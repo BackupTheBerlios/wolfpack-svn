@@ -177,6 +177,7 @@ protected:
 	short checkBank_;
 	unsigned int vendorGreet_;
 	unsigned int showNpcTitles_;
+	unsigned int shopInvul_;
 
 	//Repsys
 	long int		murderdecay_;
@@ -347,6 +348,7 @@ public:
 	short checkBank() const;
 	unsigned int vendorGreet() const;
 	unsigned int showNpcTitles() const;
+	unsigned int shopInvul() const;
 
 	// Repsys
 	long int		murderdecay() const;
@@ -1084,6 +1086,11 @@ inline QString cSrvParams::worldSaveModule() const
 inline unsigned int cSrvParams::showNpcTitles() const
 {
 	return showNpcTitles_;
+}
+
+inline unsigned int cSrvParams::shopInvul() const
+{
+	return shopInvul_;
 }
 
 #endif //__SRVPARAMS_H___

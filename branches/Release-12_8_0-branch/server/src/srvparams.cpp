@@ -169,6 +169,7 @@ void cSrvParams::readData()
 	checkBank_	            = getNumber("Vendor", "Check Bank", 2000, true );
 	vendorGreet_	        = getNumber("Vendor", "Vendor Greet", 1, true );
 	showNpcTitles_			= getNumber("Vendor",  "Show Npc Titles", 1, true);
+	shopInvul_              = getNumber("Vendor",  "ShopKeepers Invul", 0, true);
 
 	// Regenerate
 	hitpointrate_			= getNumber("Regenerate", "Hitpoints Regenerate", 8, true);

@@ -61,6 +61,12 @@ void cCharStuff::CheckAI(unsigned int currenttime, P_CHAR pc_i) // Lag Fix -- Zi
 	switch (pc_i->npcaitype)
 	{
 		case 0: // Shopkeepers greet players..Ripper
+			if (SrvParams->shopInvul() == 1 && pc_i->isNpc() && pc_i->shop && pc_i->isHuman())
+			{
+				pc_i->makeInvulnerable();
+			}else{
+				pc_i->makeVulnerable();
+			}
 			if (SrvParams->vendorGreet() == 1 && pc_i->isNpc() && pc_i->shop && pc_i->isHuman())
 			{
 				cRegion::RegionIterator4Chars ri(pc_i->pos);
