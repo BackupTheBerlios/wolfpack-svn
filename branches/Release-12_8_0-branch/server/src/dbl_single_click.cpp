@@ -591,6 +591,7 @@ void doubleclick(int s) // Completely redone by Morrolan 07.20.99
 		{
 			if ((pi->contserial == pc_currchar->packitem) || pc_currchar->Wears(pi) &&(pi->layer == 1))
 			{
+				if (pc_currchar->cell > 0) return;
 				if (pi->morez != 0)
 				{
 					pi->morez--;
