@@ -1610,7 +1610,6 @@ void dbl_click_character(UOXSOCKET s, SERIAL target_serial)
 	if ((target->isNpc())&&
 		(target->id() == 0x0034)||
 		(target->id() == 0x004E)||
-		(target->id() == 0x0038)||
 		(target->id() == 0x0050)||
 		(target->id() == 0x003A)||
 		(target->id() == 0x0039)||
