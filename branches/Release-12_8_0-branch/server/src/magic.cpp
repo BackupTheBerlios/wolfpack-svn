@@ -553,10 +553,13 @@ bool cMagic::CheckBook(int circle, int spell, P_ITEM pi)
 		pj = FindItemBySerial(vecContainer[ci]);
 		if((pj->id()==(0x1F2D+spellnum) || pj->id()==0x1F6D))
 		{
-			return false;
+			// khpae
+			//return false;
+			return true;
 		}
 	}
-	return true;
+	//return true;
+	return false;
 }
 
 int cMagic::SpellsInBook(P_ITEM pi)
