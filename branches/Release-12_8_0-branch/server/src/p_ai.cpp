@@ -393,6 +393,8 @@ void cCharStuff::CheckAI(unsigned int currenttime, P_CHAR pc_i) // Lag Fix -- Zi
 						    continue;
 						if (pc_i == pc || d > SrvParams->attack_distance() || pc->isInvul() || pc->dead)
 							continue;
+						if (!pc->inGuardedArea())
+							continue;
 						// If the distance is below the minimal distance we found
 					    if( ( Victim == NULL ) || ( minDist > d ) )
 						{

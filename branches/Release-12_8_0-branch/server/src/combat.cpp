@@ -1258,7 +1258,7 @@ void cCombat::SpawnGuard(P_CHAR pc_offender, P_CHAR pc_caller, int x, int y, sig
 	if ( pc_offender == NULL || pc_caller == NULL)
 		return;
 	
-	if (!pc_caller->inGuardedArea())
+	if (!(pc_caller->inGuardedArea() || pc_offender->inGuardedArea()))
 		return;
 	
 	if (pc_offender->dead || pc_caller->dead)
