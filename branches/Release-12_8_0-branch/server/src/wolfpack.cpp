@@ -225,6 +225,18 @@ bool iteminrange (const UOXSOCKET s, const P_ITEM pi, const int distance)
 {
 	P_CHAR pc_currchar = currchar[s];
 	if (pc_currchar->isGM()) return true;
+	// khpae : if the item is in his/her backpack, we must return true
+	//         some parts were coded expecting false
+	//         but it would not make problem. just double check
+	//         - should be cleaned later
+	if (!pi->isInWorld ()) {
+		P_ITEM bpack = GetOutmostCont (pi);
+		if (bpack != NULL) {
+			if (bpack->contserial == pc_currchar->serial) {
+				return true;
+			}
+		}
+	}
 	return inRange(pc_currchar->pos.x,pc_currchar->pos.y,pi->pos.x,pi->pos.y,distance);
 }
 

@@ -233,6 +233,8 @@ public:
 			case 8: pPack->DeleteAmount(amount, 0x1BF2, 0x02C3); break;//delete merkite
 			case 9: pPack->DeleteAmount(amount, 0x1BF2, 0x046E); break;//delete copper
 			case 10:pPack->DeleteAmount(amount, 0x1BF2, 0x0000); break;//delete silver
+					  // khpae : sometimes ingottype not set properly - should check more
+			default: pPack->DeleteAmount(amount, 0x1BF2, 0x0000); break;
 		}
 		ingottype=0;
 	}
@@ -309,7 +311,10 @@ void cSkills::MakeMenuTarget(int s, int x, int skill)
 	}
 	switch(skill)
 	{	
-		case BLACKSMITHING:	targ->delonsuccess(s);	break;
+		// khpae - g++ 3.2 makes cMMT->delonsuccess not cMMTsmith->delonsuccess
+		//         strange thing..
+		//case BLACKSMITHING:	targ->delonsuccess(s);	break;
+		case BLACKSMITHING: ((cMMTsmith *)targ->deletematerial(s, itemmake[s].needs); break;
 		case CARPENTRY:		targ->delonsuccess(s);break;
 		case INSCRIPTION: delequan(pc_currchar, itemmake[s].Mat1id, 1); break;//don't use default, cauz we delete 1 scroll //use materialid
 		//case TAILORING: delequan(pc_currchar, itemmake[s].materialid1,itemmake[s].materialid2, itemmake[s].needs);break;	//same as default skill
