@@ -145,7 +145,7 @@
 **
 */
 
-void cMovement::Walking(P_CHAR pc, int dir, int sequence)
+void cMovement::Walking(P_CHAR pc, UI08 dir, int sequence)
 {
 	// Here it used to check if dir was -1 and return. We need to make sure that we
 	// don't have any unexpected values, otherwise how can we eliminate dir as a potential
@@ -341,7 +341,7 @@ void cMovement::Walking(P_CHAR pc, int dir, int sequence)
 // West           6 0x06         134 0x86
 // Northwest      7 0x07         135 0x87
 
-bool cMovement::isValidDirection(int dir)
+bool cMovement::isValidDirection(UI08 dir)
 {
 	return ( dir == ( dir & 0x87 ) );
 }
@@ -669,7 +669,7 @@ bool cMovement::VerifySequence(P_CHAR pc, UOXSOCKET socket, int sequence) throw(
     return true;
 }
 
-bool cMovement::CheckForRunning(P_CHAR pc, UOXSOCKET socket, int dir)
+bool cMovement::CheckForRunning(P_CHAR pc, UOXSOCKET socket, UI08 dir)
 // New need for return
 // returns true if updatechar required, or false if not
 // PARAM WARNING: unreferenced paramater socket
@@ -761,7 +761,7 @@ bool cMovement::CheckForHouseBan(P_CHAR pc, UOXSOCKET socket)
 // I already made sure I could move there (even the crazy XY block stuff) so this IS a valid move. Just move the
 // directions. Oh, and since I we already have the GetX/YfromDir functions (and we need those) why don't we just
 // use them here?
-void cMovement::MoveCharForDirection(P_CHAR pc, int dir)
+void cMovement::MoveCharForDirection(P_CHAR pc, UI08 dir)
 {
 	pc->pos.x = GetXfromDir(dir, pc->pos.x);
 	pc->pos.y = GetYfromDir(dir, pc->pos.y);
@@ -950,7 +950,7 @@ void cMovement::SendWalkToPlayer(P_CHAR pc, UOXSOCKET socket, short int sequence
 }
 
 	
-void cMovement::SendWalkToOtherPlayers(P_CHAR pc, P_CHAR us, int dir, short int oldx, short int oldy, UOXSOCKET socket )
+void cMovement::SendWalkToOtherPlayers(P_CHAR pc, P_CHAR us, UI08 dir, short int oldx, short int oldy, UOXSOCKET socket )
 {
 
 	// Ok, we are TOLD to how to send this to
@@ -1530,7 +1530,7 @@ void cMovement::NpcWalk(P_CHAR pc_i, int j, int type)   //type is npcwalk mode (
 // Revision Date : 2000.09.15
 // Purpose       : Return the new y from given dir
 
-unsigned short cMovement::GetYfromDir(int dir, unsigned short y)
+unsigned short cMovement::GetYfromDir(UI08 dir, unsigned short y)
 {
 	switch ( dir & 0x07 )
 	{
@@ -1553,7 +1553,7 @@ unsigned short cMovement::GetYfromDir(int dir, unsigned short y)
 // Revision Date : 2000.09.15
 // Purpose       : Return the new x from given dir
 
-unsigned short cMovement::GetXfromDir(int dir, unsigned short x)
+unsigned short cMovement::GetXfromDir(UI08 dir, unsigned short x)
 {
 
    	switch ( dir & 0x07 )
@@ -1963,7 +1963,7 @@ bool cMovement::CanCharWalk(P_CHAR pc, short int x, short int y, signed char &z)
 // Revision Date : 2000.09.17
 // Purpose       : Check if a character can walk to a from x,y to dir direction
 // Method        : This handles the funky diagonal moves.
-bool cMovement::CanCharMove(P_CHAR pc, short int x, short int y, signed char &z, int dir)
+bool cMovement::CanCharMove(P_CHAR pc, short int x, short int y, signed char &z, UI08 dir)
 {
 	z = illegal_z;
 
@@ -2276,7 +2276,7 @@ int cMovement::validNPCMove( short int x, short int y, signed char z, P_CHAR pc_
 }
 
 // Static Members
-void cMovement::getXYfromDir(int dir, int *x, int *y)
+void cMovement::getXYfromDir(UI08 dir, int *x, int *y)
 {
 	switch(dir&0x07)
 	{
