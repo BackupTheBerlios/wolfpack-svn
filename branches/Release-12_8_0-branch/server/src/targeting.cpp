@@ -565,6 +565,9 @@ static void KeyTarget(int s, P_ITEM pi) // new keytarget by Morollan
 			{
 				Boats->OpenPlank(pi);
 				RefreshItem(pi);
+			// khpae : convert to deed from boat
+			} else if ((pi->type==117) && (pi->type2==1)) { // tiller man
+				Boats->deedBoat (s, pi);
 			}
 			//End Boats --^
 		}//else if
@@ -4138,7 +4141,7 @@ void cTargets::MultiTarget(P_CLIENT ps) // If player clicks on something with th
 					pc_currchar->envokeid = 0x00;
 					return;
 				}
-				// Checking if target is an NPC	--- By Magius(CHE) §
+				// Checking if target is an NPC	--- By Magius(CHE) ?
 				P_CHAR pc_i = FindCharBySerial(serial);
 				if(pc_i != NULL)
 				{
@@ -4146,7 +4149,7 @@ void cTargets::MultiTarget(P_CLIENT ps) // If player clicks on something with th
 					pc_currchar->envokeid = 0x00;
 					return;
 				}
-				// End Addons by Magius(CHE) §
+				// End Addons by Magius(CHE) ?
 				Trig->triggerwitem(s, NULL, 0);
 				pc_currchar->envokeid = 0x00;
 				return;

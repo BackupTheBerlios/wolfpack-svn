@@ -133,7 +133,7 @@ static void handle_IADD(UOXSOCKET const ts, int const ttype, const int coloring,
 		}
 	}// if player has backpack
 	// else leave it where it is (on the ground)
-	// Added colormem token here! by Magius(CHE) §
+	// Added colormem token here! by Magius(CHE) ?
 	if (pi_i != NULL && coloring>-1)
 	{
 		pi_i->color = memcolor;
@@ -176,17 +176,17 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 	tempname3[0] = 0;
 	tempstr[0] = 0;
 	cmsg[0] = 0;
-	float total; // Magius(CHE) §
-	char dismsg[512]; // Magius(CHE) §
-	dismsg[0] = 0; // Magius(CHE) §
-	unsigned short memcolor; // Magius(CHE) §
-	int coloring=-1, loopexit = 0;  // Magius(CHE) §
+	float total; // Magius(CHE) ?
+	char dismsg[512]; // Magius(CHE) ?
+	dismsg[0] = 0; // Magius(CHE) ?
+	unsigned short memcolor; // Magius(CHE) ?
+	int coloring=-1, loopexit = 0;  // Magius(CHE) ?
 	// end declaretion for magius
 	
 	fmsg[0] = 0;
 	
 	if (ts < 0)
-		return; // §Magius crash fix
+		return; // ?Magius crash fix
 	
 	P_CHAR pc_ts = currchar[ts];
 
@@ -230,7 +230,7 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 			strcpy(tempname,(char*)tile.name);
 		}
 		
-		if (pi->disabled>uiCurrentTime) // Added by Magius(CHE) §
+		if (pi->disabled>uiCurrentTime) // Added by Magius(CHE) ?
 		{
 			// if (!pi->disabledmsg[0]==0x0) strcpy(temp,pi->disabledmsg);
 			if (!pi->disabledmsg.empty())
@@ -329,7 +329,7 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 								sysmessage(ts, cmsg);
 						}
 					}
-					else if (!(strcmp("COLOR", (char*)script1)))  // Set the color check by Magius(CHE) §
+					else if (!(strcmp("COLOR", (char*)script1)))  // Set the color check by Magius(CHE) ?
 					{
 						cline = &script2[0];
 						splitline();
@@ -372,17 +372,17 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 					}
 					else if (!(strcmp("CSKL", (char*)script1)))  // Make a check on the players skill
 					{
-						// Magius(CHE) §
+						// Magius(CHE) ?
 						//*comm[1]='\0';
 						cline = &script2[0];
 						splitline();
 						int p = makenumber(0);
 						j = makenumber(1);
-						// End Magius(CHE) §
+						// End Magius(CHE) ?
 						i = (rand()%1000) + 1;
 						// Taur 69.02 added to get some chance of
 						// skill gain on failure
-						unsigned int skill = p; // Magius(CHE) §
+						unsigned int skill = p; // Magius(CHE) ?
 						unsigned int baseskill = pc_ts->baseskill[skill];
 						if (i > baseskill)
 						{
@@ -390,18 +390,18 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 							Skills->updateSkillLevel(currchar[ts], skill);
 							updateskill(ts, skill);
 							if (strlen(fmsg))
-								sysmessage(ts, fmsg); // by Magius(CHE) §
+								sysmessage(ts, fmsg); // by Magius(CHE) ?
 							else 
 							{
-								sprintf((char*)temp, "You fail in your attempt..."); // by Magius(CHE) §
-								sysmessage(ts, (char*)temp); // by Magius(CHE) §
+								sprintf((char*)temp, "You fail in your attempt..."); // by Magius(CHE) ?
+								sysmessage(ts, (char*)temp); // by Magius(CHE) ?
 							}
 							closescript();
 							return;
 						} // Taur end 69.02 change
 						if (j>0)
 						{
-							// Magius(CHE) §
+							// Magius(CHE) ?
 							pc_ts->targtrig = j;
 							closescript();
 							triggerwitem(ts, pi, 1);
@@ -423,7 +423,7 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 						}
 						pc_ts->chgRealDex(j);
 					}
-					else if (!(strcmp("DUR", (char*)script1)))  // Math on item HP ---- rewrite by Magius(CHE) §
+					else if (!(strcmp("DUR", (char*)script1)))  // Math on item HP ---- rewrite by Magius(CHE) ?
 					{
 						cline = &script2[0];
 						splitline();
@@ -452,8 +452,8 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 											sysmessage(ts, cmsg);
 										else 
 										{
-											total = (float) pi->hp/pi->maxhp; // Magius(CHE) §
-											sprintf(tempstr, "Your %s is now repaired! [%.1f%%]", tempname, total*100);  // Magius(CHE) §
+											total = (float) pi->hp/pi->maxhp; // Magius(CHE) ?
+											sprintf(tempstr, "Your %s is now repaired! [%.1f%%]", tempname, total*100);  // Magius(CHE) ?
 											sysmessage(ts, tempstr);
 										}
 									}
@@ -493,13 +493,13 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 							pi->disabledmsg = dismsg;
 						}
 					}
-					else if (!(strcmp("DISABLEMSG", (char*)script1)))  // Disable Item Message --- by Magius(CHE) §
+					else if (!(strcmp("DISABLEMSG", (char*)script1)))  // Disable Item Message --- by Magius(CHE) ?
 					{
 						strcpy(dismsg, (char*)script2);
 					}
 					break;
 				case 'E':
-					if (!(strcmp("EVDUR", (char*)script1)))  // Math on Evoked item HP ---- Rewrite by Magius(CHE) §
+					if (!(strcmp("EVDUR", (char*)script1)))  // Math on Evoked item HP ---- Rewrite by Magius(CHE) ?
 					{
 						cline = &script2[0];
 						splitline();
@@ -562,7 +562,7 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 						}
 					}
 					
-					else if (!(strcmp("EVMAXDUR", (char*)script1)))  // Math on Evoked item MAXHP ---- Rewrite by Magius(CHE) §
+					else if (!(strcmp("EVMAXDUR", (char*)script1)))  // Math on Evoked item MAXHP ---- Rewrite by Magius(CHE) ?
 					{
 						cline = &script2[0];
 						splitline();
@@ -576,7 +576,7 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 							{
 								if ((rand()%(100)) + 1 <= p)
 								{
-									pi_evti->maxhp += j; // Magius(CHE) §
+									pi_evti->maxhp += j; // Magius(CHE) ?
 									if (pi_evti->hp >= pi_evti->maxhp)
 										pi_evti->hp = pi_evti->maxhp;
 									if (str2num(script2) >= 0)
@@ -808,7 +808,7 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 								closescript();
 								return;
 							}
-							// Added colormem token here! by Magius(CHE) §
+							// Added colormem token here! by Magius(CHE) ?
 							if (coloring > -1)
 							{
 								pi_itemnum->color = memcolor;
@@ -1028,7 +1028,7 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 						}
 						break;
 					case 'M':
-						if (!(strcmp("MAXDUR", (char*)script1)))  // Math on item MAXHP ---- rewrite by Magius(CHE) §
+						if (!(strcmp("MAXDUR", (char*)script1)))  // Math on item MAXHP ---- rewrite by Magius(CHE) ?
 						{
 							cline = &script2[0];
 							splitline();
@@ -1105,10 +1105,10 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 							itemmake[ts].Mat1id = ((hexnumber(2)) << 8) + hexnumber(3);
 							itemmake[ts].has = getamount(currchar[ts], itemmake[ts].Mat1id); 
 							itemmake[ts].has2 = getamount(currchar[ts], itemmake[ts].Mat2id);
-							itemmake[ts].coloring = coloring; // Magius(CHE) §
+							itemmake[ts].coloring = coloring; // Magius(CHE) ?
 							if (coloring>-1)
 							{
-								itemmake[ts].newcolor = memcolor;  // Magius(CHE) §
+								itemmake[ts].newcolor = memcolor;  // Magius(CHE) ?
 							}
 							pos = ftell(scpfile);
 							closescript();
@@ -1130,7 +1130,7 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 							strcpy(sect,script2);
 							sysmessage(ts, sect);
 						}
-						else if (!(strcmp("MEMCOLOR", (char*)script1)))  // Store the item color in memory by Magius(CHE) §
+						else if (!(strcmp("MEMCOLOR", (char*)script1)))  // Store the item color in memory by Magius(CHE) ?
 						{
 							if (!strcmp((char*)script2, "EMPTY"))
 							{
@@ -1244,7 +1244,7 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 								npcnum->tamed = true;// AntiChrist FIX
 							}
 						}
-						else if (!(strcmp("NEWSPEECH", (char*)script1)))  // Give the new npc a new spech -- MAgius(CHE) §
+						else if (!(strcmp("NEWSPEECH", (char*)script1)))  // Give the new npc a new spech -- MAgius(CHE) ?
 						{
 							if (npcnum!=NULL)
 							{
@@ -1269,22 +1269,23 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 										if (strstr((char*)script2, sect))
 										{
 											pi_needitem = pi;
-											// Get Temporany Name of the NEED Item - Magius(CHE) §
-											if (pi->name != "#") // Get Temporany Name of the NEED Item - Magius(CHE) §
+											// Get Temporany Name of the NEED Item - Magius(CHE) ?
+											if (pi->name != "#") // Get Temporany Name of the NEED Item - Magius(CHE) ?
 												strcpy(tempname3, pi->name.c_str());
 											else 
 											{
 												Map->SeekTile(pi->id(), &tile);
 												strcpy(tempname3, (char*)tile.name);
 											}
-											// End Get Temporany Name of the NEED Item - Magius(CHE) §
+											// End Get Temporany Name of the NEED Item - Magius(CHE) ?
 											break;
 										}
 									}
 								}
 							}
 							
-							if (pi_needitem != NULL)
+							// khpae - bugfix
+							if (pi_needitem == NULL)
 							{
 								if (strlen(fmsg))
 									sysmessage(ts, fmsg); // Added by Magius(CHE)
@@ -1294,7 +1295,7 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 								return;
 							}
 						}
-						else if (!(strcmp("NEEDCOLOR", (char*)script1)))  // Set the color check on NEEDED item by Magius(CHE) §
+						else if (!(strcmp("NEEDCOLOR", (char*)script1)))  // Set the color check on NEEDED item by Magius(CHE) ?
 						{
 							cline = &script2[0];
 							splitline();
@@ -1324,7 +1325,7 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 								return;
 							}
 						}
-						else if (!(strcmp("NEEDDUR", (char*)script1)))  // Math on NEED item HP (only if NEEDITEM>-1)---- rewrite by Magius(CHE) §
+						else if (!(strcmp("NEEDDUR", (char*)script1)))  // Math on NEED item HP (only if NEEDITEM>-1)---- rewrite by Magius(CHE) ?
 						{
 							cline = &script2[0];
 							splitline();
@@ -1353,8 +1354,8 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 												sysmessage(ts, cmsg);
 											else 
 											{
-												total = (float) pi_needitem->hp/pi_needitem->maxhp; // Magius(CHE) §
-												sprintf(tempstr, "Your %s is now repaired! [%.1f%%]", tempname3, total*100);  // Magius(CHE) §
+												total = (float) pi_needitem->hp/pi_needitem->maxhp; // Magius(CHE) ?
+												sprintf(tempstr, "Your %s is now repaired! [%.1f%%]", tempname3, total*100);  // Magius(CHE) ?
 												sysmessage(ts, tempstr);
 											}
 										}
@@ -1386,7 +1387,7 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 								}
 							}
 						}
-						else if (!(strcmp("NEEDMAXDUR", (char*)script1)))  // Math on NEED item HP (only if NEEDITEM>-1) ---- rewrite by Magius(CHE) §
+						else if (!(strcmp("NEEDMAXDUR", (char*)script1)))  // Math on NEED item HP (only if NEEDITEM>-1) ---- rewrite by Magius(CHE) ?
 						{
 							cline = &script2[0];
 							splitline();
@@ -1542,7 +1543,7 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 							sysmessage(ts, sect);
 							}
 						}
-						else if (!(strcmp("OUTRANGE", (char*)script1)))  // Player is in range of an item (only if this item is out of backpack) -- Magius(CHE) §
+						else if (!(strcmp("OUTRANGE", (char*)script1)))  // Player is in range of an item (only if this item is out of backpack) -- Magius(CHE) ?
 						{
 							cline = &script2[0];
 							splitline();
@@ -1624,7 +1625,7 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 								uiCompleted = 1;
 							}
 							else if (strlen(fmsg))
-								sysmessage(ts, fmsg); // Added by Magius(CHE) §
+								sysmessage(ts, fmsg); // Added by Magius(CHE) ?
 						}
 						else if (!(strcmp("RANDOM_NPC", (char*)script1)))  //%chance to NADD item
 						{
@@ -1641,9 +1642,9 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 								uiCompleted = 1;
 							}
 							else if (strlen(fmsg))
-								sysmessage(ts, fmsg);// Added by Magius(CHE) §
+								sysmessage(ts, fmsg);// Added by Magius(CHE) ?
 						}
-						else if (!(strcmp("REQCOLOR", (char*)script1)))  // Set the color check on REQUIRED item by Magius(CHE) §
+						else if (!(strcmp("REQCOLOR", (char*)script1)))  // Set the color check on REQUIRED item by Magius(CHE) ?
 						{
 							cline = &script2[0];
 							splitline();
@@ -1689,7 +1690,7 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 										dy = abs(y1 - y2);
 										if ((dx>str2num(script2)) ||(dy>str2num(script2)))
 										{
-											// Magius(CHE) §
+											// Magius(CHE) ?
 											if (strlen(fmsg))
 												sysmessage(ts, fmsg);
 											else
@@ -1712,7 +1713,7 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 								dy = abs(y1 - y2);
 								if ((dx>str2num(script2)) ||(dy>str2num(script2)))
 								{
-									// Magius(CHE) §
+									// Magius(CHE) ?
 									if (strlen(fmsg))
 										sysmessage(ts, fmsg);
 									else 
@@ -2036,7 +2037,7 @@ void cTrigger::triggerwitem(UOXSOCKET const ts, P_ITEM pi, int ttype)
 // This routine processes tokens for the NPC triggers.
 // ts: socket!!!! (Player fire the trigger)- AntiChrist
 // ti: no-socket!!!! (NPC triggered) - Magius(CHE)
-void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magius(CHE) §
+void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magius(CHE) ?
 {
 	char sect[512];
 	signed int j;
@@ -2048,7 +2049,7 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 	long int pos;
 	char fmsg[512];
 	
-	// Added by Magius(CHE) §
+	// Added by Magius(CHE) ?
 	int tl;
 	P_ITEM pi_evti = NULL;
 	tile_st tile;
@@ -2065,7 +2066,7 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 	fmsg[0] = 0;
 	
 	if (ts < 0)
-		return; // §Magius crash fix
+		return; // ?Magius crash fix
 
 	P_CHAR pc_ts = currchar[ts];
 	
@@ -2093,7 +2094,7 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 			return;
 		}
 	}
-	if (ti->disabled>uiCurrentTime) // Added by Magius(CHE) §
+	if (ti->disabled>uiCurrentTime) // Added by Magius(CHE) ?
 	{
 		if (!ti->disabledmsg.empty())
 			strcpy((char*)temp, ti->disabledmsg.c_str());
@@ -2119,19 +2120,19 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 					}
 					break;
 				case 'C':
-					if (!(strcmp("CSKL", (char*)script1)))  // Make a check on the players skill -- Rewrite by Magius(CHE) §
+					if (!(strcmp("CSKL", (char*)script1)))  // Make a check on the players skill -- Rewrite by Magius(CHE) ?
 					{
-						// Magius(CHE) §
+						// Magius(CHE) ?
 						cline = &script2[0];
 						splitline();
 						p = makenumber(0);
 						j = makenumber(1);
-						// End Magius(CHE) §
+						// End Magius(CHE) ?
 						
 						i = (rand()%1000) + 1;
 						// Taur 69.02 added to get some chance of
 						// skill gain on failure
-						unsigned int skill = p; // Magius(CHE) §
+						unsigned int skill = p; // Magius(CHE) ?
 						unsigned int baseskill = pc_ts->baseskill[skill];
 						if (i > baseskill)
 						{
@@ -2139,18 +2140,18 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 							Skills->updateSkillLevel(pc_ts, skill);
 							updateskill(ts, skill);
 							if (strlen(fmsg))
-								sysmessage(ts, fmsg); // by Magius(CHE) §
+								sysmessage(ts, fmsg); // by Magius(CHE) ?
 							else 
 							{
-								strcpy((char*)temp, "You fail in your attempt..."); // by Magius(CHE) §
-								sysmessage(ts, (char*)temp); // by Magius(CHE) §
+								strcpy((char*)temp, "You fail in your attempt..."); // by Magius(CHE) ?
+								sysmessage(ts, (char*)temp); // by Magius(CHE) ?
 							}
 							closescript();
 							return;
 						} // Taur end 69.02 change
 						if (j>0)
 						{
-							// Magius(CHE) §
+							// Magius(CHE) ?
 							closescript();
 							triggernpc(ts, ti, 1);
 							return;
@@ -2176,16 +2177,16 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 						if (ti!=NULL)
 						{
 							ti->disabled = (uiCurrentTime +(MY_CLOCKS_PER_SEC*str2num(script2)));
-							ti->disabledmsg = dismsg; // Added by Magius(CHE) §
+							ti->disabledmsg = dismsg; // Added by Magius(CHE) ?
 						}
 					}
-					else if (!(strcmp("DISABLEMSG", (char*)script1)))  // Disable NPC Message --- by Magius(CHE) §
+					else if (!(strcmp("DISABLEMSG", (char*)script1)))  // Disable NPC Message --- by Magius(CHE) ?
 					{
 						strcpy(dismsg, (char*)script2);
 					}
 					break;
 				case 'E':
-					if (!(strcmp("EVDUR", (char*)script1)))  // Math on Evoked item HP ---- Rewrite by Magius(CHE) §
+					if (!(strcmp("EVDUR", (char*)script1)))  // Math on Evoked item HP ---- Rewrite by Magius(CHE) ?
 					{
 						cline = &script2[0];
 						splitline();
@@ -2242,7 +2243,7 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 							}
 						}
 					}
-					else if (!(strcmp("EMT", (char*)script1)))  // Player says something when trigger is activated -- Changed by Magius(CHE) §
+					else if (!(strcmp("EMT", (char*)script1)))  // Player says something when trigger is activated -- Changed by Magius(CHE) ?
 					{
 						strcpy(sect, (char*)script2);
 						int i;
@@ -2265,7 +2266,7 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 							}
 						}
 					}
-					else if (!(strcmp("EVMAXDUR", (char*)script1)))  // Math on Evoked item MAXHP ---- Rewrite by Magius(CHE) §
+					else if (!(strcmp("EVMAXDUR", (char*)script1)))  // Math on Evoked item MAXHP ---- Rewrite by Magius(CHE) ?
 					{
 						cline = &script2[0];
 						splitline();
@@ -2279,7 +2280,7 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 							{
 								if ((rand()%(100)) + 1 <= p)
 								{
-									pi_evti->maxhp += j; // Magius(CHE) §
+									pi_evti->maxhp += j; // Magius(CHE) ?
 									if (pi_evti->hp >= pi_evti->maxhp)
 										pi_evti->hp = pi_evti->maxhp;
 									if (str2num(script2) >= 0)
@@ -2535,7 +2536,7 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 							P_ITEM pi_c = Items->SpawnItem(ts, pc_ts, 1, "#", 1, hexnumber(0), hexnumber(1), 0, 1, 1);
 							if (pi_c == NULL)
 								return;// AntiChrist to preview crashes
-							// Added colormem token here! by Magius(CHE) §
+							// Added colormem token here! by Magius(CHE) ?
 							if (coloring>-1)
 							{
 								pi_c->color = memcolor;
@@ -2543,9 +2544,9 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 							}
 							// end addons	
 							if (ttype)
-								openscript("ntrigrs.scp"); // Added by Magius(CHE) §
+								openscript("ntrigrs.scp"); // Added by Magius(CHE) ?
 							else 
-								openscript("wtrigrs.scp");  // Added by Magius(CHE) §
+								openscript("wtrigrs.scp");  // Added by Magius(CHE) ?
 							fseek(scpfile, pos, SEEK_SET);
 						}
 						else if (!(strcmp("IDFX", (char*)script1)))  // Makes an effect at players by ID
@@ -2656,10 +2657,10 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 							itemmake[ts].Mat1id = ((hexnumber(2)) << 8) + hexnumber(3);
 							itemmake[ts].has = getamount(pc_ts, itemmake[ts].Mat1id); 
 							itemmake[ts].has2 = getamount(pc_ts, itemmake[ts].Mat2id);
-							itemmake[ts].coloring = coloring; // Magius(CHE) §
+							itemmake[ts].coloring = coloring; // Magius(CHE) ?
 							if (coloring>-1)
 							{
-								itemmake[ts].newcolor = memcolor; // Magius(CHE) §
+								itemmake[ts].newcolor = memcolor; // Magius(CHE) ?
 							}
 							pos = ftell(scpfile);
 							closescript();
@@ -2705,7 +2706,7 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 								pc_ts->mn = pc_ts->in;
 							updatestats(pc_ts, 1);
 						}
-						else if (!(strcmp("MEMCOLOR", (char*)script1)))  // Store the item color in memory by Magius(CHE) §
+						else if (!(strcmp("MEMCOLOR", (char*)script1)))  // Store the item color in memory by Magius(CHE) ?
 						{
 							P_ITEM p = NULL;
 							if (!strcmp((char*)script2, "EMPTY"))
@@ -2741,7 +2742,7 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 							splitline();
 							npcaction(ti, hexnumber(0));
 						}
-						else if (!(strcmp("NADD", (char*)script1)))  // Add a NPC at given location - AntiChrist -- Fixed here by Magius(CHE) §
+						else if (!(strcmp("NADD", (char*)script1)))  // Add a NPC at given location - AntiChrist -- Fixed here by Magius(CHE) ?
 						{// Usage: NADD <npc_number> <life_in_seconds>
 							// uiCompleted=0;
 							cline = &script2[0];
@@ -2765,9 +2766,9 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 							
 							triggerx = 0;
 							if (ttype)
-								openscript("ntrigrs.scp"); // Added by Magius(CHE) §
+								openscript("ntrigrs.scp"); // Added by Magius(CHE) ?
 							else 
-								openscript("wtrigrs.scp");  // Added by Magius(CHE) §
+								openscript("wtrigrs.scp");  // Added by Magius(CHE) ?
 							fseek(scpfile, pos, SEEK_SET);
 							strcpy((char*)script1, "DUMMY");
 						}
@@ -2782,7 +2783,7 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 								npcnum->SetOwnSerial(pc_ts->serial);
 							}
 						}
-						else if (!(strcmp("NEEDCOLOR", (char*)script1)))  // Set the color check on NEEDED item by Magius(CHE) §
+						else if (!(strcmp("NEEDCOLOR", (char*)script1)))  // Set the color check on NEEDED item by Magius(CHE) ?
 						{
 							cline = &script2[0];
 							splitline();
@@ -2838,15 +2839,15 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 							}
 							else 
 							{
-								// Get Temporany Name of the NEED Item - Magius(CHE) §
-								if (pi_needitem->name != "#") // Get Temporany Name of the NEED Item - Magius(CHE) §
+								// Get Temporany Name of the NEED Item - Magius(CHE) ?
+								if (pi_needitem->name != "#") // Get Temporany Name of the NEED Item - Magius(CHE) ?
 									strcpy(tempname3, pi_needitem->name.c_str());
 								else 
 								{
 									Map->SeekTile(pi_needitem->id(), &tile);
 									strcpy(tempname3, (char*)tile.name);
 								}
-								// End Get Temporany Name of the NEED Item - Magius(CHE) §
+								// End Get Temporany Name of the NEED Item - Magius(CHE) ?
 							}
 						}
 						else if ((!(strcmp("NEWTYPE", (char*)script1))) ||(!(strcmp("SETTYPE", (char*)script1))))  // Set active item type
@@ -2883,7 +2884,7 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 								npcnum->trigword = (char*)script2;
 							}
 						}
-						else if (!(strcmp("NEWSPEECH", (char*)script1)))  // Give the new npc a new spech -- MAgius(CHE) §
+						else if (!(strcmp("NEWSPEECH", (char*)script1)))  // Give the new npc a new spech -- MAgius(CHE) ?
 						{
 							if (npcnum!=NULL)
 							{
@@ -2909,7 +2910,7 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 						}
 						break;
 					case 'R':
-						if (!(strcmp("REQCOLOR", (char*)script1)))  // Set the color check on REQUIRED item by Magius(CHE) §
+						if (!(strcmp("REQCOLOR", (char*)script1)))  // Set the color check on REQUIRED item by Magius(CHE) ?
 						{
 							cline = &script2[0];
 							splitline();
@@ -2992,7 +2993,7 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 							if (ti!=NULL)
 								ti->trigger = str2num(script2);
 						}
-						else if (!(strcmp("SPEECH", (char*)script1)))  // Set the triggered npc a new spech -- Magius(CHE) §
+						else if (!(strcmp("SPEECH", (char*)script1)))  // Set the triggered npc a new spech -- Magius(CHE) ?
 						{
 							if (ti!=NULL)
 							{
@@ -3080,7 +3081,7 @@ void cTrigger::triggernpc(UOXSOCKET ts, P_CHAR ti, int ttype) // Changed by Magi
 						}
 						break;
 					case 'T':
-						if (!(strcmp("TALK", (char*)script1)))  // the triggered NPC now talking! --- by Magius(CHE) §
+						if (!(strcmp("TALK", (char*)script1)))  // the triggered NPC now talking! --- by Magius(CHE) ?
 						{
 							if (ti!=NULL && strlen((char*)script2)>0)
 								npctalk(ts, ti, (char*)script2, 0);
