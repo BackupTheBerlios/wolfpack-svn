@@ -1926,7 +1926,7 @@ bool cMovement::CanCharWalk(P_CHAR pc, short int x, short int y, signed char &z)
 		// now the new Z-cordinate of creature is known,
 		// check if it hits it's head against something (blocking in other words)
 // khpae - we must split two part
-	for (int cnt=0; cnt<3; cnt++) {
+	for (cnt=0; cnt<3; cnt++) {
 		int i;
 		for(i = 0; i < xycount[cnt]; i++)
 		{
