@@ -186,6 +186,8 @@ public:
 		if (!pPack) return;
 		int amt = max(amount, 1);
 
+		if (itemmake[s].Mat1id==0x1BE0||itemmake[s].Mat1id==0x1BD7) itemmake[s].Mat1color=0;
+
 		pPack->DeleteAmount(amt,itemmake[s].Mat1id,itemmake[s].Mat1color);
 		if (itemmake[s].Mat2id)						// if a 2nd material is used, delete that too
 			pPack->DeleteAmount(amt,itemmake[s].Mat2id,itemmake[s].Mat2color);
