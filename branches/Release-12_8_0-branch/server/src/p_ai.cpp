@@ -40,7 +40,7 @@
 
 void cCharStuff::CheckAI(unsigned int currenttime, P_CHAR pc_i) // Lag Fix -- Zippy
 {
-	int d, onl;
+	int d;
 	unsigned int chance;
 	if ( pc_i == NULL )
 		return;
@@ -69,11 +69,12 @@ void cCharStuff::CheckAI(unsigned int currenttime, P_CHAR pc_i) // Lag Fix -- Zi
 					P_CHAR pc = ri.GetData();
 					if (pc != NULL)
 					{
-						onl = online(pc);
 						d = chardist( pc_i, pc );
 						if (d > 3)
 							continue;
-						if (pc->isInvul() || pc->isNpc() || pc->dead || !pc->isInnocent() || !onl)
+						if (pc->isNpc() || !online(pc))
+							continue;
+						if (pc->isInvul() || pc->dead || !pc->isInnocent())
 							continue;
 						sprintf((char*)temp, "Hello %s, Welcome to my shop, How may i help thee?.", pc->name.c_str());
 						npctalkall(pc_i, (char*)temp, 1);
@@ -91,9 +92,12 @@ void cCharStuff::CheckAI(unsigned int currenttime, P_CHAR pc_i) // Lag Fix -- Zi
 					P_CHAR pc = ri.GetData();
 					if (pc != NULL)
 					{
-						onl = online(pc);
 						d = chardist( pc_i, pc );
-						if (!pc->dead || d > 3 || pc->isNpc() || !onl)
+						if (d > 3)
+							continue;
+						if (pc->isNpc() || !online(pc))
+							continue;
+						if (!pc->dead)
 							continue;
 						if (pc->isMurderer()) 
 						{
@@ -213,9 +217,12 @@ void cCharStuff::CheckAI(unsigned int currenttime, P_CHAR pc_i) // Lag Fix -- Zi
 					P_CHAR pc = ri.GetData();
 					if (pc != NULL)
 					{
-						onl = online(pc);
 						d = chardist( pc_i, pc );
-						if (!pc->dead || d > 3 || pc->isNpc() || !onl)
+						if (d > 3)
+							continue;
+						if (pc->isNpc() || !online(pc))
+							continue;
+						if (!pc->dead)
 							continue;
 						if (pc->isInnocent())
 						{
@@ -259,6 +266,8 @@ void cCharStuff::CheckAI(unsigned int currenttime, P_CHAR pc_i) // Lag Fix -- Zi
 						if( ( !pc->isNpc() ) && ( !online( pc ) ) )
 						    continue;
 						if (pc_i == pc || d > SrvParams->attack_distance() || pc->isInvul() || pc->dead)
+							continue;
+						if (!pc->inGuardedArea())
 							continue;
 						// If the distance is below the minimal distance we found
 					    if( ( Victim == NULL ) || ( minDist > d ) )
@@ -307,9 +316,12 @@ void cCharStuff::CheckAI(unsigned int currenttime, P_CHAR pc_i) // Lag Fix -- Zi
 					P_CHAR pc = ri.GetData();
 					if (pc != NULL)
 					{
-						onl = online(pc);
 						d = chardist( pc_i, pc );
-						if (d > 3 || pc->isInvul() || pc->isNpc() || pc->dead || !onl || !pc->isInnocent())
+						if (d > 3)
+							continue;
+						if (pc->isNpc() || !online(pc))
+							continue;
+						if (pc->isInvul() || pc->dead || !pc->isInnocent())
 							continue;
 						int beg= RandomNum(0, 2);
 						{
@@ -409,9 +421,12 @@ void cCharStuff::CheckAI(unsigned int currenttime, P_CHAR pc_i) // Lag Fix -- Zi
 					P_CHAR pc = ri.GetData();
 					if (pc != NULL)
 					{
-						onl = online(pc);
 						d = chardist( pc_i, pc );
-						if (d > 10 || pc->isPlayer() || (pc->isNpc() && pc->npcaitype != 2))
+						if (d > SrvParams->attack_distance())
+							continue;
+						if (pc->isPlayer())
+							continue;
+						if (pc->isNpc() && pc->npcaitype != 2)
 							continue;
 						npcattacktarget(pc_i, pc);
 						return;
@@ -428,13 +443,14 @@ void cCharStuff::CheckAI(unsigned int currenttime, P_CHAR pc_i) // Lag Fix -- Zi
 					P_CHAR pc = ri.GetData();
 					if (pc != NULL)
 					{
-						onl = online(pc);
 						d = chardist( pc_i, pc );
-						if (d > 10 || pc->isInvul() || pc->dead)
+						if (d > SrvParams->attack_distance())
+							continue;
+						if( ( !pc->isNpc() ) && ( !online( pc ) ) )
+						    continue;
+						if (pc->isInvul() || pc->dead)
 							continue;
 						if (!(pc->npcaitype == 2 || pc->isMurderer()))
-							continue;
-						if (pc->isPlayer() && !onl)
 							continue;
 						npcattacktarget(pc_i, pc);
 					}
@@ -452,9 +468,12 @@ void cCharStuff::CheckAI(unsigned int currenttime, P_CHAR pc_i) // Lag Fix -- Zi
 				P_CHAR pc = ri.GetData();
 				if (pc != NULL)
 				{
-				    onl = online(pc);
 				    d = chardist(pc_i, pc);
-				    if (d > 10 || pc->isNpc() || pc->isInvul() || pc->dead || (pc->isPlayer() && !onl))
+					if (d > 10)
+					    continue;
+					if( ( pc->isNpc() ) && ( !online( pc ) ) )
+						    continue;
+				    if (pc->dead)
 					    continue;
 
 				    sprintf((char*)temp,"I am waiting for my escort to %s, Will you take me?", region[pc_i->questDestRegion].name);
@@ -476,9 +495,14 @@ void cCharStuff::CheckAI(unsigned int currenttime, P_CHAR pc_i) // Lag Fix -- Zi
 					P_CHAR pc = ri.GetData();
 					if (pc != NULL)
 					{
-						onl = online(pc);
 						d = chardist(pc_i, pc);
-						if (d > 10 || pc->isNpc() || pc->dead || !pc->guarded || !onl)
+						if (d > SrvParams->attack_distance())
+							continue;
+						if( ( !pc->isNpc() ) && ( !online( pc ) ) )
+						    continue;
+						if (pc->dead)
+							continue;
+						if (!pc->guarded)
 							continue;
 						if (pc->Owns(pc_i))
 						{
@@ -500,9 +524,12 @@ void cCharStuff::CheckAI(unsigned int currenttime, P_CHAR pc_i) // Lag Fix -- Zi
 					P_CHAR pc = ri.GetData();
 					if (pc != NULL)
 					{
-						onl = online(pc);
 						d = chardist(pc_i, pc);
-						if (d > 10 || pc->isInvul() || pc->dead || !onl)
+						if (d > SrvParams->attack_distance())
+							continue;
+						if( ( !pc->isNpc() ) && ( !online( pc ) ) )
+						    continue;
+						if (pc->isInvul() || pc->dead)
 							continue;
 						npcattacktarget(pc_i, pc);
 						return;
