@@ -2181,6 +2181,18 @@ void cMagic::NewCastSpell( UOXSOCKET s )
 								sysmessage(s,"Give up wanabe Jesus !");
 								return;
 							}
+							if (!Map->CanMonsterMoveHere(targetLocation))
+							{
+								 switch(RandomNum(0,4))
+								 {
+								 case 0: sysmessage(s,"Thats a no teleport zone!"); break;
+								 case 1: sysmessage(s,"Thats not possible!"); break;
+								 case 2: sysmessage(s,"You can't teleport here!"); break;
+								 default:
+									 break;
+								 }
+							     return;                            
+							}
 							
 							mapRegions->Remove(pc_currchar); //LB
 							
