@@ -176,6 +176,7 @@ protected:
 	unsigned int rank_system_;
 	short checkBank_;
 	unsigned int vendorGreet_;
+	unsigned int showNpcTitles_;
 
 	//Repsys
 	long int		murderdecay_;
@@ -345,6 +346,7 @@ public:
 	unsigned int rank_system() const;
 	short checkBank() const;
 	unsigned int vendorGreet() const;
+	unsigned int showNpcTitles() const;
 
 	// Repsys
 	long int		murderdecay() const;
@@ -1077,6 +1079,11 @@ inline void cSrvParams::setSeason( unsigned char data)
 inline QString cSrvParams::worldSaveModule() const
 {
 	return worldSaveModule_;
+}
+
+inline unsigned int cSrvParams::showNpcTitles() const
+{
+	return showNpcTitles_;
 }
 
 #endif //__SRVPARAMS_H___

@@ -970,9 +970,14 @@ void showcname (UOXSOCKET s, P_CHAR pc_i, char b) // Singleclick text for a char
 				{
 					if(c=='_')
 						c=' ';
-					sprintf((char*)temp, "%s,%s", pc_i->name.c_str(),pc_i->title.c_str());
+					if (SrvParams->showNpcTitles() == 1)
+					{
+					    sprintf((char*)temp, "%s,%s", pc_i->name.c_str(),pc_i->title.c_str());
+					}else{
+					   sprintf((char*)temp, "%s%c", temp, c);
+					}
+				    x++;
 				}
-				x++;
 			}
 			while ((c!=0) && x<50 );
 		}

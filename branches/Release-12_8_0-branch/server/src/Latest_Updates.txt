@@ -15,6 +15,7 @@ off runes from inside a house. NOTE: any runes
 that have already been marked in a house will still work :(  (Ripper)
 10) Changed: Made guards alot smarter & agressive :) (Ripper)
 11) Fixed: when singleclick on an npc it will show name & title.
-example: Berry, The Banker. (Ripper)
+example: Berry, The Banker. Option to turn off & on in wolfpack.xml file.
+Show Npc Titles 1 = ON  0 = OFF. (Ripper)
 12) Fixed: house commands should now work :) (Ripper)
 13) Added: Auto furniture turn. (Thanks to UOXc)

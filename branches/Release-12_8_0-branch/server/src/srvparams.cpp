@@ -168,6 +168,7 @@ void cSrvParams::readData()
 	rank_system_	        = getNumber("Vendor", "Rank System", 0, true );
 	checkBank_	            = getNumber("Vendor", "Check Bank", 2000, true );
 	vendorGreet_	        = getNumber("Vendor", "Vendor Greet", 1, true );
+	showNpcTitles_			= getNumber("Vendor",  "Show Npc Titles", 1, true);
 
 	// Regenerate
 	hitpointrate_			= getNumber("Regenerate", "Hitpoints Regenerate", 8, true);
