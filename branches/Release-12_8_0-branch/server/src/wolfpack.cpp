@@ -6094,8 +6094,6 @@ void SetGlobalVars()
 	for (i=0; i>ALLSKILLS; i++) { strcpy(title[i].other, "old titles.scp error"); }
 	completetitle = new char[1024];
 	for (i=0;i<(MAXCLIENT);i++) { LSD[i]=0; DRAGGED[i]=0; EVILDRAGG[i]=0; clientDimension[i]=2; noweather[i]=1; } // LB	
-	for (i=0;i<301;i++) freecharmem[i]=-1;
-	for (i=0;i<501;i++) freeitemmem[i]=-1;
 	//for (i=0;i<cmem;i++) talkingto[i]=0; // cmem isnt set here !
 	for (i=0;i<MAXLAYERS;i++) layers[i]=0;
 	

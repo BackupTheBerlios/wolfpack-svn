@@ -303,8 +303,6 @@ extern unsigned int metagm[256][7]; // for meta gm script
 extern signed short int menupriv[64][256]; // for menu priv script
 extern int validEscortRegion[256];
 
-extern int freecharmem[301]; //stores pointers to deleted char struct memory
-extern int freeitemmem[501]; //stores pointers to deleted item struct memory
 extern int npcshape[5]; //Stores the coords of the bouding shape for the NPC
 
 extern jail_st jails[11];

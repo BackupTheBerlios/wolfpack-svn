@@ -392,8 +392,6 @@ list<SERIAL> guilds;
  int validEscortRegion[256];
  creat_st creatures[2048];
 
- int freecharmem[301]; //stores pointers to deleted char struct memory
- int freeitemmem[501]; //stores pointers to deleted item struct memory
  int npcshape[5]; //Stores the coords of the bouding shape for the NPC
 
  jail_st jails[11];
