@@ -436,11 +436,11 @@ void command_bounty(UOXSOCKET s)
 	if( !pc_cs->dead )
 	{
 		sysmessage(s, tr("You can only place a bounty while you are a ghost."));
-		pc_cs->murdererSer = 0;
+		pc_cs->murdererSer = INVALID_SERIAL;
 		return;
 	}
 	
-	if( pc_cs->murdererSer == 0 )
+	if( pc_cs->murdererSer == INVALID_SERIAL )
 	{
 		sysmessage(s, tr("You can only place a bounty once after someone has murdered you."));
 		return;
@@ -460,7 +460,7 @@ void command_bounty(UOXSOCKET s)
 			
 			// Set murdererSer to 0 after a bounty has been 
 			// placed so it can only be done once
-			pc_cs->murdererSer = 0;
+			pc_cs->murdererSer = INVALID_SERIAL;
 		}
 		else
 			sysmessage( s, tr("You do not have enough gold to cover the bounty."));
