@@ -1389,10 +1389,10 @@ void teleport(P_CHAR pc) // Teleports character to its current set coordinates
 	if ( pc == NULL )
 		return;
 	UOXSOCKET k = calcSocketFromChar(pc);
+	LongToCharPtr(pc->serial, &removeitem[1]);
+
 	if (k!=-1)	// If a player, move them to the appropriate XYZ
 	{
-		LongToCharPtr(pc->serial, &removeitem[1]);
-
 		LongToCharPtr(pc->serial, &goxyz[1]);
 		goxyz[5]=pc->id1;
 		goxyz[6]=pc->id2;
