@@ -75,7 +75,7 @@ private:
 	bool CanBirdWalk(unitile_st xyb);
 
 	void FillXYBlockStuff(short int x, short int y, unitile_st *xyblock, int &xycount);
-	void GetBlockingMap(const Coord_cl, unitile_st *xyblock, int &xycount);
+	void GetBlockingMap(const Coord_cl&, unitile_st *xyblock, int &xycount);
 	void GetBlockingStatics(const Coord_cl, unitile_st *xyblock, int &xycount);
 	void GetBlockingDynamics(const Coord_cl, unitile_st *xyblock, int &xycount);
 

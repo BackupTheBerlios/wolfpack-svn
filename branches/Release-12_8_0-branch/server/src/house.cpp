@@ -624,8 +624,8 @@ void house_speech(int s, const QString& msg)	// msg must already be capitalized
 	if ( !pMulti ) return;
 
 	cHouse* pHouse = dynamic_cast<cHouse*>(pMulti);
-		if ( !(pc_currchar->Owns(pHouse) || pHouse->isFriend(pc_currchar)))
-			return; // Not (Friend or Owner)
+	if ( !pHouse || !(pc_currchar->Owns(pHouse) || pHouse->isFriend(pc_currchar)))
+		return; // Not (Friend or Owner)
 
 	if(msg.contains("I BAN THEE")) 
 	{ // house ban

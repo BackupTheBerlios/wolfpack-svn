@@ -769,10 +769,10 @@ void cMovement::MoveCharForDirection(P_CHAR pc, UI08 dir)
 
 // Split up of FillXYBlockStuff
 
-void cMovement::GetBlockingMap( const Coord_cl pos, unitile_st *xyblock, int &xycount)
+void cMovement::GetBlockingMap( const Coord_cl& pos, unitile_st *xyblock, int &xycount)
 {
 	int mapid = 0;
-	signed char mapz = Map->MapElevation(pos);  //Map->AverageMapElevation(x, y, mapid);
+	signed char mapz = Map->AverageMapElevation(pos, mapid);
 	if (mapz != illegal_z)
 	{
 		land_st land;
