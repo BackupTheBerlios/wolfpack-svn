@@ -159,6 +159,7 @@ void cMovement::Walking(P_CHAR pc, UI08 dir, int sequence)
 #if DEBUG_WALK_ERROR
 		printf("%s (cMovement::Walking) caught bad direction = %s %d 0x%x\n", DBGFILE, pc->name.c_str(), dir, dir);
 #endif
+		if (pc->isNpc())
 		pc->pathnum += PATHNUM;
 		return;
 	}
