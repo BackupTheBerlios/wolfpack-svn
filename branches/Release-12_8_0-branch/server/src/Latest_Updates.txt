@@ -9,3 +9,4 @@
 5) Fixed: Red NPCs shall attack Blue NPCs.(Darkstorm)
 6) Fixed: No more spawning npcs going over max :) (Ripper)
 7) Fixed: gates now work when using gate travel.(Ripper)
+8) Fixed: Who started trade window couldnt check to trade. (Ripper)
