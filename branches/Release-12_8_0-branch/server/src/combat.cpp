@@ -870,7 +870,7 @@ void cCombat::DoCombat(P_CHAR pc_attacker, unsigned int currenttime)
 			}			
 			if (pc_defender->hp<1)//Highlight //Repsys
 			{
-				if(pc_attacker->npcaitype==4 && pc_defender->isNpc())
+				if((pc_attacker->npcaitype==4 || pc_attacker->npcaitype==9) && pc_defender->isNpc())
 				{
 					npcaction(pc_defender, 0x15);
 					

@@ -1042,12 +1042,6 @@ void deathstuff(P_CHAR pc_player)
 			pc_t->attacker = INVALID_SERIAL;
 			pc_t->resetAttackFirst();
 
-			if (pc_t->npcaitype==4 || pc_t->npcaitype==9) // Ripper...so non human npcs disapear if killed by guards.
-			{
-				if (pc_player->isNpc() && !pc_player->isHuman())
-					Npcs->DeleteChar(pc_player);
-			}
-
 			if(pc_t->isPlayer() && !pc_t->inGuardedArea())
 			{//AntiChrist
 				Karma(pc_t, pc_player, (0-(pc_player->karma)));

@@ -13,3 +13,4 @@
 9) Added: You cant mark a rune inside a house.You still can recall & gate travel
 off runes from inside a house. NOTE: any runes
 that have already been marked in a house will still work :(  (Ripper)
+10) Changed: Made guards alot smarter & agressive :) (Ripper)
