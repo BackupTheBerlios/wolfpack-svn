@@ -235,6 +235,7 @@ void cDragdrop::get_item(P_CLIENT ps) // Client grabs an item
 			{
 				ps->ResetDragging();
 				item_bounce3(pi);
+				RefreshItem(pi);
 				pi->setOwnerMovable();
 			}
 			return;
@@ -273,6 +274,7 @@ void cDragdrop::get_item(P_CLIENT ps) // Client grabs an item
 				{
 					ps->ResetDragging();
 					item_bounce4(s, pi);
+					RefreshItem(pi);
 				}
 			}
 			else
@@ -382,11 +384,11 @@ void cDragdrop::wear_item(P_CLIENT ps) // Item is dropped on paperdoll
 {
 	int j;
 	tile_st tile;
-	int serial, letsbounce=0; // AntiChrist (5) - new ITEMHAND system
+	int letsbounce=0; // AntiChrist (5) - new ITEMHAND system
 	UOXSOCKET s=ps->GetSocket();
 	P_CHAR pc_currchar = ps->getPlayer();
 
-	int cserial=calcserial(buffer[s][6],buffer[s][7],buffer[s][8],buffer[s][9]);
+	SERIAL cserial=calcserial(buffer[s][6],buffer[s][7],buffer[s][8],buffer[s][9]);
 	if(cserial==INVALID_SERIAL) return;
 	P_CHAR pc_k = FindCharBySerial( cserial );
 	
@@ -406,6 +408,7 @@ void cDragdrop::wear_item(P_CLIENT ps) // Item is dropped on paperdoll
 		{
 			ps->ResetDragging();
 			item_bounce4(s,pi);
+			RefreshItem(pi);
 			UpdateStatusWindow(s,pi);
 		}
 		return;
@@ -424,6 +427,7 @@ void cDragdrop::wear_item(P_CLIENT ps) // Item is dropped on paperdoll
 				{
 					ps->ResetDragging();
 					item_bounce4(s,pi);
+					RefreshItem(pi);
 					UpdateStatusWindow(s,pi);
 				}
 				return;
@@ -438,7 +442,8 @@ void cDragdrop::wear_item(P_CLIENT ps) // Item is dropped on paperdoll
 				if (ps->IsDragging())
                 {
 					ps->ResetDragging();
-					item_bounce4(s,pi);				
+					item_bounce4(s,pi);
+					RefreshItem(pi);
 					UpdateStatusWindow(s,pi);
 				}
 				return;
@@ -448,13 +453,14 @@ void cDragdrop::wear_item(P_CLIENT ps) // Item is dropped on paperdoll
 				( (pi->isOwnerMovable()|| pi->isLockedDown()) && !pc_currchar->Owns(pi)))
 			{
 				item_bounce6(ps,pi);
+				RefreshItem(pi);
 				return;
 			}
 		
 
 		// - AntiChrist (4) - checks for new ITEMHAND system
 		// - now you can't equip 2 hnd weapons with 1hnd weapons nor shields!!
-		serial=pc_currchar->serial;
+		SERIAL serial=pc_currchar->serial;
 		unsigned int ci;
 		vector<SERIAL> vecContainer = contsp.getData(serial);
 		for (ci = 0; ci < vecContainer.size(); ci++)
@@ -506,6 +512,7 @@ void cDragdrop::wear_item(P_CLIENT ps) // Item is dropped on paperdoll
 				{
 					ps->ResetDragging();
 					item_bounce4(s,pi);
+					RefreshItem(pi);
 					UpdateStatusWindow(s,pi);
 					itemsfx(s, pi->id());		// antichrist
 				}
@@ -518,6 +525,7 @@ void cDragdrop::wear_item(P_CLIENT ps) // Item is dropped on paperdoll
 			{
 				sysmessage(s, "You cant put items on other players!");
 				item_bounce6(ps,pi);
+				RefreshItem(pi);
 				return;
 			}
 		}
@@ -601,6 +609,7 @@ static bool ItemDroppedOnPet(P_CLIENT ps, PKGx08 *pp, P_ITEM pi)
 		{
 			ps->ResetDragging();
 			item_bounce5(s,pi);
+			RefreshItem(pi);
 		}
 	}
 	return true;
@@ -713,6 +722,7 @@ static bool DeedDroppedOnBroker(P_CLIENT ps, PKGx08 *pp, P_ITEM pi)
 		  {
 			 ps->ResetDragging();
 			 item_bounce5(s,pi);
+			 RefreshItem(pi);
 			 return true;
 		  }
 	}
@@ -763,6 +773,7 @@ static bool ItemDroppedOnBanker(P_CLIENT ps, PKGx08 *pp, P_ITEM pi)
 		  {
 			 ps->ResetDragging();
 			 item_bounce5(s,pi);
+			 RefreshItem(pi);
 			 return true;
 		  }
 	}
@@ -791,6 +802,7 @@ static bool ItemDroppedOnTrainer(P_CLIENT ps, PKGx08 *pp, P_ITEM pi)
 			{
 				ps->ResetDragging();
 				item_bounce5(s,pi);
+				RefreshItem(pi);
 			}
 		}
 		else
@@ -816,6 +828,7 @@ static bool ItemDroppedOnTrainer(P_CLIENT ps, PKGx08 *pp, P_ITEM pi)
 		{
 			ps->ResetDragging();
 			item_bounce5(s,pi);
+			RefreshItem(pi);
 			return true;
 		}
 		else
@@ -887,6 +900,7 @@ static bool ItemDroppedOnChar(P_CLIENT ps, PKGx08 *pp, P_ITEM pi)
 						{
 							ps->ResetDragging();
 							item_bounce5(s,pi);
+							RefreshItem(pi);
 						}
 					}
 					return true;
@@ -900,6 +914,7 @@ static bool ItemDroppedOnChar(P_CLIENT ps, PKGx08 *pp, P_ITEM pi)
 						{
 							ps->ResetDragging();
 							item_bounce5(s,pi);
+							RefreshItem(pi);
 						}
 					}
 					return true;
@@ -913,6 +928,7 @@ static bool ItemDroppedOnChar(P_CLIENT ps, PKGx08 *pp, P_ITEM pi)
 						{
 							ps->ResetDragging();
 							item_bounce5(s,pi);
+							RefreshItem(pi);
 						}
 					}
 					return true;
@@ -926,6 +942,7 @@ static bool ItemDroppedOnChar(P_CLIENT ps, PKGx08 *pp, P_ITEM pi)
 						{
 							ps->ResetDragging();
 							item_bounce5(s,pi);
+							RefreshItem(pi);
 						}
 					}
 					return true;
@@ -940,6 +957,7 @@ static bool ItemDroppedOnChar(P_CLIENT ps, PKGx08 *pp, P_ITEM pi)
 					{
 						ps->ResetDragging();
 						item_bounce5(s,pi);
+						RefreshItem(pi);
 					}
 					return true;
 				}
@@ -1033,12 +1051,14 @@ void dump_item(P_CLIENT ps, PKGx08 *pp) // Item is dropped on ground or a charac
 	if (!pi->isInWorld())
 	{
 		item_bounce6(ps,pi);
+		RefreshItem(pi);
 		return;
 	}
 	
 	if (!pc_currchar->canPickUp(pi))
 	{
 		item_bounce6(ps,pi);
+		RefreshItem(pi);
 		return;
 	}
 	
@@ -1122,6 +1142,7 @@ void pack_item(P_CLIENT ps, PKGx08 *pp) // Item is put into container
 	if(abort)
 	{//AntiChrist to preview item disappearing
 		item_bounce6(ps,pItem);
+		RefreshItem(pItem);
 		return;
 	}
 
@@ -1170,6 +1191,7 @@ void pack_item(P_CLIENT ps, PKGx08 *pp) // Item is put into container
 	if (!pItem->isInWorld())
 	{
 		item_bounce6(ps,pItem);
+		RefreshItem(pItem);
 		return;
 	}
 	
@@ -1180,6 +1202,7 @@ void pack_item(P_CLIENT ps, PKGx08 *pp) // Item is put into container
 		{
 			ps->ResetDragging();
 			item_bounce3(pItem);
+			RefreshItem(pItem);
 			if (pCont->id1>=0x40)
 				senditem(s, pCont);
 		}
@@ -1203,6 +1226,7 @@ void pack_item(P_CLIENT ps, PKGx08 *pp) // Item is put into container
 			{
 				ps->ResetDragging();
 				item_bounce3(pItem);
+				RefreshItem(pItem);
 			}
 			if (pCont->id1>=0x40)
 				senditem(s, pCont);
@@ -1216,6 +1240,7 @@ void pack_item(P_CLIENT ps, PKGx08 *pp) // Item is put into container
 			{
 				sysmessage(s, "You cannot place spells in other peoples spellbooks.");
 				item_bounce6(ps,pItem);
+				RefreshItem(pItem);
 				return;
 			}
 			
@@ -1239,6 +1264,7 @@ void pack_item(P_CLIENT ps, PKGx08 *pp) // Item is put into container
 					{
 						sysmessage(s,"You already have that spell!");
 						item_bounce6(ps,pItem);
+						RefreshItem(pItem);
 						return;
 					}
 				}
@@ -1380,6 +1406,7 @@ void cDragdrop::drop_item(P_CLIENT ps) // Item is dropped
           #endif
 
 		  item_bounce6(ps, pi);
+		  RefreshItem(pi);
 		  return;
 	  }
 	  else if ( ( (pp->TxLoc!=-1) && (pp->TyLoc!=-1) && ( pp->Tserial!=-1)) || ( (isItemSerial(pp->Iserial)) && (isItemSerial(pp->Tserial)) ) ) EVILDRAGG[s]=1; // calc new evildrag value
