@@ -1,0 +1,84 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- a drake -->
+	<npc id="drake_base" inherit="monster_base">
+		<name>drake</name>
+		<id><random list="NPCIDS_DRAKE" /></id>
+		<inherit id="KARMA_L4" />
+		<inherit id="FAME_L4" />
+		<!-- Stats -->
+		<str><random min="401" max="430"/></str>
+		<dex><random min="133" max="152"/></dex>
+		<int><random min="101" max="140"/></int>
+		<maxhitpoints><random min="241" max="258" /></maxhitpoints>
+		<!-- Skills -->
+		<magicresistance><random min="651" max="800"/></magicresistance>
+		<tactics><random min="651" max="900"/></tactics>
+		<wrestling><random min="651" max="800"/></wrestling>
+		<!-- Damage -->
+		<mindamage>30</mindamage>
+		<maxdamage>46</maxdamage>
+		<tag name="dmg_fire" value="20" type="int" />
+		<!-- Resists -->
+		<tag name="res_cold" value="40,50" type="int" />
+		<tag name="res_energy" value="30,40" type="int" />
+		<tag name="res_fire" value="50,60" type="int" />
+		<tag name="res_physical" value="45,50" type="int" />
+		<tag name="res_poison" value="20,30" type="int" />
+		<!-- Misc. -->
+		<controlslots>2</controlslots>
+		<!-- Missing: 1-7CS, MNS, Potions, Reagents, Level 3 Map -->
+		<lootpacks>lootpack_rich</lootpacks>
+		<mintaming>843</mintaming>
+		<strproperty name="slayer_group" value="dragons" />
+	</npc>
+
+	<!-- a drake (gray) -->
+	<npc id="drake_gray" inherit="drake_base">
+		<id>60</id>
+		<category>Monsters\Dragons\Drake (Gray)</category>
+		<baseid>drake_gray</baseid>
+
+		<!-- Carve -->
+		<intproperty name="carve_scales" value="2" />
+		<strproperty name="carve_scales_type" value="yellow" />
+		<intproperty name="carve_hides" value="20" />
+		<strproperty name="carve_hides_type" value="horned" />
+		<intproperty name="carve_meat" value="10" />
+	</npc>
+
+	<!-- a drake (red) -->
+	<npc id="drake_red" inherit="drake_base">
+		<id>61</id>
+		<category>Monsters\Dragons\Drake (Red)</category>
+		<baseid>drake_red</baseid>
+
+		<!-- Carve -->
+		<intproperty name="carve_scales" value="2" />
+		<strproperty name="carve_scales_type" value="red" />
+		<intproperty name="carve_hides" value="20" />
+		<strproperty name="carve_hides_type" value="horned" />
+		<intproperty name="carve_meat" value="10" />
+	</npc>
+
+	<list id="drake_ids">
+		<item>drake_gray</item>
+		<item>drake_red</item>
+	</list>
+
+	<!-- random dragon -->
+	<npc id="drake">
+		<id>61</id>
+		<category>Monsters\Dragons\Drake (Random)</category>
+		<inherit><random list="drake_ids" /></inherit>
+	</npc>
+
+</definitions>
