@@ -1683,6 +1683,8 @@ void cMagic::NewCastSpell( UOXSOCKET s )
 		{
 			// mark, recall and gate go here
 			P_ITEM pi=FindItemBySerPtr(buffer[s]+7);
+			P_ITEM pi_multi = findmulti(pc_currchar->pos);		
+			
 			if(pi)
 			{
 				if( !pi->isInWorld() || line_of_sight( s, pc_currchar->pos, pi->pos, WALLS_CHIMNEYS+DOORS+FLOORS_FLAT_ROOFING ) || pc_currchar->isGM() ) // bugfix LB
@@ -1724,6 +1726,14 @@ void cMagic::NewCastSpell( UOXSOCKET s )
 							break;
 							//////////// (45) MARK //////////////////
 						case 45:
+							if (pi_multi != NULL)
+							{	
+				                if (ishouse(pi_multi->id()))
+								{
+					                sysmessage(s, "You can`t mark a rune in a house!");
+				                    return;
+								}
+							}
 							pi->morex=pc_currchar->pos.x;
 							pi->morey=pc_currchar->pos.y;
 							pi->morez=pc_currchar->pos.z;
