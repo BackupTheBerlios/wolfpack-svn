@@ -882,8 +882,11 @@ void cNetworkStuff::SockClose () // Close all sockets for shutdown
 	closesocket(a_socket);
 	for (i=0;i<MAXCLIENT;i++) 
 	{
-		client[i]->close();
-		delete client[i];
+		if ( client[i] )
+		{
+			client[i]->close();
+			delete client[i];
+		}
 		client[i] = 0;
 	}
 }
