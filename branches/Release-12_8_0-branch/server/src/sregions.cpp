@@ -155,7 +155,7 @@ void loadspawnregions()//Regionspawns
 
 	spawnregion_st dummy;
 
-	spawnregion.clear();
+	//spawnregion.clear();
 	spawnregion.reserve(1);
 
 	openscript("spawn.scp");
