@@ -950,7 +950,7 @@ int cCombat::CalcAtt(P_CHAR pc_p) // Calculate total attack powerer
 	for ( ci = 0; ci < vecContainer.size(); ci++)
 	{
 		pi = FindItemBySerial(vecContainer[ci]);
-		if (pi->layer==1 || pi->layer==2)
+		if ( pi && ( pi->layer==1 || pi->layer==2 ) )
 		{
 			if (pi->lodamage == pi->hidamage) total+=pi->lodamage;
 			else if ((pi->lodamage>0)&&(pi->hidamage>0))

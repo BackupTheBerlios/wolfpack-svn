@@ -1183,6 +1183,8 @@ void GuildTitle(int s, P_CHAR pc_player2)
 	if ( pc_player2->guildstone != INVALID_SERIAL && pc_player2->guildtoggle )
 	{
 		cGuildStone* pStone = dynamic_cast<cGuildStone*>(FindItemBySerial( pc_player2->guildstone ));
+		if (!pStone)
+			return;
 		QString abbreviation = pStone->abbreviation.c_str();
 		QString guildtype("");
 		QString title("");
