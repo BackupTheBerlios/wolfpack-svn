@@ -4111,6 +4111,11 @@ void cTargets::MultiTarget(P_CLIENT ps) // If player clicks on something with th
 			}
 		}
 
+		// khpae : ghostly item bug fix
+		if ((!Iready) && (!Cready)) {
+			return;
+		}
+
 		switch(pt->Tnum)
 		{
 		case 0: AddTarget(s,pt); break;

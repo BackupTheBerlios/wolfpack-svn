@@ -236,6 +236,11 @@ bool iteminrange (const UOXSOCKET s, const P_ITEM pi, const int distance)
 				return true;
 			}
 		}
+	} else if (pi->contserial != INVALID_SERIAL) { // item in a bag on the ground
+		P_ITEM pbag = GetOutmostCont (pi);
+		if (pbag != NULL) {
+			return inRange(pc_currchar->pos.x, pc_currchar->pos.y, pbag->pos.x, pbag->pos.y, distance);
+		}
 	}
 	return inRange(pc_currchar->pos.x,pc_currchar->pos.y,pi->pos.x,pi->pos.y,distance);
 }
