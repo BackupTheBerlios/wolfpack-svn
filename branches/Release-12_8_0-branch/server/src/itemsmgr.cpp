@@ -131,7 +131,7 @@ void cItemsManager::purge()
 	list<cItem*>::iterator it;
 	for (it = deletedItems.begin(); it != deletedItems.end(); ++it)
 	{
-		delete *it;
+		delete (*it);
 	}
 	deletedItems.clear();
 }

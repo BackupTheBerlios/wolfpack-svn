@@ -601,25 +601,25 @@ void cGuildStone::ToggleAbbreviation(UOXSOCKET s)
 
 	if (!isMember(pc)) 
 	{
-		sysmessage(s, "you are not a guild member");
+		sysmessage(s, tr("You are not a guild member") );
 		return;
 	}
 
 	if (this->guildType != cGuildStone::standard)		// Check for Order/Chaos
 	{
-		sysmessage(s, "You are in an Order/Chaos guild, you cannot toggle your title.");
+		sysmessage(s, tr("You are in an Order/Chaos guild, you cannot toggle your title.") );
 	}
 	else
 	{
 		if (!pc->guildtoggle)									// If set to Off then
 		{
 			pc->guildtoggle = true;									// Turn it On
-			sysmessage(s, "You toggled your abbreviation on.");	// Tell player about the change
+			sysmessage(s, tr("You toggled your abbreviation on.") );	// Tell player about the change
 		}
 		else													// Otherwise
 		{
 			pc->guildtoggle = false;					// Turn if Off
-			sysmessage(s, "You toggled your abbreviation off.");	// And tell him also
+			sysmessage(s, tr("You toggled your abbreviation off.") );	// And tell him also
 		}
 	}
 	this->Menu(s, 1);										// Send him back to the menu
@@ -768,8 +768,8 @@ void cGuildStone::GumpChoice(UOXSOCKET s,int main,int sub)
 		}
 		return;
 	case 8003:													// set type menu
-//		if (sub >= 2 && sub <=4) 
-//			SetType(sub-2);
+		if (sub >= 2 && sub <=4) 
+			SetType( static_cast<enGuildType>(sub-2) );
 		Menu(s,2);
 		return;
 	case 8004:													// edit charter menu
@@ -1175,9 +1175,6 @@ void cGuildStone::Serialize( ISerialization &archive )
 // Called by: textflags()
 void GuildTitle(int s, P_CHAR pc_player2)
 {
-	char title[150];
-	char abbreviation[5];
-	char guildtype[10];
 	int tl;
 
 	if ( pc_player2 == NULL )
@@ -1186,23 +1183,27 @@ void GuildTitle(int s, P_CHAR pc_player2)
 	if ( pc_player2->guildstone != INVALID_SERIAL && pc_player2->guildtoggle )
 	{
 		cGuildStone* pStone = dynamic_cast<cGuildStone*>(FindItemBySerial( pc_player2->guildstone ));
-		strcpy(abbreviation, pStone->abbreviation.c_str());
-		
-		if (!(strcmp(abbreviation,"")))
-			strcpy(abbreviation,"none");
+		QString abbreviation = pStone->abbreviation.c_str();
+		QString guildtype("");
+		QString title("");
+
+		if (abbreviation.isEmpty())
+			abbreviation = "none";
 		switch (pStone->guildType)
 		{
-		case cGuildStone::order:	strcpy(guildtype, "Order");		break;
-		case cGuildStone::chaos:	strcpy(guildtype, "Chaos");		break;
-		default:													break;		
+		case cGuildStone::order:	guildtype = "Order";		break;
+		case cGuildStone::chaos:	guildtype = "Chaos";		break;
+		default:												break;		
 		}
 
-		if (pc_player2->guildtitle != "") 
-			sprintf(title,"[%s, %s] [%s]",pc_player2->guildtitle.c_str(),abbreviation,guildtype);
+		if (!pc_player2->guildtitle.empty()) 
+			title = QString("[%1, %2]").arg(pc_player2->guildtitle.c_str()).arg(abbreviation);
 		else 
-			sprintf(title,"[%s] [%s]",abbreviation, guildtype);
+			title = QString("[%1]").arg(abbreviation);
 
-		tl=44+strlen(title)+1;
+		if ( !guildtype.isEmpty() )
+			title.append( " [" + guildtype + "]" );
+		tl = 44 + title.length() + 1;
 		talk[1]=tl>>8;
 		talk[2]=tl%256;
 		LongToCharPtr(pc_player2->serial, &talk[3]);
@@ -1214,7 +1215,7 @@ void GuildTitle(int s, P_CHAR pc_player2)
 		talk[13]=3;
 		Xsend(s, talk, 14);
 		Xsend(s, sysname, 30);
-		Xsend(s, title, strlen(title)+1);
+		Xsend(s, const_cast<char*>(title.latin1()), title.length() + 1);
 	}
 }
 

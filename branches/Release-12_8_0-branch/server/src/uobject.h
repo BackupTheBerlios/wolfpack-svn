@@ -59,7 +59,7 @@ protected:
 public:
 	cUObject();
 	cUObject( cUObject& ); // Copy constructor
-	virtual ~cUObject() = 0;
+	virtual ~cUObject() = 0 {};
 	virtual void Serialize(ISerialization &archive);
 	virtual std::string objectID();
 	void moveTo( const Coord_cl& );

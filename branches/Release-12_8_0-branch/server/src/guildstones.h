@@ -58,7 +58,7 @@ class ISerialization;
 class cGuildStone : public cItem
 {
 public:
-	enum enGuildType { standard = 0, chaos, order };
+	enum enGuildType { standard = 0, order, chaos };
 	std::string			guildName;
 	std::string			abbreviation;
 	enGuildType			guildType;

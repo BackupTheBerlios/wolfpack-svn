@@ -58,10 +58,6 @@ cUObject::cUObject( cUObject &src )
 	this->free = src.free;
 }
 
-cUObject::~cUObject()
-{
-}
-
 void cUObject::init()
 {
 	this->serial = INVALID_SERIAL;
