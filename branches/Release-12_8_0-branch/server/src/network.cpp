@@ -1181,9 +1181,104 @@ void cNetworkStuff::GetMsg(int s) // Receive message from client
 				cClient cli(s);
 				P_CLIENT ps = &cli;
 
+				// khpae : for map commands - will be cleaned later
+				unsigned char mapPacket[12] = "\x56\x40\x01\x02\x03\x01\x00\x00\x00\x00\x00";
+				int mapSer = INVALID_SERIAL;
+				P_ITEM pMap = NULL;
+				char mapAct;
+				unsigned short mapX, mapY;
+				unsigned char mapPinNum;
 				switch(packet)
 				{
-
+					// khpae : map pin editing 05/06/02
+				case 0x56:
+					mapSer = LongFromCharPtr (&buffer[s][1]);
+					pMap = FindItemBySerial (mapSer);
+					if (pMap == NULL) {
+						break;
+					}
+					if (pMap->type != 10) {	// should not occur
+						break;
+					}
+					mapAct = buffer[s][5];
+					mapX = (unsigned short)(buffer[s][7]<<8 | buffer[s][8]);
+					mapY = (unsigned short)(buffer[s][9]<<8 | buffer[s][10]);
+					switch (mapAct) {
+						case 0x01:	// add pin
+							if (!pMap->mapEditable) {	// should not occur
+								sysmessage (s, "It is not editable.");
+								break;
+							}
+							if (pMap->mapNumPin > 15) { // restriction needed
+								sysmessage (s, "You can only use pin upto 16.");
+								break;
+							}
+							if ((mapX==0) || (mapY==0)) {	// should not occur
+								break;
+							}
+							pMap->mapPinXY[pMap->mapNumPin][0] = mapX;
+							pMap->mapPinXY[pMap->mapNumPin][1] = mapY;
+							pMap->mapNumPin ++;
+							break;
+						case 0x02:	// add pin with pin num
+							if (!pMap->mapEditable) {	// should not occur
+								sysmessage (s, "It is not editable.");
+								break;
+							}
+							mapPinNum = buffer[s][6];
+							if (mapPinNum > 15) {
+								sysmessage (s, "You can only use pin upto 16.");
+								break;
+							}
+							if (mapPinNum <= pMap->mapNumPin) {
+								int i;
+								for (i=pMap->mapNumPin; i>mapPinNum; i--) {
+									pMap->mapPinXY[i][0] = pMap->mapPinXY[i-1][0];
+									pMap->mapPinXY[i][1] = pMap->mapPinXY[i-1][1];
+								}
+							}
+							pMap->mapNumPin ++;
+							pMap->mapPinXY[mapPinNum][0] = mapX;
+							pMap->mapPinXY[mapPinNum][1] = mapY;
+							break;
+						case 0x03:	// change one pin
+							sysmessage (s, "change pin : Not implemented yet.");
+							break;
+						case 0x04:	// remove one pin
+							if (pMap->mapNumPin < 1) {
+								break;
+							}
+							mapPinNum = buffer[s][6];
+							if ((pMap->mapNumPin<=mapPinNum) || (mapPinNum>15)) { // should not occur
+								break;
+							}
+							int i;
+							for (i=mapPinNum; i<(pMap->mapNumPin-1); i++) {
+								pMap->mapPinXY[i][0] = pMap->mapPinXY[i+1][0];
+								pMap->mapPinXY[i][1] = pMap->mapPinXY[i+1][1];
+							}
+							pMap->mapNumPin --;
+							break;
+						case 0x05:	// remove all pin
+							pMap->mapNumPin = 0;
+							break;
+						case 0x06:	// toggle edit
+							LongToCharPtr (pMap->serial, &mapPacket[1]);
+							mapPacket[5] = 0x07;	// response
+							if (pMap->mapEditable) {
+								pMap->mapEditable = false;
+							} else {
+								pMap->mapEditable = true;
+							}
+							mapPacket[6] = (pMap->mapEditable) ? 1 : 0;
+							
+							Xsend (s, mapPacket, 11);
+							break;
+						default:		// no other action
+							break;
+					}
+					break;
+					// khpae : map pin end
 				case 0x04:
 					// Expermintal for God clent
                     if (pc_currchar->isGM())

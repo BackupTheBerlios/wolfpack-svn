@@ -138,6 +138,15 @@ cItem::cItem( cItem &src )
 	this->timeused_last=getNormalizedTime();
 	this->spawnregion=src.spawnregion;
 	this->desc = src.desc;
+	// khpae : item map
+	this->mapEditable = src.mapEditable;
+	this->mapNumPin = src.mapNumPin;
+	int i;
+	for (i=0; i<16; i++) {
+		this->mapPinXY[i][0] = src.mapPinXY[i][0];
+		this->mapPinXY[i][1] = src.mapPinXY[i][1];
+	}
+	this->autoSail = src.autoSail;
 }
 
 inline string cItem::objectID()
@@ -766,7 +775,7 @@ void cItem::Init(bool mkser)
 	this->trigtype=0; //Type of trigger
 	this->trigon=0; // equipped item trigger -Frazurbluu-
 	this->disabled=0; //Item is disabled, cant trigger.
-	this->disabledmsg = ""; //Item disabled message. -- by Magius(CHE) §
+	this->disabledmsg = ""; //Item disabled message. -- by Magius(CHE) ?
 	this->tuses=0;    //Number of uses for trigger
 	this->poisoned=0; //AntiChrist -- for poisoning skill
  	this->murdertime=0; //AntiChrist -- for corpse -- when the people has been killed
@@ -776,6 +785,14 @@ void cItem::Init(bool mkser)
 	this->time_unused=0;
 	this->timeused_last=getNormalizedTime();
 	this->spawnregion=0;
+	// khpae : add item map
+	this->mapEditable = false;
+	this->mapNumPin = 0;
+	int i;
+	for (i=0; i<16; i++) {
+		this->mapPinXY[i][0] = this->mapPinXY[i][1] = 0;
+	}
+	this->autoSail = false;
 }
 
 // -- delete an item (Actually just mark it is free)

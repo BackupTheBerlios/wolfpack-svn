@@ -249,8 +249,8 @@ void cSkills::MakeMenuTarget(int s, int x, int skill)
 {
 //	int cc=currchar[s];
 	P_CHAR pc_currchar = currchar[s];
-	int rank=10; // For Rank-System --- Magius§(çhe)
-	int tmpneed=0; // For Fixed Delquant -- Magius(CHE) §
+	int rank=10; // For Rank-System --- Magius?(?he)
+	int tmpneed=0; // For Fixed Delquant -- Magius(CHE) ?
 	cMMT *targ = cMMT::factory(skill);
 	
 	// exploit fix - detects if they took the material out of their
@@ -278,13 +278,13 @@ void cSkills::MakeMenuTarget(int s, int x, int skill)
 
 	if(!Skills->CheckSkill(pc_currchar,skill, itemmake[s].minskill, itemmake[s].maxskill) && !pc_currchar->isGM()) //GM cannot fail! - AntiChrist
 	{
-		// Magius(CHE) §
+		// Magius(CHE) ?
 		// With these 2 lines if you have a resouce item with
 		// Amount=1 and fail to work on it, this resouce will be
 		// Removed anyway. So noone can increase his skill using
 		// a single resource item.
-		tmpneed=itemmake[s].needs/2; // Magius(CHE) §
-		if (tmpneed==0) itemmake[s].needs++; // Magius(CHE) §
+		tmpneed=itemmake[s].needs/2; // Magius(CHE) ?
+		if (tmpneed==0) itemmake[s].needs++; // Magius(CHE) ?
 		switch(skill) 
 		{
 		case BLACKSMITHING: targ->failure(s);break;
@@ -1049,7 +1049,7 @@ void cSkills::PotionToBottle(P_CHAR pc, P_ITEM pi_mortar)
 	
 	// the remainder of this function NOT (yet) revamped by Duke !
 	
-	// Addon for Storing creator NAME and SKILLUSED by Magius(CHE) §
+	// Addon for Storing creator NAME and SKILLUSED by Magius(CHE) ?
 	if(!pc->isGM())
 	{
 		pi_potion->creator = pc->name; // Magius(CHE) - Memorize Name of the creator
@@ -2814,7 +2814,8 @@ void cSkills::Decipher(P_ITEM tmap, int s)
 				LogWarning("Treasure hunting cSkills::Decipher : Cannot open regions-script");
 				return;
 			}
-			sprintf(sect, "TREASURE%i", nmap->morez);
+			// khpae - treasure hunting - start
+/*			sprintf(sect, "TREASURE%i", nmap->morez);
 			if (!rscript->find(sect)) 
 			{
 				rscript->Close();
@@ -2837,16 +2838,31 @@ void cSkills::Decipher(P_ITEM tmap, int s)
 			rscript->NextLine();
 			blrx = str2num(script1);
 			rscript->NextLine();
-			blry = str2num(script1);
+			blry = str2num(script1);*/
+			if (!rscript->find ("TREASURES")) {
+				rscript->Close();
+				LogWarning ("Treasure hunting cSkills::Decipher : Unable to find 'SECTION TREASURES' in regions-script");
+				return;
+			}
+			rscript->NextLine();          // Get the number of areas
+			regtouse = rand()%str2num(script1); // Select a random one
+			for (i=0; i<regtouse; i++) {
+				rscript->NextLine ();
+				rscript->NextLine ();
+			}
+			rscript->NextLine ();
+			x = str2num (script1);
+			rscript->NextLine ();
+			y = str2num (script1);
 			rscript->Close();					// Close the script
-			if ((btlx < 0) || (btly < 0) || (blrx > 0x13FF) || (blry > 0x0FFF))	// Valid region?
+/*			if ((btlx < 0) || (btly < 0) || (blrx > 0x13FF) || (blry > 0x0FFF))	// Valid region?
 			{
 				sprintf(sect, "Treasure Hunting cSkills::Decipher : Invalid region borders for lvl.%d , region %d", nmap->morez, regtouse+1);	// Give out detailed warning :D
 				LogWarning(sect);
 				return;
 			}
 			x = btlx + (rand()%(blrx-btlx));	// Generate treasure location
-			y = btly + (rand()%(blry-btly));
+			y = btly + (rand()%(blry-btly));*/
 			tlx = x - 250;		// Generate map borders
 			tly = y - 250;
 			lrx = x + 250;

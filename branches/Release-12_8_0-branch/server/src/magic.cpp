@@ -1572,7 +1572,9 @@ bool cMagic::newSelectSpell2Cast( UOXSOCKET s, int num)
 	pc_currchar->nextact=75;
 	if (type==0 && (!(pc_currchar->isGM())))//if they are a gm they don't have a delay :-)
 	{
-		pc_currchar->spelltime=(spells[num].delay*MY_CLOCKS_PER_SEC)+uiCurrentTime;
+		// khpae - fix for delay
+		pc_currchar->spelltime=(spells[num].delay*MY_CLOCKS_PER_SEC / 10)+uiCurrentTime;
+		//pc_currchar->spelltime=(spells[num].delay*MY_CLOCKS_PER_SEC)+uiCurrentTime;
 		pc_currchar->priv2 |= 2;//freeze
 	}
 	else
@@ -2127,6 +2129,11 @@ void cMagic::NewCastSpell( UOXSOCKET s )
 			
 			// ..[1] 0-> object or item selected, 1-> terrain selected
 			char_selected=item_selected=terrain_selected=false;
+			// khpae
+			if (buffer[s][1] == 1) {
+				terrain_selected = true;
+			}
+			// khpae end
 			if      (pc_i != NULL && buffer[s][1]==0)      char_selected=true;
             else if (pi_l != NULL && buffer[s][1]==0)      item_selected=true;
 			else						                   terrain_selected=true;

@@ -254,7 +254,7 @@ void doubleclick(int s) // Completely redone by Morrolan 07.20.99
 		{
 			if (pi->trigtype == 0)
 			{
-				if (pi->disabled <= uiCurrentTime) // changed by Magius(CHE) §
+				if (pi->disabled <= uiCurrentTime) // changed by Magius(CHE) ?
 				{
 					Trig->triggerwitem(s, pi, 1); // if players uses trigger
 					return;
@@ -262,7 +262,7 @@ void doubleclick(int s) // Completely redone by Morrolan 07.20.99
 				else 
 				{
 					if (!pi->disabledmsg.empty()) 
-						sysmessage(s, (char*)pi->disabledmsg.c_str()); // Added by Magius(CHE) §
+						sysmessage(s, (char*)pi->disabledmsg.c_str()); // Added by Magius(CHE) ?
 					else 
 						sysmessage(s, "That doesnt seem to work right now.");
 					return;
@@ -311,20 +311,26 @@ void doubleclick(int s) // Completely redone by Morrolan 07.20.99
 		{
 			if (iteminrange(s, pi, 3))
 			{
-				if (pi->id2 == 0x84 || pi->id2 == 0xD5 || pi->id2 == 0xD4 || pi->id2 == 0x89)
+				// khpae
+				//if (pi->id2 == 0x84 || pi->id2 == 0xD5 || pi->id2 == 0xD4 || pi->id2 == 0x89)
+				if ((pi->id2 == 0x84) || (pi->id2 == 0x86) || (pi->id2 == 0x89) || (pi->id2 == 0xD4) || (pi->id2 == 0xD3) || (pi->id2 == 0xD4) || (pi->id2 == 0xD5)) {
 					Boats->PlankStuff(s, pi);
-				else 
+				} else {
 					sysmessage(s, "That is locked.");
+				}
 			}
 			else 
 				sysmessage(s, "You can't reach that!");
 			return;
 		}
+		// khpae : bugfix
+		return;
 		// End Boats --^
 		
 	case 1: // normal containers
 	case 63:
-		if (pi->moreb1)
+		// khpae boat explosion bug fix
+		if ((pi->moreb1) && (!pi->type2))
 			Magic->MagicTrap(pc_currchar, pi); // added by AntiChrist
 		// only 1 and 63 can be trapped, so pleaz leave it here :) - Anti
 	case 65: // nodecay item spawner..Ripper
@@ -479,9 +485,20 @@ void doubleclick(int s) // Completely redone by Morrolan 07.20.99
 		map1[17] = height>>8;
 		map1[18] = height%256;
 //		END OF: By Polygon
-
+		
 		Xsend(s, map1, 19);
+		// khpae : map pins
+		if ((pi->mapNumPin<1) || (pi->mapNumPin>15)) {
+			return;
+		}
 		Xsend(s, map2, 11);
+		map2[5] = 1;	// add pin
+		map2[6] = 0;
+		for (i=0; i<pi->mapNumPin; i++) {	// send pin data
+			ShortToCharPtr (pi->mapPinXY[i][0], &map2[7]);
+			ShortToCharPtr (pi->mapPinXY[i][1], &map2[9]);
+			Xsend(s, map2, 11);
+		}
 		return;// maps
 	case 11: // book (not spellbooks)
 		pc_currchar->objectdelay = 0;

@@ -155,12 +155,14 @@ void cBoat::PlankStuff(UOXSOCKET s, P_ITEM pi_plank)//If the plank is opened, do
 		// we need to get the boat again after beaming the character to the boat's plank
 		// otherweise only -1's will be added to the boat hash-table 
         
-		pc_cs->moveTo(pi_plank->pos + Coord_cl(0,0,5));
+		// khpae : commented 3 lines
+		//pc_cs->moveTo(pi_plank->pos + Coord_cl(0,0,5));
 
-		pc_cs->multis=-3; // we have to trick getboat to start the search !!!
+		//pc_cs->multis=-3; // we have to trick getboat to start the search !!!
 		                              // will be corrected automatically by setserial...
 
-		P_ITEM boat2 = GetBoat(pc_cs);
+		//P_ITEM boat2 = GetBoat(pc_cs);
+		P_ITEM boat2 = FindItemBySerial (calcserial (pi_plank->more1, pi_plank->more2, pi_plank->more3, pi_plank->more4));
 		if (boat2 == NULL)
 			return;
 
@@ -181,8 +183,41 @@ void cBoat::PlankStuff(UOXSOCKET s, P_ITEM pi_plank)//If the plank is opened, do
 			}
 		}
 	
+		// khpae
+		UI16 x, y;
+		SI08 z;
+		switch (boat2->dir & 0x0F) {
+			case 0:
+			case 4:
+				x = (boat2->pos.x + pi_plank->pos.x) / 2;
+				y = (boat2->pos.y + pi_plank->pos.y) / 2;
+				break;
+			case 2:
+			case 6:
+				x = (boat2->pos.x + pi_plank->pos.x) / 2;
+				y = (boat2->pos.y + pi_plank->pos.y) / 2;
+				break;
+			default:
+				return;
+		}
+		z = boat2->pos.z + 3;
+		pc_cs->MoveTo (x, y, z);
+		teleport (pc_cs);
+      pc_cs->SetMultiSerial(boat2->serial); // set chars->multis value
+		sysmessage(s,"You entered a boat");
+	} else {
+		int bser = calcserial (pi_plank->more1, pi_plank->more2, pi_plank->more3, pi_plank->more4);
+		if (bser != boat->serial) {
+			return;
+		}
+		if (LeaveBoat(s, pi_plank)) {	//They are on a boat, get off
+			sysmessage (s, "You left the boat.");
+		} else {
+			sysmessage (s, "You cannot get off here!");
+		}
+	}
 
-        OpenPlank(pi_plank); //lb
+/*        OpenPlank(pi_plank); //lb
 
 		if (boat2 != NULL) // now set the char coords to the boat !!!
 		{
@@ -194,11 +229,12 @@ void cBoat::PlankStuff(UOXSOCKET s, P_ITEM pi_plank)//If the plank is opened, do
 	} else {
 		LeaveBoat(s, pi_plank);//They are on a boat, get off
 	}
-	teleport(pc_cs);//Show them they moved.
+	teleport(pc_cs);//Show them they moved.*/
 }
 
+// khpae : rewritten
 
-void cBoat::LeaveBoat(UOXSOCKET s, P_ITEM pi_plank)//Get off a boat (dbl clicked an open plank while on the boat.
+/*void cBoat::LeaveBoat(UOXSOCKET s, P_ITEM pi_plank)//Get off a boat (dbl clicked an open plank while on the boat.
 {
 	P_CHAR pc_cs,pc_b;
 	
@@ -264,7 +300,7 @@ void cBoat::LeaveBoat(UOXSOCKET s, P_ITEM pi_plank)//Get off a boat (dbl clicked
 		}//for y
 	}//for x
 	sysmessage(s,"You cannot get off here!");
-}
+}*/
 
 void cBoat::OpenPlank(P_ITEM pi_p)//Open, or close the plank (called from keytarget() )
 {
@@ -353,6 +389,15 @@ bool cBoat::Build(UOXSOCKET s, P_ITEM pBoat, char id2)//Build a boat! (Do stuff 
 	if( !pTiller ) return false;
 	pTiller->pos.z=-5;
 	pTiller->priv=0;
+	// khpae
+	pTiller->type = 117;
+	pTiller->type2 = 1; // tiller man sub type
+	pTiller->more1 = static_cast<unsigned char>((pBoat->serial&0xFF000000)>>24);
+	pTiller->more2 = static_cast<unsigned char>((pBoat->serial&0x00FF0000)>>16);
+	pTiller->more3 = static_cast<unsigned char>((pBoat->serial&0x0000FF00)>>8);
+	pTiller->more4 = static_cast<unsigned char>((pBoat->serial&0x000000FF));
+	pTiller->pos.z=-5;
+	pTiller->priv=0;
 
 	P_ITEM pPlankR=Items->SpawnItem(pc_cs,1,"#",0,0x3EB2,0,0);//Plank2 is on the RIGHT side of the boat
 	if( !pPlankR ) return false;
@@ -430,6 +475,7 @@ bool cBoat::Build(UOXSOCKET s, P_ITEM pBoat, char id2)//Build a boat! (Do stuff 
 		pHold->pos.y=pBoat->pos.y-5;
 		break;
 	}
+	pBoat->type2 = 9;	// khpae : not moving 9, 1-8 : moving direction+1
 	mapRegions->Add(pTiller);//Make sure everything is in da regions!
 	mapRegions->Add(pPlankL);
 	mapRegions->Add(pPlankR);
@@ -437,7 +483,7 @@ bool cBoat::Build(UOXSOCKET s, P_ITEM pBoat, char id2)//Build a boat! (Do stuff 
 	mapRegions->Add(pBoat);
 	
 	//their x pos is set by BuildHouse(), so just fix their Z...
-	pc_cs->pos.z = pc_cs->dispz = pBoat->pos.z+3;//Char Z, try and keep it right.
+	//pc_cs->pos.z = pc_cs->dispz = pBoat->pos.z+3;//Char Z, try and keep it right.  khpae : no need
     pc_cs->SetMultiSerial(pBoat->serial);
 	return true;
 }
@@ -454,7 +500,9 @@ P_ITEM cBoat::GetBoat(P_CHAR pcc_cs)//get the closest boat to the player and che
 
     if (pcc_cs->multis > 0) 
 		return FindItemBySerial( pcc_cs->multis );
-    else if (pcc_cs->multis == -1) return NULL;
+	// khpae
+	else return NULL;
+/*    else if (pcc_cs->multis == -1) return NULL;
 	else 
 	{
 		pi_boat = findmulti(pcc_cs->pos);
@@ -463,7 +511,7 @@ P_ITEM cBoat::GetBoat(P_CHAR pcc_cs)//get the closest boat to the player and che
 				pi_boat = NULL;
 
 		return pi_boat;
-	}
+	}*/
 }
 
 
@@ -474,7 +522,8 @@ P_ITEM cBoat::GetBoat(P_CHAR pcc_cs)//get the closest boat to the player and che
 // it doesnt check against dynamics yet, especially against other ships.
 // hopefully coming soon
 
-bool cBoat::Block(P_ITEM pBoat, short int xmove, short int ymove, int dir)//Check to see if the boat is blocked in front of, behind, or next to it (Depending on direction)
+// khpae : rewritten
+/*bool cBoat::Block(P_ITEM pBoat, short int xmove, short int ymove, int dir)//Check to see if the boat is blocked in front of, behind, or next to it (Depending on direction)
 // PARAM WARNING: xmove and ymove is unreferenced
 {
 	int ser, sz, zt, loopexit=0;
@@ -605,33 +654,33 @@ bool cBoat::Block(P_ITEM pBoat, short int xmove, short int ymove, int dir)//Chec
 			return true;
 	}//for c=soze
 	return false;
-}
+}*/
 
-void cBoat::Move(UOXSOCKET s, int dir, P_ITEM pBoat)
+bool cBoat::Move(UOXSOCKET s, int dir, P_ITEM pBoat)
 {//Move the boat and all it's items 1 square
 	int tx=0,ty=0;
 	int serial;
      
 	if (pBoat == NULL)
-		return;
+		return false;
 
 	serial = calcserial(pBoat->moreb1, pBoat->moreb2, pBoat->moreb3, pBoat->moreb4);
-	if (serial == INVALID_SERIAL) return;
+	if (serial == INVALID_SERIAL) return false;
 	P_ITEM pTiller = FindItemBySerial( serial );
 	if(pTiller == NULL)
-		return;
+		return false;
 	
 	P_ITEM pi_p1 = FindItemBySerial( pBoat->morex );
 	if(pi_p1 == NULL) 
-		return;
+		return false;
 
 	P_ITEM pi_p2 = FindItemBySerial( pBoat->morey );
 	if(pi_p2 == NULL) 
-		return;
+		return false;
 
 	P_ITEM pHold = FindItemBySerial( pBoat->morez );
 	if(pHold == NULL) 
-		return;
+		return false;
 
 	Xsend(s,wppause,2);
 
@@ -675,17 +724,17 @@ void cBoat::Move(UOXSOCKET s, int dir, P_ITEM pBoat)
 
 	if((pBoat->pos.x+tx<=200 || pBoat->pos.x+tx>=6000) && (pBoat->pos.y+ty<=200 || pBoat->pos.y+ty>=4900)) //bugfix LB
 	{
-		pBoat->type2=0;
+		pBoat->type2=9;
 		itemtalk(s, pTiller, "Arr, Sir, we've hit rough waters!");
 		Xsend(s,restart,2);
-		return;
+		return false;
 	}
 	if(Block(pBoat,tx,ty,dir))
 	{
-		pBoat->type2=0;
+		pBoat->type2=9;
 		itemtalk(s, pTiller, "Arr, somethings in the way!");
 		Xsend(s,restart,2);
-		return;
+		return false;
 	}
 
 	//Move all the special items
@@ -722,6 +771,106 @@ void cBoat::Move(UOXSOCKET s, int dir, P_ITEM pBoat)
 		}
 	}
 	Xsend(s,restart,2);
+	return true;
+}
+
+// khpae : auto sail
+void cBoat::Move (UOXSOCKET s, P_ITEM pBoat) {	
+	if (pBoat==NULL) {
+		return;
+	}
+	int dx;
+	int dy;
+	do {
+		dx = pBoat->mapPinXY[0][0] - pBoat->pos.x;
+		dy = pBoat->mapPinXY[0][1] - pBoat->pos.y;
+		if ((dx==0) && (dy==0)) {
+			if (pBoat->mapNumPin == 1) {
+				int tser = calcserial (pBoat->moreb1, pBoat->moreb2, pBoat->moreb3, pBoat->moreb4);
+				P_ITEM pTiller = FindItemBySerial (tser);
+				if (pTiller != NULL) {
+					itemtalk (s, pTiller, "We are here, Sir.");
+				}
+				pBoat->autoSail = false;
+				pBoat->mapNumPin = 0;
+				pBoat->type2 = 9;
+				return;
+			}
+			pBoat->mapNumPin --;
+			int i;
+			for (i=0; i<(pBoat->mapNumPin); i++) {
+				pBoat->mapPinXY[i][0] = pBoat->mapPinXY[i+1][0];
+				pBoat->mapPinXY[i][1] = pBoat->mapPinXY[i+1][1];
+			}
+		}
+	} while ((dx==0) && (dy==0));
+	int dir;
+	if (dx == 0) {
+		if (dy < 0) {
+			dir = 0;
+		} else {
+			dir = 4;
+		}
+		if (!Move (s, dir, pBoat)) {
+			pBoat->autoSail = false;
+			pBoat->mapNumPin = 0;
+			pBoat->type2 = 9;
+		}
+		return;
+	} else if (dy == 0) {
+		if (dx < 0) {
+			dir = 6;
+		} else {
+			dir = 2;
+		}
+		if (!Move (s, dir, pBoat)) {
+			pBoat->autoSail = false;
+			pBoat->mapNumPin = 0;
+			pBoat->type2 = 9;
+		}
+		return;
+	}
+	float slength = sqrt (dx*dx + dy*dy);
+	float fdx = float(dx);
+	fdx /= slength;
+	float fdy = float(dy);
+	fdy /= slength;
+	if (fdx < -.25) {
+		dx = -1;
+	} else if (fdx > .25) {
+		dx = 1;
+	} else {
+		dx = 0;
+	}
+	if (fdy < -.25) {
+		dy = -1;
+	} else if (fdy > .25) {
+		dy = 1;
+	} else {
+		dy = 0;
+	}
+	if ((dx==0) && (dy<0)) {
+		dir = 0;
+	} else if ((dx>0) && (dy<0)) {
+		dir = 1;
+	} else if ((dx>0) && (dy==0)) {
+		dir = 2;
+	} else if ((dx>0) && (dy>0)) {
+		dir = 3;
+	} else if ((dx==0) && (dy>0)) {
+		dir = 4;
+	} else if ((dx<0) && (dy>0)) {
+		dir = 5;
+	} else if ((dx<0) && (dy==0)) {
+		dir = 6;
+	} else {
+		dir = 7;
+	}
+	if (!Move (s, dir, pBoat)) {
+		pBoat->autoSail = false;
+		pBoat->mapNumPin = 0;
+		pBoat->type2 = 9;
+	}
 }
 
 void cBoat::TurnStuff(P_ITEM pBoat, P_CHAR pc_i, int dir)//Turn an item that was on the boat when the boat was turned.
@@ -780,8 +929,8 @@ void cBoat::Turn(P_ITEM pBoat, int turn)//Turn the boat item, and send all the p
 	unsigned short int Send[MAXCLIENT];
 	SERIAL serial;
 	int a,dir, d=0;
-	
-	
+	int oldid2 = pBoat->id2;	// khpae added for restore if turn fail !
+
 	for (a = 0; a < now; ++a)
 	{
 		if (iteminrange(a, pBoat, BUILDRANGE) && perm[a])
@@ -827,6 +976,7 @@ void cBoat::Turn(P_ITEM pBoat, int turn)//Turn the boat item, and send all the p
 	if( Block( pBoat, 0, 0, pBoat->dir ) )
 	{
 		pBoat->dir = olddir;
+		pBoat->id2 = oldid2;	// khpae : restore old id2
 		for( a = 0; a < d; a++ )
 		{
 			Xsend( Send[a], restart, 2 );
@@ -944,43 +1094,165 @@ char cBoat::Speech(UOXSOCKET s, const QString& msg)//See if they said a command.
 	if ( tiller == NULL ) 
 		return 0;
 
-	if((msg.find("FORWARD")!= string::npos) || (msg.find("UNFURL SAIL")!=string::npos))
+	// khpae - command add
+	if((msg.find("ONE")!= string::npos) || (msg.find("DRIFT")!=string::npos))
 	{
-		boat->type2=1;//Moving
-		Move(s,dir, boat);
-		itemtalk(s, tiller, "Aye, sir.");
-		return 1;
-	} else if(msg.find("BACKWARD")!= string::npos)
-	{
-		boat->type2=2;//Moving backward
-		if(dir >= 4) dir-=4; 
-		else dir+=4;
-		Move(s,dir, boat);		
-		itemtalk(s, tiller, "Aye, sir.");
-		return 1;
-	}  else if((msg.find("ONE")!= string::npos) || (msg.find("DRIFT")!=string::npos))
-	{
+		if (msg.find ("FORWARD LEFT") != string::npos) {
+			dir -= 1;
+			if (dir < 0) {
+				dir += 8;
+			}
+			if (Move (s, dir, boat)) {
+				itemtalk (s, tiller, "Aye, sir.");
+			}
+			boat->type2 = 9;
+			return 1;
+		} else if (msg.find ("FORWARD RIGHT") != string::npos) {
+			dir += 1;
+			if (dir > 7) {
+				dir -= 8;
+			}
+			if (Move (s, dir, boat)) {
+				itemtalk (s, tiller, "Aye, sir.");
+			}
+			boat->type2 = 9;
+			return 1;
+		} else if (msg.find ("BACKWARD RIGHT") != string::npos) {
+			dir += 3;
+			if (dir > 7) {
+				dir -= 8;
+			}
+			if (Move (s, dir, boat)) {
+				itemtalk (s, tiller, "Aye, sir.");
+			}
+			boat->type2 = 9;
+			return 1;
+		} else if (msg.find ("BACKWARD LEFT") != string::npos) {
+			dir += 5;
+			if (dir > 7) {
+				dir -= 8;
+			}
+			if (Move (s, dir, boat)) {
+				itemtalk (s, tiller, "Aye, sir.");
+			}
+			boat->type2 = 9;
+			return 1;
+		} else
+		if (msg.find ("FORWARD") != string::npos) {
+			if (Move (s, dir, boat)) {
+				itemtalk (s, tiller, "Aye, sir.");
+			}
+			boat->type2 = 9;
+		} else if (msg.find ("BACKWARD") != string::npos) {
+			dir -= 4;
+			if (dir < 0) {
+				dir += 8;
+			}
+			if (Move (s, dir, boat)) {
+				itemtalk (s, tiller, "Aye, sir.");
+			}
+			boat->type2 = 9;
+		} else 
 		if(msg.find("LEFT")!=string::npos)
 		{
 			dir-=2;
 			if(dir<0) dir+=8;			
-			Move(s, dir, boat);
-			itemtalk(s, tiller, "Aye, sir.");
+			if (Move(s, dir, boat)) {
+				itemtalk(s, tiller, "Aye, sir.");
+			}
+			// khpae
+			boat->type2 = 9; // stop
 			return 1;
 
 		} else if(msg.find("RIGHT")!=string::npos)
 		{
 			dir+=2;
 			if(dir>=8) dir-=8; 			
-			Move(s,dir,boat);
-		
-			itemtalk(s, tiller, "Aye, sir.");
+			if (Move(s,dir,boat)) {
+				itemtalk(s, tiller, "Aye, sir.");
+			}
+			// khpae
+			boat->type2 = 9;
 			return 1;
 		}
-	} 
+	} else if (msg.find ("FORWARD RIGHT") != string::npos) {
+		dir = boat->dir + 1;
+		if (dir > 7) {
+			dir -= 8;
+		}
+		if (Move (s, dir, boat)) {
+			itemtalk (s, tiller, "Aye, sir.");
+			boat->type2 = 2;
+		} else {
+			boat->type2 = 9;
+		}
+		return 1;
+	} else if (msg.find ("FORWARD LEFT") != string::npos) {
+		dir = boat->dir - 1;
+		if (dir < 0) {
+			dir += 8;
+		}
+		if (Move (s, dir, boat)) {
+			itemtalk (s, tiller, "Aye, sir.");
+			boat->type2 = 8;
+		} else {
+			boat->type2 = 9;
+		}
+		return 1;
+	} else if (msg.find ("BACKWARD RIGHT") != string::npos) {
+		dir = boat->dir + 3;
+		if (dir > 7) {
+			dir -= 8;
+		}
+		if (Move (s, dir, boat)) {
+			itemtalk (s, tiller, "Aye, sir.");
+			boat->type2 = 4;
+		} else {
+			boat->type2 = 9;
+		}
+		return 1;
+	} else if (msg.find ("BACKWARD LEFT") != string::npos) {
+		dir = boat->dir - 3;
+		if (dir < 0) {
+			dir += 8;
+		}
+		if (Move (s, dir, boat)) {
+			itemtalk (s, tiller, "Aye, sir.");
+			boat->type2 = 6;
+		} else {
+			boat->type2 = 9;
+		}
+		return 1;
+	} else
+	if((msg.find("FORWARD")!= string::npos) || (msg.find("UNFURL SAIL")!=string::npos))
+	{
+		if (Move(s,dir, boat)) {
+			itemtalk(s, tiller, "Aye, sir.");
+			boat->type2=1;//Moving : khpae - moving the same direction of the boat
+		} else {
+			boat->type2 = 9;	// stop
+		}
+		return 1;
+	} else if(msg.find("BACKWARD")!= string::npos)
+	{
+		if(dir >= 4) dir-=4;
+		else dir+=4;
+		if (Move(s,dir, boat)) {
+			itemtalk(s, tiller, "Aye, sir.");
+			boat->type2=5;//Moving backward // khpae : changed from 2 to 5
+		} else {
+			boat->type2 = 9;
+		}
+		return 1;
+	}
 	else if((msg.find("STOP")!=string::npos) || (msg.find("FURL SAIL")!=string::npos))
 	{ 
-		boat->type2=0; itemtalk(s, tiller, "Aye, sir."); 
+		boat->type2=9;
+		if (boat->autoSail) {
+			boat->autoSail = false;
+		}
+		itemtalk(s, tiller, "Aye, sir."); 
+		return 1;
 	}//Moving is type2 1 and 2, so stop is 0 :-)
 	
 	else if(((msg.find("TURN")!=string::npos) && ((msg.find("AROUND")!=string::npos) || (msg.find("LEFT")!=string::npos) || (msg.find("RIGHT")!=string::npos)))
@@ -988,9 +1260,10 @@ char cBoat::Speech(UOXSOCKET s, const QString& msg)//See if they said a command.
 	{
 		if((msg.find("RIGHT")!=string::npos) || (msg.find("STARBOARD")!=string::npos)) 
 		{
-			dir-=2; if(dir<0) dir+=8;
+			// khpae
+			dir+=2; if(dir>7) dir-=8;
 			int tx=0,ty=0;
-
+/*
 	        switch(dir&0x0F) // little reminder for myself: move this swtich to a function to have less code ... LB
 			{
 	           case '\x00' : 
@@ -1022,24 +1295,25 @@ char cBoat::Speech(UOXSOCKET s, const QString& msg)//See if they said a command.
 		       ty--;
 		       break;
 			}
+*/
 
-
-			if (!Block(boat,tx,ty,dir))
-			{
+//			if (!Block(boat,tx,ty,dir))
+//			{
 			  Turn(boat,1);
-			  itemtalk(s, tiller, "Aye, sir.");
-			  return 1;
-			} else { 
-				boat->type2 = 0;
-			    itemtalk(s, tiller, "Arr,somethings in the way"); 
+//			  itemtalk(s, tiller, "Aye, sir.");
+//			  return 1;
+//			} else {
+				boat->type2 = 9;
+//			    itemtalk(s, tiller, "Arr,somethings in the way");
 				return 1;
-			}
+//			}
 		}
 		else if((msg.find("LEFT")!=string::npos) || (msg.find("PORT")!=string::npos)) 
 		{
-			dir+=2; if(dir>7) dir-=8;
+			// khpae
+			dir-=2; if(dir<0) dir+=8;
 			int tx=0,ty=0;
-
+/*
 	        switch(dir&0x0F)
 			{
 	           case '\x00' : 
@@ -1071,19 +1345,19 @@ char cBoat::Speech(UOXSOCKET s, const QString& msg)//See if they said a command.
 		       ty--;
 		       break;
 			}
+*/
 
-
-			if (!Block(boat,tx,ty,dir))
-			{
-			  Turn(boat,0);			
-			  itemtalk(s, tiller, "Aye, sir.");
-			  return 1;
-			} else 
-			{ 
-				boat->type2 = 0;
-				itemtalk(s, tiller, "Arr,somethings in the way"); 
+//			if (!Block(boat,tx,ty,dir))
+//			{
+			  Turn(boat,0);
+//			  itemtalk(s, tiller, "Aye, sir.");
+//			  return 1;
+//			} else
+//			{
+				boat->type2 = 9;
+//				itemtalk(s, tiller, "Arr,somethings in the way");
 				return 1;
-			}
+//			}
 		}
 		else if((msg.find("COME ABOUT")!=string::npos) || (msg.find("AROUND")!=string::npos))
 		{
@@ -1099,6 +1373,407 @@ char cBoat::Speech(UOXSOCKET s, const QString& msg)//See if they said a command.
 		tiller->name += msg2+8;
 		return 1;
 	}
-
+	// khpae - bugfix
+	else if (msg.find ("LEFT") != string::npos) {
+		dir-=2;
+		if (dir<0) dir+=8;  
+		if (Move (s, dir, boat)) {
+			itemtalk(s, tiller, "Aye, sir.");
+			boat->type2 = 7;
+		} else {
+			boat->type2 = 9;
+		}
+		return 1;
+	} else if (msg.find ("RIGHT") != string::npos) {
+		dir+=2;
+		if (dir>=8) dir-=8;
+		if (Move (s,dir,boat)) {
+			itemtalk (s, tiller, "Aye, sir.");
+			boat->type2 = 3;
+		} else {
+			boat->type2 = 9;
+		}
+		return 1;
+	}
 	return 0;
+}
+
+// khpae - new blocking check : boat-boat collision correction will be added soon
+bool cBoat::Block (P_ITEM pBoat, short int xmove, short int ymove, int dir) {
+	int ser = calcserial (pBoat->moreb1, pBoat->moreb2, pBoat->moreb3, pBoat->moreb4);
+	if (ser == INVALID_SERIAL) {
+		return true;
+	}
+	P_ITEM t = FindItemBySerial (ser);
+	P_ITEM p1 = FindItemBySerial (pBoat->morex);
+	P_ITEM p2 = FindItemBySerial (pBoat->morey);
+	P_ITEM h = FindItemBySerial (pBoat->morez); 
+	if ((t==NULL) || (p1==NULL) || (p2==NULL) || (h==NULL)) {
+		return true;
+	}
+	int length = getLength (pBoat->more1);
+	if (length < 0) {
+		return true;
+	}
+	int x0, y0, dx, dy, x1, y1;
+	int width = 5;
+	bool blocked = false;
+	switch (pBoat->dir & 0x0F) {
+		case 0:
+			x0 = h->pos.x-2;
+			y0 = h->pos.y-1;
+			dx = width;
+			dy = length;
+			break;
+		case 4:
+			x0 = t->pos.x-2;
+			y0 = t->pos.y-1;
+			dx = width;
+			dy = length;
+			break;
+		case 2:
+			x0 = t->pos.x-1;
+			y0 = t->pos.y-2;
+			dx = length;
+			dy = width;
+			break;
+		case 6:
+			x0 = h->pos.x-1;
+			y0 = h->pos.y-2;
+			dx = length;
+			dy = width;
+			break;
+		default:
+			blocked = true;
+			break;
+	}
+	if ((xmove==0) && (ymove==0)) {
+		switch (dir) {
+			case 2:
+				x0 = pBoat->pos.x - length / 2 + 1;
+				y0 = pBoat->pos.y - 2;
+				dx = length;
+				dy = width;
+				break;
+			case 6:
+				x0 = pBoat->pos.x - length / 2;// - 1;
+				y0 = pBoat->pos.y - 2;
+				dx = length;
+				dy = width;
+				break;
+			case 0:
+				x0 = pBoat->pos.x - 2;
+				y0 = pBoat->pos.y - length / 2;// - 1;
+				dx = width;
+				dy = length;
+				break;
+			case 4:
+				x0 = pBoat->pos.x - 2;
+				y0 = pBoat->pos.y - length / 2 + 1;
+				dx = width;
+				dy = length;
+				break;
+			default:
+				blocked = true;
+				break;
+		}
+	}
+	if (blocked) {
+		return true;
+	}
+	x1 = x0 + xmove;
+	y1 = y0 + ymove;
+
+	int sz, type;
+	map_st map;
+	land_st land;
+	tile_st tile;
+	int x, y;
+	int zt;
+	int loopexit = 0;
+
+	for (x=x1; x<(x1+dx); x++) {
+		for (y=y1; y<(y1+dy); y++) {
+			if ((x>=x0) && (x<(x0+dx)) && (y>=y0) && (y<(y0+dy)) && ((xmove!=0) || (ymove!=0))) {
+				continue;
+			}
+			if ((xmove==0) && (ymove==0) && (abs (x-pBoat->pos.x)<3) && (abs (y-pBoat->pos.y)<3)) {
+				continue;
+			}
+			sz = Map->StaticTop (Coord_cl (x, y, pBoat->pos.z, pBoat->pos.map));
+			if (sz == illegal_z) {
+				type = 0;
+			} else {
+				type = 1;
+			}
+			if (type == 0) {
+				map = Map->SeekMap (Coord_cl (x, y, 0, pBoat->pos.map));
+				Map->SeekLand (map.id, &land);
+				if (!(land.flag1 & 0x80)) {
+					blocked = true;
+				}
+			} else {
+				MapStaticIterator msi(Coord_cl( x, y, 0, pBoat->pos.map ));
+				staticrecord *stat;
+				while ((stat = msi.Next()) && (++loopexit < MAXLOOPS)) {
+					msi.GetTile (&tile);
+					zt = stat->zoff + tile.height;
+					if ((!(tile.flag1 & 0x80)) && (zt <= 70)) {
+						blocked = true;
+					} else if (strcmp((char*)tile.name, "water") != 0) {
+						blocked = true;
+					}
+				}
+			}
+			cRegion::RegionIterator4Items ri (Coord_cl (x, y, 0, pBoat->pos.map));
+			for (ri.Begin (); !ri.atEnd (); ri++) {
+				P_ITEM pi = ri.GetData ();
+				if ((pi != NULL) && (pi->pos.x==x) && (pi->pos.y==y)) {
+					blocked = true;
+					break;
+				}
+			}
+			if (blocked) {
+				break;
+			}
+		}
+		if (blocked) {
+			break;
+		}
+	}
+	return blocked;
+}
+
+
+int cBoat::getLength (unsigned char t) {
+	int length = -1;
+	switch (t) {
+		case 0x00:
+		case 0x04:
+			length = 11;
+			break;
+		case 0x08:
+		case 0x0C:
+			length = 13;
+			break;
+		case 0x10:
+		case 0x14:
+			length = 15;
+			break;
+	}
+	return length;
+}
+
+bool cBoat::LeaveBoat (UOXSOCKET s, P_ITEM pi_plank) {
+	P_CHAR pc_cs = currchar[s];
+	P_ITEM pBoat = GetBoat (pc_cs);
+	if ((pc_cs == NULL) || (pi_plank == NULL) || (pBoat == NULL)) {
+		return false;
+	}
+	UI16 x, y, x0, y0, x1, y1, dx, dy;
+	switch (pBoat->dir & 0x0F) {
+		case 0:
+		case 4:
+			x0 = (pBoat->pos.x > pi_plank->pos.x) ? pi_plank->pos.x-1 : pi_plank->pos.x+1;
+			y0 = pi_plank->pos.y - 2;
+			x1 = (pBoat->pos.x > pi_plank->pos.x) ? pi_plank->pos.x-2 : pi_plank->pos.x+2;
+			y1 = y0 + 5;
+			break;
+		case 2:
+		case 6:
+			x0 = pi_plank->pos.x - 2;
+			y0 = (pBoat->pos.y > pi_plank->pos.y) ? pi_plank->pos.y-1 : pi_plank->pos.y+1;
+			x1 = x0 + 5;
+			y1 = (pBoat->pos.y > pi_plank->pos.y) ? pi_plank->pos.y-2 : pi_plank->pos.y+2;
+			break;
+		default:
+			return false;
+	}
+	UI16 tmp;
+	if (x0 > x1) {
+		tmp = x0;
+		x0 = x1;
+		x1 = tmp;
+	}
+	if (y0 > y1) {
+		tmp = y0;
+		y0 = y1;
+		y1 = tmp;
+	}
+	signed char sz, mz, z;
+	bool check = false;
+	land_st landt;
+	map_st mapt;
+	tile_st tilet;
+	int loopexit = 0;
+	for (x=x0; x<=x1; x++) {
+		for (y=y0; y<=y1; y++) {
+			sz = Map->StaticTop (Coord_cl (x,y,0, 0));
+			mz = Map->MapElevation (Coord_cl (x,y,0, 0));
+			if ((sz == illegal_z) && (mz != -5)) {
+				z = mz;
+				check = true;
+				break;
+			} else if ((sz != illegal_z) && (sz != -5)) {
+				z = sz;
+				check = true;
+				break;
+			}
+		}
+		if (check) {
+			break;
+		}
+	}
+	if (!check) {
+		return false;
+	}
+	UI16 a;
+	vector<SERIAL> vecCown = cownsp.getData (pc_cs->serial);
+	for (a=0; a<vecCown.size (); a++) {
+		P_CHAR pc_b = FindCharBySerial (vecCown[a]);
+		if (pc_b != NULL) {
+			if (pc_b->isNpc () && pc_cs->Owns (pc_b) && inrange1p (pc_cs, pc_b)) {
+				pc_b->MoveTo (x, y, z);
+				pc_b->multis = INVALID_SERIAL;
+			}
+			teleport (pc_b);
+		}
+	}
+	pc_cs->MoveTo (x, y, z);
+	teleport (pc_cs);
+	cmultisp.remove (pc_cs->multis, pc_cs->serial);
+	pc_cs->multis = INVALID_SERIAL;
+	return true;
+}
+
+// khpae - make deed from a boat
+void cBoat::deedBoat (UOXSOCKET s, P_ITEM pii) {
+	P_CHAR pc = currchar[s];
+	if (pc == NULL) {
+		return;
+	}
+	P_ITEM pBoat = FindItemBySerial (calcserial (pii->more1, pii->more2, pii->more3, pii->more4));
+	if (pBoat == NULL) {
+		return;
+	}
+	// if player is in boat
+	if (pc->multis != INVALID_SERIAL) {
+		sysmessage (s, "You must leave the boat to deed it.");
+		return;
+	}
+	// check the player has the boat key
+	P_ITEM bpack = Packitem (pc);
+	if (bpack == NULL) {
+		return;
+	}
+	vector<SERIAL> vpack = contsp.getData (bpack->serial);
+	P_ITEM pi = NULL;
+	bool found = false;
+	int in;
+	for (in=0; in<vpack.size (); in++) {
+		pi = FindItemBySerial (vpack[in]);
+		if (pi == NULL) {
+			contsp.remove (bpack->serial, vpack[in]);
+			continue;
+		}
+		if (pi->type == 7) {
+			SERIAL si = calcserial (pi->more1, pi->more2, pi->more3, pi->more4);
+			if (si == pBoat->serial) {
+				found = true;
+				break;
+			}
+		}
+	}
+	if ((!found) || (pi==NULL)) {
+		sysmessage (s, "You don't have the boat key.");
+		return;
+	}
+	// if any pcs / npcs / items are in the boat, it cannot be deed.
+	vector<SERIAL> vitem = imultisp.getData (pBoat->serial);
+	if (vitem.size () > 0) {
+		sysmessage (s, "You can only deed with empty boat (remove items).");
+		return;
+	}
+	vector<SERIAL> vchar = cmultisp.getData (pBoat->serial);
+	if (vchar.size () > 0) {
+		sysmessage (s, "You can only deed with empty boat (remove pc/npcs.");
+		return;
+	}
+	// add deed
+	P_ITEM bdeed = Items->SpawnItemBackpack2 (s, pBoat->madewith, 0);
+	if (bdeed == NULL) {
+		sysmessage (s, "There's problem with deed boat. Please contact Game Master.");
+		return;
+	}
+	// remove key
+	Items->DeleItem (pi);
+	// remove all other keys for this ship
+	AllItemsIterator iter_items;
+	for (iter_items.Begin (); !iter_items.atEnd (); ++iter_items) {
+		P_ITEM boatKey = iter_items.GetData();
+		if ((boatKey->type==7) && (calcserial (boatKey->more1, boatKey->more2, boatKey->more3, boatKey->more4)==pBoat->serial)) {
+			--iter_items;
+			Items->DeleItem (boatKey);
+		}
+	}
+	// tiller
+	Items->DeleItem (pii);
+	// left plank
+	P_ITEM pi2 = FindItemBySerial (pBoat->morex);
+	if (pi2 != NULL) {
+		Items->DeleItem (pi2);
+	}
+	// right plank
+	pi2 = FindItemBySerial (pBoat->morey);
+	if (pi2 != NULL) {
+		Items->DeleItem (pi2);
+	}
+	// hold
+	pi2 = FindItemBySerial (pBoat->morez);
+	if (pi2 != NULL) {
+		Items->DeleItem (pi2);
+	}
+	Items->DeleItem (pBoat);
+	pc->multis = INVALID_SERIAL;
+	sysmessage (s, "You deed the boat.");
+}
+
+// khpae : initial setup for auto sailing
+void cBoat::setAutoSail (UOXSOCKET s, P_ITEM pMap, P_ITEM pTiller) {
+	P_CHAR pc = currchar[s];
+	if (pc == NULL) {
+		return;
+	}
+	if (!pMap->mapNumPin) {
+		itemtalk (s, pTiller, "Sir, there's no ship cource.");
+		return;
+	}
+	if (pc->multis == INVALID_SERIAL) {
+		sysmessage (s, "You must on the boat to do that.");
+		return;
+	}
+	int bserial = calcserial (pTiller->more1, pTiller->more2, pTiller->more3, pTiller->more4);
+	if (bserial != pc->multis) {
+		sysmessage (s, "You must on the boat to do that.");
+		return;
+	}
+	P_ITEM pBoat = FindItemBySerial (bserial);
+	if (pBoat == NULL) {
+		return;
+	}
+	int x0 = (pMap->more1<<8) | pMap->more2;
+	int y0 = (pMap->more3<<8) | pMap->more4;
+	int x1 = (pMap->moreb1<<8) | pMap->moreb2;
+	int y1 = (pMap->moreb3<<8) | pMap->moreb4;
+	int width = 134 * (pMap->morez + 1);
+	int i, posx, posy;
+	for (i=0; i<pMap->mapNumPin; i++) {
+		posx = x0 + pMap->mapPinXY[i][0]*(x1-x0) / width;
+		posy = y0 + pMap->mapPinXY[i][1]*(y1-y0) / width;
+		pBoat->mapPinXY[i][0] = (unsigned short)posx;
+		pBoat->mapPinXY[i][1] = (unsigned short)posy;
+	}
+	itemtalk (s, pTiller, "Aye, Sir.");
+	pBoat->autoSail = true;
+	pBoat->mapNumPin = pMap->mapNumPin;
 }

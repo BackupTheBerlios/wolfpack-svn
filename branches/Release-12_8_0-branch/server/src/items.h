@@ -163,6 +163,11 @@ public:
 	unsigned int timeused_last; // helper attribute for time_unused, doesnt get saved
 	int spawnregion;
 	
+	// khpae : for map pins and boat auto sailing
+	bool mapEditable;
+	unsigned short mapPinXY[16][2];
+	unsigned char mapNumPin;
+	bool autoSail;
 	
 	void Init(bool mkser = true);
 	void SetSerial(long ser);

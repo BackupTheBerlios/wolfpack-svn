@@ -522,6 +522,56 @@ void cSkills::Mine(int s)
 	if(pc->stm>pc->effDex()) pc->stm=pc->effDex();
 	updatestats(pc,2);
 	
+	// khpae check backpack - treasure map
+	P_ITEM bp = Packitem (pc);
+	bool huntingTreasure = false;
+	P_ITEM tmap = NULL;
+	int mx, my;
+	if (bp != NULL) { // it MUST not NULL
+		unsigned int ci = 0;
+		vector<SERIAL> vecContainer = contsp.getData(bp->serial);
+		for (ci=0; ci<vecContainer.size(); ci++) {
+			P_ITEM bpi = FindItemBySerial(vecContainer[ci]);
+			if (bpi == NULL) {
+				contsp.remove (bp->serial, vecContainer[ci]);
+				continue;
+			}
+			if (bpi->type == 302) { // deciphered treasure map
+				mx = bpi->morex;
+				my = bpi->morey;
+				x = (buffer[s][0x0B]<<8) + buffer[s][0x0C];
+				y = (buffer[s][0x0D]<<8) + buffer[s][0x0E];
+				if ((x==mx) && (y==my)) {
+					huntingTreasure = true; // ok. we find it !
+					tmap = bpi;
+					break;
+				}
+			}
+		}
+		if (huntingTreasure) {
+			// load item
+			P_ITEM treas = Items->CreateFromScript (-1, 30000+tmap->morez);
+			if (treas == NULL) {
+				LogWarning ("error loading treasure script.");
+				return;
+			}
+			// spawn treasure box
+			Coord_cl pos;
+			pos.x = mx;
+			pos.y = my;
+			signed char mz = Map->MapElevation (pos);
+			treas->MoveTo (mx, my, mz);
+			// refresh
+			RefreshItem (treas);
+			// delete treasure map
+			Items->DeleItem (tmap);
+			//soundeffect (s, , ,);
+			sysmessage (s, "you find out a treasure box");
+			return;
+		}
+	}
+	// khpae treasure hunting end
+	
 	if(oretime[0][0]==0)//First time done since server started
 	{
 		oretime[0][0]=17;//lucky number ;-)
@@ -1779,7 +1829,7 @@ void cSkills::ArmsLoreTarget(int s)
 			strcat((char*)temp,p2);
 			char temp2[33];
 			sprintf(temp2," [%.1f %%]",totalhp*100);
-			strcat((char*)temp,temp2);	// Magius(CHE) §
+			strcat((char*)temp,temp2);	// Magius(CHE) ?
 		}
 		if (CheckSkill(pc_currchar,ARMSLORE, 250, 510))
 		{

@@ -174,6 +174,10 @@ void BuildHouse(UOXSOCKET s, int i)
 					hdeed=str2num(script2);
 				}							
 				else if (!(strcmp((char*)script1, "BOAT"))) boat = true;//Boats
+				// khpae : boat deed num
+				else if (!(strcmp ((char *)script1, "BOAT_DEED"))) {
+					hdeed = str2num (script2);
+				}
 				else if (!(strcmp((char*)script1, "NOREALMULTI"))) norealmulti = true;
 				else if (!(strcmp((char*)script1, "NOKEY"))) nokey = true;
 				else if (!(strcmp((char*)script1, "NAME"))) 
@@ -303,7 +307,9 @@ void BuildHouse(UOXSOCKET s, int i)
 			{
 				Items->DeleItem(pMulti);
 				return;
-			} 
+			}
+			// store deed item number
+			pMulti->madewith = hdeed;
 		}
 		
 		if (i)//Boats->.. Moved from up there ^
@@ -333,8 +339,12 @@ void BuildHouse(UOXSOCKET s, int i)
 		pKey->more4 = static_cast<unsigned char>((pMulti->serial&0x000000FF));
 		pKey->type=7;
 		pKey->priv=2; // Newbify key..Ripper
-        
-		P_ITEM pKey2 = Items->SpawnItem(s, pc_currchar, 1, "a house key", 0, 0x10, 0x0F, 0,1,1);
+
+		// khpae - added tent key & ship key
+		P_ITEM pKey2;
+		if (id2>=112&&id2<=115) pKey2 = Items->SpawnItem(s, pc_currchar, 1, "a tent key", 0, 0x10, 0x10,0, 1,1);
+		else if(id2<=0x18) pKey2 = Items->SpawnItem(s, pc_currchar, 1, "a ship key",0,0x10,0x13,0,1,1);
+		else 	pKey2 = Items->SpawnItem(s, pc_currchar, 1, "a house key", 0, 0x10, 0x0F, 0,1,1);
 		P_ITEM bankbox = pc_currchar->GetBankBox();
 		pKey2->more1 = static_cast<unsigned char>((pMulti->serial&0xFF000000)>>24);
 		pKey2->more2 = static_cast<unsigned char>((pMulti->serial&0x00FF0000)>>16);
@@ -440,6 +450,10 @@ void BuildHouse(UOXSOCKET s, int i)
 			pc_currchar->pos.x=x+cx; //move char inside house
 			pc_currchar->pos.y=y+cy;
 			pc_currchar->dispz = pc_currchar->pos.z = z+cz;
+			// khpae : water height = -5, char height = -2
+			if (boat) {
+				pc_currchar->pos.z = z + 3;
+			}
 			teleport((pc_currchar));
 		}
 	}
@@ -624,7 +638,11 @@ void house_speech(int s, const QString& msg)	// msg must already be capitalized
 	if ( !pMulti ) return;
 
 	cHouse* pHouse = dynamic_cast<cHouse*>(pMulti);
-	if ( !pHouse || !(pc_currchar->Owns(pHouse) || pHouse->isFriend(pc_currchar)))
+	// khpae added
+	if (pHouse == NULL) {
+		return;
+	}
+	if (!(pc_currchar->Owns(pHouse) || pHouse->isFriend(pc_currchar)))
 		return; // Not (Friend or Owner)
 
 	if(msg.contains("I BAN THEE")) 

@@ -1146,6 +1146,16 @@ void pack_item(P_CLIENT ps, PKGx08 *pp) // Item is put into container
 		return;
 	}
 
+	// khpae : drop map on tiller man
+	if ((pItem->type==10) && (pCont->type==117) && (pCont->type2==1)) {
+		// bounced after the tiller man read map ;-)
+		Boats->setAutoSail (s, pItem, pCont);
+		item_bounce6 (ps, pItem);
+		RefreshItem (pItem);
+		return;
+	}
+	// khpae end
+
 	if (pCont->layer==0 && pCont->id() == 0x1E5E &&	pc_currchar->Wears(pCont))
 	{
 		// Trade window???

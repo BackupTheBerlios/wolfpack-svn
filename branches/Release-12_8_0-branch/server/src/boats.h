@@ -67,7 +67,7 @@ extern unsigned char cShipItems[4][6];
 class cBoat 
 {
 	private:
-		void LeaveBoat(int, P_ITEM);		
+		bool LeaveBoat(int, P_ITEM);	// khpae changed to bool
 		bool Block(P_ITEM, short int, short int,int);
 		void TurnStuff(P_ITEM pBoat, P_CHAR pc_i, int dir);
 		void TurnStuff(P_ITEM pBoat, P_ITEM pi, int dir);
@@ -78,8 +78,13 @@ class cBoat
 		void OpenPlank(P_ITEM);
 		void PlankStuff(UOXSOCKET, P_ITEM);
 		bool Build(int, P_ITEM pBoat, char);
-		void Move(int, int, P_ITEM pBoat);
+		bool Move(int, int, P_ITEM pBoat);	// khpae changed to bool
 		void Turn(P_ITEM pBoat, int);
+		int getLength (unsigned char);
+		void deedBoat (UOXSOCKET, P_ITEM);	// khpae : convert to deed
+		// auto sailing
+		void setAutoSail (UOXSOCKET, P_ITEM, P_ITEM);
+		void Move (UOXSOCKET, P_ITEM);
 };
 #endif
 

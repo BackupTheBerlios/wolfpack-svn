@@ -1885,6 +1885,11 @@ bool cMovement::CanCharWalk(P_CHAR pc, short int x, short int y, signed char &z)
 		                                     // since the [i] is calclated several times below
 			                                 // if it doesn't help, it doesn't hurt either.
 			signed char nItemTop = thisblock->basez + thisblock->height; // Calculate the items total height
+			// khpae - ladder problem
+			if (thisblock->flag2&4) {
+				nItemTop -= thisblock->height/2;
+			}
+			// khpae - ladder end
 
 	    // check if the creature is floating on a static (keeping Z or falling)
 			if ( ( nItemTop >= nNewZ ) &&
@@ -1942,8 +1947,9 @@ bool cMovement::CanCharWalk(P_CHAR pc, short int x, short int y, signed char &z)
     // Thyme : He's right... Should be based of character's height.
 		}
 
-		if (blocked)
-			break;
+		// khpae - cleanup needed
+//		if (blocked)
+//			break;
 	
 	}
 // end knoxos code
@@ -2112,7 +2118,7 @@ int cMovement::calc_walk(P_CHAR pc, unsigned int x, unsigned int y, unsigned int
 			{ // walkable tile
 				newz = nItemTop;
 				ontype = thisblock->type;
-				if( thisblock->flag4 == 0x80 ) { // if it was ladder the char is allowed to `levitate´ next move
+				if( thisblock->flag4 == 0x80 ) { // if it was ladder the char is allowed to `levitate? next move
 					on_ladder = true;
 				}
 				continue;
@@ -2127,7 +2133,7 @@ int cMovement::calc_walk(P_CHAR pc, unsigned int x, unsigned int y, unsigned int
 		{
 			ontype = thisblock->type;
 			newz = nItemTop;
-			if( thisblock->flag4 == 0x80 ) { // if it was ladder the char is allowed to `levitate´ next move
+			if( thisblock->flag4 == 0x80 ) { // if it was ladder the char is allowed to `levitate? next move
 				on_ladder = true;
 			}
 		}
@@ -2147,7 +2153,7 @@ int cMovement::calc_walk(P_CHAR pc, unsigned int x, unsigned int y, unsigned int
 			{
 				ontype = thisblock->type;
 				newz = nItemTop;
-				if( thisblock->flag4 == 0x80 ) 	{ // if it was ladder the char is allowed to `levitate´ next move
+				if( thisblock->flag4 == 0x80 ) 	{ // if it was ladder the char is allowed to `levitate? next move
 					on_ladder = true;
 				}
 			}
