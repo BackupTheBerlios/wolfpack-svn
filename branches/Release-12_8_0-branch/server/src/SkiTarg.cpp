@@ -2082,6 +2082,11 @@ void cSkills::TameTarget(int s)
 			npctalk(s, pc_currchar, (char*)tr("It seems to accept you as it's master!").latin1() , 0);
 			tamed=1;
 			pc->SetOwnSerial(pc_currchar->serial);
+			pc->SetSpawnSerial(-1);
+		    if (pc->spawnregion>0)
+			{
+			   spawnregion[pc->spawnregion].current--;
+			}
 			pc->npcWander=0;
 			if(pc->id1==0x00 && (pc->id2==0x0C || pc->id2==0x3B))
 			{

@@ -1667,7 +1667,7 @@ void dbl_click_character(UOXSOCKET s, SERIAL target_serial)
 	{//if monster
 		if (target->id1==0x01&&(target->id2==0x23||target->id2==0x24))
 		{//if packhorse or packlhama added by JustMichael 8/31/99
-			if (pc_currchar->Owns(target))
+			if (pc_currchar->Owns(target) || pc_currchar->isGM())
 			{
 				if (target->packitem != INVALID_SERIAL)
 				{
