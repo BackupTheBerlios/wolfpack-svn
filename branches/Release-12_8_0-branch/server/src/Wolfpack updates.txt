@@ -11,9 +11,9 @@ If you change scripts while the server is running it might crash.
 Freeze the server with the serversleep command while you 
 change scripts on the fly.
 
-For more of them look at: www.wpdev.com
+For more of them look at: www.wpdev.org
 
-Wolfpack Homepage: www.wpdev.com
+Wolfpack Homepage: www.wpdev.org
 
 -----------------------------------------------------------
                         Wolfpack 12.8.0
