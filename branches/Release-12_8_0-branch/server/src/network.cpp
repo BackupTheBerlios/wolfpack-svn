@@ -98,7 +98,8 @@ void cNetworkStuff::DoStreamCode(UOXSOCKET s)
 			sent += temp;
 		}
 		else if ( temp == 0 )
-		{ // Gracefull disconnect, let's give up.
+		{ // Gracefull disconnect, mark as closed and give up.
+			client[s]->close();
 			return;
 		}
 		else if ( client[s]->error() != QSocketDevice::NoError )
