@@ -1796,7 +1796,7 @@ void cSkills::HealingSkillTarget(UOXSOCKET s)
 				int healmin = (((ph->skill[HEALING]/5)+(ph->skill[VETERINARY]/5))+3); //OSI's formula for min amount healed (Skyfire)
 				int healmax = (((ph->skill[HEALING]/5)+(ph->skill[VETERINARY]/2))+10); //OSI's formula for max amount healed (Skyfire)
 				int j = RandomNum(healmin, healmax);
-				pp->hp = min(pp->st, pp->hp + j);
+				pp->hp = min(pp->st, static_cast<signed short>(pp->hp + j));
 				// khpae
 				//pp->hp = (pp->st > (pp->hp + j)) ? (pp->hp + j) : pp->st;
 				updatestats(pp, 0);
