@@ -55,6 +55,7 @@ using namespace std;
 
 class Script;
 class QDateTime;
+class QSocketDevice;
 
 //Wolfpack Includes
 
@@ -197,7 +198,7 @@ extern unsigned long initialservermill ;
 /////////////////////////////////////////////
 // maximum too cause maxclient = maximum +1
 
-extern char firstpacket[MAXCLIENT+1];
+extern bool firstpacket[MAXCLIENT+1];
 extern char noweather[MAXCLIENT+1]; //LB
 extern unsigned char LSD[MAXCLIENT];
 extern unsigned char DRAGGED[MAXCLIENT];
@@ -217,7 +218,7 @@ extern int newclient[MAXCLIENT];
 extern unsigned char  buffer[MAXCLIENT][MAXBUFFER_REAL];
 extern char  outbuffer[MAXCLIENT][MAXBUFFER_REAL];
 extern int whomenudata [(MAXCLIENT)*10]; // LB, for improved whomenu, ( is important !!!
-extern int client[MAXCLIENT];
+extern QSocketDevice* client[MAXCLIENT];
 extern short int walksequence[MAXCLIENT];
 extern signed char addid5[MAXCLIENT];
 extern int acctno[MAXCLIENT];

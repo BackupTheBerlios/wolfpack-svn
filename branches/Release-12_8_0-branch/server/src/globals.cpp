@@ -44,6 +44,9 @@ wp_version_info wp_version;
 // Library Includes
 #include "qdatetime.h"
 
+// Forwards
+class QSocketDevice;
+
 //	Instantiate our console object
 
 WPConsole_cl clConsole;
@@ -297,7 +300,7 @@ cCharStuff::cBankerAI	*BankerAI;
  unsigned char DRAGGED[MAXCLIENT];
  unsigned char EVILDRAGG[MAXCLIENT]; // we need this for UO3D clients to save dragging history , LB
 
-char firstpacket[MAXCLIENT+1];
+bool firstpacket[MAXCLIENT+1];
 
 // meta gm variables
  int priv3a[MAXCLIENT]; // sorry, my stupidity, (Lord Binary). basically not necassairy. but no time to rewrite now.
@@ -313,7 +316,7 @@ char firstpacket[MAXCLIENT+1];
  char unsigned buffer[MAXCLIENT][MAXBUFFER_REAL];
  char  outbuffer[MAXCLIENT][MAXBUFFER_REAL];
  int whomenudata [(MAXCLIENT)*10]; // LB, for improved whomenu, ( is important !!!
- int client[MAXCLIENT];
+ QSocketDevice* client[MAXCLIENT];
  short int walksequence[MAXCLIENT];
  signed char addid5[MAXCLIENT];
  int acctno[MAXCLIENT];

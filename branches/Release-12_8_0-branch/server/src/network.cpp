@@ -43,6 +43,7 @@ using namespace std ;
 
 // Library Includes
 #include "qstringlist.h"
+#include "qsocketdevice.h"
 
 #define PACKET_LEN_DYNAMIC	0x0000
 #define PACKET_LEN_NONE		0xffff
@@ -87,15 +88,21 @@ void cNetworkStuff::DoStreamCode(UOXSOCKET s)
 { 
 	int status ;
 	int len = Pack(outbuffer[s],  xoutbuffer, boutlength[s]);
-	if ((status = send(client[s], xoutbuffer, len, MSG_NOSIGNAL)) == SOCKET_ERROR)
+	int sent = 0;
+	unsigned int timeHere = getNormalizedTime();
+	while (sent < len && timeHere + 20*MY_CLOCKS_PER_SEC > getNormalizedTime())
 	{
-         #ifndef __unix__
-		   errno = WSAGetLastError();
-		   if (errno != WSAECONNRESET) LogErrorVar("Socket Send error %i \n",errno) ;
-         #else
-		 LogError("Socket Send error \n") ;
-         #endif
-		
+		int temp = client[s]->writeBlock(xoutbuffer + sent, len - sent);
+		if ( temp > 0 )
+		{
+			sent += temp;
+		}
+		else if ( temp == 0 )
+		{ // Gracefull disconnect, let's give up.
+			return;
+		}
+		else if ( client[s]->error() != QSocketDevice::NoError )
+			return;
 	}
 }
 
@@ -113,17 +120,13 @@ void cNetworkStuff::FlushBuffer(int s) // Sends buffered data at once
 		}
 		else
 		{			
-			if((status = send(client[s], (char*)outbuffer[s], boutlength[s], MSG_NOSIGNAL))==SOCKET_ERROR)
+			if ( client[s]->writeBlock(outbuffer[s], boutlength[s]) != boutlength[s] )
 			{
-            #ifndef __unix__
-				errno = WSAGetLastError();
-			#endif
-				if (errno != WSAECONNRESET)
-					LogErrorVar("Socket Send Error %i\n",errno) ;
+				LogError("Socket Send Error");
+				clConsole.send("[cNetworkStuff::FlushBuffer], Socket send error\n");
 			}
 		}
-		boutlength[s]=0;
-		//  clConsole.send("Done\n");
+		boutlength[s] = 0;
 	}
 }
 
@@ -189,7 +192,9 @@ void cNetworkStuff::Disconnect (int s) // Force disconnection of player //Instal
 
 	FlushBuffer(s);
 
-	closesocket(client[s]);
+	client[s]->close();
+	delete client[s];
+	client[s] = 0;
 
 	int j;
 	for (j=s;j<now-1;j++)
@@ -245,8 +250,8 @@ void cNetworkStuff::Disconnect (int s) // Force disconnection of player //Instal
 		currentSpellType[j]=currentSpellType[j+1];
 			
 	}
-
-	currchar[now]=NULL;
+	client[now] = 0;
+	currchar[now] = 0;
 	now--;	
 }
 
@@ -748,23 +753,31 @@ char cNetworkStuff::LogOut(int s)//Instalog
 
 int cNetworkStuff::Receive(int s, int x, int a) // Old socket receive function (To be replaced soon)
 {
-	int count,loopexit=0;
+	int count = 0;
 	
 	if ( (x+a) >= MAXBUFFER_ASYNCH) return 0;
 
+	unsigned int timeHere = getNormalizedTime();
+
 	do
 	{
-		if((count = recv(client[s], (char*)&buffer[s][a], x, MSG_NOSIGNAL))==SOCKET_ERROR)
+		int temp = client[s]->readBlock( (char*)&buffer[s][a] + count, x );
+		if ( temp > 0 )
 		{
-#ifndef __unix__
-			errno = WSAGetLastError();
-#endif
-			if (errno != WSAECONNRESET)
-				LogErrorVar("Socket Recv Error %i\n",errno) ;
+			count += temp;
+			x -= temp;
 		}
-	
+		else if ( client[s]->error() != QSocketDevice::NoError )
+		{
+			//Disconnect(s);
+			return -1;
+		}
+		else if ( temp = 0 ) // gracefull disconnect according to docs.
+		{
+			return count == 0 ? -1 : count;
+		}
 	}
-	while ( (count!=x) && (count>0) && (++loopexit < MAXBUFFER_ASYNCH ));
+	while ( x > 0 && ( timeHere + 20*MY_CLOCKS_PER_SEC ) > getNormalizedTime() );
 
 	return count;
 }
@@ -866,7 +879,12 @@ void cNetworkStuff::SockClose () // Close all sockets for shutdown
 {
 	int i;
 	closesocket(a_socket);
-	for (i=0;i<MAXCLIENT;i++) closesocket(client[i]);
+	for (i=0;i<MAXCLIENT;i++) 
+	{
+		client[i]->close();
+		delete client[i];
+		client[i] = 0;
+	}
 }
 
 void cNetworkStuff::CheckConn() // Check for connection requests
@@ -885,8 +903,9 @@ void cNetworkStuff::CheckConn() // Check for connection requests
 		if (s>0)
 		{	
 			len = sizeof(struct sockaddr_in);
-			client[now] = accept(a_socket, (struct sockaddr *)&client_addr, &len);
-			if ( client[now]<0 )
+			client[now] = new QSocketDevice( accept(a_socket, (struct sockaddr *)&client_addr, &len), QSocketDevice::Stream );
+			client[now]->setBlocking( false );
+			if ( client[now]->socket() < 0 )
 			{
 				clConsole.send("ERROR: Error at client connection!\n");
 				error=1;			
@@ -896,7 +915,9 @@ void cNetworkStuff::CheckConn() // Check for connection requests
 			if ( CheckForBlockedIP( client_addr ) )
 			{
 				clConsole.send("IPBlocking: Blocking IP address [%s] listed in hosts_deny\n", inet_ntoa( client_addr.sin_addr ));
-				closesocket(client[now]);
+				client[now]->close();
+				delete client[now];
+				client[now] = 0;
 			}
 			else
 			{
@@ -941,8 +962,9 @@ void cNetworkStuff::CheckConn() // Check for connection requests
 				sprintf((char*)temp,"WOLFPACK: Client %i [%i.%i.%i.%i] %s [Total:%i].\n",now,client_addr.sin_addr.s_addr&0xFF _ (client_addr.sin_addr.s_addr&0xFF00)>>8 _ (client_addr.sin_addr.s_addr&0xFF0000)>>16 _ (client_addr.sin_addr.s_addr&0xFF000000)>>24, temp2, now+1);
 				clConsole.send(temp);
 
-				if (SrvParams->serverLog()) savelog((char*)temp,"server.log");
-				now++;
+				if (SrvParams->serverLog()) 
+					savelog((char*)temp,"server.log");
+				++now;
 			}
 			return;
 
@@ -967,9 +989,10 @@ void cNetworkStuff::CheckMessage() // Check for messages from the clients
 
 	for (i=0;i<now;i++)
 	{
-		FD_SET(client[i],&all);
-		FD_SET(client[i],&errsock);
-		if (client[i]+1>nfds) nfds=client[i]+1;
+		FD_SET(client[i]->socket(), &all);
+		FD_SET(client[i]->socket(), &errsock);
+		if ( client[i]->socket() + 1 > nfds )
+			nfds = client[i]->socket() + 1;
 
 	}
 
@@ -978,18 +1001,19 @@ void cNetworkStuff::CheckMessage() // Check for messages from the clients
 	if (s>0)
 	{
 		oldnow=now;
-		for (i=0;i<oldnow;i++)
+		for ( i = 0; i < oldnow; ++i )
 		{
-			if (FD_ISSET(client[i],&errsock))
+			if (FD_ISSET(client[i]->socket(), &errsock))
 			{
 				Disconnect(i);
 			}
 
 		
-			if ((FD_ISSET(client[i],&all))&&(oldnow==now))
+			if ((FD_ISSET(client[i]->socket(), &all))&&(oldnow==now))
 			{
 				GetMsg(i);
-				if (executebatch) batchcheck(i);
+				if (executebatch) 
+					batchcheck(i);
 				                                 				
 			}
 
@@ -1105,18 +1129,14 @@ void cNetworkStuff::GetMsg(int s) // Receive message from client
 		
 	if (newclient[s])
 	{
-		if((count=recv(client[s], (char*)buffer[s], 4, MSG_NOSIGNAL))==SOCKET_ERROR)
+		if ( Receive(s, 4, 0) != 4 )
 		{
-#ifndef __unix__
-			errno = WSAGetLastError();
-#endif
-			if (errno != WSAECONNRESET)
-				LogErrorVar("Socket Recv Error %i\n",errno) ;
+			Disconnect(s);
+			return;
 		}
-		
-		newclient[s]=0;
-		firstpacket[s]=1;
-				
+
+		newclient[s] = 0;
+		firstpacket[s] = true;
 	}
 	else
 	{
@@ -1301,7 +1321,7 @@ void cNetworkStuff::GetMsg(int s) // Receive message from client
 					break;
 
 				case 0x80:// First Login					
-					firstpacket[s]=0;
+					firstpacket[s] = false;
 					LoginMain(s);			
 					break;
 
@@ -1310,8 +1330,8 @@ void cNetworkStuff::GetMsg(int s) // Receive message from client
 					break;
 
 				case 0x91:// Second Login			
-					firstpacket[s]=0;
-					cryptclient[s]=1;
+					firstpacket[s] = false;
+					cryptclient[s] = 1;
 					CharList(s);
 					break;
 
