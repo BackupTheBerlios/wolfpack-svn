@@ -2775,7 +2775,7 @@ int main(int argc, char *argv[])
 	signal(SIGTERM,&signal_handler);
 // we have this here, because convient, but should be set regardless of deamon or not.
 // Keeps a disconnected socket from terminating the server.
-	signal(SIGPIPE, SIG_IGN)
+	signal(SIGPIPE, SIG_IGN);
 #endif	
 	#define CIAO_IF_ERROR if (error==1) { Network->SockClose(); im_clearmenus(); DeleteClasses(); exit(-1); }
 
