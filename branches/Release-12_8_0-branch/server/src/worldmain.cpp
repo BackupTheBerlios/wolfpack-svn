@@ -900,6 +900,11 @@ void CWorldMain::loadnewworld(QString module) // Load world from WOLFPACK.WSC
 		//AntiChrist bugfix for magic reflect
 		pc->priv2 &= 0xBF;
 		pc->SetSpawnSerial( pc->spawnserial );
+		if ( pc->spawnregion >= spawnregion.size() )
+		{
+			pc->spawnregion = 0;
+		} else
+			spawnregion[pc->spawnregion].current++;
 
 		pc->region = calcRegionFromXY(pc->pos.x, pc->pos.y); //LB bugfix
 
