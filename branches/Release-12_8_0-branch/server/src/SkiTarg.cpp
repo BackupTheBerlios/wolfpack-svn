@@ -1796,9 +1796,9 @@ void cSkills::HealingSkillTarget(UOXSOCKET s)
 				int healmin = (((ph->skill[HEALING]/5)+(ph->skill[VETERINARY]/5))+3); //OSI's formula for min amount healed (Skyfire)
 				int healmax = (((ph->skill[HEALING]/5)+(ph->skill[VETERINARY]/2))+10); //OSI's formula for max amount healed (Skyfire)
 				int j = RandomNum(healmin, healmax);
-				// just temp - khpae
-				//pp->hp = min(pp->st, pp->hp + j);
-				pp->hp = (pp->st > (pp->hp + j)) ? (pp->hp + j) : pp->st;
+				pp->hp = min(pp->st, pp->hp + j);
+				// khpae
+				//pp->hp = (pp->st > (pp->hp + j)) ? (pp->hp + j) : pp->st;
 				updatestats(pp, 0);
 				sysmessage(s, tr("You apply the bandages and the creature looks a bit healthier.") );
 			}
