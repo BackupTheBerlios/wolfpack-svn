@@ -1,0 +1,45 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Arcane Daemon -->
+	<npc id="arcane_daemon" inherit="monster_base">
+		<name>arcane daemon</name>
+		<id>784</id>
+		<karma><random list="KARMA_L5" /></karma>
+		<fame><random list="FAME_L4" /></fame>
+		<!-- Stats -->
+		<str><random min="131" max="150"/></str>
+		<dex><random min="126" max="136"/></dex>
+		<int><random min="301" max="350"/></int>
+		<maxhitpoints><random min="101" max="115"/></maxhitpoints>
+		<!-- Skills -->
+		<magicresistance>0</magicresistance>
+		<tactics>0</tactics>
+		<wrestling>0</wrestling>
+		<anatomy>0</anatomy>
+		<!-- Damage -->
+		<mindamage>23</mindamage>
+		<maxdamage>31</maxdamage>
+		<!-- Damage Properties -->
+		<tag name="dmg_fire" value="20" type="int" />
+		<!-- Resist Properties -->
+		<tag name="res_physical" value="50,60" type="int" />
+		<tag name="res_fire" value="70,80" type="int" />
+		<tag name="res_cold" value="10,20" type="int" />
+		<tag name="res_poison" value="50,60" type="int" />
+		<tag name="res_energy" value="30,40" type="int" />
+		<!-- Loot Packs -->
+		<!-- Missing:  -->
+		<lootpacks>lootpack_average</lootpacks>
+		<!-- Misc. -->
+		<category>Monsters\Daemonic\Arcane Daemon</category>
+	</npc>
+
+</definitions>

@@ -1,0 +1,32 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- dragon helm -->
+	<item id="2645">
+		<id>0x2645</id>
+		<decay />
+		<nodye />
+		<durability><random min="50" max="65" /></durability>
+		<tag name="resname" value="iron" />
+		<smelt>12</smelt>
+		<weight>7.0</weight>
+		<type>1009</type>
+		<basescripts>equipment</basescripts>
+		<category>Armor\Base\Dragon\Dragon Helm 1</category>
+	</item>
+
+	<!-- dragon helm -->
+	<item id="2646" inherit="2645">
+		<id>0x2646</id>
+		<baseid>2645</baseid>
+		<category>Armor\Base\Dragon\Dragon Helm 2</category>
+	</item>\
+
+</definitions>

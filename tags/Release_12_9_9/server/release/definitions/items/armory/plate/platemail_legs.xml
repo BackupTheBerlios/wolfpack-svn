@@ -1,0 +1,35 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Plate Leggings NS -->
+	<item id="1411">
+		<id>0x1411</id>
+		<decay />
+		<nodye />
+		<durability><random min="60" max="100" /></durability>
+		<tag name="resname" value="iron" />
+		<restock>10</restock>
+		<smelt>16</smelt>
+		<weight>7.0</weight>
+		<buyprice>218</buyprice>
+		<sellprice>109</sellprice>
+		<type>1009</type>
+		<basescripts>equipment</basescripts>
+		<category>Armor\Base\Platemail\Legs (N/S)</category>
+	</item>
+
+	<!-- Plate Leggings EW -->
+	<item id="141a" inherit="1411">
+		<id>0x141a</id>
+		<baseid>1411</baseid>
+		<category>Armor\Base\Platemail\Legs (E/W)</category>
+	</item>
+
+</definitions>

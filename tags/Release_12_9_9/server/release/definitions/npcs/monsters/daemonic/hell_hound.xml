@@ -1,0 +1,52 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- a hell hound -->
+	<npc id="hell_hound" inherit="monster_base">
+		<name>hell hound</name>
+		<id><random list="NPCIDS_HELLHOUND"/></id>
+		<karma><random list="KARMA_L3" /></karma>
+		<fame><random list="FAME_L3" /></fame>
+		<!-- Stats -->
+		<str><random min="102" max="150"/></str>
+		<dex><random min="81" max="105"/></dex>
+		<int><random min="36" max="60"/></int>
+		<maxhitpoints><random min="66" max="125" /></maxhitpoints>
+		<!-- Skills -->
+		<magicresistance><random min="576" max="750"/></magicresistance>
+		<tactics><random min="501" max="700"/></tactics>
+		<wrestling><random min="601" max="800"/></wrestling>
+		<totame>855</totame>
+		<!-- Damage -->
+		<mindamage>21</mindamage>
+		<maxdamage>31</maxdamage>
+		<tag name="dmg_fire" value="80" type="int" />
+		<!-- Resists -->
+		<tag name="res_physical" value="25,35" type="int" />
+		<tag name="res_fire" value="30,40" type="int" />
+		<tag name="res_poison" value="10,20" type="int" />
+		<tag name="res_energy" value="10,20" type="int" />
+		<!-- Misc. -->
+		<desc>What so ever raiment a daemon adorns, doubt not that their power remains beneath the garb. Truer words could not be spoken of the hounds from hell. Vicious and hungry, these hounds are pack animals whose sole desire is to relieve wanderers of their mortal coil.</desc>
+		<!-- Missing: 5 Sulfurous Ash, Rib -->
+		<lootpacks>lootpack_average;lootpack_meager</lootpacks>
+		<carve>carve_hell_hound</carve>
+		<category>Monsters\Daemonic\Hell Hound</category>
+	</npc>
+
+	<npc id="hell_hound_1" inherit="hell_hound">
+		<id>97</id>
+	</npc>
+
+	<npc id="hell_hound_2" inherit="hell_hound">
+		<id>98</id>
+	</npc>
+
+</definitions>

@@ -1,0 +1,52 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- a shade -->
+	<npc id="shade" inherit="undead_base">
+		<name>shade</name>
+		<id>153</id>
+		<karma><random list="KARMA_L2" /></karma>
+		<fame><random list="FAME_L2" /></fame>
+		<!-- Stats -->
+		<str><random min="76" max="100"/></str>
+		<dex><random min="76" max="95"/></dex>
+		<int><random min="36" max="60"/></int>
+		<maxhitpoints><random min="46" max="60"/></maxhitpoints>
+		<!-- Skills -->
+		<wrestling><random min="451" max="550"/></wrestling>
+		<tactics><random min="451" max="600"/></tactics>
+		<magicresistance><random min="551" max="700"/></magicresistance>
+		<magery><random min="551" max="700"/></magery>
+		<evaluatingintel><random min="551" max="700"/></evaluatingintel>
+		<anatomy>0</anatomy>
+		<!-- Damage -->
+		<mindamage>11</mindamage>
+		<maxdamage>18</maxdamage>
+		<!-- Damage Properties -->
+		<tag name="dmg_cold" value="50" type="int" />
+		<!-- Resist Properties -->
+		<tag name="res_physical" value="25,30" type="int" />
+		<!-- Missing: Reagent -->
+		<lootpacks>lootpack_meager</lootpacks>
+		<!-- Misc. -->
+		<category>Monsters\Undead\Shade</category>
+	</npc>
+
+	<npc name="spectre" inherit="shade">
+		<name>spectre</name>
+		<category>Monsters\Undead\Spectre</category>
+	</npc>
+
+	<npc name="wraith" inherit="shade">
+		<name>wraith</name>
+		<category>Monsters\Undead\Spectre</category>
+	</npc>
+
+</definitions>

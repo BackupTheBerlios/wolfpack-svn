@@ -1,0 +1,32 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Black Staff -->
+	<item id="df1">
+		<id>0xdf1</id>
+		<decay />
+		<nodye />
+		<sellprice>9</sellprice>
+		<buyprice>18</buyprice>
+		<durability><random min="30" max="39" /></durability>
+		<weight>6.0</weight>
+		<basescripts>equipment</basescripts>
+		<type>1003</type>
+		<twohanded />
+		<category>Weapons\Staves\Black Staff (N/S)</category>
+	</item>
+
+	<item id="df0" inherit="df1">
+		<id>0xdf0</id>
+		<baseid>df1</baseid>
+		<category>Weapons\Staves\Black Staff (E/W)</category>
+	</item>
+
+</definitions>

@@ -1,0 +1,86 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   |
+ *  ( (  ;._ \\     |
+ *=======================================================*/
+-->
+<!--
+	These should make it very easy to give monsters more accurate fame/karma levels
+-->
+<definitions>
+
+	<!-- Fame Gain -->
+	<list id="FAME_L1">
+		<item><random min="0" max="1249" /></item>
+	</list>
+
+	<list id="FAME_L2">
+		<item><random min="1250" max=" 2499" /></item>
+	</list>
+
+	<list id="FAME_L3">
+		<item><random min="2500" max=" 4999" /></item>
+	</list>
+
+	<list id="FAME_L4">
+		<item><random min="5000" max="9999" /></item>
+	</list>
+
+	<list id="FAME_L5">
+		<item><random min="10000" max="25000" /></item>
+	</list>
+
+	<!-- Zero Karma Gain -->
+	<list id="KARMA_NL0">
+		<item><random min="0" max="624" /></item>
+	</list>
+
+	<list id="KARMA_L0">
+		<item><random min="-624" max="0" /></item>
+	</list>
+
+	<!-- Positive Karma Gain -->
+	<list id="KARMA_NL1">
+		<item><random min="625" max="1249" /></item>
+	</list>
+
+	<list id="KARMA_NL2">
+		<item><random min="1250" max="2499" /></item>
+	</list>
+
+	<list id="KARMA_NL3">
+		<item><random min="2500" max="4999" /></item>
+	</list>
+
+	<list id="KARMA_NL4">
+		<item><random min="5000" max="9999" /></item>
+	</list>
+
+	<list id="KARMA_NL5">
+		<item><random min="10000" max="25000" /></item>
+	</list>
+
+	<!-- Negative Karma Gain -->
+	<list id="KARMA_L1">
+		<item><random max="-625" min="-1249" /></item>
+	</list>
+
+	<list id="KARMA_L2">
+		<item><random max="-1250" min="-2499" /></item>
+	</list>
+
+	<list id="KARMA_L3">
+		<item><random max="-2500" min="-4999" /></item>
+	</list>
+
+	<list id="KARMA_L4">
+		<item><random max="-5000" min="-9999" /></item>
+	</list>
+
+	<list id="KARMA_L5">
+		<item><random max="-10000" min="-25000" /></item>
+	</list>
+
+</definitions>

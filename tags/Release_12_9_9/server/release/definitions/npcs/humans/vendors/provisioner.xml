@@ -1,0 +1,34 @@
+<!--
+=================================================================
+|   )      (\_     | WOLFPACK 13.0.0 Scripts                    |
+|  ((    _/{  "-;  | Created by: DarkStorm                      |
+|   )).-' {{ ;'`   | Revised by: White Wolf                     |
+|  ( (  ;._ \\ ctr | Last Modification: 12/16/02                |
+=================================================================
+-->
+<definitions>
+
+	<!-- A provisioner vendor -->
+	<npc id="provisioner_male">
+		<inherit>vendor_male</inherit>
+		<title>the Provisioner</title>
+		<shopkeeper>
+			<restockable/>
+		</shopkeeper>
+		<camping><random min="450" max="680" /></camping>
+		<tactics><random min="450" max="680" /></tactics>
+		<category>Vendors\Provisioner (Male)</category>
+	</npc>
+	
+	<npc id="provisioner_female">
+		<inherit>vendor_female</inherit>
+		<title>the Provisioner</title>
+		<shopkeeper>
+			<restockable/>
+		</shopkeeper>
+		<camping><random min="450" max="680" /></camping>
+		<tactics><random min="450" max="680" /></tactics>
+		<category>Vendors\Provisioner (Female)</category>
+	</npc>
+
+</definitions>

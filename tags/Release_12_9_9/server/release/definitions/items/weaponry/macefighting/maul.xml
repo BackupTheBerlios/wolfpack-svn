@@ -1,0 +1,33 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Maul -->
+	<item id="143b">
+		<id>0x143b</id>
+		<onehanded />
+		<decay />
+		<nodye />
+		<sellprice>11</sellprice>
+		<buyprice>22</buyprice>
+		<durability><random min="30" max="58" /></durability>
+		<weight>14.0</weight>
+		<tag name="resname" value="iron" />
+		<basescripts>equipment</basescripts>
+		<type>1004</type>
+		<category>Weapons\Maces\Maul (N/S)</category>
+	</item>
+
+	<item id="143a" inherit="143b">
+		<id>0x143a</id>
+		<baseid>143b</baseid>
+		<category>Weapons\Maces\Mau (E/W)</category>
+	</item>
+
+</definitions>

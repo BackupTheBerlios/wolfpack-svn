@@ -1,0 +1,41 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- a mongbat -->
+	<npc id="mongbat" inherit="monster_base">
+		<name>mongbat</name>
+		<id>39</id>
+		<karma><random list="KARMA_L0" /></karma>
+		<fame><random list="FAME_L1" /></fame>
+		<!-- Stats -->
+		<str><random min="6" max="10"/></str>
+		<dex><random min="26" max="38"/></dex>
+		<int><random min="6" max="14"/></int>
+		<maxmana>0</maxmana>
+		<maxhitpoints><random min="4" max="6" /></maxhitpoints>
+		<!-- Skills -->
+		<magicresistance><random min="51" max="140"/></magicresistance>
+		<tactics><random min="51" max="100"/></tactics>
+		<wrestling><random min="51" max="100"/></wrestling>
+		<totame>771</totame>
+		<!-- Damage -->
+		<mindamage>1</mindamage>
+		<maxdamage>2</maxdamage>
+		<!-- Resists -->
+		<tag name="res_physical" value="5,10" type="int" />
+		<!-- Misc. -->
+		<desc>Like the harpies and the headless, the mongbat is a bestial perversion of the human form, being shaped like a bat with a monkey's head. Mongbats are cowardly creatures, of no great threat individually, but they are masters of the underground ambush, attacking in flocks from out of the concealing dark.</desc>
+		<!-- Missing: -->
+		<lootpacks>lootpack_poor</lootpacks>
+		<carve>carve_mong_bat</carve>
+		<category>Monsters\Daemonic\Mongbat</category>
+	</npc>
+
+</definitions>

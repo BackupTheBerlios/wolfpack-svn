@@ -1,0 +1,311 @@
+<!--
+=================================================================
+|   )      (\_     | WOLFPACK 13.0.0 Scripts                    |
+|  ((    _/{  "-;  | Created by: DarkStorm                      |
+|   )).-' {{ ;'`   | Revised by:                                |
+|  ( (  ;._ \\ ctr | Last Modification: Created                 |
+=================================================================
+| Mapmaker                                                      |
+=================================================================
+-->
+<definitions>
+	<item id="1047">
+		<id>0x1047</id>
+		<category>Professions\Mapmaker\Globe 1</category>
+	</item>
+
+	<item id="1048">
+		<id>0x1048</id>
+		<category>Professions\Mapmaker\Globe 2</category>
+	</item>
+
+	<item id="14eb">
+		<id>0x14eb</id>
+		<category>Professions\Mapmaker\Map (N/S)</category>
+	</item>
+
+	<item id="14ec">
+		<id>0x14ec</id>
+		<category>Professions\Mapmaker\Map (W/E)</category>
+	</item>
+
+	<item id="14ed">
+		<id>0x14ed</id>
+		<category>Professions\Mapmaker\Rolled Map (N/S)</category>
+	</item>
+
+	<item id="14ee">
+		<id>0x14ee</id>
+		<category>Professions\Mapmaker\Rolled Map (W/E)</category>
+	</item>
+
+	<item id="14ef">
+		<id>0x14ef</id>
+		<category>Professions\Mapmaker\Deed (N/S)</category>
+	</item>
+
+	<item id="14f0">
+		<id>0x14f0</id>
+		<category>Professions\Mapmaker\Deed (W/E)</category>
+	</item>
+
+	<item id="14f1">
+		<id>0x14f1</id>
+		<category>Professions\Mapmaker\Ship Plans (N/S)</category>
+	</item>
+
+	<item id="14f2">
+		<id>0x14f2</id>
+		<category>Professions\Mapmaker\Ship Plans (W/E)</category>
+	</item>
+
+	<item id="14f3">
+		<id>0x14f3</id>
+		<category>Professions\Mapmaker\Ship Model (N/S)</category>
+	</item>
+
+	<item id="14f4">
+		<id>0x14f4</id>
+		<category>Professions\Mapmaker\Ship Model (W/E)</category>
+	</item>
+
+	<item id="14f5">
+		<id>0x14f5</id>
+		<category>Professions\Mapmaker\Spyglass (W/E)</category>
+	</item>
+
+	<item id="14f6">
+		<id>0x14f6</id>
+		<category>Professions\Mapmaker\Spyglass (N/S)</category>
+	</item>
+
+	<item id="mapmakers_pen">
+		<id>0xfbf</id>
+		<name>#1044167</name>
+		<category>Professions\Mapmaker\Pen &amp; Ink</category>
+	</item>
+
+	<item id="map_britain" inherit="14eb">
+		<name>map of Britain</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="britain" />
+		<category>Professions\Mapmaker\Maps\Britain</category>
+	</item>
+
+	<item id="map_britaintoskarabrae" inherit="14eb">
+		<name>map of Britain to Skara Brae</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="britaintoskarabrae" />
+		<category>Professions\Mapmaker\Maps\Britain to Skara Brae</category>
+	</item>
+
+	<item id="map_britaintotrinsic" inherit="14eb">
+		<name>map of Britain to Trinsic</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="britaintotrinsic" />
+		<category>Professions\Mapmaker\Maps\Britain to Trinsic</category>
+	</item>
+
+	<item id="map_bucsden" inherit="14eb">
+		<name>map of Buccaneer's Den</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="bucsden" />
+		<category>Professions\Mapmaker\Maps\Buccaneer's Den</category>
+	</item>
+
+	<item id="map_bucsdentomagincia" inherit="14eb">
+		<name>map of Buccaneer's Den to Magincia</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="bucsdentomagincia" />
+		<category>Professions\Mapmaker\Maps\Buccaneer's Den to Magincia</category>
+	</item>
+
+	<item id="map_bucsdentoocllo" inherit="14eb">
+		<name>map of Buccaneer's Den to Ocllo</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="bucsdentoocllo" />
+		<category>Professions\Mapmaker\Maps\Buccaneer's Den to Ocllo</category>
+	</item>
+
+	<item id="map_jhelom" inherit="14eb">
+		<name>map of Jhelom</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="jhelom" />
+		<category>Professions\Mapmaker\Maps\Jhelom</category>
+	</item>
+
+	<item id="map_magincia" inherit="14eb">
+		<name>map of Magincia</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="magincia" />
+		<category>Professions\Mapmaker\Maps\Magincia</category>
+	</item>
+
+	<item id="map_maginciatoocllo" inherit="14eb">
+		<name>map of Magincia to Ocllo</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="maginciatoocllo" />
+		<category>Professions\Mapmaker\Maps\Magincia to Ocllo</category>
+	</item>
+
+	<item id="map_minoc" inherit="14eb">
+		<name>map of Minoc</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="minoc" />
+		<category>Professions\Mapmaker\Maps\Minoc</category>
+	</item>
+
+	<item id="map_minoctoyew" inherit="14eb">
+		<name>map of Minoc to Yew</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="minoctoyew" />
+		<category>Professions\Mapmaker\Maps\Minoc to Yew</category>
+	</item>
+
+	<item id="map_minoctovesper" inherit="14eb">
+		<name>map of Minoc to Vesper</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="minoctovesper" />
+		<category>Professions\Mapmaker\Maps\Minoc to Vesper</category>
+	</item>
+
+	<item id="map_moonglow" inherit="14eb">
+		<name>map of Moonglow</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="moonglow" />
+		<category>Professions\Mapmaker\Maps\Moonglow</category>
+	</item>
+
+	<item id="map_moonglowtonujelm" inherit="14eb">
+		<name>map of Moonglow to Nujelm</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="moonglowtonujelm" />
+		<category>Professions\Mapmaker\Maps\Moonglow to Nujelm</category>
+	</item>
+
+	<item id="map_nujelm" inherit="14eb">
+		<name>map of Nujelm</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="nujelm" />
+		<category>Professions\Mapmaker\Maps\Nujelm</category>
+	</item>
+
+	<item id="map_nujelmtomagincia" inherit="14eb">
+		<name>map of Nujelm to Magincia</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="nujelmtomagincia" />
+		<category>Professions\Mapmaker\Maps\Nujelm to Magincia</category>
+	</item>
+
+	<item id="map_occlo" inherit="14eb">
+		<name>map of Ocllo</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="occlo" />
+		<category>Professions\Mapmaker\Maps\Ocllo</category>
+	</item>
+
+	<item id="map_serpentshold" inherit="14eb">
+		<name>map of Serpent's Hold</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="serpentshold" />
+		<category>Professions\Mapmaker\Maps\Serpent's Hold</category>
+	</item>
+
+	<item id="map_serpentsholdtoocllo" inherit="14eb">
+		<name>map of Serpent's Hold to Ocllo</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="serpentsholdtoocllo" />
+		<category>Professions\Mapmaker\Maps\Serpent's Hold to Ocllo</category>
+	</item>
+
+	<item id="map_skarabrae" inherit="14eb">
+		<name>map of Skara Brae</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="skarabrae" />
+		<category>Professions\Mapmaker\Maps\Skara Brae</category>
+	</item>
+
+	<item id="map_world" inherit="14eb">
+		<name>map of The World</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="world" />
+		<category>Professions\Mapmaker\Maps\The World</category>
+	</item>
+
+	<item id="map_trinsic" inherit="14eb">
+		<name>map of Trinsic</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="trinsic" />
+		<category>Professions\Mapmaker\Maps\Trinsic</category>
+	</item>
+
+	<item id="map_trinsictobucsden" inherit="14eb">
+		<name>map of Trinsic to Buccaneer's Den</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="trinsictobucsden" />
+		<category>Professions\Mapmaker\Maps\Trinsic to Buccaneer's Den</category>
+	</item>
+
+	<item id="map_trinsictojhelom" inherit="14eb">
+		<name>map of Trinsic to Jhelom</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="trinsictojhelom" />
+		<category>Professions\Mapmaker\Maps\Trinsic to Jhelom</category>
+	</item>
+
+	<item id="map_vesper" inherit="14eb">
+		<name>map of Vesper</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="vesper" />
+		<category>Professions\Mapmaker\Maps\Vesper</category>
+	</item>
+
+	<item id="map_vespertonujelm" inherit="14eb">
+		<name>map of Vesper to Nujelm</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="vespertonujelm" />
+		<category>Professions\Mapmaker\Maps\Vesper to Nujelm</category>
+	</item>
+
+	<item id="map_yew" inherit="14eb">
+		<name>map of Yew</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="yew" />
+		<category>Professions\Mapmaker\Maps\Yew</category>
+	</item>
+
+	<item id="map_yewtobritain" inherit="14eb">
+		<name>map of Yew to Britain</name>
+		<basescripts>map</basescripts>
+		<tag name="type" value="preset" />
+		<tag name="preset" value="yewtobritain" />
+		<category>Professions\Mapmaker\Maps\Yew to Britain</category>
+	</item>
+</definitions>

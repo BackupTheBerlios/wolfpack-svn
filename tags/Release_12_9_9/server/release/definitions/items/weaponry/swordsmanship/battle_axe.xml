@@ -1,0 +1,34 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Battle Axe -->
+	<item id="f47">
+		<id>0xf47</id>
+		<twohanded />
+		<decay />
+		<nodye />
+		<sellprice>15</sellprice>
+		<buyprice>30</buyprice>
+		<durability><random min="30" max="63" /></durability>
+		<weight>4.0</weight>
+		<tag name="resname" value="iron" />
+		<tag name="remaining_uses" type="int" value="35" />
+		<basescripts>equipment,blades</basescripts>
+		<type>1002</type>
+		<category>Weapons\Axes\Battle Axe (N/S)</category>
+	</item>
+
+	<item id="f48" inherit="f47">
+		<id>0xf48</id>
+		<baseid>f47</baseid>
+		<category>Weapons\Axes\Battle Axe (E/W)</category>
+	</item>
+
+</definitions>

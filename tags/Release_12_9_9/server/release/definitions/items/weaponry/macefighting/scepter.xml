@@ -1,0 +1,33 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Scepter -->
+	<item id="26c6">
+		<id>0x26c6</id>
+		<onehanded />
+		<decay />
+		<nodye />
+		<sellprice>15</sellprice>
+		<buyprice>30</buyprice>
+		<durability><random min="50" max="98" /></durability>
+		<weight>7.0</weight>
+		<tag name="resname" value="iron" />
+		<basescripts>equipment</basescripts>
+		<type>1004</type>
+		<category>Weapons\Maces\Scepter (N/S)</category>
+	</item>
+
+	<item id="26bc" inherit="26c6">
+		<id>0x26bc</id>
+		<baseid>26c6</baseid>
+		<category>Weapons\Maces\Scepter (E/W)</category>
+	</item>
+
+</definitions>

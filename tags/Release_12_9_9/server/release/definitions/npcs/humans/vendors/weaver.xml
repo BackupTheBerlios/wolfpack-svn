@@ -1,0 +1,32 @@
+<!--
+=================================================================
+|   )      (\_     | WOLFPACK 13.0.0 Scripts                    |
+|  ((    _/{  "-;  | Created by: DarkStorm                      |
+|   )).-' {{ ;'`   | Revised by: White Wolf                     |
+|  ( (  ;._ \\ ctr | Last Modification: 12/16/02                |
+=================================================================
+-->
+<definitions>
+
+	<!-- A weaver vendor -->
+	<npc id="weaver_male">
+		<inherit>vendor_male</inherit>
+		<title>the Weaver</title>
+		<shopkeeper>
+			<restockable/>
+		</shopkeeper>
+		<tailoring><random min="650" max="880" /></tailoring>
+		<category>Vendors\Weaver (Male)</category>
+	</npc>
+	
+	<npc id="weaver_female">
+		<inherit>vendor_female</inherit>
+		<title>the Weaver</title>
+		<shopkeeper>
+			<restockable/>
+		</shopkeeper>
+		<tailoring><random min="650" max="880" /></tailoring>
+		<category>Vendors\Weaver (Female)</category>
+	</npc>
+
+</definitions>

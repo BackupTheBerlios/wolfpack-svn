@@ -1,0 +1,64 @@
+<!--
+=================================================================
+|   )      (\_     | WOLFPACK 13.0.0 Scripts                    |
+|  ((    _/{  "-;  | Created by: DarkStorm                      |
+|   )).-' {{ ;'`   | Revised by: White Wolf                     |
+|  ( (  ;._ \\ ctr | Last Modification: 12/16/02                |
+=================================================================
+-->
+<definitions>
+
+	<!-- A Tailor vendor -->
+	<npc id="tailor_male">
+		<inherit>vendor_male</inherit>
+		<title>the Tailor</title>
+		<shopkeeper>
+			<restockable>
+				<item id="153f">
+					<amount>10</amount>
+				</item>
+				<item id="1515">
+					<amount>10</amount>
+				</item>
+				<item id="108b">
+					<amount>10</amount>
+				</item>
+				<item id="1516">
+					<amount>10</amount>
+				</item>
+				<item id="1517">
+					<amount>10</amount>
+				</item>
+			</restockable>
+		</shopkeeper>
+		<tailoring><random min="640" max="1000"/></tailoring>
+		<category>Vendors\Tailor (Male)</category>
+	</npc>
+	
+	<npc id="tailor_female">
+		<inherit>vendor_female</inherit>
+		<title>the Tailor</title>
+		<shopkeeper>
+			<restockable>
+				<item id="153f">
+					<amount>10</amount>
+				</item>
+				<item id="1515">
+					<amount>10</amount>
+				</item>
+				<item id="108b">
+					<amount>10</amount>
+				</item>
+				<item id="1516">
+					<amount>10</amount>
+				</item>
+				<item id="1517">
+					<amount>10</amount>
+				</item>
+			</restockable>
+		</shopkeeper>
+		<tailoring><random min="640" max="1000"/></tailoring>
+		<category>Vendors\Tailor (Female)</category>
+	</npc>
+
+</definitions>

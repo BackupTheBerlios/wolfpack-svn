@@ -1,0 +1,33 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Cutlass -->
+	<item id="1441">
+		<id>0x1441</id>
+		<onehanded />
+		<decay />
+		<nodye />
+		<sellprice>10</sellprice>
+		<buyprice>21</buyprice>
+		<durability><random min="30" max="70" /></durability>
+		<weight>8.0</weight>
+		<tag name="resname" value="iron" />
+		<type>1001</type>
+		<basescripts>equipment,blades</basescripts>
+		<category>Weapons\Swords\Cutlass (N/S)</category>
+	</item>
+
+	<item id="1440" inherit="1441">
+		<id>0x1440</id>
+		<baseid>1441</baseid>
+		<category>Weapons\Swords\Cutlass (E/W)</category>
+	</item>
+
+</definitions>

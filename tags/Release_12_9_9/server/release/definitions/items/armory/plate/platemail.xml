@@ -1,0 +1,35 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Male Plate Armor North-South -->
+	<item id="1415">
+		<id>0x1415</id>
+		<decay />
+		<nodye />
+		<durability><random min="60" max="100" /></durability>
+		<tag name="resname" value="iron" />
+		<restock>10</restock>
+		<smelt>20</smelt>
+		<weight>10.0</weight>
+		<buyprice>273</buyprice>
+		<sellprice>136</sellprice>
+		<type>1009</type>
+		<basescripts>equipment</basescripts>
+		<category>Armor\Base\Platemail\Male Armor (N/S)</category>
+	</item>
+
+	<!-- Male Plate Armor East-West -->
+	<item id="1416" inherit="1415">
+		<id>0x1416</id>
+		<baseid>1415</baseid>
+		<category>Armor\Base\Platemail\Male Armor (E/W)</category>
+	</item>
+
+</definitions>

@@ -1,0 +1,28 @@
+<!--
+=================================================================
+|   )      (\_     | WOLFPACK 13.0.0 Scripts                    |
+|  ((    _/{  "-;  | Created by: DarkStorm                      |
+|   )).-' {{ ;'`   | Revised by: White Wolf                     |
+|  ( (  ;._ \\ ctr | Last Modification: 12/16/02                |
+=================================================================
+-->
+<definitions>
+
+	<!-- A veterinarian -->
+	<npc id="veterinarian_male">
+		<inherit>vendor_male</inherit>
+		<title>the Veterinarian</title>
+		<veterinary><random min="900" max="1000"/></veterinary>
+		<animallore><random min="850" max="1000"/></animallore>
+		<category>Vendors\Veterinarian (Male)</category>
+	</npc>
+	
+	<npc id="veterinarian_female">
+		<inherit>vendor_female</inherit>
+		<title>the Veterinarian</title>
+		<veterinary><random min="900" max="1000"/></veterinary>
+		<animallore><random min="850" max="1000"/></animallore>
+		<category>Vendors\Veterinarian (Female)</category>
+	</npc>
+
+</definitions>

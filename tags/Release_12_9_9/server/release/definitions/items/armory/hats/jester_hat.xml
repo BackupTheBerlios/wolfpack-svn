@@ -1,0 +1,22 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Jester Hat -->
+	<item id="172e">
+		<category>Clothes\Headwear\Jester Hat</category>
+		<category>Armor\Headwear\Jester Hat</category>
+		<id>0x172e</id>
+		<dye />
+		<durability><random min="20" max="25" /></durability>
+		<type>1009</type>
+		<basescripts>equipment</basescripts>
+	</item>
+
+</definitions>

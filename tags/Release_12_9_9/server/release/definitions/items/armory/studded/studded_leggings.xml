@@ -1,0 +1,33 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Studded Leggings -->
+	<item id="13da">
+		<id>0x13da</id>
+		<decay />
+		<nodye />
+		<durability><random min="35" max="45" /></durability>
+		<tag name="resname" value="leather" />
+		<restock>10</restock>
+		<weight>3.0</weight>
+		<buyprice>103</buyprice>
+		<sellprice>51</sellprice>
+		<type>1009</type>
+		<basescripts>equipment</basescripts>
+		<category>Armor\Base\Studded Leather\Leggings (N/S)</category>
+	</item>
+
+	<item id="13e1" inherit="13da">
+		<id>0x13e1</id>
+		<baseid>13da</baseid>
+		<category>Armor\Base\Studded Leather\Leggings (E/W)</category>
+	</item>
+
+</definitions>

@@ -1,0 +1,34 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Composite Bow -->
+	<item id="26c2">
+		<id>0x26c2</id>
+		<bindmenu id="item_menu"/>
+		<twohanded />
+		<decay />
+		<nodye />
+		<sellprice>28</sellprice>
+		<buyprice>56</buyprice>
+		<tag name="range" value="12" type="int" />
+		<durability><random min="30" max="70" /></durability>
+		<weight>7.0</weight>
+		<basescripts>equipment</basescripts>
+		<type>1006</type>
+		<category>Weapons\Bows\Composite Bow (N/S)</category>
+	</item>
+
+	<item id="26cc" inherit="26c2">
+		<id>0x26cc</id>
+		<baseid>26c2</baseid>
+		<category>Weapons\Bows\Composite Bow (E/W)</category>
+	</item>
+
+ </definitions>

@@ -1,0 +1,34 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Orc Helmet North-South -->
+	<item id="1f0b">
+		<id>0x1f0b</id>
+		<decay />
+		<nodye />
+		<durability><random min="30" max="50" /></durability>
+		<restock>10</restock>
+		<smelt>12</smelt>
+		<weight>5.0</weight>
+		<buyprice>127</buyprice>
+		<sellprice>63</sellprice>
+		<type>1009</type>
+		<basescripts>equipment</basescripts>
+		<category>Armor\Base\Helmets\Orc Helm (N/S)</category>
+	</item>
+
+	<!-- Orc Helmet East-West -->
+	<item id="1f0c" inherit="1f0b">
+		<id>0x1f0c</id>
+		<baseid>1f0b</baseid>
+		<category>Armor\Base\Helmets\Orc Helm (E/W)</category>
+	</item>
+
+</definitions>

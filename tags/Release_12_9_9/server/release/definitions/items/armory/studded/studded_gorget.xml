@@ -1,0 +1,27 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Studded Gorget -->
+	<item id="13d6">
+		<id>0x13d6</id>
+		<decay />
+		<nodye />
+		<durability><random min="35" max="45" /></durability>
+		<tag name="resname" value="leather" />
+		<restock>10</restock>
+		<weight>1.0</weight>
+		<buyprice>73</buyprice>
+		<sellprice>36</sellprice>
+		<type>1009</type>
+		<basescripts>equipment</basescripts>
+		<category>Armor\Base\Studded Leather\Gorget</category>
+	</item>
+
+</definitions>

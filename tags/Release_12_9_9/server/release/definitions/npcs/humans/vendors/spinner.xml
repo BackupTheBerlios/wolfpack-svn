@@ -1,0 +1,36 @@
+<!--
+=================================================================
+|   )      (\_     | WOLFPACK 13.0.0 Scripts                    |
+|  ((    _/{  "-;  | Created by: DarkStorm                      |
+|   )).-' {{ ;'`   | Revised by: White Wolf                     |
+|  ( (  ;._ \\ ctr | Last Modification: 12/16/02                |
+=================================================================
+-->
+<definitions>
+
+	<!-- A spinner vendor -->
+	<npc id="spinner_male">
+		<inherit>vendor_male</inherit>
+		<title>the Spinner</title>
+		<shopkeeper>
+			<restockable>
+			</restockable>
+			<sellable>
+			</sellable>
+		</shopkeeper>
+		<category>Vendors\Spinner (Male)</category>
+	</npc>
+	
+	<npc id="spinner_female">
+		<inherit>vendor_female</inherit>
+		<title>the Spinner</title>
+		<shopkeeper>
+			<restockable>
+			</restockable>
+			<sellable>
+			</sellable>
+		</shopkeeper>
+		<category>Vendors\Spinner (Female)</category>
+	</npc>
+
+</definitions>

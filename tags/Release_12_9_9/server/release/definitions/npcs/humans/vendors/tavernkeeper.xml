@@ -1,0 +1,46 @@
+<!--
+=================================================================
+|   )      (\_     | WOLFPACK 13.0.0 Scripts                    |
+|  ((    _/{  "-;  | Created by: DarkStorm                      |
+|   )).-' {{ ;'`   | Revised by: White Wolf                     |
+|  ( (  ;._ \\ ctr | Last Modification: 12/16/02                |
+=================================================================
+-->
+<definitions>
+
+	<!-- A tavernkeeper vendor -->
+	<npc id="tavernkeeper_male">
+		<inherit>vendor_male</inherit>
+		<title>the Tavernkeeper</title>
+		<equipped>
+			<item id="153b" > <!-- Half Apron -->
+				<color><random list="COLORS_MISC" /></color>
+			</item>
+		</equipped>
+		<shopkeeper>
+			<restockable>
+			</restockable>
+			<sellable>
+			</sellable>
+		</shopkeeper>
+		<category>Vendors\Tavernkeeper (Male)</category>
+	</npc>
+	
+	<npc id="tavernkeeper_female">
+		<inherit>vendor_female</inherit>
+		<title>the Tavernkeeper</title>
+		<equipped>
+			<item id="153b" > <!-- Half Apron -->
+				<color><random list="COLORS_MISC" /></color>
+			</item>
+		</equipped>
+		<shopkeeper>
+			<restockable>
+			</restockable>
+			<sellable>
+			</sellable>
+		</shopkeeper>
+		<category>Vendors\Tavernkeeper (Female)</category>
+	</npc>
+
+</definitions>

@@ -1,0 +1,33 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Hatchet -->
+	<item id="f43">
+		<id>0xf43</id>
+		<twohanded />
+		<decay />
+		<nodye />
+		<sellprice>18</sellprice>
+		<buyprice>36</buyprice>
+		<durability><random min="30" max="46" /></durability>
+		<weight>4.0</weight>
+		<tag name="resname" value="iron" />
+		<basescripts>equipment,blades</basescripts>
+		<category>Weapons\Axes\Hatchet (N/S)</category>
+		<type>1002</type>
+	</item>
+
+	<item id="f44" inherit="f43">
+		<id>0xf44</id>
+		<baseid>f43</baseid>
+		<category>Weapons\Axes\Hatchet (E/W)</category>
+	</item>
+
+</definitions>

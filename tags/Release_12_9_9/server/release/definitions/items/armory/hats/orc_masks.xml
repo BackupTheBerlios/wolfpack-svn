@@ -1,0 +1,30 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Orc Mask 1 n/s -->
+	<item id="141b">
+		<id>0x141b</id>
+		<durability><random min="20" max="25" /></durability>
+		<category>Clothes\Headwear\Orc Mask (N/S)</category>
+		<category>Armor\Headwear\Orc Mask (N/S)</category>
+		<weight>4.0</weight>
+		<type>1009</type>
+		<basescripts>equipment</basescripts>
+	</item>
+
+	<!-- Orc Mask 1 w/e -->
+	<item id="141c" inherit="141b">
+		<id>0x141c</id>
+		<baseid>141b</baseid>
+		<category>Clothes\Headwear\Orc Mask (W/E)</category>
+		<category>Armor\Headwear\Orc Mask (W/E)</category>
+	</item>
+
+</definitions>

@@ -1,0 +1,34 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Ring Leggings -->
+	<item id="13f0">
+		<id>0x13f0</id>
+		<decay />
+		<nodye />
+		<durability><random min="40" max="50" /></durability>
+		<tag name="resname" value="iron" />
+		<restock>10</restock>
+		<smelt>13</smelt>
+		<weight>15</weight>
+		<buyprice>147</buyprice>
+		<sellprice>73</sellprice>
+		<type>1009</type>
+		<basescripts>equipment</basescripts>
+		<category>Armor\Base\Ringmail\Leggings (N/S)</category>
+	</item>
+
+	<item id="13f1" inherit="13f0">
+		<id>0x13f1</id>
+		<baseid>13f0</baseid>
+		<category>Armor\Base\Ringmail\Leggings (E/W)</category>
+	</item>
+
+</definitions>

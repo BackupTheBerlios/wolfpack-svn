@@ -1,0 +1,33 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Leather Bustier -->
+	<item id="1c0a">
+		<id>0x1c0a</id>
+		<decay />
+		<nodye />
+		<durability><random min="30" max="40" /></durability>
+		<tag name="resname" value="leather" />
+		<restock>10</restock>
+		<weight>2.0</weight>
+		<buyprice>97</buyprice>
+		<sellprice>48</sellprice>
+		<type>1009</type>
+		<basescripts>equipment</basescripts>
+		<category>Armor\Base\Leather\Bustier (N/S)</category>
+	</item>
+
+	<item id="1c0b" inherit="1c0a">
+		<id>0x1c0b</id>
+		<baseid>1c0a</baseid>
+		<category>Armor\Base\Leather\Bustier (E/W)</category>
+	</item>
+
+ </definitions>

@@ -1,0 +1,34 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Cross Bow left -->
+	<item id="f4f">
+		<bindmenu id="item_menu"/>
+		<id>0xf4f</id>
+		<twohanded />
+		<decay />
+		<nodye />
+		<sellprice>23</sellprice>
+		<buyprice>46</buyprice>
+		<tag name="range" value="12" type="int" />
+		<durability><random min="30" max="51" /></durability>
+		<weight>7.0</weight>
+		<basescripts>equipment</basescripts>
+		<type>1007</type>
+		<category>Weapons\Bows\Crossbow (N/S)</category>
+	</item>
+
+	<item id="f50" inherit="f4f">
+		<id>0xf50</id>
+		<baseid>f4f</baseid>
+		<category>Weapons\Bows\Crossbow (E/W)</category>
+	</item>
+
+</definitions>

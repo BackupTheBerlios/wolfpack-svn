@@ -1,0 +1,37 @@
+<!--
+=================================================================
+|   )      (\_     | WOLFPACK 13.0.0 Scripts                    |
+|  ((    _/{  "-;  | Created by: DarkStorm                      |
+|   )).-' {{ ;'`   | Revised by: White Wolf                     |
+|  ( (  ;._ \\ ctr | Last Modification: 12/16/02                |
+=================================================================
+-->
+<definitions>
+
+	<!-- A tinker vendor -->
+	<npc id="tinker_male">
+		<inherit>vendor_male</inherit>
+		<title>the Tinker</title>
+		<shopkeeper>
+			<restockable/>
+		</shopkeeper>
+		<lockpicking><random min="600" max="830"/></lockpicking>
+		<removetraps><random min="750" max="980"/></removetraps>
+		<tinkering><random min="640" max="1000"/></tinkering>
+		<category>Vendors\Tinker (Male)</category>
+	</npc>
+	
+	<!-- A tinker vendor -->
+	<npc id="tinker_female">
+		<inherit>vendor_female</inherit>
+		<title>the Tinker</title>
+		<shopkeeper>
+			<restockable/>
+		</shopkeeper>
+		<lockpicking><random min="600" max="830"/></lockpicking>
+		<removetraps><random min="750" max="980"/></removetraps>
+		<tinkering><random min="640" max="1000"/></tinkering>
+		<category>Vendors\Tinker (Female)</category>
+	</npc>
+
+</definitions>

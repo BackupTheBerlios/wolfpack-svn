@@ -1,0 +1,33 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+ <definitions>
+
+	<!-- Bone Leggings North-South -->
+	<item id="1452">
+		<id>0x1452</id>
+		<decay />
+		<nodye />
+		<durability><random min="25" max="30" /></durability>
+		<tag name="resname" value="leather" />
+		<restock>10</restock>
+		<weight>3</weight>
+		<value>0</value>
+		<type>1009</type>
+		<basescripts>equipment</basescripts>
+		<category>Armor\Base\Bone\Leggings (N/S)</category>
+	</item>
+
+	<!-- Bone Leggings East-West -->
+	<item id="1457" inherit="1452">
+		<id>0x1457</id>
+		<baseid>1452</baseid>
+		<category>Armor\Base\Bone\Leggings (E/W)</category>
+	</item>
+
+</definitions>
