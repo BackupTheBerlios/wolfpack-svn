@@ -6011,7 +6011,10 @@ void setcharflag(P_CHAR pc)// repsys ...Ripper
 			case 7: // order guard
 			case 8: // banker
 			case 9: // town guard
+			case 11: // good npcs
 			case 17: // player vendor
+			case 18: // escort npcs
+			case 19: // real estate brokers
 				pc->setInnocent();
 				break;
 			default:
@@ -6020,14 +6023,14 @@ void setcharflag(P_CHAR pc)// repsys ...Ripper
 					pc->setInnocent();
 					return;
 				}
-				if (SrvParams->animals_guarded() == 1 && pc->npcaitype == 0 && !pc->tamed)
+				if (SrvParams->animals_guarded() == 1 && pc->npcaitype == 0 && !pc->isHuman() && !pc->tamed)
 				{
 					if (pc->inGuardedArea())	// in a guarded region, with guarded animals, animals == blue
 						pc->setInnocent();
 					else				// if the region's not guarded, they're gray
 						pc->setCriminal();
 				}
-				else if (pc->ownserial>-1 && pc->tamed)
+				else if (pc->ownserial>-1 && !pc->isHuman() && pc->tamed)
 				{
 					P_CHAR pc_owner = FindCharBySerial(pc->ownserial);
 					if (pc_owner != NULL)
