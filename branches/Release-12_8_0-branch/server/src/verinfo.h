@@ -141,7 +141,7 @@ struct wp_version_info
 
 		   verstruct.major_version  = 12;
 		   verstruct.sub_version    = 8;
-		   verstruct.subsub_version = 8; // no subsub
+		   verstruct.subsub_version = 10; // no subsub
 
 		   verstruct.flags    = WPV_RELEASE;
 		   verstruct.derivate = WOLF;
@@ -149,13 +149,13 @@ struct wp_version_info
            vernumber = to_32bitver(verstruct);		   
 		  
 		   /// code for auto generation of verstring, productstring and betareleasestring coming soon (LB) ...
-		   verstring = "12.8.8";  // Wolfpack version 
+		   verstring = "12.8.10";  // Wolfpack version 
 		   productstring = "Wolfpack"; // selfexplainatory, isnt't it :)
 		   betareleasestring = ""; // release status
 
 		   //////////////////////////////////////////////////
 
-		   clientsupportedstring = "3.0.7b";
+		   clientsupportedstring = "3.0.8g";
 
 		   // SUPPORTED_CLIENT is part of the client version control system.
            // this is NOT necassairily the lastest client.
