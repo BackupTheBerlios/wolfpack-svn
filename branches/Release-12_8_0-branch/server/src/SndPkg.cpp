@@ -568,6 +568,17 @@ void backpack(UOXSOCKET s, SERIAL serial) // Send Backpack (with items)
 			 bpopen[6]=0x4C;
 			 break;
 
+		case 0x1A:
+			 if (pCont->id2 == 0xD7) {	// khpae : keg 1AD7
+				 bpopen[6]=0x3E;
+			 }
+			 break;
+		case 0x19:
+			 if (pCont->id2 == 0x40) {	// khpae : keg 1940
+				 bpopen[6]=0x3E;
+			 }
+			 break;
+
 		default:
 			break;
 

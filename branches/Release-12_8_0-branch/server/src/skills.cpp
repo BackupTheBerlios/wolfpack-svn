@@ -954,10 +954,11 @@ void cSkills::CreatePotion(P_CHAR pc, char type, char sub, P_ITEM pi_mortar)
 	pi_mortar->more2=sub;
 	pi_mortar->morex=pc->skill[ALCHEMY];
 	
-	if (!(getamount(pc, 0x0F0E)>=1))
-	{
-		target(calcSocketFromChar(pc), 0, 1, 0, 109, "Where is an empty bottle for your potion?");
-	}
+//	if (!(getamount(pc, 0x0F0E)>=1))
+//	{
+		// khpae : added keg
+		target(calcSocketFromChar(pc), 0, 1, 0, 109, "Where is an empty bottle / keg for your potion?");
+/*	}
 	else
 	{
 		// Dupois - Added pouring potion sfx Oct 09, 1998
@@ -966,7 +967,7 @@ void cSkills::CreatePotion(P_CHAR pc, char type, char sub, P_ITEM pi_mortar)
 		npcemoteall(pc, (char*)temp,0);
 		delequan(pc, 0x0F0E, 1);
 		Skills->PotionToBottle(pc, pi_mortar);
-	} 
+	} */
 }
 
 /////////////////////////
@@ -992,6 +993,33 @@ void cSkills::BottleTarget(int s)
 			sprintf((char*)temp, "*%s pours the completed potion into a bottle.*", pc_currchar->name.c_str());
 			npcemoteall(pc_currchar, (char*)temp,0);
 			Skills->PotionToBottle(pc_currchar, mortar);
+		}
+	} else if ((pi->id()==0x1AD7) || (pi->id()==0x1940) || (pi->id()==0x0E7F)) {	// khpae : keg stuff
+		P_ITEM mortar = FindItemBySerial(calcserial(addid1[s], addid2[s], addid3[s], addid4[s]));
+		if (mortar == NULL) {
+			return;
+		}
+		if (pi->more3 > 100) {	// charges : max 100
+			sysmessage(s,"This keg full.. try other one.");
+			return;
+		}
+		if (mortar->type == 17) {
+			int ptype = mortar->more1 * 10 + mortar->more2;
+			int ktype = pi->more1 * 10 + pi->more2;
+			if ((pi->more3!=0) && (ptype!=ktype)) {	// only the same kind can be added
+				sysmessage(s,"Not the same kind of potion.. try other one.");
+				return;
+			}
+			sprintf((char*)temp, "*%s pours the completed potion into a keg.*",  pc_currchar->name.c_str());
+			npcemoteall(pc_currchar, (char*)temp,0);
+			if (pi->more3 == 0) {	// new
+				pi->more1 = mortar->more1;
+				pi->more2 = mortar->more2;
+				pi->morex = mortar->morex;
+			}
+			pi->more3 ++;
+			pi->weight += 1;
+			mortar->type = 0;
 		}
 	}
 	else

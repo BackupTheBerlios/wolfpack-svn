@@ -4218,6 +4218,67 @@ void cTargets::MultiTarget(P_CLIENT ps) // If player clicks on something with th
 
 		case 100: Magic->NewCastSpell( s ); break;	// we now have this as our new spell targeting location
 
+		case 104:	// khpae : empty bottle + keg > potion
+			{
+			P_ITEM pkeg = FindItemBySerial (pt->Tserial);
+			if (pkeg == NULL) {
+				printf ("keg not found\n");
+				return;
+			}
+			int bserial = calcserial (addid1[s], addid2[s], addid3[s], addid4[s]);
+			P_ITEM pbottle = FindItemBySerial (bserial);
+			if (pbottle == NULL) {
+				printf ("bottle not found\n");
+				return;
+			}
+			if (pkeg->more3 < 1) {
+				sysmessage (s, "The keg is empty.");
+				printf ("empty keg\n");
+				return;
+			}
+			unsigned char id1, id2;
+			char pn[50];
+			switch ((pkeg->more1) * 10 + pkeg->more2) {
+				case 11: id1=0x0F;id2=0x08;strcpy(pn, "an agility"); break;
+				case 12: id1=0x0F;id2=0x08;strcpy(pn, "a greater agility"); break;
+				case 21: id1=0x0F;id2=0x07;strcpy(pn, "a lesser cure"); break;
+				case 22: id1=0x0F;id2=0x07;strcpy(pn, "a cure"); break;
+				case 23: id1=0x0F;id2=0x07;strcpy(pn, "a greater cure"); break;
+				case 31: id1=0x0F;id2=0x0D;strcpy(pn, "a lesser explosion"); break;
+				case 32: id1=0x0F;id2=0x0D;strcpy(pn, "an explosion"); break;
+				case 33: id1=0x0F;id2=0x0D;strcpy(pn, "a greater explosion"); break;
+				case 41: id1=0x0F;id2=0x0C;strcpy(pn, "a lesser heal"); break;
+				case 42: id1=0x0F;id2=0x0C;strcpy(pn, "a heal"); break;
+				case 43: id1=0x0F;id2=0x0C;strcpy(pn, "a greater heal"); break;
+				case 51: id1=0x0F;id2=0x06;strcpy(pn, "a night sight"); break;
+				case 61: id1=0x0F;id2=0x0A;strcpy(pn, "a lesser poison"); break;
+				case 62: id1=0x0F;id2=0x0A;strcpy(pn, "a poison"); break;
+				case 63: id1=0x0F;id2=0x0A;strcpy(pn, "a greater poison"); break;
+				case 64: id1=0x0F;id2=0x0A;strcpy(pn, "a deadly poison"); break;
+				case 71: id1=0x0F;id2=0x0B;strcpy(pn, "a refresh"); break;
+				case 72: id1=0x0F;id2=0x0B;strcpy(pn, "a total refreshment"); break;
+				case 81: id1=0x0F;id2=0x09;strcpy(pn, "a strength"); break;
+				case 82: id1=0x0F;id2=0x09;strcpy(pn, "a greater strength"); break;
+				default:
+							printf ("more value error while making potion..\n");
+							return;
+			}
+			P_ITEM ppotion = Items->SpawnItem(s, currchar[s], 1,"#",0, id1, id2,0,1,0);
+			if (ppotion == NULL) {
+				printf ("Error while making potion..\n");
+				return;
+			}
+			pbottle->ReduceAmount (1);
+			ppotion->name = string(pn) + string(" potion");
+			ppotion->type=19;
+			ppotion->morex = pkeg->morex;
+			ppotion->morey = pkeg->more1;
+			ppotion->morez = pkeg->more2;
+			pkeg->more3 --;
+			pkeg->weight --;
+			RefreshItem (ppotion);
+			}
+			break;
 		case 105: Targ->xSpecialBankTarget(s); break;//AntiChrist
 		case 106: Targ->NpcAITarget(s); break;
 		case 107: Targ->xBankTarget(s); break;

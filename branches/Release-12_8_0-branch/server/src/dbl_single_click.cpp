@@ -1313,7 +1313,9 @@ void doubleclick(int s) // Completely redone by Morrolan 07.20.99
 						addid2[s] = static_cast<unsigned char>((pi->serial&0x00FF0000)>>16);
 						addid3[s] = static_cast<unsigned char>((pi->serial&0x0000FF00)>>8);
 						addid4[s] = static_cast<unsigned char>((pi->serial&0x000000FF));
-						target(s, 0, 1, 0, 109, "Where is an empty bottle for your potion?");
+						// khpae : add keg
+						//target(s, 0, 1, 0, 109, "Where is an empty bottle for your potion?");
+						target(s, 0, 1, 0, 109, "Where is an empty bottle/keg for your potion ?");
 					}
 					else
 					{
@@ -1324,6 +1326,14 @@ void doubleclick(int s) // Completely redone by Morrolan 07.20.99
 						target(s, 0, 1, 0, 108, "What do you wish to grind with your mortar and pestle?");
 					}
 					return; // alchemy
+					// khpae : empty bottle + keg
+				case 0x0F0E:	// empty bottle
+					addid1[s] = static_cast<unsigned char>((pi->serial&0xFF000000)>>24);
+					addid2[s] = static_cast<unsigned char>((pi->serial&0x00FF0000)>>16);
+					addid3[s] = static_cast<unsigned char>((pi->serial&0x0000FF00)>>8);
+					addid4[s] = static_cast<unsigned char>((pi->serial&0x000000FF));
+					target (s, 0, 1, 0, 104, "Which keg do you wish to pour potion?");
+					return;
 				case 0x0F9E:
 				case 0x0F9F: // scissors
 					target(s, 0, 1, 0, 128, "What cloth should I use these scissors on?");
@@ -1597,6 +1607,83 @@ void singleclick(UOXSOCKET s)
 	}
 	
 	itemmessage(s, (char*)temp, serial);
+	
+	// khpae : keg stuff
+	if ((pi->id()==0x0E7F) || (pi->id()==0x1AD7) || (pi->id()==0x1940)) {
+		wgt = pi->weight;
+		if (pi->more3 > 0) {
+			char temp3[30];
+			switch (pi->more1 * 10 + pi->more2) {
+				case 11:
+					strcpy(temp3, "agility");
+					break;
+				case 12:
+					strcpy (temp3, "greater agility");
+					break;
+				case 21:
+					strcpy (temp3, "lesser cure");
+					break;
+				case 22:
+					strcpy (temp3, "cure");
+					break;
+				case 23:
+					strcpy (temp3, "greater cure");
+					break;
+				case 31:
+					strcpy (temp3, "lesser explosion");
+					break;
+				case 32:
+					strcpy (temp3, "explosion");
+					break;
+				case 33:
+					strcpy (temp3, "greater explosion");
+					break;
+				case 41:
+					strcpy (temp3, "lesser heal");
+					break;
+				case 42:
+					strcpy (temp3, "heal");
+					break;
+				case 43:
+					strcpy (temp3, "greater heal");
+					break;
+				case 51:
+					strcpy (temp3, "nightsight");
+					break;
+				case 61:
+					strcpy (temp3, "lesser poison");
+					break;
+				case 62:
+					strcpy (temp3, "poison");
+					break;
+				case 63:
+					strcpy (temp3, "greater poison");
+					break;
+				case 64:
+					strcpy (temp3, "deadly poison");
+					break;
+				case 71:
+					strcpy (temp3, "refresh");
+					break;
+				case 72:
+					strcpy (temp3, "total refreshment");
+					break;
+				case 81:
+					strcpy (temp3, "strength");
+					break;
+				case 91:
+					strcpy (temp3, "greater strength");
+					break;
+				default:
+					return;
+			}
+			sprintf((char*)temp2, "[%i %s potions, %i stones]", pi->more3, temp3, wgt);
+			itemmessage (s, (char *)temp2, serial);
+		} else {
+			itemmessage(s, "[0 items, 0 stones]", serial);
+		}
+		return;
+	}
 	
 	// Send the item/weight as the last line in case of containers
 	if (pi->type == 1 || pi->type == 63 || pi->type == 65 || pi->type == 87)
