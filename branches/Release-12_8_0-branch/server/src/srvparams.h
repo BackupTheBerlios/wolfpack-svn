@@ -74,6 +74,7 @@ protected:
 	unsigned int statsAdvanceModifier_;
 	unsigned short objectDelay_;
 	unsigned char bgSound_;
+	unsigned int guardsInvul_;
 	bool stealing_;
 	bool guardsActive_;
 	bool partMsg_;
@@ -236,6 +237,7 @@ public:
 	unsigned char commandPrefix() const;
 	unsigned int skillAdvanceModifier() const;
 	unsigned int statsAdvanceModifier() const;
+	unsigned int guardsInvul() const;
 	bool stealingEnabled() const;
 	bool guardsActive() const;
 	void guardsActive(bool);
@@ -1091,6 +1093,11 @@ inline unsigned int cSrvParams::showNpcTitles() const
 inline unsigned int cSrvParams::shopInvul() const
 {
 	return shopInvul_;
+}
+
+inline unsigned int cSrvParams::guardsInvul() const
+{
+	return guardsInvul_;
 }
 
 #endif //__SRVPARAMS_H___

@@ -102,6 +102,7 @@ void cSrvParams::readData()
 	bgSound_				= getNumber("General",	"BackGround Sound Chance", 2, true);
 	stealing_				= getBool("General",	"Stealing Enabled",	true, true);			
 	guardsActive_			= getBool("General",	"Guards Enabled",	true, true);
+	guardsInvul_            = getNumber("General",	"Guards Invul", 0, true);
 	partMsg_				= getBool("General",	"PartMessage",		true, true);
 	joinMsg_				= getBool("General",	"JoinMessage",		true, true);
 	saveSpawns_				= getBool("General",	"Save Spawned Regions", true, true);

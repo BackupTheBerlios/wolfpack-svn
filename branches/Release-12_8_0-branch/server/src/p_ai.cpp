@@ -258,6 +258,13 @@ void cCharStuff::CheckAI(unsigned int currenttime, P_CHAR pc_i) // Lag Fix -- Zi
 				&& pc_i->inGuardedArea())	// this region is guarded
 			{	// this bracket just to keep compiler happy
 
+				if (SrvParams->guardsInvul() == 1)
+				{
+				    pc_i->makeInvulnerable();
+				}else{
+				    pc_i->makeVulnerable();
+				}
+
 				P_CHAR Victim = NULL;
 				UI32 minDist;
 
@@ -363,6 +370,13 @@ void cCharStuff::CheckAI(unsigned int currenttime, P_CHAR pc_i) // Lag Fix -- Zi
 			if (!pc_i->war	// guard isnt busy 
 				&& pc_i->inGuardedArea())	// this region is guarded
 			{	// this bracket just to keep compiler happy
+
+				if (SrvParams->guardsInvul() == 1)
+				{
+				    pc_i->makeInvulnerable();
+				}else{
+				    pc_i->makeVulnerable();
+				}
 
 				P_CHAR Victim = NULL;
 				UI32 minDist;
