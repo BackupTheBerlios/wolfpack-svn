@@ -261,6 +261,53 @@ void cGump::Button(int s, int button, SERIAL serial, char type)
 			}
 			break;
 		}
+	case 7:	// khpae : runebook
+		if ((button<1) || (button>64)) {
+			break;
+		}
+		if ((button<17) && (button>0)) { // insert rune
+			sysmessage (s, "not implemented yet. just drag and drop a rune on the runebook.");
+		} else {
+			vector<SERIAL> runes = contsp.getData (serial); 
+			int bt = (button-1) % 16;
+			if (runes.size () <= bt) {
+				sysmessage (s, "there's no rune..");
+				break;
+			}
+			P_ITEM irune = FindItemBySerial (runes[bt]);
+			if (irune == NULL) {
+				sysmessage (s, "no such rune..");
+				break;
+			}
+			if ((button<33) && (button>16)) {   // remove rune
+				removeRuneFromRunebook (s, serial, runes[bt]);
+			} else if ((button<49) && (button>32)) {  // recall
+				if (Magic->CheckReagents (pc_currchar, 32) != 1) { // check reagents
+					sysmessage (s, "You don't have enough reagents.");
+					break;
+				} else if (!Magic->CheckMana (pc_currchar, 32)) {  // check mana
+					break;
+				}
+				Magic->DelReagents (pc_currchar, 32);  // remove reagents
+				Magic->SubtractMana (pc_currchar, 32); // subtract mana
+				LongToCharPtr (runes[bt], &buffer[s][7]);
+				Magic->Recall (s);
+			} else if ((button<65) && (button>48)) {  // gate
+				if (Magic->CheckReagents (pc_currchar, 52) != 1) {
+					sysmessage (s, "You don't have enough reagents.");
+					break;
+				} else if (!Magic->CheckMana (pc_currchar, 52)) {
+					break;
+				}
+				Magic->DelReagents (pc_currchar, 52);
+				Magic->SubtractMana (pc_currchar, 52);
+				LongToCharPtr (runes[bt], &buffer[s][7]);
+				Magic->Gate (s);
+			}
+		}
+		break;
+	default:
+		break;
 	}
 }
 
@@ -1684,4 +1731,152 @@ void cGump::Open(int s, P_CHAR pc, int num1, int num2)
 	shopgumpopen[5]=num1;
 	shopgumpopen[6]=num2;
 	Xsend(s, shopgumpopen, 7);
+}
+
+// khpae : open runebook
+void cGump::RuneBook(int s, P_ITEM rBook)
+{
+	static char menuarray[300][50];
+	static char menuarray1[30][50];
+
+	if (rBook == NULL) {
+		return;
+	}
+
+	int linecount = 0;
+	int linecount1 = 0;
+	int linenum = 0;
+	strcpy (menuarray[linecount++], "page 0");
+	strcpy (menuarray[linecount++], "gumppic 100 10 2200");
+
+	int i;
+	int posx, posy;
+	strcpy (menuarray[linecount++], "page 1");
+	for(i=0; i<16; i++) {
+		posx = 125 + (i/8) * 155;
+		posy = 30 + (i%8) * 20;
+		sprintf (menuarray[linecount++], "button %i %i 2103 2104 1 0 %i", posx, posy, i+1);	// insert rune
+		sprintf (menuarray[linecount++], "button %i %i 2103 2104 1 0 %i", posx+15, posy, i+17);	// remove rune
+		sprintf (menuarray[linecount++], "text %i %i 0 %i", posx+30, posy-5, linenum++);	// rune name
+		sprintf (menuarray[linecount++], "button %i %i 2103 2104 1 0 %i", posx+120, posy, i+33);	// recall
+		sprintf (menuarray[linecount++], "button %i %i 2103 2104 1 0 %i", posx+135, posy, i+49);	// gate
+	}
+
+	// get rune names
+	P_ITEM pi;
+	vector<SERIAL> vecCont = contsp.getData (rBook->serial);
+	for(i=0; i<16; i++) {
+		if (vecCont.size () > i) {
+			pi = FindItemBySerial (vecCont[i]);
+			if (pi != NULL) {
+				strcpy (menuarray1[linecount1++], pi->name.c_str ());
+			} else {
+				strcpy (menuarray1[linecount1++], "Empty");
+			}
+		} else {
+			strcpy (menuarray1[linecount1++], "Empty");
+		}
+	}
+
+	// bottom line text
+	sprintf (menuarray[linecount++], "text 130 190 0 %i", linenum++);
+	strcpy (menuarray1[linecount1++], "Insert  Remove                Recall  Gate");
+	sprintf (menuarray[linecount++], "text 130 178 0 %i", linenum++);
+	strcpy (menuarray1[linecount1++], "| +-----+                       +-----+ |");
+
+	int length = 21;
+	int length2 = 1;
+
+	for (i=0; i<linecount; i++) {
+		if (strlen (menuarray[i])==0) {
+			break;
+		}
+		length += strlen (menuarray[i])+4; // { str } : 2 + strlen + 2
+		length2 += strlen (menuarray[i])+4;
+	}
+
+	length += 3;	// num of lines
+
+	for(i=0; i<linecount1; i++) {
+		if (strlen (menuarray1[i]) == 0) {
+			break;
+		}
+		length += strlen (menuarray1[i]) * 2 + 2; // len + word(str)
+	}
+
+	// header
+	// total size
+	gump1[1]=length>>8;
+	gump1[2]=length%256;
+	P_CHAR pc = currchar[s];
+	if (pc == NULL) {
+		return;
+	}
+	LongToCharPtr (rBook->serial, &gump1[3]);
+	gump1[7]=0;
+	gump1[8]=0;
+	gump1[9]=0;
+	gump1[10]=0x07;
+	// layout size
+	gump1[19]=length2>>8;
+	gump1[20]=length2%256;
+	Xsend(s, gump1, 21);
+
+	// layout
+	char sect[80];
+	for(i=0; i<linecount; i++) {
+		sprintf (sect, "{ %s }", menuarray[i]);
+		Xsend (s, sect, strlen (sect));
+	}
+
+	// num of lines
+	gump2[1]=linecount1>>8;
+	gump2[2]=linecount1%256;
+	Xsend(s, gump2, 3);
+
+	// send text : convert to word data
+	int j;
+	for(i=0; i<linecount1; i++) {
+		if (strlen(menuarray1[i])==0) {
+			break;
+		}
+		gump3[0] = (strlen (menuarray1[i]))>>8;
+		gump3[1] = (strlen (menuarray1[i]))%256;
+		Xsend (s, gump3, 2);
+		gump3[0] = 0;
+		for (j=0; j<strlen (menuarray1[i]); j++) {
+			gump3[1] = menuarray1[i][j];
+			Xsend (s, gump3, 2);
+		}
+	}
+}
+
+void cGump::removeRuneFromRunebook (UOXSOCKET s, SERIAL serial, SERIAL srune) {
+	if ((srune==INVALID_SERIAL) || (serial==INVALID_SERIAL)) {
+		return;
+	}
+	P_CHAR pc = currchar[s];
+	if (pc == NULL) {
+		return;
+	}
+	P_ITEM ipack = Packitem (pc);
+	if (ipack == NULL) {
+		return;
+	}
+	P_ITEM irune = FindItemBySerial (srune);
+	if (irune == NULL) {
+		return;
+	}
+	// remove from contsp
+	if (contsp.find (serial, srune)) {
+		if (!contsp.remove (serial, srune)) {
+		}
+	} else {
+		sysmessage (s, "no rune there.");
+		return;
+	}
+	// add to backpack
+	irune->SetContSerial (ipack->serial);
+	irune->SetRandPosInCont (ipack);
+	RefreshItem (irune);
 }

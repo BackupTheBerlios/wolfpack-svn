@@ -290,6 +290,10 @@ void doubleclick(int s) // Completely redone by Morrolan 07.20.99
 	}	
 	switch (pi->type)
 	{
+		// khpae : runebook
+		case 20:
+			Gumps->RuneBook (s, pi);
+			return;
 	case 16:
 		// Check for 'resurrect item type' this is the ONLY type one can use if dead.
 		if (pc_currchar->dead)

@@ -1146,6 +1146,18 @@ void pack_item(P_CLIENT ps, PKGx08 *pp) // Item is put into container
 		return;
 	}
 
+	// khpae : drop a rune on a runebook
+	if ((pItem->type==50) && (pCont->type==20)) {
+		if ((pItem->morex<=200) && (pItem->morey<=200)) {
+			sysmessage (s, "That rune has not been marked yet!");
+			item_bounce6 (ps, pItem);
+			RefreshItem (pItem);
+		} else {
+			pItem->SetContSerial (pCont->serial);
+		}
+		return;
+	}
+	// khpae : runebook end
 	// khpae : drop map on tiller man
 	if ((pItem->type==10) && (pCont->type==117) && (pCont->type2==1)) {
 		// bounced after the tiller man read map ;-)
