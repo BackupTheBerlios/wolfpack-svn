@@ -149,7 +149,7 @@ void cSrvParams::readData()
 	beggingRange_           = getNumber("General",  "Begging Range", 3, true);
 	worldSaveModule_		= getString("General",  "WorldSave Module", "binary", true);
 	clientsAllowed_			= QStringList::split(",", getString("General", "Allowed Clients", "SERVER_DEFAULT", true).upper());
-	uoTime.fromString( QString::number(FIRST_YEAR) + "-" + getString("General", "Initial Date/Time", "01-18T00:00:00", true), Qt::ISODate);
+	uoTime = uoTime.fromString( QString::number(FIRST_YEAR) + "-" + getString("General", "Initial Date/Time", "01-01T01:00:00", true), Qt::ISODate);
 
 	// Combat
 	combatHitMessage_		= getBool("Combat", "Hit Message", true, true );

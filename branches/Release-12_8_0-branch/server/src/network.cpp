@@ -107,7 +107,6 @@ void cNetworkStuff::DoStreamCode(UOXSOCKET s)
 }
 
 
-
 void cNetworkStuff::FlushBuffer(int s) // Sends buffered data at once
 {
 	int status ;
@@ -777,7 +776,7 @@ int cNetworkStuff::Receive(int s, int x, int a) // Old socket receive function (
 			return count == 0 ? -1 : count;
 		}
 	}
-	while ( x > 0 && ( timeHere + 20*MY_CLOCKS_PER_SEC ) > getNormalizedTime() );
+	while ( x > 0 && ( timeHere + 5*MY_CLOCKS_PER_SEC ) > getNormalizedTime() );
 
 	return count;
 }
