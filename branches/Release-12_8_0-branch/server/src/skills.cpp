@@ -1054,7 +1054,7 @@ void cSkills::PotionToBottle(P_CHAR pc, P_ITEM pi_mortar)
 		if (pc->skill[ALCHEMY]>950) pi_potion->madewith=ALCHEMY+1; // Memorize Skill used - Magius(CHE)
 		else pi_potion->madewith=0-ALCHEMY-1; // Memorize Skill used - Magius(CHE)
 	} else {
-		pi_potion->creator[0]='\0';
+		pi_potion->creator.erase();
 		pi_potion->madewith=0;
 	}
 	

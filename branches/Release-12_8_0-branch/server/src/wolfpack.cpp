@@ -4186,35 +4186,20 @@ void usepotion(P_CHAR pc_p, P_ITEM pi)//Reprogrammed by AntiChrist
 	soundeffect2(pc_p, 0x0030);
 	if (pc_p->id1>=1 && pc_p->id2>90 && pc_p->onhorse==0)
 		npcaction( pc_p, 0x22);
-	//empty bottle after drinking - Tauriel
-	if (pi->amount!=1)
-	{
-		pi->amount--;
-	}
-	//empty bottle after drinking - Tauriel
-	pi->SetContSerial(-1);
-	if (pi->morey!=3)
-	{
-		int lsd = pi->morey; // save morey before overwritten
-		int kser = pi->serial;
 
-		pi->Init(0);
-		pi->SetSerial(kser);
-		pi->setId(0x0F0E);
-
-		if (lsd==10) // empty Lsd potions
+	//empty bottle after drinking
+	if (pi->morey!=3)	// not for explosion potions ;)
+	{
+		P_ITEM Bottle = Items->SpawnItem(pc_p,1,"#",1,0x0F0E,0,1);
+		if (pi->morey==10)
 		{
-			pi->setId(0x183d);
+			Bottle->morey=10;
+			Bottle->setId(0x183d); // empty Lsd potions
+			RefreshItem(Bottle);
 		}
-		pi->pileable = true;
-		pi->moveTo(pc_p->pos);
-		pi->priv|=0x01;
 	}
-	else
-	{
-		Items->DeleItem(pi);
-	}
-	RefreshItem(pi);// AntiChrist
+	pi->ReduceAmount(1);
+	RefreshItem(pi);
 	// end empty bottle change
 #if 0
 	}
