@@ -437,7 +437,7 @@ void cAsyncNetIO::run() throw()
 						d->consumeReadBuf( 4, temp );
 						d->skippedUOHeader = true;
 						
-						wpCopyIn( d->seed, tmp );
+						wpCopyIn( d->seed, temp );
 						d->seed = B_BENDIAN_TO_HOST_INT32( d->seed );
 						//d->seed = ( ( temp[0] & 0xFF ) << 24 ) | ( ( temp[1] & 0xFF ) << 16 ) | ( ( temp[2] & 0xFF ) << 8 ) | ( ( temp[3] & 0xFF ) );
 
@@ -686,9 +686,10 @@ void cAsyncNetIO::flushWriteBuffer( cAsyncNetIOPrivate* d )
 
 	// Encrypt new packets
 	QByteArray *p = d->wba.first();
-	while (p) {
-     		// Encrypt the outgoing buffer
-                if ( d->encryption )
+	while (p) 
+	{
+    	// Encrypt the outgoing buffer
+        if ( d->encryption )
 			d->encryption->serverEncrypt( p->data(), p->size() );
 		d->ewba.append(p);
 		p = d->wba.next();
@@ -701,9 +702,8 @@ void cAsyncNetIO::flushWriteBuffer( cAsyncNetIOPrivate* d )
 	{
 		QByteArray* a = d->ewba.first();
 
-		if (!a) {
+		if ( !a )
 			break;
-		}
 
 		int nwritten;
 		int i = 0;
@@ -771,7 +771,7 @@ cUOPacket* cAsyncNetIO::recvPacket( QSocketDevice* socket )
 }
 
 /*
-	Requeues a packet to the front of the queue for a socket.
+	Re-queues a packet to the front of the queue for a socket.
 */
 void cAsyncNetIO::pushfrontPacket( QSocketDevice* socket, cUOPacket* packet )
 {
