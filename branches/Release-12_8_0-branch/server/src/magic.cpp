@@ -2187,7 +2187,7 @@ void cMagic::NewCastSpell( UOXSOCKET s )
 							if (item_selected) { sysmessage(s, "You can't teleport there.");  return; }
 							
 							P_ITEM pi_multi = findmulti( Coord_cl(x, y, z) );
-							if( pi_multi == NULL )
+							if( pi_multi != NULL )	// khpae bugfix
 							{
 								sysmessage( s, "You can't teleport here!" );
 								return;
