@@ -1519,7 +1519,7 @@ bool cMagic::newSelectSpell2Cast( UOXSOCKET s, int num)
 		for ( ci = 0; ci < vecContainer.size(); ci++)
 		{
 			pj = FindItemBySerial(vecContainer[ci]);
-			if (type!=2 && (pj->layer==2||(pj->layer==1 && pj->type!=9 )))
+			if (type != 2 && pj && ( pj->layer == 2 || (pj->layer == 1 && pj->type != 9 )))
 			{
 				if (!(pj->id()==0x13F9 || pj->id()==0x0E8A || pj->id()==0x0DF0 || pj->id()==0x0DF2
 					|| IsChaosOrOrderShield(pj->id()) ))
