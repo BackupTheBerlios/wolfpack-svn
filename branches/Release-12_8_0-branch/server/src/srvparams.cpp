@@ -212,6 +212,7 @@ void cSrvParams::readData()
 	worldFixedLevel_		= getNumber("Light", "World Fixed Level", 0, true);
 	worldDarkLevel_			= getNumber("Light", "World Dark Level", 18, true);
 	dungeonLightLevel_		= getNumber("Light", "Dungeon Level", 18, true);
+	season_		            = getNumber("Light", "Set Season", 0, true);
 }
 
 void cSrvParams::reload()
