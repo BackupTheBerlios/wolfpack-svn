@@ -1389,7 +1389,7 @@ int cSkills::GetCombatSkill(P_CHAR pc)
 	for ( ci = 0; ci < vecContainer.size(); ci++)
 	{
 		pi = FindItemBySerial(vecContainer[ci]);
-		if (pi->layer==1 || pi->layer==2)
+		if (pi && pi->layer==1 || pi->layer==2)
 		{
 			if (IsSwordType(pi->id()) )
 			{

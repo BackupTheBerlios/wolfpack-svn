@@ -2762,6 +2762,9 @@ void cTargets::FollowTarget(int s)
 	P_CHAR char1 = FindCharBySerial(addx[s]);
 	P_CHAR char2 = FindCharBySerial(calcserial(buffer[s][7], buffer[s][8], buffer[s][9], buffer[s][10]));
 
+	if ( !(char1 && char2) ) // They were not found, could be bad formed packet.
+		return;
+
 	char1->ftarg = char2->serial;
 	char1->npcWander = 1;
 }
@@ -2772,7 +2775,7 @@ void cTargets::TransferTarget(int s)
 
 	P_CHAR pc1 = FindCharBySerial(addx[s]);
 	P_CHAR pc2 = FindCharBySerial(calcserial(buffer[s][7], buffer[s][8], buffer[s][9], buffer[s][10]));
-	if ( pc1 == NULL || pc2 == NULL)
+	if ( !( pc1 && pc2 ) ) // They were not found, could be bad formed packet.
 		return;
 
 	sprintf(t,"* %s will now take %s as his master *",pc1->name.c_str(), pc2->name.c_str());
@@ -2792,12 +2795,14 @@ void cTargets::BuyShopTarget(int s)
 	SERIAL serial = LongFromCharPtr(buffer[s]+7);
 	P_CHAR pc = FindCharBySerial(serial);
 	if (pc != NULL)
+	{
 		if ((pc->serial==serial))
 		{
 			Targ->BuyShop(s, pc);
 			return;
 		}
 		sysmessage(s, "Target shopkeeper not found...");
+	}
 }
 
 int cTargets::BuyShop(UOXSOCKET s, P_CHAR pc)

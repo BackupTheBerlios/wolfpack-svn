@@ -213,7 +213,7 @@ int inrange2 (UOXSOCKET s, P_ITEM pi) // Is item i in visual range for player on
 	
 	P_CHAR pc_currchar = currchar[s];
 	int vr=VISRANGE;
-	if (pi == NULL) // blackwind Crash fix
+	if ( !(pi && pc_currchar) )
 		return 0;
 
 	if (pi->id1==0x40 &&(pi->id2>=0x7C && pi->id2<=0x7F))	// a large house ??
@@ -1090,10 +1090,10 @@ void deathstuff(P_CHAR pc_player)
 	unsigned int ci=0;
 	P_ITEM pi_j;
 	vector<SERIAL> vecContainer(contsp.getData(pc_player->serial));
-	for ( ci = 0; ci < vecContainer.size(); ci++)
+	for ( ci = 0; ci < vecContainer.size(); ++ci)
 	{
 		pi_j = FindItemBySerial(vecContainer[ci]);
-		if (pi_j->type==1 && pi_j->pos.x==26 && pi_j->pos.y==0 &&
+		if (pi_j && pi_j->type==1 && pi_j->pos.x==26 && pi_j->pos.y==0 &&
 			pi_j->pos.z==0 && pi_j->id()==0x1E5E )
 		{
 			endtrade(pi_j->serial);

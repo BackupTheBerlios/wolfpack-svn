@@ -674,7 +674,7 @@ void backpack(UOXSOCKET s, SERIAL serial) // Send Backpack (with items)
 
 void backpack2(int s, SERIAL serial) // Send corpse stuff
 {
-	int count=0, count2;
+	int count2;
 	unsigned char bpopen2[6]="\x3C\x00\x05\x00\x00";
 	unsigned char display1[8]="\x89\x00\x0D\x40\x01\x02\x03";
 	unsigned char display2[6]="\x01\x40\x01\x02\x03";
@@ -683,58 +683,53 @@ void backpack2(int s, SERIAL serial) // Send corpse stuff
 	register unsigned int ci;
 	P_ITEM pi;
 	vector<SERIAL> vecContainer = contsp.getData(serial);
+	vector<P_ITEM> vecContainerPtr;
+	vecContainerPtr.reserve( vecContainer.size() );
 	for ( ci = 0; ci < vecContainer.size(); ++ci)
 	{
 		pi = FindItemBySerial(vecContainer[ci]);
-		if (pi->layer!=0)
+		if (pi && pi->layer != 0)
 		{
-			++count;
+			vecContainerPtr.push_back(pi);
 		}
 	}
-	count2=(count*5)+7 + 1 ; // 5 bytes per object, 7 for this header and 1 for terminator
+	count2 = (vecContainerPtr.size() * 5) + 7 + 1 ; // 5 bytes per object, 7 for this header and 1 for terminator
 	display1[1]=count2>>8;
 	display1[2]=count2%256;
 	LongToCharPtr(serial, &display1[3]);
 	Xsend(s, display1, 7);
 
-	for ( ci = 0; ci < vecContainer.size(); ++ci)
+	for ( ci = 0; ci < vecContainerPtr.size(); ++ci)
 	{
-		pi = FindItemBySerial(vecContainer[ci]);
-		if (pi->layer!=0)
-		{
-			display2[0]=pi->layer;
-			LongToCharPtr(pi->serial, &display2[1]);
-			Xsend(s, display2, 5);
-		}
+		pi = vecContainerPtr[ci];
+		display2[0] = pi->layer;
+		LongToCharPtr(pi->serial, &display2[1]);
+		Xsend(s, display2, 5);
 	}
 	char nul = 0;
 	Xsend(s, &nul, 1);	// Terminate with a 0
 
-	bpopen2[3]=count>>8;
-	bpopen2[4]=count%256;
-	count2=(count*19)+5;
+	ShortToCharPtr( vecContainerPtr.size(), &bpopen2[3]);
+	count2=(vecContainerPtr.size()*19)+5;
 	bpopen2[1]=count2>>8;
 	bpopen2[2]=count2%256;
 	Xsend(s, bpopen2, 5);
 
-	for ( ci = 0; ci < vecContainer.size(); ++ci)
+	for ( ci = 0; ci < vecContainerPtr.size(); ++ci)
 	{
-		pi = FindItemBySerial(vecContainer[ci]);
-		if (pi->layer!=0)
-		{
-			LongToCharPtr(pi->serial, &bpitem[0]);
-			ShortToCharPtr(pi->id(),bpitem+4);
-			bpitem[7]=pi->amount>>8;
-			bpitem[8]=pi->amount%256;
-			bpitem[9]=pi->pos.x>>8;
-			bpitem[10]=pi->pos.x%256;
-			bpitem[11]=pi->pos.y>>8;
-			bpitem[12]=pi->pos.y%256;
-			LongToCharPtr(serial, &bpitem[13]);
-			ShortToCharPtr(pi->color, &bpitem[17]);
-			bpitem[19]=pi->decaytime=0;// reseting the decaytimer in the backpack	//moroallan
-			Xsend(s, bpitem, 19);
-		}
+		pi = vecContainerPtr[ci];
+		LongToCharPtr(pi->serial, &bpitem[0]);
+		ShortToCharPtr(pi->id(),bpitem+4);
+		bpitem[7]=pi->amount>>8;
+		bpitem[8]=pi->amount%256;
+		bpitem[9]=pi->pos.x>>8;
+		bpitem[10]=pi->pos.x%256;
+		bpitem[11]=pi->pos.y>>8;
+		bpitem[12]=pi->pos.y%256;
+		LongToCharPtr(serial, &bpitem[13]);
+		ShortToCharPtr(pi->color, &bpitem[17]);
+		bpitem[19] = pi->decaytime = 0;// reseting the decaytimer in the backpack	//moroallan
+		Xsend(s, bpitem, 19);
 	}
 }
 
@@ -2519,9 +2514,9 @@ void staticeffect3(UI16 x, UI16 y, SI08 z, unsigned char eff1, unsigned char eff
 	effect[25]=0; // This value is unknown
 	effect[26]=1; // LB changed to 1
 	effect[27]=explode; // This value is used for moving effects that explode on impact.
-	for (j=0;j<now;j++)
+	for ( j = 0; j < now; ++j )
 	{  // if inrange of effect and online send effect
-		if (inVisRange(x, y, currchar[j]->pos.x, currchar[j]->pos.y))
+		if (perm[j] && inVisRange(x, y, currchar[j]->pos.x, currchar[j]->pos.y))
 		{
 			Xsend(j, effect, 28);
 		}

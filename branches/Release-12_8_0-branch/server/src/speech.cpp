@@ -111,7 +111,7 @@ bool InputSpeech(const QString& comm, cChar* pPlayer, UOXSOCKET s)
 				int x = 0;
 				for (i = 0; i < now; i++)
 				{
-					if ((currchar[i]->isGM()) && perm[i])
+					if (perm[i] && (currchar[i]->isGM()) )
 					{
 						x = 1;
 						sysmessage(i, temp);
@@ -131,7 +131,7 @@ bool InputSpeech(const QString& comm, cChar* pPlayer, UOXSOCKET s)
 				int x = 0;
 				for (i = 0; i < now; i++)
 				{
-					if (currchar[i]->isCounselor() && perm[i])
+					if ( perm[i] && currchar[i]->isCounselor() )
 					{
 						x = 1;
 						sysmessage(i, (char*)temp);

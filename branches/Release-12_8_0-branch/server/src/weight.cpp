@@ -169,22 +169,25 @@ float cWeight::LockeddownWeight(P_ITEM pItem, int *total, int *total2 )
 	unsigned int ci = 0;
 	P_ITEM pi;
 	vector<SERIAL> vecContainer = contsp.getData(pItem->serial);
-	for ( ci = 0; ci < vecContainer.size(); ci++)
+	for ( ; ci < vecContainer.size(); ++ci )
 	{
 		pi = FindItemBySerial(vecContainer[ci]);
-		int itemsweight=pi->getWeight();
-		total2=total2+pi->amount;
-		*total=*total+1;
-		if (pi->type==1 || pi->type==63 || pi->type==65 || pi->type==87) //item is another container
+		if ( pi )
 		{
-			totalweight+=(itemsweight/100.0f); //(pi->weight/100);
-			totalweight+=LockeddownWeight(pi, total, total2); //find the item's weight within this container
+			int itemsweight = pi->getWeight();
+			total2=total2+pi->amount;
+			*total=*total+1;
+			if (pi->type==1 || pi->type==63 || pi->type==65 || pi->type==87) //item is another container
+			{
+				totalweight+=(itemsweight/100.0f); //(pi->weight/100);
+				totalweight+=LockeddownWeight(pi, total, total2); //find the item's weight within this container
+			}
+			
+			if ( pi->id() == 0x0EED )
+				totalweight+=(pi->amount*SrvParams->goldWeight());
+			else
+				totalweight+=(float)((itemsweight*pi->amount)/100.0f); //((pi->weight*pi->amount)/100);  // Ison 2-21-99
 		}
-		
-		if ( pi->id() == 0x0EED )
-			totalweight+=(pi->amount*SrvParams->goldWeight());
-		else
-			totalweight+=(float)((itemsweight*pi->amount)/100.0f); //((pi->weight*pi->amount)/100);  // Ison 2-21-99
 	}
 
 	if (*total==0) 

@@ -615,9 +615,9 @@ void cCommands::GMPage(int s, char *reason)
 			QString temp = tr("Page from %1 [%2]: %3").arg(pc_currchar->name.c_str()).arg(pc_currchar->serial, 16).arg(reason);
 			for (i=0;i<now; ++i) 
 			{
-				if (currchar[i]->isGM() && perm[i])
+				if (perm[i] && currchar[i]->isGM() ) // perm should always be checked first.
 				{
-					x=1;
+					x = 1;
 					sysmessage(i, temp);
 				}
 			}
