@@ -1468,6 +1468,10 @@ void teleport(P_CHAR pc) // Teleports character to its current set coordinates
 						{
 							senditem(k, mapitem);
 						}
+						// khpae added for big buildings
+						if ((mapitem->id1==0x40)&&(mapitem->id2>=0x7C)&&(mapitem->id2<=0x7E)&&(abs(pc->pos.x-mapitem->pos.x)<=BUILDRANGE)&&(abs(pc->pos.y-mapitem->pos.y)<=BUILDRANGE)) {
+							senditem (k, mapitem);
+						}
 					}
 				}
 			}

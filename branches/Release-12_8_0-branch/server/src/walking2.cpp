@@ -1307,7 +1307,8 @@ void cMovement::HandleItemCollision(P_CHAR pc, UOXSOCKET socket, bool amTurning)
 						// is the item a building on the BUILDRANGE?
 						if ((mapitem->id1==0x40)&&(mapitem->id2>=0x7C)&&(mapitem->id2<=0x7E))
 						{
-							if ((abs(newx-mapitem->pos.x)==BUILDRANGE)||(abs(newy-mapitem->pos.y)==BUILDRANGE))
+							//if ((abs(newx-mapitem->pos.x)==BUILDRANGE)||(abs(newy-mapitem->pos.y)==BUILDRANGE))
+							if ((abs(newx-mapitem->pos.x)<=BUILDRANGE) && (abs(newy-mapitem->pos.y)<=BUILDRANGE) && ((abs(oldx-mapitem->pos.x)>BUILDRANGE) || (abs(oldy-mapitem->pos.y)>BUILDRANGE)))
 							{
 								senditem(socket, mapitem);
 							}
@@ -1915,7 +1916,8 @@ bool cMovement::CanCharWalk(P_CHAR pc, short int x, short int y, signed char &z)
 
 		// now the new Z-cordinate of creature is known,
 		// check if it hits it's head against something (blocking in other words)
-		for(i = 0; i < xycount; i++)
+		// khpae head block removed
+		/*for(i = 0; i < xycount; i++)
 		{
 			unitile_st *thisblock = &xyblock[i];
 			signed char nItemTop = thisblock->basez + thisblock->height; // Calculate the items total height
@@ -1945,7 +1947,7 @@ bool cMovement::CanCharWalk(P_CHAR pc, short int x, short int y, signed char &z)
     //         such gaps or tunnels in Britannia).
     //         (Well UO isn't ment to really think in 3d)
     // Thyme : He's right... Should be based of character's height.
-		}
+		}*/
 
 		// khpae - cleanup needed
 //		if (blocked)

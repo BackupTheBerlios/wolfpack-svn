@@ -121,7 +121,8 @@ void Writeslot(LPSTR lpszMessage);
 
 #define MAXPAGES 75 // Maximum number of pages in the GM queue
 #define VISRANGE 18 // Visibility for normal items
-#define BUILDRANGE 31 // Visibility for castles and keeps
+// khpae : it seems that 30 is right
+#define BUILDRANGE 30 // 31 // Visibility for castles and keeps
 #define MAP0CACHE 300
 #define PATHNUM 2
 
