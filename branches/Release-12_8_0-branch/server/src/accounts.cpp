@@ -53,7 +53,7 @@ cAccount::~cAccount(void)
 		SaveAccounts();
 }
 
-bool cAccount::findByNumber( int number, account_st* retValue )
+bool cAccount::findByNumber( int number, account_st** retValue )
 {
 	map<int, string>::iterator it = acctnumbers_sp.find( number );
 	if ( it != acctnumbers_sp.end() )
@@ -61,7 +61,7 @@ bool cAccount::findByNumber( int number, account_st* retValue )
 		map<string, account_st>::iterator it2 = acctlist.find( (*it).second );
 		if ( it2 != acctlist.end() )
 		{
-			retValue = &(*it2).second;
+			*retValue = &((*it2).second);
 			return true;
 		}
 	}
@@ -294,10 +294,10 @@ void cAccount::SetOffline( int acctnum )
 
 bool cAccount::ChangePassword(unsigned int number, string password)
 {
-	account_st* account = NULL;
-	if ( findByNumber( number, account ) )
+	account_st* account = 0;
+	if ( findByNumber( number, &account ) )
 	{
-		account->pass = password;
+		account->pass = password.c_str(); //stupid STL bug
 		++unsavedaccounts;
 		if (unsavedaccounts >= saveratio)
 			SaveAccounts();
@@ -309,7 +309,7 @@ bool cAccount::ChangePassword(unsigned int number, string password)
 vector<SERIAL> cAccount::characters( int number )
 {
 	account_st* account = NULL;
-	if ( findByNumber( number, account ) )
+	if ( findByNumber( number, &account ) )
 	{
 		return account->characters;
 	}
@@ -319,7 +319,7 @@ vector<SERIAL> cAccount::characters( int number )
 void cAccount::addCharacter( int number, SERIAL serial )
 {
 	account_st* account = NULL;
-	if ( findByNumber( number, account ) )
+	if ( findByNumber( number, &account ) )
 	{
 		account->characters.push_back( serial );
 	}
@@ -328,7 +328,7 @@ void cAccount::addCharacter( int number, SERIAL serial )
 void cAccount::removeCharacter( int number, SERIAL serial )
 {
 	account_st* account = NULL;
-	if ( findByNumber( number, account ) )
+	if ( findByNumber( number, &account ) )
 	{
 		register unsigned int i;
 		for ( i = 0; i < account->characters.size(); ++i )

@@ -91,7 +91,7 @@ private:
 	unsigned int unsavedaccounts;
 	unsigned int saveratio;
 	void LoadAccount ( int acctnumb );
-	bool findByNumber( int number, account_st* retValue );
+	bool findByNumber( int number, account_st** retValue );
 public:
 	unsigned int lasttimecheck;
 	cAccount( void );
