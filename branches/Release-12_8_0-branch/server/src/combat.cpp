@@ -42,6 +42,8 @@
 #include "guildstones.h"
 #include "combat.h"
 #include "srvparams.h"
+// khpae added for turning stuff
+#include "walking2.h"
 
 #include "debug.h"
 #undef  DBGFILE
@@ -683,6 +685,12 @@ void cCombat::DoCombatAnimations(P_CHAR pc_attacker, P_CHAR pc_defender, int fig
 {
 	short id = pc_attacker->id();
 	int cc,aa;
+	// khpae - turn toward the defender
+	int newdir = chardir (pc_attacker, pc_defender);
+	if (((pc_attacker->dir&0x07) != newdir) && (newdir >= 0)) {
+		Movement->Walking (pc_attacker, newdir, 256);
+	}
+	// khpae - turning end
 	if (id<0x0190)
 	{
 		aa=4+(rand()%3); // bugfix, LB, some creatures dont have animation #4
@@ -966,7 +974,7 @@ int cCombat::CalcDef(P_CHAR pc,int x) // Calculate total defense power
 	{ 
 		if (pShield)
 			total+=(((pc->skill[PARRYING]*pShield->def)/200)+1); // Updated to OSI standars (Skyfire)
-	} 		//Displayed AR = ((Parrying Skill * Base AR of Shield) ÷ 200) + 1
+	} 		//Displayed AR = ((Parrying Skill * Base AR of Shield) ? 200) + 1
 	if (pc->skill[PARRYING]==1000) 
 		total+=5; // gm parry bonus. 
 	if (ishuman(pc)) // Added by Magius(CHE) 
