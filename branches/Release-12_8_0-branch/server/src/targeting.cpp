@@ -2609,8 +2609,12 @@ void cTargets::ReleaseTarget(int s, int c)
 			pc->jailsecs = 0; 
 			pc->jailtimer = 0; 
 			teleport(pc);
-			soundeffect(calcSocketFromChar(pc), 0x01, 0xfd); // Play sound effect for player 
-			sysmessage(calcSocketFromChar(pc), "You are released.."); 
+			UOXSOCKET pc_socket = calcSocketFromChar(pc);
+			if ( pc_socket != INVALID_UOXSOCKET )
+			{
+				soundeffect(pc_socket, 0x01, 0xfd); // Play sound effect for player 
+				sysmessage(pc_socket, "You are released.."); 
+			}
 			sysmessage(s, "Player %s released.", pc->name.c_str());
 		} 
 	} 

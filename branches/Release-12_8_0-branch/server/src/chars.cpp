@@ -930,14 +930,12 @@ void cChar::Serialize(ISerialization &archive)
 		archive.write("trigword",		trigword);
 		archive.write("disablemsg",		disabledmsg);
 		unsigned int j;
-		for (j=0;j<TRUESKILLS;j++)
+		for (j = 0; j < TRUESKILLS; ++j)
 		{
-			char t[256] = {0,};
-			numtostr(j, t);
-			string temp = string("skill") + string(t);
-			archive.write(temp.c_str(), baseskill[j]);
-			temp = string("skl") + string(t);
-			archive.write(temp.c_str(), lockSkill[j] );
+			QString temp = QString("skill") + QString::number(j);
+			archive.write(temp.latin1(), baseskill[j]);
+			temp = QString("skl") + QString::number(j);
+			archive.write(temp.latin1(), lockSkill[j] );
 		}
 		archive.write("cantrain", cantrain);
 		

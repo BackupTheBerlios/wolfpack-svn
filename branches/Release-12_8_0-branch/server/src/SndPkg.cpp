@@ -95,6 +95,9 @@ void soundeffect(int s, unsigned char a, unsigned char b) // Play sound effect f
 {
 	int i;
 	
+	if ( s == INVALID_UOXSOCKET )
+		qWarning("soundeffect() error: invalid socket");
+
 	P_CHAR pc_currchar = currchar[s];
 
 	sfx[2] = a;
