@@ -2609,7 +2609,7 @@ void cTargets::ReleaseTarget(int s, int c)
 			pc->jailsecs = 0; 
 			pc->jailtimer = 0; 
 			teleport(pc); 
-			soundeffect(c, 1, 0xfd); // Play sound effect for player 
+			//soundeffect(c, 1, 0xfd); // Play sound effect for player 
 			sysmessage(c, "You are released.."); 
 			sysmessage(s, "Player %s released.", pc->name.c_str()); 
 		} 

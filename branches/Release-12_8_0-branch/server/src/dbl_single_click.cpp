@@ -885,7 +885,8 @@ void doubleclick(int s) // Completely redone by Morrolan 07.20.99
             else 
 			{ 
 	             sysmessage(s, "Crystall ball shatters.."); 
-	             pi->ReduceAmount(1); 
+	             pi->ReduceAmount(1);
+				 RefreshItem(pi);
 			}
             return;// End jailball
 	    case 402: // Blackwinds Reputation ball 

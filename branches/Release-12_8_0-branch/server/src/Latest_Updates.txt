@@ -19,3 +19,4 @@ example: Berry, The Banker. Option to turn off & on in wolfpack.xml file.
 Show Npc Titles 1 = ON  0 = OFF. (Ripper)
 12) Fixed: house commands should now work :) (Ripper)
 13) Added: Auto furniture turn. (Thanks to UOXc)
+14) Fixed: Crashed when trying to release player from jail. (Ripper)
