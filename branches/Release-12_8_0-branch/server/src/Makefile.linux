@@ -14,7 +14,7 @@ CXXFLAGS=	-funsigned-char -g -D_REENTRANT -DREENTRANT -DZTHREAD_STATIC -DNDEBUG 
 INCPATH	=	-Ilib/ZThread/include -Ilib/wrl/include
 LINK	=	g++
 LFLAGS	=	
-LIBS	=	$(SUBLIBS) -Llib/ZThread/lib -Llib/wrl/lib -lZThread -lwrl -lpthread
+LIBS	=	$(SUBLIBS) -Llib/ZThread/lib -Llib/wrl/lib -lZThread -lwrl -lpthread -ldl
 MOC	=	$(QTDIR)/bin/moc
 UIC	=	$(QTDIR)/bin/uic
 
