@@ -170,7 +170,7 @@ struct wp_version_info
            #else
              compiledbystring = "Wolfpack" ;	// person that compiled windows version
            #endif
-           codersstring = "Correa, DarkStorm, Khpae, punt, Ripper, Sereg"; // Keep in alphabetic order.
+           codersstring = "Wolfpack Developers"; // It was getting too big :)
 
            emailstring = "http://www.wpdev.org/";		  
 	   }
