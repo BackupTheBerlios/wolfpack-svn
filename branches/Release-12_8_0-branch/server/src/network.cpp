@@ -773,7 +773,7 @@ int cNetworkStuff::Receive(int s, int x, int a) // Old socket receive function (
 			//Disconnect(s);
 			return -1;
 		}
-		else if ( temp = 0 ) // gracefull disconnect according to docs.
+		else if ( temp == 0 ) // gracefull disconnect according to docs.
 		{
 			return count == 0 ? -1 : count;
 		}
