@@ -124,6 +124,7 @@ void cNetworkStuff::FlushBuffer(int s) // Sends buffered data at once
 			{
 				LogError("Socket Send Error");
 				clConsole.send("[cNetworkStuff::FlushBuffer], Socket send error\n");
+				client[s]->close();
 			}
 		}
 		boutlength[s] = 0;

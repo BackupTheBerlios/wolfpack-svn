@@ -2752,7 +2752,7 @@ int main(int argc, char *argv[])
 		clConsole.setStreams(NULL, (dynamic_cast<ostream*>(&fconsole)), NULL, NULL);
 	
 	}
-	#if defined(__unix__)
+#if defined(__unix__)
 	// We can use SIGHUP, SIGINT, and SIGWINCH as we should never recive them
 	// So we will use SIGHUP to reload our scripts (kinda a standard for sighup to be reload)
 	// We will use a SIGUSR2 to be world save
@@ -2763,8 +2763,7 @@ int main(int argc, char *argv[])
 	signal(SIGTERM,&signal_handler);
 // we have this here, because convient, but should be set regardless of deamon or not.
 // Keeps a disconnected socket from terminating the server.
-	
-	signal(SIGPIPE,&signal_handler);
+	signal(SIGPIPE, SIG_IGN)
 #endif	
 	#define CIAO_IF_ERROR if (error==1) { Network->SockClose(); im_clearmenus(); DeleteClasses(); exit(-1); }
 
