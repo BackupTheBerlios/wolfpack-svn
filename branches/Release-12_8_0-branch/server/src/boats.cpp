@@ -830,10 +830,10 @@ void cBoat::Move (UOXSOCKET s, P_ITEM pBoat) {
 		}
 		return;
 	}
-	float slength = sqrt (dx*dx + dy*dy);
-	float fdx = float(dx);
+	float slength = sqrt (static_cast<float>(dx*dx + dy*dy)); // gcc 3.x have issues doing this implicit conversion
+	float fdx = static_cast<float>(dx);
 	fdx /= slength;
-	float fdy = float(dy);
+	float fdy = static_cast<float>(dy);
 	fdy /= slength;
 	if (fdx < -.25) {
 		dx = -1;
