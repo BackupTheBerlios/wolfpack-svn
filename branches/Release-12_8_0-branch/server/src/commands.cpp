@@ -323,7 +323,8 @@ void cCommands::NextCall(int s, int type)
 	
 	P_CHAR pc_currchar = currchar[s];
 	
-	if (pc_currchar->callnum != 0)
+	//if (pc_currchar->callnum != 0)
+	if (pc_currchar->callnum > 0)		// khpae
 	{
 		donewithcall(s, type);
 	}

@@ -181,8 +181,8 @@ void cChar::Init(bool ser)
 	this->smeltitem= INVALID_SERIAL;
 	this->tailitem = INVALID_SERIAL;
 	this->npcaitype=0; // NPC ai
-	this->callnum=-1; //GM Paging
-	this->playercallnum=-1; //GM Paging
+	this->callnum= 0; //-1; //GM Paging		// khpae changed to 0
+	this->playercallnum= 0; //-1; //GM Paging	// khpae changed to 0
 	this->region=255;
 	this->skilldelay=0;
 	this->objectdelay=0;

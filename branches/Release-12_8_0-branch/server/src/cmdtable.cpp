@@ -2216,7 +2216,8 @@ void command_gotocur(UOXSOCKET s)
 	int x=0;
 	P_CHAR pc_currchar = currchar[s];
 	
-	if(pc_currchar->callnum==0)
+	//if(pc_currchar->callnum==0)
+	if (pc_currchar->callnum < 1)		// khpae
 	{
 		sysmessage(s, tr("You are not currently on a call."));
 	}
@@ -2253,7 +2254,8 @@ void command_gmtransfer(UOXSOCKET s)
 	int x2=0;
 	P_CHAR pc_currchar = currchar[s];
 	
-	if(pc_currchar->callnum!=0)
+	//if(pc_currchar->callnum!=0)
+	if (pc_currchar->callnum > 0)		// khpae
 	{
 		if(!pc_currchar->isGM()) //Char is a counselor
 		{

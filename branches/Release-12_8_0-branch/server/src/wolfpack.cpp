@@ -3862,10 +3862,15 @@ void initque() // Initilizes the gmpages[] and counspages[] arrays and also jail
 void donewithcall(int s, int type)
 {
 	P_CHAR pc_currchar = currchar[s];
+	if (pc_currchar == NULL) {	// khpae
+		return;
+	}
 	int cn = pc_currchar->callnum;
-	if(cn!=0) //Player is on a call
+	//if(cn!=0) //Player is on a call
+	if (cn > 0)		// khpae - crash fix
 	{
-		if(type==1) //Player is a GM
+		// khpae added check
+		if((type==1) && (!gmpages[cn].handled))//Player is a GM
 		{
 			gmpages[cn].handled=1;
 			gmpages[cn].name.erase();
@@ -3873,7 +3878,8 @@ void donewithcall(int s, int type)
 			gmpages[cn].serial = 0;
 			sysmessage(s,"Call removed from the GM queue.");
 		}
-		else //Player is a counselor
+		// khpae added check
+		else if (!counspages[cn].handled)//Player is a counselor
 		{
 			counspages[cn].handled=1;
 			counspages[cn].name.erase();
