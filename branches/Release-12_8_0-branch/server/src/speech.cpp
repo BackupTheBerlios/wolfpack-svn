@@ -178,7 +178,9 @@ bool StableSpeech(cChar* pMaster, const QString& comm, cChar* pPlayer, UOXSOCKET
 		p_pet = ri.GetData();
 		if (pPlayer->dist(p_pet) <= 8)
 		{
-			if (pPlayer->Owns(p_pet) && p_pet->stablemaster_serial==0) //owner of the pet ? and not already stabled ?
+			// khpae : small bug fix
+			//if (pPlayer->Owns(p_pet) && p_pet->stablemaster_serial==0) //owner of the pet ? and not already stabled ?
+			if (pPlayer->Owns(p_pet) && (p_pet->stablemaster_serial==INVALID_SERIAL))
 			{
 				//char pntmp[150];
 				//strcpy(pntmp, p_pet->name.c_str());
