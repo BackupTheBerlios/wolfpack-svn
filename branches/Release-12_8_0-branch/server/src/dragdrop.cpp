@@ -1053,6 +1053,8 @@ void dump_item(P_CLIENT ps, PKGx08 *pp) // Item is dropped on ground or a charac
 			pc_currchar->glowHalo(pi);
 		}		
 		SndRemoveitem(pi->serial);
+		//Automatically turn furniture - CyberSpud
+		autoFurnitureTurn(s,pi);
 		RefreshItem(pi);
 	}
 	else

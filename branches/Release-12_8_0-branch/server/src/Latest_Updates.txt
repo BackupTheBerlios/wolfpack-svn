@@ -16,3 +16,5 @@ that have already been marked in a house will still work :(  (Ripper)
 10) Changed: Made guards alot smarter & agressive :) (Ripper)
 11) Fixed: when singleclick on an npc it will show name & title.
 example: Berry, The Banker. (Ripper)
+12) Fixed: house commands should now work :) (Ripper)
+13) Added: Auto furniture turn. (Thanks to UOXc)

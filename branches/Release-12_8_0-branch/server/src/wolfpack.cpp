@@ -6362,3 +6362,353 @@ void doGmMoveEff(UOXSOCKET s)
 	return;
 }
 
+//o---------------------------------------------------------------------------o
+//|	Function	-	void AutoFurnitureTurn( int s, int i)
+//|	Date		-	11/23/2001  Happy Thanksgiving!
+//|	Programmer	-	CyberSpud
+//o---------------------------------------------------------------------------o
+//|	Purpose		-	Takes a character's socket and an item and rotates that
+//|					item if the character is facing one of the cardinal
+//|					directions.  
+//o---------------------------------------------------------------------------o
+void autoFurnitureTurn( int s, P_ITEM pi ) // Auto turn furniture
+{
+	P_CHAR pc_currchar = currchar[s];
+	int CharDir = pc_currchar->dir;
+	int id1 = pi->id1, id2 = pi->id2;
+	char direction[8];
+
+	switch (CharDir)
+	{
+		case 0:
+			strcpy(direction,"north");
+			break;
+		case 2:
+			strcpy(direction,"east");
+			break;
+		case 4:
+			strcpy(direction,"south");
+			break;
+		case 6:
+			strcpy(direction,"west");
+			break;
+		default:  //not facing one of the cardinal directions so go ahead and return
+			return;
+	}
+	
+//***straw chair***
+	if ((id1 == 0x0B) && ((id2 == 0x5c)	  //north
+				      ||  (id2 == 0x5a)	  //east
+					  ||  (id2 == 0x5b)	  //south
+					  ||  (id2 == 0x5d))) //west
+	{	
+		switch (CharDir)
+		{
+		case 0:
+			id2 = 0x5c;
+			break;
+		case 2:
+			id2 = 0x5a;
+			break;
+		case 4:
+			id2 = 0x5b;
+			break;
+		case 6:
+			id2 = 0x5d;
+			break;
+		}
+	}
+	
+//***fancy chair***
+	else if ((id1 == 0x0B) && ((id2 == 0x50)    //north
+				           ||  (id2 == 0x4e)    //east
+					       ||  (id2 == 0x4f)    //south
+					       ||  (id2 == 0x51)))  //west
+	{	
+		switch (CharDir)
+		{
+		case 0:
+			id2 = 0x50;
+			break;
+		case 2:
+			id2 = 0x4e;
+			break;
+		case 4:
+			id2 = 0x4f;
+			break;
+		case 6:
+			id2 = 0x51;
+			break;
+		}
+	}
+//***Trinsic chair***
+	else if ((id1 == 0x0B) && ((id2 == 0x54)    //north
+				           ||  (id2 == 0x52)    //east
+					       ||  (id2 == 0x53)    //south
+					       ||  (id2 == 0x55)))  //west
+	{	
+		switch (CharDir)
+		{
+		case 0:
+			id2 = 0x54;
+			break;
+		case 2:
+			id2 = 0x52;
+			break;
+		case 4:
+			id2 = 0x53;
+			break;
+		case 6:
+			id2 = 0x55;
+			break;
+		}
+	}
+//***wooden chair***
+	else if ((id1 == 0x0B) && ((id2 == 0x59)    //north
+				           ||  (id2 == 0x56)    //east
+					       ||  (id2 == 0x57)    //south
+					       ||  (id2 == 0x58)))  //west
+	{	
+		switch (CharDir)
+		{
+		case 0:
+			id2 = 0x59;
+			break;
+		case 2:
+			id2 = 0x56;
+			break;
+		case 4:
+			id2 = 0x57;
+			break;
+		case 6:
+			id2 = 0x58;
+			break;
+		}
+	}
+//***wooden throne***
+	else if ((id1 == 0x0B) && ((id2 == 0x31)    //north
+				           ||  (id2 == 0x2f)    //east
+					       ||  (id2 == 0x2e)    //south
+					       ||  (id2 == 0x30)))  //west
+	{	
+		switch (CharDir)
+		{
+		case 0:
+			id2 = 0x31;
+			break;
+		case 2:
+			id2 = 0x2f;
+			break;
+		case 4:
+			id2 = 0x2e;
+			break;
+		case 6:
+			id2 = 0x30;
+			break;
+		}
+	}
+//***stone throne***
+	else if ((id1 == 0x12) && ((id2 == 0x1a)    //north
+				           ||  (id2 == 0x19)    //east
+					       ||  (id2 == 0x18)    //south
+					       ||  (id2 == 0x1b)))  //west
+	{	
+		switch (CharDir)
+		{
+		case 0:
+			id2 = 0x1a;
+			break;
+		case 2:
+			id2 = 0x19;
+			break;
+		case 4:
+			id2 = 0x18;
+			break;
+		case 6:
+			id2 = 0x1b;
+			break;
+		}
+	}
+//***fancy throne***
+	else if ((id1 == 0x0b) && ((id2 == 0x32)    //north
+				           ||  (id2 == 0x33)))  //east
+	{	
+		switch (CharDir)
+		{
+		case 0:
+		case 4:
+			id2 = 0x32;
+			break;
+		case 2:
+		case 6:
+			id2 = 0x33;
+			break;
+		}
+	}
+//***wooden bench***
+	else if ((id1 == 0x0b) && ((id2 == 0x2d)    //north
+				           ||  (id2 == 0x2c)))  //east
+	{	
+		switch (CharDir)
+		{
+		case 0:
+		case 4:
+			id2 = 0x2d;
+			break;
+		case 2:
+		case 6:
+			id2 = 0x2c;
+			break;
+		}
+	}
+//***chest of drawers***
+	else if ((id1 == 0x0a) && ((id2 == 0x2c)    //north
+				           ||  (id2 == 0x34)))  //east
+	{	
+		switch (CharDir)
+		{
+		case 0:
+		case 4:
+			id2 = 0x2c;
+			break;
+		case 2:
+		case 6:
+			id2 = 0x34;
+			break;
+		}
+	}
+//***stained chest of drawers***
+	else if ((id1 == 0x0a) && ((id2 == 0x30)    //north
+				           ||  (id2 == 0x38)))  //east
+	{	
+		switch (CharDir)
+		{
+		case 0:
+		case 4:
+			id2 = 0x30;
+			break;
+		case 2:
+		case 6:
+			id2 = 0x38;
+			break;
+		}
+	}
+//***armiore***
+	else if ((id1 == 0x0a) && ((id2 == 0x4f)    //north
+				           ||  (id2 == 0x53)))  //east
+	{	
+		switch (CharDir)
+		{
+		case 0:
+		case 4:
+			id2 = 0x4f;
+			break;
+		case 2:
+		case 6:
+			id2 = 0x53;
+			break;
+		}
+	}
+//***stained armiore***
+	else if ((id1 == 0x0a) && ((id2 == 0x4d)    //north
+				           ||  (id2 == 0x51)))  //east
+	{	
+		switch (CharDir)
+		{
+		case 0:
+		case 4:
+			id2 = 0x4d;
+			break;
+		case 2:
+		case 6:
+			id2 = 0x51;
+			break;
+		}
+	}
+//***empty bookcase***
+	else if ((id1 == 0x0a) && ((id2 == 0x9d)    //north
+				           ||  (id2 == 0x9e)))  //east
+	{	
+		switch (CharDir)
+		{
+		case 0:
+		case 4:
+			id2 = 0x9d;
+			break;
+		case 2:
+		case 6:
+			id2 = 0x9e;
+			break;
+		}
+	}
+//***wooden chest***
+	else if ((id1 == 0x0e) && ((id2 == 0x43)    //north
+				           ||  (id2 == 0x42)))  //east
+	{	
+		switch (CharDir)
+		{
+		case 0:
+		case 4:
+			id2 = 0x43;
+			break;
+		case 2:
+		case 6:
+			id2 = 0x42;
+			break;
+		}
+	}
+//***metal chest***
+	else if ((id1 == 0x0e) && ((id2 == 0x41)    //north
+				           ||  (id2 == 0x40)))  //east
+	{	
+		switch (CharDir)
+		{
+		case 0:
+		case 4:
+			id2 = 0x41;
+			break;
+		case 2:
+		case 6:
+			id2 = 0x40;
+			break;
+		}
+	}
+//***silver chest***
+	else if ((id1 == 0x09) && (id2 == 0xab) ||  //north
+			 (id1 == 0x0e) && (id2 == 0x7c))    //east
+	{	
+		switch (CharDir)
+		{
+		case 0:
+		case 4:
+			id1 = 0x09;
+			id2 = 0xab;
+			break;
+		case 2:
+		case 6:
+			id1 = 0x0e;
+			id2 = 0x7c;
+			break;
+		}
+	}
+//***not a piece of furniture***
+	else	
+	{
+		return;
+	}
+	
+	pi->id1=id1;	//change the id and refresh the item
+	pi->id2=id2;
+	RefreshItem(pi);
+	
+	if( pi->name[0] == '#' )	//just in case there isn't a name
+	{
+		sysmessage(s,"You face the item to the %s",direction);
+	}
+	else
+	{
+		sysmessage(s,"You face %s to the %s",pi->name.c_str(),direction);
+	}
+
+}
+

@@ -3554,9 +3554,15 @@ void cTargets::HouseRelease( UOXSOCKET s ) // Abaddon & Ripper
 // update: 5-8-00
 {
 	int ser = LongFromCharPtr(buffer[s]+7);
+	P_CHAR pc_currchar = currchar[s];
 	P_ITEM pi = FindItemBySerial(ser);
 	if( pi != NULL )
 	{
+		if (pi->secureIt == 1 && !pc_currchar->Owns(pi))
+		{
+			sysmessage(s,"You cannot do that!");
+			return;
+		}
 		if (Items->isFieldSpellItem(pi))
 		{
 			sysmessage(s,"you cannot release this!");

@@ -274,6 +274,7 @@ void criminal(P_CHAR pc);
 void callguards( P_CHAR pc_player );
 int recursestatcap(int chr); //Morrolan - stat/skill cap
 void skillfreq(int chr, int skill); //Morrolan - stat/skill cap
+void autoFurnitureTurn(int s,P_ITEM pi);
 
 #endif
 

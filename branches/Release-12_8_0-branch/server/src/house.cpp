@@ -618,20 +618,14 @@ void cHouse::removeFriend(P_CHAR pc)
 void house_speech(int s, string& msg)	// msg must already be capitalized
 {
 	P_CHAR pc_currchar = currchar[s];
-	
-	if ( pc_currchar->multis == INVALID_SERIAL )
-		return; // Not inside a multi
 
-	P_ITEM pMulti = FindItemBySerial(pc_currchar->multis);
+	P_ITEM pMulti = findmulti(pc_currchar->pos);
 		
-	if ( pMulti && ishouse(pMulti->id()) )
-	{
-		cHouse* pHouse = dynamic_cast<cHouse*>(pMulti);
+	if ( !pMulti ) return;
+
+	cHouse* pHouse = dynamic_cast<cHouse*>(pMulti);
 		if ( !(pc_currchar->Owns(pHouse) || pHouse->isFriend(pc_currchar)))
 			return; // Not (Friend or Owner)
-	}
-	else
-		return;	
 
 	if(msg.find("I BAN THEE")!=string::npos) 
 	{ // house ban
