@@ -314,7 +314,7 @@ void cSkills::MakeMenuTarget(int s, int x, int skill)
 		// khpae - g++ 3.2 makes cMMT->delonsuccess not cMMTsmith->delonsuccess
 		//         strange thing..
 		//case BLACKSMITHING:	targ->delonsuccess(s);	break;
-		case BLACKSMITHING: ((cMMTsmith *)targ->deletematerial(s, itemmake[s].needs); break;
+		case BLACKSMITHING: ((cMMTsmith *)targ)->deletematerial(s, itemmake[s].needs); break;
 		case CARPENTRY:		targ->delonsuccess(s);break;
 		case INSCRIPTION: delequan(pc_currchar, itemmake[s].Mat1id, 1); break;//don't use default, cauz we delete 1 scroll //use materialid
 		//case TAILORING: delequan(pc_currchar, itemmake[s].materialid1,itemmake[s].materialid2, itemmake[s].needs);break;	//same as default skill
