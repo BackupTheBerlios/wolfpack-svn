@@ -39,6 +39,8 @@
 //#include "SndPkg.h"
 //#include "debug.h"
 //#include "utilsys.h"
+// khpae - for validNPCMove check
+#include "walking2.h"
 
 // System Include Files
 #include <algorithm>
@@ -64,7 +66,52 @@ void HomeTarget(int s, int a1, int a2, int a3, int a4, char b1, char b2, char *t
 	Xsend(s, multitarcrs, 26);
 }
 
-bool CheckBuildSite(const Coord_cl& pos, int sx, int sy)
+// pos - target location
+// sx, sy - house size
+// pc_s - current char
+bool CheckBuildSite (Coord_cl pos, int sx, int sy, P_CHAR pc_s) {
+	// rewrite - khpae
+	// check 3 route
+	// 1. map elevation diff < 7
+	// 2. one can walk there : valid tile
+	// 3. is there any other overlapping multi
+	if ((sx>200) || (sy>200)) {	// too big
+		return false;
+	}
+	unsigned short x, y, x0, y0, x1, y1;
+	signed char z, z0;
+	char pcBlocked = pc_s->blocked;
+	x0 = pos.x - abs (sx/2);
+	x1 = pos.x + abs (sx/2);
+	y0 = pos.y - abs (sy/2);
+	y1 = pos.y + abs (sy/2);
+	z0 = pos.z;
+	for (x=x0; x<=x1; x++) {
+		for (y=y0; y<=y1; y++) {
+			z = Map->MapElevation (Coord_cl (x, y, pos.z, pos.map));
+			if (abs (z-z0) > 7) {
+				return false;
+			}
+			if (!Movement->validNPCMove (x, y, z, pc_s)) {
+				pc_s->blocked = pcBlocked;
+				return false;
+			}
+			pc_s->blocked = pcBlocked;
+			cRegion::RegionIterator4Items ri (Coord_cl (x, y, 0, pos.map));
+			for (ri.Begin (); !ri.atEnd (); ri++) {
+				P_ITEM pi = ri.GetData ();
+				if (pi == NULL) {
+					continue;
+				}
+				if ((ishouse (pi->id ())) && (pi->pos.x==x) && (pi->pos.y==y)) {	// only done for multi house
+					return false;
+				}
+			}
+		}
+	}
+	return true;
+}
+/*bool CheckBuildSite(const Coord_cl& pos, int sx, int sy)
 {
 	signed int checkz;
 	//char statc;
@@ -85,7 +132,7 @@ bool CheckBuildSite(const Coord_cl& pos, int sx, int sy)
 		}
 	}
 	return true;
-}
+}*/
 
 
 //o---------------------------------------------------------------------------o
@@ -249,7 +296,9 @@ void BuildHouse(UOXSOCKET s, int i)
 		
 		if (ishouse(id)) // strict checking only for houses ! LB
 		{
-			if(!CheckBuildSite(Coord_cl(x,y,z,pc_currchar->pos.map),sx,sy))
+			// khpae - changed
+			//if(!CheckBuildSite(Coord_cl(x,y,z,pc_currchar->pos.map),sx,sy))
+			if(!CheckBuildSite(Coord_cl(x,y,z,pc_currchar->pos.map),sx,sy, pc_currchar))
 			{
 				sysmessage(s,"Can not build a house at that location (CBS)!");
 				return;

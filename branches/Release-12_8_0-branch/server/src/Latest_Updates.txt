@@ -59,4 +59,4 @@ Show Npc Titles 1 = ON  0 = OFF. (Ripper)
 51) Fixed: Crash when trying to make pet attack invalid target (Correa)
 52) Fixed: Lots of memory leak issues (Correa)
 53) Fixed: Veterinary now should work (Uber/Correa)
-
+54) Fixed: House building bugs fixed (khpae)
