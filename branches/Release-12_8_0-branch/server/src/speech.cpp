@@ -161,7 +161,7 @@ bool StableSpeech(cChar* pMaster, const QString& comm, cChar* pPlayer, UOXSOCKET
 		return 0;
 
     //if (!strstr( comm, "STABLE"))	// lets check if the keyword stable is in the commandstring, if not return !
-	if (comm.find("STABLE") == string::npos)
+	if (!comm.contains("STABLE"))
 		return 0;
       
 	/////////////////////////////////////////////////////////////////////
@@ -250,7 +250,7 @@ bool UnStableSpeech(cChar* pMaster, const QString& comm, cChar* pPlayer, UOXSOCK
 		return 0;
 
 //    if (!(strstr( comm, "CLAIM") || strstr( comm, "RETRIEVE")))	// lets check if the keyword CLAIM is in the commandstring, if not return !
-	if ((comm.find("CLAIM") == string::npos) && (comm.find("RETRIEVE") == string::npos))
+	if (!comm.contains("CLAIM") && !comm.contains("RETRIEVE"))
 	
 		return 0;
 
@@ -339,7 +339,7 @@ bool ShieldSpeech(cChar* pGuard, const QString& comm, cChar* pPlayer, UOXSOCKET 
 	if(pGuard->npcaitype == 6)	// chaos guard
 	{
 		//if (strstr( comm, "CHAOS SHIELD")) //Ripper...if in chaos guild get a new shield.
-		if (comm.find("CHAOS SHIELD") != string::npos)
+		if (comm.contains("CHAOS SHIELD"))
 		{	// if they say chaos shield
 			if(pPlayer->guildstone == INVALID_SERIAL)	// if not in a guild.
 			{
@@ -378,7 +378,7 @@ bool ShieldSpeech(cChar* pGuard, const QString& comm, cChar* pPlayer, UOXSOCKET 
 	{
 		//if (strstr( comm, "ORDER SHIELD")) //Ripper...if in order guild get a new shield.
 			// if they say order shield
-		if (comm.find("ORDER SHIELD") != string::npos)
+		if (comm.contains("ORDER SHIELD"))
 		{
 			if(pPlayer->guildstone == INVALID_SERIAL)	// if not in a guild.
 			{
@@ -422,7 +422,7 @@ bool QuestionSpeech(cChar* pc, const QString& comm, cChar* pPlayer, UOXSOCKET s)
 		return 0;
 	
     //if (strstr( comm, "NAME")) //Ripper...say name and a npc will tell you there name :).
-	if (comm.find("NAME")!=string::npos)
+	if (comm.contains("NAME"))
 	{
 		sprintf(temp, "hello my name is %s.", pc->name.c_str());
 		npctalkall(pc,temp,0);
@@ -430,7 +430,7 @@ bool QuestionSpeech(cChar* pc, const QString& comm, cChar* pPlayer, UOXSOCKET s)
 	}
 	
     //if (strstr( comm, "TIME")) //Ripper...say time and the npc gives the time.
-	if (comm.find("TIME") != string::npos)
+	if (comm.contains("TIME"))
 	{
 		npctalkall(pc, (char*)tr("it is now %1").arg(uoTime.toString()).latin1(),0);
 		return 1;
@@ -438,7 +438,7 @@ bool QuestionSpeech(cChar* pc, const QString& comm, cChar* pPlayer, UOXSOCKET s)
 	
     
     //if (strstr( comm, "LOCATION") || strstr( comm, "WHERE AM I")) //Ripper...gives location of char.
-	if (comm.find("LOCATION") != string::npos)
+	if (comm.contains("LOCATION"))
 	{
 		if (strlen(region[pPlayer->region].name)>0)
 			sprintf(temp, "You are in %s",region[pPlayer->region].name); 
@@ -496,7 +496,7 @@ bool EscortSpeech(cChar* pEscortee, const QString& comm, cChar* pPlayer, UOXSOCK
 		// If this is a request for hire
 	//	if ( response1 )
 		bool bpunt = false ;
-		if (comm.find("I WILL TAKE THEE") != string::npos)
+		if (comm.contains("I WILL TAKE THEE"))
 		{
 			if ( pEscortee->ftarg == INVALID_SERIAL )
 			{
@@ -521,7 +521,7 @@ bool EscortSpeech(cChar* pEscortee, const QString& comm, cChar* pPlayer, UOXSOCK
 		// DESTINATION
 		// If this is a request to find out where a NPC wants to go and the PC is within range of the NPC and the NPC is waiting for an ESCORT
 		//if (response2)
-		if ((comm.find("DESTINATION") != string::npos) || bpunt)
+		if ((comm.contains("DESTINATION")) || bpunt)
 		{
 			if ( pEscortee->ftarg == currchar[s]->serial )
 			{
@@ -565,7 +565,7 @@ bool TrainerSpeech(cChar* pTrainer, const QString& comm, cChar* pPlayer, UOXSOCK
 {
 	if (pPlayer->dist(pTrainer) > 3 || !pTrainer->isHuman())
 		return false;
-	if ((comm.contains("TRAIN")) && (comm.contains("TEACH")) && (comm.contains("LEARN")))
+	if (!comm.contains("TRAIN") && !comm.contains("TEACH") && !comm.contains("LEARN"))
 		return false;
 
 	int i,skill=-1;
