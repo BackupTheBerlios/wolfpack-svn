@@ -78,9 +78,11 @@ mapfile(NULL), sidxfile(NULL), statfile(NULL), verfile(NULL), tilefile(NULL), mu
 		tilename[0] = multiname[0] = midxname[0] = '\0';
 	
 	MapCache = new QIntCache<map_st>( 100, 521); // should be a prime number
+	MapCache->setAutoDelete( true );
 	// http://www.utm.edu/research/primes/lists/small/1000.txt contains a prime table.
 
 	TileCache = new QIntCache<tile_st>( 100, 512 );
+	TileCache->setAutoDelete( true );
 //	memset(tilecache, 0x00, sizeof(tilecache));
 	memset(StaticCache, 0x00, sizeof(StaticCache));
 	

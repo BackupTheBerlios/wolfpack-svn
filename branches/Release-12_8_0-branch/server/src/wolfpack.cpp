@@ -3238,22 +3238,9 @@ void qsfLoad(char *fn, short depth); // Load a quest script file
 	clConsole.send("\n");
 	clConsole.send("Deleting Classes...");
 	DeleteClasses();
+	// Notice, from this point down no global class is valid!!
 	clConsole.send("Done!\n");
 
-	if (NewErrorsLogged())
-		clConsole.send("New ERRORS have been logged. Please send the error*.log and critical*.log files to the dev team !\n");
-	if (NewWarningsLogged())
-		clConsole.send("New WARNINGS have been logged. Probably scripting errors. See the warnings*.log for details !\n");
-
-	if (error) {
-		clConsole.send("ERROR: Server terminated by error!\n");
-
-		if (SrvParams->serverLog()) savelog("Server Shutdown by Error!\n=======================================================================\n\n\n","server.log");
-	} else {
-		clConsole.send("WOLFPACK: Server shutdown complete!\n");
-		if (SrvParams->serverLog()) savelog("Server Shutdown!\n=======================================================================\n\n\n","server.log");
-	}
-	//endScrn() ;
 	return 0;
 }
 

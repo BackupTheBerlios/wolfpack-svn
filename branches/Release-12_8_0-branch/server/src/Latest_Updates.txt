@@ -57,4 +57,6 @@ Show Npc Titles 1 = ON  0 = OFF. (Ripper)
 49) Fixed: Cant use wands in jail. (Ripper)
 50) Fixed: Crash with drag & drop code (Correa)
 51) Fixed: Crash when trying to make pet attack invalid target (Correa)
+52) Fixed: Lots of memory leak issues (Correa)
+53) Fixed: Veterinary now should work (Uber/Correa)
 

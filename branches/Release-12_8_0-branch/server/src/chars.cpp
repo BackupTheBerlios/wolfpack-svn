@@ -87,7 +87,7 @@ void cChar::Init(bool ser)
 	this->account=-1;
 	this->pos.x=100;
 	this->pos.y=100;
-	this->pos.z=this->dispz=0;
+	this->pos.z=this->dispz = this->prevZ = 0;
 	
 //	this->oldpos.x=0; // fix for jail bug
 //	this->oldpos.y=0; // fix for jail bug
@@ -272,6 +272,9 @@ void cChar::Init(bool ser)
     this->stablemaster_serial = INVALID_SERIAL;
 	this->timeused_last = getNormalizedTime();
 	this->time_unused = 0;
+	this->GuildType = 0;
+	this->gmrestrict = 0;
+	this->gmMoveEff = 0;
 
 	for (i=0;i<TRUESKILLS;i++)
 	{
