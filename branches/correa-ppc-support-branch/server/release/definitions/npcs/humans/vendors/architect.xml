@@ -1,0 +1,30 @@
+<!--
+=================================================================
+|   )      (\_     | WOLFPACK 13.0.0 Scripts                    |
+|  ((    _/{  "-;  | Created by: DarkStorm                      |
+|   )).-' {{ ;'`   | Revised by: White Wolf                     |
+|  ( (  ;._ \\ ctr | Last Modification: 12/16/02                |
+=================================================================
+-->
+<definitions>
+
+	<!-- A architect vendor -->
+	<npc id="architect_male">
+		<inherit>vendor_male</inherit>
+		<title context="Vendor Male Titles">the Architect</title>
+		<shopkeeper>
+			<restockable/>
+		</shopkeeper>
+		<category>Vendors\Architect (Male)</category>
+	</npc>
+	
+	<npc id="architect_female">
+		<inherit>vendor_female</inherit>
+		<title context="Vendor Female Titles">the Architect</title>
+		<shopkeeper>
+			<restockable/>
+		</shopkeeper>
+		<category>Vendors\Architect (Female)</category>
+	</npc>
+
+</definitions>

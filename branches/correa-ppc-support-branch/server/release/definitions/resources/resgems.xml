@@ -1,0 +1,28 @@
+<!--
+=================================================================
+|   )      (\_     | WOLFPACK 13.0.0 Scripts                    |
+|  ((    _/{  "-;  | Created by: DarkStorm                      |
+|   )).-' {{ ;'`   | Revised by:                                |
+|  ( (  ;._ \\ ctr | Last Modification: Created                 |
+=================================================================
+-->
+<definitions>
+
+	<item id="gem">
+		<id>0x1ea7</id>
+		<nodecay/>
+	</item>
+
+	<item id="ore_gem" inherit="gem">
+		<tag name="resource" value="ore" type="string" />
+		<name>Ore gem</name>
+		<category>Resources\Resource Ore</category>
+	</item>
+
+	<item id="wood_gem" inherit="gem">
+		<tag name="resource" value="wood" type="string" />
+		<name>Wood gem</name>
+		<category>Resources\Resource Wood</category>
+	</item>
+
+</definitions>

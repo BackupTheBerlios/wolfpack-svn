@@ -1,0 +1,46 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- an ogre -->
+	<npc id="ogre" inherit="monster_base">
+		<name>ogre</name>
+		<id>1</id>
+		<inherit id="KARMA_L3" />
+		<inherit id="FAME_L3" />
+		<!-- Stats -->
+		<str><random min="166" max="195"/></str>
+		<dex><random min="46" max="65"/></dex>
+		<int><random min="46" max="70"/></int>
+		<maxhitpoints><random min="100" max="117"/></maxhitpoints>
+		<!-- Skills -->
+		<magicresistance><random min="551" max="700"/></magicresistance>
+		<tactics><random min="601" max="700"/></tactics>
+		<wrestling><random min="701" max="800"/></wrestling>
+		<!-- Damage -->
+		<mindamage>18</mindamage>
+		<maxdamage>22</maxdamage>
+		<!-- Resists -->
+		<tag name="res_cold" value="15,25" type="int" />
+		<tag name="res_energy" value="25" type="int" />
+		<tag name="res_fire" value="15,25" type="int" />
+		<tag name="res_physical" value="30,35" type="int" />
+		<tag name="res_poison" value="15,25" type="int" />
+		<!-- Misc. -->
+		<desc>These brutes are akin to orcs, but larger. They are fiercely stupid, but do possess some faculty of reason. Like all the intelligent races, they have a great greed for gold. Ogres are bullies, but also cowards, and will run if a fight turns against them.</desc>
+		<!-- Missing: Potion, Club -->
+		<lootpacks>lootpack_average</lootpacks>
+		<carve>carve_ogre</carve>
+		<category>Monsters\Giants\Ogre</category>
+		<strproperty name="slayer_group" value="ogres" />
+		<intproperty name="carve_meat" value="2" />
+		<inherit id="speed_slow" />
+	</npc>
+
+</definitions>

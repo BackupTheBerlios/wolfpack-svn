@@ -1,0 +1,49 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Baracoon The Piper -->
+	<npc id="barracoon_the_piper" inherit="monster_base">
+		<name>Baracoon</name>
+		<title>the piper</title>
+		<id>400</id>
+		<karma>-25000</karma>
+		<fame>25000</fame>
+		<!-- Stats -->
+		<str><random min="305" max="425"/></str>
+		<dex><random min="72" max="150"/></dex>
+		<int><random min="505" max="750"/></int>
+		<maxhitpoints>42000</maxhitpoints>
+		<maxstamina><random min="102" max="300" /></maxstamina>
+		<!-- Skills -->
+		<magicresistance>1000</magicresistance>
+		<tactics><random min="976" max="1000"/></tactics>
+		<wrestling><random min="976" max="1000"/></wrestling>
+		<meditation>0</meditation>
+		<evaluatingintelligence>0</evaluatingintelligence>
+		<magery>0</magery>
+		<anatomy>0</anatomy>
+		<!-- Damage -->
+		<mindamage>66</mindamage>
+		<maxdamage>104</maxdamage>
+		<!-- Resist Properties -->
+		<tag name="res_physical" value="60,70" type="int" />
+		<tag name="res_fire" value="50,60" type="int" />
+		<tag name="res_cold" value="50,60" type="int" />
+		<tag name="res_poison" value="40,50" type="int" />
+		<tag name="res_energy" value="40,50" type="int" />
+		<!-- Loot Packs -->
+		<!-- Missing: Skull of Greed -->
+		<lootpacks>lootpack_ultra_rich;lootpack_ultra_rich;lootpack_ultra_rich;lootpack_ultra_rich;lootpack_filthy_rich;gems</lootpacks>
+		<!-- Misc. -->
+		<category>Monsters\Champions\Baracoon The Piper</category>
+		<inherit id="speed_veryfast" />
+	</npc>
+
+</definitions>

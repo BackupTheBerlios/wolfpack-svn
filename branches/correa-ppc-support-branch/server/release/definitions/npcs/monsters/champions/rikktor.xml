@@ -1,0 +1,56 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Rikktor -->
+	<npc id="rikktor" inherit="monster_base">
+		<name>Rikktor</name>
+		<title>the Dragon</title>
+		<id>797</id>
+		<karma>-25000</karma>
+		<fame>25000</fame>
+		<!-- Stats -->
+		<str><random min="701" max="900"/></str>
+		<dex><random min="201" max="350"/></dex>
+		<int><random min="51" max="100"/></int>
+		<maxhitpoints><random min="3000" max="3000"/></maxhitpoints>
+		<!-- Skills -->
+		<wrestling><random min="0" max="0"/></wrestling>
+		<tactics><random min="1000" max="1000"/></tactics>
+		<magicresistance><random min="1402" max="1600"/></magicresistance>
+		<anatomy><random min="1000" max="1000"/></anatomy>
+		<!-- Damage -->
+		<mindamage>124</mindamage>
+		<maxdamage>272</maxdamage>
+		<!-- Damage Properties -->
+		<!--
+		<tag name="dmg_fire" value="0" type="int" />
+		<tag name="dmg_cold" value="0" type="int" />
+		<tag name="dmg_poison" value="0" type="int" />
+		<tag name="dmg_energy" value="0" type="int" />
+		-->
+		<!-- Resist Properties -->
+		<tag name="res_physical" value="80,90" type="int" />
+		<tag name="res_fire" value="80,90" type="int" />
+		<tag name="res_cold" value="30,40" type="int" />
+		<tag name="res_poison" value="80,90" type="int" />
+		<tag name="res_energy" value="80,90" type="int" />
+		<!-- Loot Packs -->
+		<!-- Missing: Skull of Power -->
+		<lootpacks>lootpack_ultra_rich;lootpack_ultra_rich;lootpack_ultra_rich;gems</lootpacks>
+		<!-- Misc. -->
+		<category>Monsters\Champions\Rikktor</category>
+
+		<!-- Carve -->
+		<intproperty name="carve_scales" value="20" />
+		<strproperty name="carve_scales_type" value="all" />
+		<inherit id="speed_veryfast" />
+	</npc>
+
+</definitions>

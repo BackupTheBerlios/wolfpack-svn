@@ -1,0 +1,29 @@
+<!--
+/*=========================================================
+ *   )      (\_     | WOLFPACK 13.0.0 Scripts
+ *  ((    _/{  "-;  | Created by: Dreoth
+ *   )).-' {{ ;'`   | Revised by:
+ *  ( (  ;._ \\     | Last modification:
+ *=======================================================*/
+-->
+<definitions>
+
+	<!-- Jester Hat -->
+	<item id="172e">
+		<category>Clothes\Headwear\Jester Hat</category>
+		<category>Armor\Headwear\Jester Hat</category>
+		<id>0x172e</id>
+		<dye />
+		<durability><random min="20" max="25" /></durability>
+		<type>1009</type>
+		<basescripts>equipment</basescripts>
+		<!-- Properties -->
+		<intproperty name="req_strength" value="10" />
+		<intproperty name="res_fire" value="5" />
+		<intproperty name="res_cold" value="9" />
+		<intproperty name="res_poison" value="5" />
+		<intproperty name="res_energy" value="5" />
+		<allowmeditation />
+	</item>
+
+</definitions>
