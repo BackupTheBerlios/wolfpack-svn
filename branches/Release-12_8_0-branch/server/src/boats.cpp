@@ -923,7 +923,7 @@ void cBoat::Turn(P_ITEM pBoat, int turn)//Turn the boat item, and send all the p
 	}
 }
 
-char cBoat::Speech(UOXSOCKET s, string& msg)//See if they said a command. msg must already be capitalized
+char cBoat::Speech(UOXSOCKET s, const QString& msg)//See if they said a command. msg must already be capitalized
 {
 	P_CHAR pc_currchar = currchar[s];
 	P_ITEM boat = GetBoat(pc_currchar);

@@ -615,39 +615,38 @@ void cCharStuff::cDragonAI::DoneAI(P_CHAR pc_i, int currenttime)
 	return;
 }
 
-bool cCharStuff::cBankerAI::DoAI(int c, P_CHAR pBanker, string& comm)
+bool cCharStuff::cBankerAI::DoAI(int c, P_CHAR pBanker, const QString& comm)
 {
 	P_CHAR pc_currchar = currchar[c];
 
-	string search1("BANK") ;
 	string search2("BALANCE");
 	string search3("WITHDRAW") ;
 	string search4("CHECK") ;
 
 	if (SrvParams->useSpecialBank())
 	{
-		search1 = SrvParams->specialBankTrigger().latin1();
-		if ((comm.find(search1)!= string::npos) &&(!(pc_currchar->dead)))
+		if ((comm.contains(SrvParams->specialBankTrigger(), false)) &&(!(pc_currchar->dead)))
 		{
 			openspecialbank(c, currchar[c]);
+			return true;
 		}
 	}
-    else if ((comm.find(search1)!=string::npos) &&(!(pc_currchar->dead)))
+    else if ((comm.contains("BANK")) &&(!(pc_currchar->dead)))
 	{
 		OpenBank(c);
 		return true;
 	}
-    else if ((comm.find(search2)!=string::npos) &&(!(pc_currchar->dead)))
+    else if ((comm.contains("BALANCE")) &&(!(pc_currchar->dead)))
 	{
 		return Balance(c, pBanker);
 	}
-	else if ((comm.find(search3)!=string::npos) &&(!(pc_currchar->dead)))
+	else if ((comm.contains("WITHDRAW")) &&(!(pc_currchar->dead)))
 	{
-		return Withdraw(c, pBanker, comm);
+		return Withdraw(c, pBanker, comm.latin1());
 	}
-	else if ((comm.find(search4)!=string::npos) &&(!(pc_currchar->dead)))
+	else if ((comm.contains("CHECK")) &&(!(pc_currchar->dead)))
 	{
-		return BankCheck(c, pBanker, comm);
+		return BankCheck(c, pBanker, comm.latin1());
 	}
 	return true;
 }
@@ -666,7 +665,7 @@ bool cCharStuff::cBankerAI::Balance(int c, P_CHAR pBanker)
 	return true;
 }
 
-bool cCharStuff::cBankerAI::Withdraw(int c, P_CHAR pBanker, string& comm)
+bool cCharStuff::cBankerAI::Withdraw(int c, P_CHAR pBanker, const string& comm)
 {
 	P_CHAR pc_currchar = currchar[c];
 	int beginoffset ;
@@ -698,7 +697,7 @@ bool cCharStuff::cBankerAI::Withdraw(int c, P_CHAR pBanker, string& comm)
 	return true;
 }
 
-bool cCharStuff::cBankerAI::BankCheck(int c, P_CHAR pBanker, string& comm)
+bool cCharStuff::cBankerAI::BankCheck(int c, P_CHAR pBanker, const string& comm)
 {
 	P_CHAR pc_currchar = currchar[c];
 	int beginoffset ;

@@ -36,17 +36,10 @@
 #include "platform.h"
 
 
-// System Includes
-
-#include <iostream>
-#include <cmath>
-
-using namespace std;
-
-
 // Forward class Declaration
 
 class cBoat;
+class QString;
 
 // Wolfpack files
 #include "wolfpack.h"
@@ -81,7 +74,7 @@ class cBoat
 
 	public:
 		P_ITEM GetBoat(P_CHAR);
-		char Speech(int, string& );
+		char Speech(int, const QString& );
 		void OpenPlank(P_ITEM);
 		void PlankStuff(UOXSOCKET, P_ITEM);
 		bool Build(int, P_ITEM pBoat, char);

@@ -233,9 +233,10 @@ void cMagic::SpellBook(UOXSOCKET s, P_ITEM pi)
 	//spells[64]=spells[65];
 	//spells[65]=0;
 
-	for (i=0;i<64;i++)
+	for ( i = 0; i < 64; ++i )
 	{
-		if (spells[i]) scount++;
+		if (spells[i]) 
+			++scount;
 	}
 	char sbookinit[6]="\x3C\x00\x3E\x00\x03";
 	sbookinit[1]=((scount*19)+5)>>8;

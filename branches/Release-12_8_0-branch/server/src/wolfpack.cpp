@@ -6376,7 +6376,9 @@ void doGmMoveEff(UOXSOCKET s)
 //|					item if the character is facing one of the cardinal
 //|					directions.  
 //o---------------------------------------------------------------------------o
-void autoFurnitureTurn( int s, P_ITEM pi ) // Auto turn furniture
+
+// Returns true if item was updated.
+bool autoFurnitureTurn( int s, P_ITEM pi ) // Auto turn furniture
 {
 	P_CHAR pc_currchar = currchar[s];
 	int CharDir = pc_currchar->dir;
@@ -6398,7 +6400,7 @@ void autoFurnitureTurn( int s, P_ITEM pi ) // Auto turn furniture
 			strcpy(direction,"west");
 			break;
 		default:  //not facing one of the cardinal directions so go ahead and return
-			return;
+			return false;
 	}
 	
 //***straw chair***
@@ -6699,12 +6701,12 @@ void autoFurnitureTurn( int s, P_ITEM pi ) // Auto turn furniture
 //***not a piece of furniture***
 	else	
 	{
-		return;
+		return false;
 	}
 	
 	pi->id1=id1;	//change the id and refresh the item
 	pi->id2=id2;
-	RefreshItem(pi);
+//  RefreshItem(pi); callee's responsability.
 	
 	if( pi->name[0] == '#' )	//just in case there isn't a name
 	{
@@ -6714,6 +6716,6 @@ void autoFurnitureTurn( int s, P_ITEM pi ) // Auto turn furniture
 	{
 		sysmessage(s,"You face %s to the %s",pi->name.c_str(),direction);
 	}
-
+	return true;
 }
 
