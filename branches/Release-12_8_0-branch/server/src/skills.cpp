@@ -174,33 +174,40 @@ protected:
 	unsigned char badsnd1;
 	unsigned char badsnd2;
 public:
-	cMMT(short badsnd=0, char *failmsg="You fail to create the item.")
+	cMMT(short badsnd = 0, char *failmsg = "You fail to create the item.")
 	{
-		badsnd1 = static_cast<unsigned char>(badsnd>>8);
-		badsnd2 = static_cast<unsigned char>(badsnd&0x00FF);
-		failtext=failmsg;
+		badsnd1 = static_cast < unsigned char>(badsnd >> 8);
+		badsnd2 = static_cast < unsigned char>(badsnd&0x00FF);
+		failtext = failmsg;
 	}
 	virtual void deletematerial(SOCK s, int amount)
 	{
-		P_ITEM pPack=Packitem(currchar[s]);
-		if (!pPack) return;
+		P_ITEM pPack = Packitem(currchar[s]);
+		if (!pPack)
+			return;
 		int amt = max(amount, 1);
-
-		if (itemmake[s].Mat1id==0x1BE0||itemmake[s].Mat1id==0x1BD7) itemmake[s].Mat1color=0;
-
-		pPack->DeleteAmount(amt,itemmake[s].Mat1id,itemmake[s].Mat1color);
-		if (itemmake[s].Mat2id)						// if a 2nd material is used, delete that too
-			pPack->DeleteAmount(amt,itemmake[s].Mat2id,itemmake[s].Mat2color);
-
-/*		delequan(currchar[s],itemmake[s].Mat1id,amount>0 ? amount : 1);
-		if (itemmake[s].Mat2id)												// if a 2nd material is used,
-			delequan(currchar[s],itemmake[s].Mat2id,amount>0 ? amount : 1);	// delete that too */
+		
+		if (itemmake[s].Mat1id == 0x1BD1 || itemmake[s].Mat1id == 0x1BD4 || itemmake[s].Mat1id == 0x1BE0 || itemmake[s].Mat1id == 0x1BD7)
+			itemmake[s].Mat1color = 0;
+		
+		pPack->DeleteAmount(amt, itemmake[s].Mat1id, itemmake[s].Mat1color);
+		if (itemmake[s].Mat2id) // if a 2nd material is used, delete that too
+		{
+			if (itemmake[s].Mat2id == 0x1BD1 || itemmake[s].Mat2id == 0x1BD4 || itemmake[s].Mat2id == 0x1BE0 || itemmake[s].Mat2id == 0x1BD7)
+				itemmake[s].Mat2color = 0;
+			pPack->DeleteAmount(amt, itemmake[s].Mat2id, itemmake[s].Mat2color);
+		}
 	}
 	virtual void delonfail(SOCK s)		{deletematerial(s, itemmake[s].needs/2);}
 	virtual void delonsuccess(SOCK s)	{deletematerial(s, itemmake[s].needs);}
-	virtual void playbad(SOCK s)		{soundeffect(s,badsnd1,badsnd2);}
-	virtual void failmsg(SOCK s)		{sysmessage(s,failtext);}
-	virtual void failure(SOCK s)		{delonfail(s);playbad(s);failmsg(s);}
+	virtual void playbad(SOCK s)		{soundeffect(s, badsnd1, badsnd2);}
+	virtual void failmsg(SOCK s)		{sysmessage(s, failtext);}
+	virtual void failure(SOCK s)		
+	{
+		delonfail(s);
+		playbad(s);
+		failmsg(s);
+	}
 	static cMMT* factory(short skill);
 };
 
