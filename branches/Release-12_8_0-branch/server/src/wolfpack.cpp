@@ -3498,70 +3498,69 @@ char indungeon(P_CHAR pc)
 	return 0;
 }
 
-void npcattacktarget(P_CHAR pc_target2, P_CHAR pc_target)
+void npcattacktarget(P_CHAR attacker, P_CHAR defender)
 {
-	if (pc_target == pc_target2) return;
-	if (pc_target == NULL || pc_target2 == NULL) return;
+	if (attacker == defender) return;
+	if (attacker == NULL || defender == NULL) return;
+	if (attacker->dead || defender->dead) return;
+	if (defender->dispz > (attacker->dispz +10)) return;//FRAZAI
+	if (defender->dispz < (attacker->dispz -10)) return;//FRAZAI
 
-	if (pc_target->dispz > (pc_target2->dispz +10)) return;//FRAZAI
-	if (pc_target->dispz < (pc_target2->dispz -10)) return;//FRAZAI
-	if (!(line_of_sight(-1,pc_target2->pos, pc_target->pos, WALLS_CHIMNEYS+DOORS+FLOORS_FLAT_ROOFING))) return; //From Leviathan - Morrolan
-	playmonstersound(pc_target, pc_target->id(), SND_STARTATTACK);
+	if (!(line_of_sight(-1,attacker->pos, defender->pos, WALLS_CHIMNEYS+DOORS+FLOORS_FLAT_ROOFING))) return; //From Leviathan - Morrolan
+	playmonstersound(defender, defender->id(), SND_STARTATTACK);
 	int i;
 	unsigned int cdist=0 ;
 
-	if (pc_target->dead || pc_target2->dead) return;
-
-	if (pc_target->targ != INVALID_SERIAL)
-		cdist = chardist( pc_target, FindCharBySerial(pc_target->targ));
+	if (defender->targ != INVALID_SERIAL)
+		cdist = chardist( defender, FindCharBySerial(defender->targ));
 	else cdist=30;
 
-	if (cdist>chardist(pc_target, pc_target2))
+	if (cdist>chardist(defender, attacker))
 	{
-		pc_target->targ = pc_target2->serial;
-		pc_target->attacker = pc_target2->serial;
-		pc_target->setAttackFirst();
+		defender->targ = attacker->serial;
+		defender->attacker = attacker->serial;
+		defender->setAttackFirst();
 	}
 
-	if (pc_target2->targ != INVALID_SERIAL)
-		cdist = chardist(pc_target2, FindCharBySerial(pc_target2->targ));
+	if (attacker->targ != INVALID_SERIAL)
+		cdist = chardist(attacker, FindCharBySerial(attacker->targ));
 	else cdist=30;
 
-	if ((cdist > chardist(pc_target, pc_target2))&&
-		((!(pc_target2->npcaitype==4)||(!((pc_target2->targ==INVALID_SERIAL)))))) // changed from 0x40 to 4, LB
+	if ((cdist > chardist(defender, attacker))&&
+		((!(attacker->npcaitype==4)||(!((attacker->targ==INVALID_SERIAL)))))) // changed from 0x40 to 4, LB
 	{
-		pc_target2->targ = pc_target->serial;
-		pc_target2->attacker = pc_target->serial;
-		pc_target2->resetAttackFirst();
+		attacker->targ = defender->serial;
+		attacker->attacker = defender->serial;
+		attacker->resetAttackFirst();
 	}
 
-	pc_target->unhide();
-	pc_target->disturbMed();
+	defender->unhide();
+	defender->disturbMed();
 
-	pc_target2->unhide();
-	pc_target2->disturbMed();
+	attacker->unhide();
+	attacker->disturbMed();
 
-	if (pc_target->isNpc())
+	if (defender->isNpc())
 	{
-		if (!(pc_target->war))
-			npcToggleCombat(pc_target);
-		pc_target->setNextMoveTime();
+		if (!(defender->war))
+			npcToggleCombat(defender);
+		defender->setNextMoveTime();
 	}
-	if ((pc_target2->isNpc())&&!(pc_target2->npcaitype==4)) // changed from 0x40 to 4, LB
+	if ((attacker->isNpc())&&!(attacker->npcaitype==4)) // changed from 0x40 to 4, LB
 	{
-		if (!(pc_target2->war))
-			npcToggleCombat(pc_target2);
-		pc_target2->setNextMoveTime();
+		if (!(attacker->war))
+			npcToggleCombat(attacker);
+		attacker->setNextMoveTime();
 	}
 	
-	sprintf((char*)temp, "You see %s attacking %s!", pc_target2->name.c_str(), pc_target->name.c_str());
+	sprintf((char*)temp, "You see %s attacking %s!", attacker->name.c_str(), defender->name.c_str());
 
 	for (i=0;i<now;i++)
 		{
-		 if (inrange1p(currchar[i], pc_target)&&perm[i])
+		 if (inrange1p(currchar[i], defender)&&perm[i])
 		 {
-			  pc_target->emotecolor = 0x0026;
-			  npcemote(i, pc_target2, (char*)temp,1);
+			  defender->emotecolor = 0x0026;
+			  npcemote(i, attacker, (char*)temp,1);
 		 }
 	}
 }
@@ -3644,18 +3643,16 @@ void getSextantCords(signed int x, signed int y, bool t2a, char *sextant)
 
 }
 
-void npcsimpleattacktarget(P_CHAR pc_target2, P_CHAR pc_target)
+void npcsimpleattacktarget(P_CHAR attacker, P_CHAR defender)
 {
-	if (pc_target2 == NULL || pc_target == NULL)
-		return;
-	if ((pc_target->targ==pc_target2->serial)&&(pc_target2->targ==pc_target->serial)) return;
+	if (attacker == NULL || defender == NULL) return;
+	if (attacker == defender) return;
+	if (attacker->dead || defender->dead) return;
 
-	if (pc_target->dead || pc_target2->dead) return;
-
-	pc_target->fight(pc_target2);
-	pc_target->setAttackFirst();
-	pc_target2->fight(pc_target);
-	pc_target2->resetAttackFirst();
+	defender->fight(attacker);
+	defender->setAttackFirst();
+	attacker->fight(defender);
+	attacker->resetAttackFirst();
 }
 
 void openbank(int s, P_CHAR pc_i)

@@ -117,8 +117,8 @@ int unmounthorse(UOXSOCKET s);
 void telltime(int s);
 void impaction(int s, int act);
 int fielddir(P_CHAR pc, int x, int y, int z);
-void npcattacktarget(P_CHAR pc_target2, P_CHAR pc_target);
-void npcsimpleattacktarget(P_CHAR pc_target2, P_CHAR pc_target);
+void npcattacktarget(P_CHAR attacker, P_CHAR defender);
+void npcsimpleattacktarget(P_CHAR attacker, P_CHAR defender);
 int RandomNum(int nLowNum, int nHighNum);
 void enlist(int s, int listnum); // For enlisting in army
 
