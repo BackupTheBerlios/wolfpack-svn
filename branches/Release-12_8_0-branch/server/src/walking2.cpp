@@ -570,6 +570,10 @@ bool cMovement::CanNPCWalk(unitile_st xyb)
 	tile_st newTile;
 	Map->SeekTile( blockid, &newTile );
 
+	// khpae : blocking tile !!
+	if (xyb.flag1 & 0x40) {
+		return false;
+	}
 	if ( Map->IsRoofOrFloorTile(&newTile) )
 		return true;
 	
@@ -589,6 +593,10 @@ bool cMovement::CanPlayerWalk(unitile_st xyb)
 	tile_st newTile;
 	Map->SeekTile( blockid, &newTile );
 
+   // khpae : blocking tile !!
+	if (xyb.flag1 & 0x40) {
+		return false;
+	}
 	if ( Map->IsRoofOrFloorTile(&newTile) )
 		return true;
 	
@@ -1851,22 +1859,21 @@ bool cMovement::CanCharWalk(P_CHAR pc, short int x, short int y, signed char &z)
 	signed char nNewZ = illegal_z;
 	short int MoveType = CheckMovementType(pc);
 	bool blocked = false;
-
+	int xycount[3] = {0,};
+	unitile_st xyblock[3][XYMAX];
 	for ( int cnt = 0; cnt < 3 ; cnt++ )
 	{
-		int xycount = 0;
-		unitile_st xyblock[XYMAX];
 
 		switch (cnt)
 		{
 		case 0:
-			GetBlockingMap( Coord_cl(x, y, z, pc->pos.map), xyblock, xycount);
+			GetBlockingMap( Coord_cl(x, y, z, pc->pos.map), xyblock[0], xycount[0]);
 			break;
 		case 1:
-			GetBlockingStatics( Coord_cl(x, y, z, pc->pos.map), xyblock, xycount);
+			GetBlockingStatics( Coord_cl(x, y, z, pc->pos.map), xyblock[1], xycount[1]);
 			break;
 		case 2:
-			GetBlockingDynamics( Coord_cl(x, y, z, pc->pos.map), xyblock, xycount);
+			GetBlockingDynamics( Coord_cl(x, y, z, pc->pos.map), xyblock[2], xycount[2]);
 			break;
 		default:
 #if DEBUG_WALK_ERROR
@@ -1880,9 +1887,9 @@ bool cMovement::CanCharWalk(P_CHAR pc, short int x, short int y, signed char &z)
 	// knoxos
 	// Work our way through the blockables item array
 		int i;
-		for(  i = 0; i < xycount; i++ )
+		for(  i = 0; i < xycount[cnt]; i++ )
 		{
-		    unitile_st *thisblock = &xyblock[i]; // this is a easy/little tricky, to save a little calculation
+		    unitile_st *thisblock = &xyblock[cnt][i]; // this is a easy/little tricky, to save a little calculation
 		                                     // since the [i] is calclated several times below
 			                                 // if it doesn't help, it doesn't hurt either.
 			signed char nItemTop = thisblock->basez + thisblock->height; // Calculate the items total height
@@ -1893,22 +1900,24 @@ bool cMovement::CanCharWalk(P_CHAR pc, short int x, short int y, signed char &z)
 			// khpae - ladder end
 
 	    // check if the creature is floating on a static (keeping Z or falling)
-			if ( ( nItemTop >= nNewZ ) &&
+			if ( ( nItemTop > nNewZ ) &&
 				 ( ( ( nItemTop <= oldZ ) && ( abs(oldZ - nItemTop) <= P_M_MAX_Z_FALL ) ) ||
 				 ( ( nItemTop >= oldZ ) && ( nItemTop < oldZ + P_M_MAX_Z_CLIMB ) ) ) )
 			{
-				if ( ( MoveType & P_C_IS_GM_BODY ) && ( CanGMWalk(xyblock[i]) ) )
+				if ( ( MoveType & P_C_IS_GM_BODY ) && ( CanGMWalk(xyblock[cnt][i]) ) )
 					nNewZ = nItemTop;
-				if ( ( MoveType & P_C_IS_PLAYER ) && ( CanPlayerWalk(xyblock[i]) ) )
+				if ( ( MoveType & P_C_IS_PLAYER ) && ( CanPlayerWalk(xyblock[cnt][i]) ) )
 					nNewZ = nItemTop;
-				if ( ( MoveType & P_C_IS_FISH ) && ( CanFishWalk(xyblock[i]) ) )
+				if ( ( MoveType & P_C_IS_FISH ) && ( CanFishWalk(xyblock[cnt][i]) ) )
 					nNewZ = nItemTop;
-				if ( ( MoveType & P_C_IS_NPC ) && ( CanNPCWalk(xyblock[i]) ) )
+				if ( ( MoveType & P_C_IS_NPC ) && ( CanNPCWalk(xyblock[cnt][i]) ) )
 					nNewZ = nItemTop;
-				if ( ( MoveType & P_C_IS_BIRD ) && ( CanBirdWalk(xyblock[i]) ) )
+				if ( ( MoveType & P_C_IS_BIRD ) && ( CanBirdWalk(xyblock[cnt][i]) ) )
 					nNewZ = nItemTop;
 			}
 		}
+	// khpae - we must split two part
+	}
 
 #if DEBUG_WALK
 		printf( "CheckWalkable calculate Z=%s %d\n", pc->name.c_str(), nNewZ );
@@ -1916,18 +1925,24 @@ bool cMovement::CanCharWalk(P_CHAR pc, short int x, short int y, signed char &z)
 
 		// now the new Z-cordinate of creature is known,
 		// check if it hits it's head against something (blocking in other words)
-		// khpae head block removed
-		/*for(i = 0; i < xycount; i++)
+// khpae - we must split two part
+	for (int cnt=0; cnt<3; cnt++) {
+		int i;
+		for(i = 0; i < xycount[cnt]; i++)
 		{
-			unitile_st *thisblock = &xyblock[i];
+			unitile_st *thisblock = &xyblock[cnt][i];
 			signed char nItemTop = thisblock->basez + thisblock->height; // Calculate the items total height
-			if ((nItemTop >= nNewZ) && (thisblock->basez <= nNewZ + P_M_MAX_Z_INFLUENCE))
+			// khpae
+			// 'head' blocking things
+			//if ((nItemTop >= nNewZ) && (thisblock->basez <= nNewZ + P_M_MAX_Z_INFLUENCE))
+			signed char nZ = nNewZ + P_M_MAX_Z_INFLUENCE;
+			if ((nItemTop>nNewZ) && (thisblock->basez<=nZ))
 			{ // in effact radius?
 				if ( MoveType & P_C_IS_GM_BODY )
 					continue;
-				if ( ( MoveType & P_C_IS_FISH ) && ( CanFishWalk(xyblock[i]) ) )
+				if ( ( MoveType & P_C_IS_FISH ) && ( CanFishWalk(xyblock[cnt][i]) ) )
 					continue;
-				if ( ( MoveType & P_C_IS_BIRD ) && ( CanBirdWalk(xyblock[i]) ) )
+				if ( ( MoveType & P_C_IS_BIRD ) && ( CanBirdWalk(xyblock[cnt][i]) ) )
 					continue;
 				if ( thisblock->flag1 & 0x40 )
 				{   // blocking
@@ -1947,11 +1962,11 @@ bool cMovement::CanCharWalk(P_CHAR pc, short int x, short int y, signed char &z)
     //         such gaps or tunnels in Britannia).
     //         (Well UO isn't ment to really think in 3d)
     // Thyme : He's right... Should be based of character's height.
-		}*/
+		}
 
 		// khpae - cleanup needed
-//		if (blocked)
-//			break;
+		if (blocked)
+			break;
 	
 	}
 // end knoxos code

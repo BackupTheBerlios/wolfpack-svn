@@ -1034,20 +1034,33 @@ void checkauto() // Check automatic/timer controlled stuff (Like fighting and re
 								}
 							}
 						} else if (mapitem != NULL) {//Boats
-							if(mapitem->type==117 &&
-								(mapitem->type2==1 || mapitem->type2==2)&&
+							// khpae
+							if (mapitem->type==117 && 
+								(mapitem->type2<9 || mapitem->autoSail) &&
+							//	(mapitem->type2==1 || mapitem->type2==2)&&
 								(mapitem->gatetime<=currenttime||overflow))
 							{
-								if (mapitem->type2==1) 
+								if (mapitem->autoSail) {
+									Boats->Move (i, mapitem);
+								} else {
+									int dir = mapitem->dir + mapitem->type2 - 1;
+									if (dir > 7) {
+										dir -= 8;
+									}
+									if (!Boats->Move (i, dir, mapitem)) {
+									//mapitem->type2 = 8;
+									}
+								}
+								mapitem->gatetime = (unsigned int)(currenttime+(double)(SrvParams->boatSpeed()*MY_CLOCKS_PER_SEC));
+								/*if (mapitem->type2==1) 
 									Boats->Move(i, mapitem->dir, mapitem);
 								else 
 								{
 									int dir = mapitem->dir+4;
 									if (dir>7) dir-=8; // LB, BUGKILLING !!!
 									Boats->Move(i, dir, mapitem);
-								}
-								mapitem->gatetime=(unsigned int)(currenttime + (double)(SrvParams->boatSpeed()*MY_CLOCKS_PER_SEC));
-							}	
+								}*/
+							}
 						}
 					}
 				}
