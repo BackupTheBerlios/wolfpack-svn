@@ -1861,7 +1861,8 @@ bool cMovement::CanCharWalk(P_CHAR pc, short int x, short int y, signed char &z)
 	bool blocked = false;
 	int xycount[3] = {0,};
 	unitile_st xyblock[3][XYMAX];
-	for ( int cnt = 0; cnt < 3 ; cnt++ )
+	int cnt = 0;
+	for ( ; cnt < 3 ; ++cnt )
 	{
 
 		switch (cnt)
