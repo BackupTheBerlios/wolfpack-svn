@@ -251,8 +251,8 @@ void cCharStuff::CheckAI(unsigned int currenttime, P_CHAR pc_i) // Lag Fix -- Zi
 					P_CHAR pc = ri.GetData();
 					if (pc != NULL)
 					{
-						if (pc->isPlayer() && !online(pc))
-					       continue;					// logged out player
+						if (!pc->isNpc() || !online(pc))
+					       continue;					// logged out player or not npc
 				        if (pc_i->isSameAs(pc))
 					       continue;					// the guard himself
 				        if (!(pc->npcaitype==2 || pc->isMurderer()))
@@ -321,31 +321,43 @@ void cCharStuff::CheckAI(unsigned int currenttime, P_CHAR pc_i) // Lag Fix -- Zi
 			if (!pc_i->war	// guard isnt busy 
 				&& pc_i->inGuardedArea())	// this region is guarded
 			{	// this bracket just to keep compiler happy
+
+				P_CHAR Victim = NULL;
+				UI32 minDist;
+
 				cRegion::RegionIterator4Chars ri(pc_i->pos);
 				for (ri.Begin(); !ri.atEnd(); ri++)
 				{
 					P_CHAR pc = ri.GetData();
 					if (pc != NULL)
 					{
-						onl = online(pc);
 						d = chardist( pc_i, pc);
-						if (pc_i == pc || d > 3 || pc->isInvul() || pc->dead || !onl)
+
+						if( ( !pc->isNpc() ) && ( !online( pc ) ) )
+						    continue;
+						if (pc_i == pc || d > SrvParams->attack_distance() || pc->isInvul() || pc->dead)
 							continue;
-						if (pc->isPlayer() && pc->crimflag > 0)
+						// If the distance is below the minimal distance we found
+					    if( ( Victim == NULL ) || ( minDist > d ) )
+						{
+						   Victim = pc;
+						   minDist = d;
+						}
+						if (pc->isPlayer() && pc->crimflag > 0 && d <= 3)
 						{
 							sprintf((char*)temp, "You better watch your step %s, I am watching thee!!", pc->name.c_str());
 							npctalkall(pc_i, (char*)temp, 1);
 							pc_i->antispamtimer = uiCurrentTime + MY_CLOCKS_PER_SEC*30;
 						}
-						else if (pc->isPlayer() && !(pc->isInnocent() || pc->dead))
+						else if (pc->isPlayer() && pc->isInnocent() && d <= 3)
 						{
 							sprintf((char*)temp, "%s is an upstanding citizen, I will protect thee in %s.", pc->name.c_str(), region[pc->region].name);
 							npctalkall(pc_i, (char*)temp, 1);
 							pc_i->antispamtimer = uiCurrentTime + MY_CLOCKS_PER_SEC*30;
 						}
-						else if (d <= 10 &&(
+						else if (d <= SrvParams->attack_distance() &&(
 							(pc->isNpc() &&(pc->npcaitype == 2))	// evil npc
-							||(pc->isPlayer() && !(pc->isInnocent()) || pc->isCriminal()))	// a player, not grey or blue
+							||(pc->isPlayer() && pc->isMurderer() && !(pc->isInnocent()) || pc->isCriminal()))	// a player,is murderer & not grey or blue
 							||(pc->attackfirst == 1))	// any agressor
 						{
 							pc_i->pos.x = pc->pos.x; // Ripper..guards teleport to enemies.
@@ -353,7 +365,9 @@ void cCharStuff::CheckAI(unsigned int currenttime, P_CHAR pc_i) // Lag Fix -- Zi
 							pc_i->pos.z = pc->pos.z;
 							soundeffect2(pc_i, 0x01FE); // crashfix, LB
 							staticeffect(pc_i, 0x37, 0x2A, 0x09, 0x06);
-							npcattacktarget(pc_i, pc);
+							// We found a victim
+				            if( Victim != NULL )
+							npcattacktarget(pc_i, Victim);
 							npctalkall(pc_i, "Thou shalt regret thine actions, swine!", 1); // ANTISPAM !!! LB
 							return;
 						}
