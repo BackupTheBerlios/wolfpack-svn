@@ -198,7 +198,7 @@ void cMagic::SpellBook(UOXSOCKET s, P_ITEM pi)
 	LongToCharPtr(pi->serial, &sbookstart[1]);
 	Xsend(s, sbookstart, 7);
 
-	int spells[64] = {0,};
+	int spells[65] = {0,};
 	int i, scount=0;
 
 	unsigned int ci=0;
