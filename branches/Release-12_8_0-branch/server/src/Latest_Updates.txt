@@ -61,3 +61,4 @@ Show Npc Titles 1 = ON  0 = OFF. (Ripper)
 53) Fixed: Veterinary now should work (Uber/Correa)
 54) Fixed: House building bugs fixed (khpae)
 55) Fixed: Crash on some unusual ocasions with spell casting (Correa)
+56) Fixed: Snooping pack animals no longer use snooping. (Ripper) thanks to LB.

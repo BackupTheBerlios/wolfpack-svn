@@ -370,6 +370,7 @@ void doubleclick(int s) // Completely redone by Morrolan 07.20.99
 					backpack(s, serial);
 				else if (pc_currchar->serial == pco->serial || pc_currchar->isGMorCounselor() || pco->npcaitype == 17)
 					backpack(s, serial);
+				else if (pco->ownserial == pc_currchar->serial) backpack(s, serial); // no snooping if looking in pets backpack.
 				else
 					Skills->Snooping(pc_currchar, pi);
 			}
