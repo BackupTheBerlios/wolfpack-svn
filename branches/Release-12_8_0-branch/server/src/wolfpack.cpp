@@ -6245,6 +6245,7 @@ void StartClasses(void)
 	Books=NULL;
 	Respawn=NULL;
 	Movement = NULL;
+	Drag = NULL;
 	Weather=NULL;
 	DragonAI=NULL;
 	BankerAI=NULL;
@@ -6271,6 +6272,7 @@ void StartClasses(void)
 	Respawn = new cRespawn;
 	AllTmpEff = new cAllTmpEff;
 	Movement = new cMovement;
+	Drag = new cDragdrop;
 	//Weather = new cWeather;
 	// Sky's AI Stuff
 	DragonAI=new cCharStuff::cDragonAI;
@@ -6301,6 +6303,7 @@ void DeleteClasses(void)
 	delete Books;
 	delete Respawn;
 	delete Movement;
+	delete Drag;
 	delete DragonAI;
 	delete BankerAI;
 	//delete Weather;

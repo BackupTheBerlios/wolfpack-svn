@@ -55,3 +55,6 @@ Show Npc Titles 1 = ON  0 = OFF. (Ripper)
 47) Fixed: Readded the domain name resolution code, simplified the address handling (Correa)
 48) Fixed: Shafts & feathers will now reduce when used. (codex / Ripper)
 49) Fixed: Cant use wands in jail. (Ripper)
+50) Fixed: Crash with drag & drop code (Correa)
+51) Fixed: Crash when trying to make pet attack invalid target (Correa)
+

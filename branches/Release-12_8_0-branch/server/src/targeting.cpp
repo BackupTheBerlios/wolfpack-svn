@@ -2743,14 +2743,16 @@ void cTargets::JailTarget(int s, int c)
 
 void cTargets::AttackTarget(int s)
 {
-	P_CHAR target = FindCharBySerial(addx[s]);
+	P_CHAR target  = FindCharBySerial(addx[s]);
 	P_CHAR target2 = FindCharBySerial(calcserial(buffer[s][7], buffer[s][8], buffer[s][9], buffer[s][10]));
+	if ( !target2 || !target ) 
+		return;
+
     if (target->inGuardedArea()) // Ripper..No pet attacking in town.
 	{
         sysmessage(s,"You cant have pets attack in town!");
         return;
 	}
-	if (target2 == NULL || target == NULL) return;
 	npcattacktarget(target2, target);
 }
 
