@@ -111,8 +111,3 @@ void cUObject::Serialize(ISerialization &archive)
 		archive.doneWritting();
 	}
 }
-
-inline string cUObject::objectID()
-{
-	return string("UOBJECT");
-}
