@@ -150,7 +150,7 @@ static void item_bounce6(const P_CLIENT ps, const P_ITEM pi)
 
 void cDragdrop::get_item(P_CLIENT ps) // Client grabs an item
 {
-	int amount, update = 0, serial;
+	unsigned short amount, update = 0, serial;
 	UOXSOCKET s = ps->GetSocket();
 	P_CHAR pc_currchar = ps->getPlayer();
 	
