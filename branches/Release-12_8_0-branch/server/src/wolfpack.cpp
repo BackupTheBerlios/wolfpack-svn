@@ -2381,6 +2381,9 @@ void mounthorse(UOXSOCKET s, P_CHAR pc_mount) // Remove horse char and give play
 			case 0x4E: pi->setId(0x3EA0); break; // Grey Horse
 			case 0x50: pi->setId(0x3EA1); break; // Tan Horse
 			case 0x74: pi->setId(0x3EB5); break; // Nightmare
+			case 0xB1: pi->setId(0x3EB5); break; // Nightmare
+			case 0xB2: pi->setId(0x3EB6); break; // Nightmare
+			case 0xB3: pi->setId(0x3EB7); break; // Nightmare
 			case 0x75: pi->setId(0x3EA8); break; // Silver Steed
 			case 0x72: pi->setId(0x3EA9); break; // Dark Steed
 			case 0x7A: pi->setId(0x3EB4); break; // Unicorn

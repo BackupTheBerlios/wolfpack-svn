@@ -1738,6 +1738,9 @@ void dbl_click_character(UOXSOCKET s, SERIAL target_serial)
 		(target->id() == 0x00AA)||
 		(target->id() == 0x00AB)||
 		(target->id() == 0x00BB)||
+		(target->id() == 0x00B1)||
+		(target->id() == 0x00B2)||
+		(target->id() == 0x00B3)||
 		(target->id() == 0x0090)||
 		(target->id() == 0x00C8)||
 		(target->id() == 0x00E2)||
