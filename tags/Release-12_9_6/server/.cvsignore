@@ -1,0 +1,11 @@
+moc_*.cpp
+res.aps
+wolf.ncb
+wolf.opt
+wolf.plg
+Release
+Debug
+vc70.idb
+wolfpack.suo
+wolfpack.ncb
+vc70.pdb
