@@ -39,6 +39,8 @@
 #include <string>
 #include <map>
 
+// Library Headers
+#include "qstring.h"
 
 // Wolfpack Headers
 #include "defines.h"
@@ -271,10 +273,11 @@ struct tele_locations_st
 struct ServerList_st
 {
 	UI16 uiIndex;
-	string sServer;
+	QString sServer;
 	UI08 uiFull;
 	UI08 uiTime;
-	string sIP;
+	UI32 ip;
+	QString sIP;
 	UI16 uiPort;
 };
 

@@ -201,7 +201,7 @@ void updatehtml()//HTML
 		{
 			//ip=inet_addr(serv[str2num(script2)-1][1]);
 			vector<ServerList_st>::iterator it = SrvParams->serverList().begin();
-			fprintf(html, (*(it + str2num(script2) - 1)).sIP.c_str());
+			fprintf(html, (*(it + str2num(script2) - 1)).sIP.latin1());
 		}
 		else if(!(strcmp((char*)script1,"GMNUM")))
 		{

@@ -338,8 +338,8 @@ void cNetworkStuff::Login2(int s)
 		newlist2[0]=(unsigned char) ((i+1)>>8);
 		newlist2[1]=(unsigned char) ((i+1)%256);
 
-		strcpy((char*)&newlist2[2], (*it).sServer.c_str());
-		ip = inet_addr((*it).sIP.c_str());
+		strcpy((char*)&newlist2[2], (*it).sServer.latin1());
+		ip = (*it).ip;
 		newlist2[39]=(unsigned char) (ip>>24);
 		newlist2[38]=(unsigned char) (ip>>16);
 		newlist2[37]=(unsigned char) (ip>>8);
@@ -352,7 +352,7 @@ void cNetworkStuff::Relay(int s) // Relay player to a certain IP
 {
 	unsigned long int ip;
 	ServerList_st serv = SrvParams->serverList()[buffer[s][2]-1];
-	ip = inet_addr(serv.sIP.c_str());
+	ip = serv.ip;
 
 	login03[4]=(unsigned char) (ip>>24);
 	login03[3]=(unsigned char) (ip>>16);
@@ -595,7 +595,7 @@ void cNetworkStuff::startchar(int s) // Send character startup stuff to player
 	/// you can change 0x37 to your liking, but not to 0
 	/////////////////////////////////////////////////////////////////////
 
-	sysmessage(s, 0x37, "Welcome to %s !", SrvParams->serverList()[0].sServer.c_str());
+	sysmessage(s, 0x37, "Welcome to %s !", SrvParams->serverList()[0].sServer.latin1());
 	sysmessage(s, 0x37, "Running on %s %s %s ", wp_version.productstring.c_str() , wp_version.betareleasestring.c_str() , wp_version.verstring.c_str() );
 	sysmessage(s, 0x37, "Current developers: %s",wp_version.codersstring.c_str() );
 
@@ -1337,7 +1337,7 @@ void cNetworkStuff::GetMsg(int s) // Receive message from client
 					break;
 
 				case 0x22:// Resync Request			
-					teleport((pc_currchar));
+					teleport(pc_currchar);
 					break;
 
 				case 0x03:// Speech
