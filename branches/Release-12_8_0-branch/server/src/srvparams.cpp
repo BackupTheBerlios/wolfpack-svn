@@ -241,7 +241,10 @@ std::vector<ServerList_st>& cSrvParams::serverList()
 					server.sServer = strList[0];
 					QStringList strList2 = QStringList::split(",", strList[1].stripWhiteSpace());
 					server.sIP = strList2[0];
-					server.uiPort = strList2[1].toUShort();
+					bool ok = false;
+					server.uiPort = strList2[1].toUShort(&ok);
+					if ( !ok )
+						server.uiPort = 2593; // Unspecified defaults to 2593
 					serverList_.push_back(server);
 				}
 			}
