@@ -41,6 +41,7 @@
 #include <list>
 
 // Library Includes
+#include <qvaluevector.h>
 
 using namespace std;
 
@@ -67,8 +68,8 @@ public:
 	friend class RegionIterator4Chars;
 	friend class RegionIterator4Items;
 
-	typedef vector<SERIAL> raw;
-	typedef vector<SERIAL>::iterator rawIterator;
+	typedef QValueVector<SERIAL> raw;
+	typedef QValueVector<SERIAL>::iterator rawIterator;
 	typedef ::RegionIterator4Chars RegionIterator4Chars;
 	typedef ::RegionIterator4Items RegionIterator4Items;
 
