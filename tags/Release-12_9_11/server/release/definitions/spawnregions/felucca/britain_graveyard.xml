@@ -1,0 +1,24 @@
+<!--
+=================================================================
+|   )      (\_     | WOLFPACK 13.0.0 Scripts                    |
+|  ((    _/{  "-;  | Created by: sereg                        |
+|   )).-' {{ ;'`   | Revised by: Dreoth                         |
+|  ( (  ;._ \\ ctr | Last Modification: Created                 |
+=================================================================
+-->
+<definitions>
+
+	<spawnregion id="felucca_britain_graveyard">
+		<maxnpcamount>5</maxnpcamount>
+		<mintime>10</mintime>
+		<maxtime>30</maxtime>
+		<npcs>
+			<npc mult="3">headless</npc>
+			<npc mult="1">skeleton</npc>
+			<npc mult="1">lich</npc>
+		</npcs>
+		<npcspercycle>1</npcspercycle>
+		<rectangle x1="1337" x2="1374" y1="1493" y2="1509" map="0" />
+	</spawnregion>
+
+</definitions>

@@ -1,0 +1,20 @@
+<!--
+=================================================================
+|   )      (\_     | WOLFPACK 13.0.0 Scripts
+|  ((    _/{  "-;  | Created by: Dreoth
+|   )).-' {{ ;'`   | Revised by:
+|  ( (  ;._ \\ ctr | Last Modification: Created
+=================================================================
+-->
+<!--
+	<teleport source="x,y,z,map" destination="x,y,z,map" />
+-->
+<definitions>
+
+	<region name="ilshenar_teleports">
+		<!-- The World -->
+		<rectangle x1="1" y1="1" x2="2304" y2="1600" map="2" />
+		<!-- Teleports -->
+	</region>
+
+</definitions>

@@ -1,0 +1,52 @@
+<!--
+=================================================================
+|   )      (\_     | WOLFPACK 13.0.0 Scripts                    |
+|  ((    _/{  "-;  | Created by: DarkStorm                      |
+|   )).-' {{ ;'`   | Revised by: White Wolf                     |
+|  ( (  ;._ \\ ctr | Last Modification: 12/16/02                |
+=================================================================
+-->
+<definitions>
+
+	<!-- A bowyer vendor -->
+	<npc id="bowyer_male">
+		<inherit>vendor_male</inherit>
+		<title context="Vendor Male Titles">the Bowyer</title>
+		<equipped>
+			<item id="13b1" /> <!-- Bow -->
+			<item id="13c7" /> <!-- Leather Gorget -->
+		</equipped>
+		<shopkeeper>
+			<restockable>
+				<item id="1022"><amount>20</amount></item>
+			</restockable>
+			<sellable>
+				<item id="1022" />
+			</sellable>
+		</shopkeeper>
+		<archery><random min="600" max="830" /></archery>
+		<bowcrafting><random min="900" max="1000" /></bowcrafting>
+		<category>Vendors\Bowyer (Male)</category>
+	</npc>
+	
+	<npc id="bowyer_female">
+		<inherit>vendor_female</inherit>
+		<title context="Vendor Female Titles">the Bowyer</title>
+		<equipped>
+			<item id="13b1" /> <!-- Bow -->
+			<item id="13c7" /> <!-- Leather Gorget -->
+		</equipped>
+		<shopkeeper>
+			<restockable>
+				<item id="1022"><amount>20</amount></item>
+			</restockable>
+			<sellable>
+				<item id="1022" />
+			</sellable>
+		</shopkeeper>
+		<archery><random min="600" max="830" /></archery>
+		<bowcrafting><random min="900" max="1000" /></bowcrafting>
+		<category>Vendors\Bowyer (Female)</category>
+	</npc>
+
+</definitions>

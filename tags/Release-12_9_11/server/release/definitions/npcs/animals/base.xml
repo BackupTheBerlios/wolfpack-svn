@@ -1,0 +1,24 @@
+<!--
+=================================================================
+|   )      (\_     | WOLFPACK 13.0.0 Scripts                    |
+|  ((    _/{  "-;  | Created by: Kosh                           |
+|   )).-' {{ ;'`   | Revised by: sereg                          |
+|  ( (  ;._ \\ ctr | Last Modification: Enhanced                |
+=================================================================
+-->
+<definitions>
+
+	<!-- animal_base -->
+	<npc id="animal_base">
+		<name>unknown animal</name>
+		<wandertype>1</wandertype>
+		<direction><random min="0" max="18" /></direction>
+		<anatomy>0</anatomy>
+		<mindamage>1</mindamage>
+		<maxdamage>3</maxdamage>
+		<mintaming>2000</mintaming>
+		<bindmenu>tame_menu,pet_menu</bindmenu>
+		<basescripts>speech.pets</basescripts>
+	</npc>
+
+</definitions>
