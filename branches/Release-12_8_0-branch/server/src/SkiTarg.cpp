@@ -1861,15 +1861,14 @@ void cSkills::ItemIdTarget(int s)
 			}
 
 			// Identify Item by Antichrist // Changed by MagiusCHE)
-			if (CheckSkill(pc_currchar, ITEMID, 250, 500))
-				if (pi->name2 == "#") 
-					pi->name = pi->name2; // Item identified! -- by Magius(CHE)
+			if (CheckSkill(pc_currchar, ITEMID, 250, 500)) 
 
 			if(pi->name == "#") 
 				pi->getName(temp2);
 			else 
-				strcpy((char*)temp2, pi->name.c_str());
+				strcpy((char*)temp2, pi->name2.c_str());
 			sysmessage(s, tr("You found that this item appears to be called: %1").arg(temp2) );
+			pi->name = pi->name2; // Item identified!
 
 			// Show Creator by Magius(CHE)
 			if (CheckSkill(pc_currchar, ITEMID, 250, 500))
