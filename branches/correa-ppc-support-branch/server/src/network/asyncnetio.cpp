@@ -436,8 +436,10 @@ void cAsyncNetIO::run() throw()
 						char temp[4];
 						d->consumeReadBuf( 4, temp );
 						d->skippedUOHeader = true;
-
-						d->seed = ( ( temp[0] & 0xFF ) << 24 ) | ( ( temp[1] & 0xFF ) << 16 ) | ( ( temp[2] & 0xFF ) << 8 ) | ( ( temp[3] & 0xFF ) );
+						
+						wpCopyIn( d->seed, tmp );
+						d->seed = B_BENDIAN_TO_HOST_INT32( d->seed );
+						//d->seed = ( ( temp[0] & 0xFF ) << 24 ) | ( ( temp[1] & 0xFF ) << 16 ) | ( ( temp[2] & 0xFF ) << 8 ) | ( ( temp[3] & 0xFF ) );
 
 						// Only 0xFFFFFFFF seed allowed for !d->login
 						if ( !d->login && d->seed != 0xFFFFFFFF )
@@ -474,7 +476,7 @@ void cAsyncNetIO::run() throw()
 					// for encrypted data if we didn't receive all we need
 					if ( !d->encryption )
 					{
-						// Gameserver Encryption
+						// Game server Encryption
 						if ( !d->login && d->rsize >= 65 )
 						{
 							// The 0x91 packet is 65 byte
@@ -570,13 +572,13 @@ void cAsyncNetIO::run() throw()
 		}
 		mapsMutex.unlock();
 		//if( buffers.empty() )
-		// Disconnecting doesnt work for now
+		// Disconnecting doesn't work for now
 		waitCondition.wait( 10 ); // let's rest for a while
 	}
 }
 
 /*!
-  Informs the amount of data valiable into internal buffers
+  Informs the amount of data avaliable into internal buffers
 */
 Q_ULONG cAsyncNetIO::bytesAvailable( QSocketDevice* socket ) const
 {
@@ -642,6 +644,7 @@ void cAsyncNetIO::buildUOPackets( cAsyncNetIOPrivate* d )
 				d->ungetch( *p );
 				d->ungetch( *( p + 1 ) );
 				d->ungetch( packetID );
+				length = B_LENDIAN_TO_HOST_INT32(length); // Because we built as little
 				if ( d->rsize < length )
 				{
 					keepExtracting = false;
