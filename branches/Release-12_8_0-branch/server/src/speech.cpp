@@ -944,7 +944,7 @@ int cSpeech::response(UOXSOCKET s, P_CHAR pPlayer, const QString& SpeechUpr)
 	for (ri.Begin(); !ri.atEnd(); ri++)
 	{
 		pc = ri.GetData();
-		if (pc->isPlayer())		// only npcs will respond automagically, players still have to do that themselves ;)
+		if ( !pc || pc->isPlayer() )		// only npcs will respond automagically, players still have to do that themselves ;)
 			continue;
 		if (pPlayer->dist(pc) > 16)	// at least they should be on the screen
 			continue;

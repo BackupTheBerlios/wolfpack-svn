@@ -1162,6 +1162,11 @@ void deathstuff(P_CHAR pc_player)
 	{
 		pi_j = FindItemBySerial(vecContainer[ci]);
 		// for BONUS ITEMS - remove bonus
+		if ( !pi_j )
+		{
+			contsp.remove( pc_player->serial, vecContainer[ci] ); // take out the invalid entrie
+			continue;
+		}
 		pc_player->removeItemBonus(pi_j);
 		if ((pi_j->trigon==1) && (pi_j->layer >0) && (pi_j->layer!=15) && (pi_j->layer<19))// -Frazurbluu- Trigger Type 2 is my new trigger type *-
 		{
@@ -1184,7 +1189,7 @@ void deathstuff(P_CHAR pc_player)
 				for ( ci1 = 0; ci1 < vecContainer.size(); ++ci1)
 				{
 					P_ITEM pi_k = FindItemBySerial(vecContainer[ci1]);
-					if ( (!(pi_k->priv&0x02)) && (pi_k->type!=9))//Morrolan spellbook disappearance fix
+					if ( pi_k && !(pi_k->priv&0x02) && pi_k->type !=9 )//Morrolan spellbook disappearance fix
 					{//put the item in the corpse only of we're sure it's not a newbie item or a spellbook
 						pi_k->layer=0;
 						pi_k->SetContSerial(pi_c->serial);
@@ -2018,6 +2023,13 @@ int unmounthorse(UOXSOCKET s) // Get off a horse (Remove horse item and spawn ne
 	for ( ci = 0; ci < vecContainer.size(); ci++)
 	{
 		pi = FindItemBySerial(vecContainer[ci]);
+
+		if ( !pi )
+		{
+			contsp.remove( p_petowner->serial, vecContainer[ci] ); // take out invalid entrie
+			continue;
+		}
+
 		if (pi->layer == 0x19 && !pi->free)
 		{
 			//////////////////////////////////////
@@ -2814,27 +2826,6 @@ int main(int argc, char *argv[])
 	  if (wp_version.verstruct.flags & WPV_REQXWOLF)
 	  {		
 		    // link dynamicaly so that it starts on systems that don't have the isdebuggerpresent() system call (w95)
-		    bool detectable;
-		  	BOOL  (WINAPI *lpfIsDebuggerPresent)   (void  ) = NULL;
-	        HINSTANCE hInstLib = LoadLibraryA ("Kernel32.DLL" );
-            if (hInstLib==NULL) FreeLibrary(hInstLib); else lpfIsDebuggerPresent = ( BOOL ( WINAPI* ) ( void ) )  GetProcAddress ( hInstLib, "IsDebuggerPresent" );
-		    BOOL debuggerpresent=false;
-			if (lpfIsDebuggerPresent==NULL) { detectable=false; } else { detectable=true; debuggerpresent = lpfIsDebuggerPresent(); }
-
-			if (!debuggerpresent && detectable)
-			{		     		   			
-               clConsole.send("This is a Wolfpack version that needs to be started by X-Wolf\n");
-			   clConsole.send("Wolfpack server detected that is hasn't been started by X-Wolf, quitting\n");
-               FreeLibrary(hInstLib);
-			   exit(666);
-			} else if (!detectable)
-			{
-			   clConsole.send("This is a Wolfpack version that needs to be started by X-Wolf\n");
-			   clConsole.send("But Wolfpack can't detect if it is started by X-Wolf or not\n");
-			
-			}
-
-			if (hInstLib!=NULL) FreeLibrary(hInstLib);		
 	  }
 	
 #endif

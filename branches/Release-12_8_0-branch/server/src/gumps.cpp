@@ -845,9 +845,9 @@ void playermenu(int s, int type) //WhoList2 with offline players--By Ripper
 		//--Start User List
 
 		k=0;
-		for(i=0;i<now;i++)
+		for( i = 0; i < now; ++i )
 		{
-			if ((currchar[i]->account!=-1 && !currchar[i]->free && online(currchar[i])))
+			if (perm[i] && (currchar[i]->account!=-1 && !currchar[i]->free && online(currchar[i])))
 			{
 			  if(k>0 && (!(k%10)))
 			  {

@@ -672,6 +672,17 @@ int GuildCompare(P_CHAR player1, P_CHAR player2)
 
 	cGuildStone* pStone1 = dynamic_cast<cGuildStone*>(FindItemBySerial(player1->guildstone));
 	cGuildStone* pStone2 = dynamic_cast<cGuildStone*>(FindItemBySerial(player2->guildstone));
+	
+	if ( !pStone1 ) // not a valid guildstone, let's take out;
+	{
+		player1->guildstone = INVALID_SERIAL;
+		return 0;
+	}
+	if ( !pStone2 ) // not a valid guildstone, let's take out;
+	{
+		player2->guildstone = INVALID_SERIAL;
+		return 0;
+	}
 
 	if ( pStone1->guildType != pStone2->guildType && pStone1->guildType != cGuildStone::standard && pStone2->guildType != cGuildStone::standard)
 	{

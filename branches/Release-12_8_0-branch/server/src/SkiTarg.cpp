@@ -2220,7 +2220,9 @@ void cSkills::StealingTarget(int s) // re-arranged by LB 22-dec 1999
 	}
 	
 	P_CHAR pc_npc = GetPackOwner(pi);
-
+	if ( !pc_npc )
+		return;
+	
 	if (pc_npc->npcaitype == 17)
 	{
 		sysmessage(s, tr("You cannot steal that.") );
