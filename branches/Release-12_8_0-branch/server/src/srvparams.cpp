@@ -46,6 +46,10 @@ cSrvParams::cSrvParams( const QString& filename, const QString& format, const QS
 	// Load data into binary format
 	// If value not found, create key.
 	readData();
+	if (!containGroup("StartLocation") )
+		setDefaultStartLocation();
+	if (!containGroup("LoginServer"))
+		setDefaultServerList();
 	flush(); // if any key created, save it.
 }
 
@@ -211,6 +215,8 @@ void cSrvParams::readData()
 
 void cSrvParams::reload()
 {
+	serverList_.clear();
+	startLocation_.clear();
 	Preferences::reload();
 	readData();
 }
@@ -219,8 +225,6 @@ std::vector<ServerList_st>& cSrvParams::serverList()
 {
 	if ( serverList_.empty() ) // Empty? Try to load
 	{
-		if (!containGroup("LoginServer"))
-			setDefaultServerList();
 		setGroup("LoginServer");
 		bool bKeepLooping = true;
 		unsigned int i = 1;
@@ -250,8 +254,6 @@ std::vector<StartLocation_st>& cSrvParams::startLocation()
 {
 	if ( startLocation_.empty() ) // Empty? Try to load
 	{
-		if (!containGroup("StartLocation") )
-			setDefaultStartLocation();
 		setGroup("StartLocation");
 		bool bKeepLooping = true;
 		unsigned int i = 1;
