@@ -87,6 +87,7 @@ void cSrvParams::readData()
 	decayTime_				= getNumber("Game Speed", "Decay Time", 300, true);
 	secondsPerUOMinute_     = getNumber("Game Speed", "Seconds Per UO Minute", 5, true);
 	beggingTime_            = getNumber("Game Speed", "Begging Time", 120, true);
+	checkTammedTime_		= getDouble("Game Speed", "Tamed Check Time", 1.0, true);
     
 	// General Group
 	skillcap_				= getNumber("General",	"SkillCap",			700, true);
@@ -104,8 +105,8 @@ void cSrvParams::readData()
 	announceWorldSaves_		= getBool("General",	"Announce WorldSaves", true, true);
 	port_                   = getNumber("General",    "Port", 2593, true);
 	goldWeight_             = getDouble("General",    "Gold Weight", 0.001000, true);
-	playercorpsedecaymultiplier_ = getNumber("General", "Player Corpse Decay Multiplier", 0, true);
-	lootdecayswithcorpse_   = getNumber("General",    "Loot Decays With Corpse", 1, true);
+	playercorpsedecaymultiplier_ = getNumber("General", "Player Corpse Decay Multiplier", 1, true);
+	lootdecayswithcorpse_   = getBool("General",    "Loot Decays With Corpse", true, true);
 	invisTimer_             = getDouble("General",    "InvisTimer", 60, true);
 	bandageInCombat_		= getBool("General",	"Bandage In Combat",	true, true);
 	gateTimer_              = getDouble("General",    "GateTimer", 30, true);
