@@ -428,12 +428,12 @@ void cCombat::CombatHit(P_CHAR pc_attacker, P_CHAR pc_deffender, unsigned int cu
 			{
 				if(pc_deffender->casting && currentSpellType[s2]==0 )
 				{//if casting a normal spell (scroll: no concentration loosen)
+					Magic->SpellFail(s2);
 					currentSpellType[s2]=0;
 					pc_deffender->spell=-1;
 					pc_deffender->casting=0;
 					pc_deffender->spelltime=0;
 					pc_deffender->priv2 &= 0xfd; // unfreeze, bugfix LB
-					Magic->SpellFail(s2);
 				}
 			}
 
