@@ -180,7 +180,7 @@ public:
 		badsnd2 = static_cast < unsigned char>(badsnd&0x00FF);
 		failtext = failmsg;
 	}
-	virtual void deletematerial(SOCK s, int amount)
+	void deletematerial(SOCK s, int amount)
 	{
 		P_ITEM pPack = Packitem(currchar[s]);
 		if (!pPack)
@@ -198,11 +198,11 @@ public:
 			pPack->DeleteAmount(amt, itemmake[s].Mat2id, itemmake[s].Mat2color);
 		}
 	}
-	virtual void delonfail(SOCK s)		{deletematerial(s, itemmake[s].needs/2);}
-	virtual void delonsuccess(SOCK s)	{deletematerial(s, itemmake[s].needs);}
-	virtual void playbad(SOCK s)		{soundeffect(s, badsnd1, badsnd2);}
-	virtual void failmsg(SOCK s)		{sysmessage(s, failtext);}
-	virtual void failure(SOCK s)		
+	void delonfail(SOCK s)		{deletematerial(s, itemmake[s].needs/2);}
+	void delonsuccess(SOCK s)	{deletematerial(s, itemmake[s].needs);}
+	void playbad(SOCK s)		{soundeffect(s, badsnd1, badsnd2);}
+	void failmsg(SOCK s)		{sysmessage(s, failtext);}
+	void failure(SOCK s)		
 	{
 		delonfail(s);
 		playbad(s);
@@ -215,7 +215,7 @@ class cMMTsmith : public cMMT		// MakeMenuTarget for Smithing
 {
 public:
 	cMMTsmith(short badsnd=0x002A) : cMMT(badsnd) {}
-	virtual void deletematerial(SOCK s, int amount)
+	void deletematerial(SOCK s, int amount)
 	{
 		P_ITEM pPack= Packitem(currchar[s]);
 		if (pPack == NULL)

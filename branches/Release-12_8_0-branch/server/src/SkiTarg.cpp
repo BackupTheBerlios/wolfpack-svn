@@ -2681,14 +2681,14 @@ public:
 	virtual void delonsuccess(SOCK s)	{deletematerial(s, itemmake[s].needs);}
 	virtual void failure(SOCK s)		{delonfail(s);playbad(s);failmsg(s);}
 	*/
-	virtual void failmsg(int s)			{sysmessage(s,failtext);}
-	virtual void playbad(int s)			{soundeffect(s,badsnd1,badsnd2);}
-	virtual void playgood(int s)		{soundeffect(s,0,0x2A);}
-	virtual void checkPartID(short id)	{;}
-	virtual bool decide()				{return (itembits == 3) ? true : false;}
-	virtual void createIt(int s)		{;}
+	void failmsg(int s)			{sysmessage(s,failtext);}
+	void playbad(int s)			{soundeffect(s,badsnd1,badsnd2);}
+	void playgood(int s)		{soundeffect(s,0,0x2A);}
+	void checkPartID(short id)	{;}
+	bool decide()				{return (itembits == 3) ? true : false;}
+	void createIt(int s)		{;}
 	static cTinkerCombine* factory(short combinetype);
-	virtual void DoIt(int s)
+	void DoIt(int s)
 	{
 		P_ITEM piClick = FindItemBySerial( calcserial(addid1[s], addid2[s], addid3[s], addid4[s]) );
 		if( piClick == NULL )
@@ -2751,12 +2751,12 @@ class cTinkCreateAwG : public cTinkerCombine
 {
 public:
 	cTinkCreateAwG() : cTinkerCombine() {}
-	virtual void checkPartID(short id)
+	void checkPartID(short id)
 	{
 		if (id==0x105B || id==0x105C) itembits |= 0x01; // axles
 		if (id==0x1053 || id==0x1054) itembits |= 0x02; // gears
 	}
-	virtual void createIt(int s)
+	void createIt(int s)
 	{
 		Items->SpawnItem(s, currchar[s],1,"an axle with gears",1,0x10,0x51,0,1,1);
 	}
@@ -2766,19 +2766,19 @@ class cTinkCreateParts : public cTinkerCombine
 {
 public:
 	cTinkCreateParts() : cTinkerCombine() {}
-	virtual void checkPartID(short id)
+	void checkPartID(short id)
 	{
 		if (id==0x1051 || id==0x1052) itembits |= 0x01; // axles with gears
 		if (id==0x1055 || id==0x1056) itembits |= 0x02; // hinge
 		if (id==0x105D || id==0x105E) itembits |= 0x04; // springs
 	}
-	virtual bool decide()
+	bool decide()
 	{
 		if (itembits == 3) {id2=0x59; minskill=300; return true;}	// sextant parts
 		if (itembits == 5) {id2=0x4F; minskill=400; return true;}	// clock parts
 		return false;
 	}
-	virtual void createIt(int s)
+	void createIt(int s)
 	{
 		 char sztemp[15] ;
 		if (id2 == 0x4F)
@@ -2797,13 +2797,13 @@ class cTinkCreateClock : public cTinkerCombine
 {
 public:
 	cTinkCreateClock() : cTinkerCombine() {}
-	virtual void checkPartID(short id)
+	void checkPartID(short id)
 	{
 		if (id==0x104D || id==0x104E) itembits |= 0x01; // clock frame
 		if (id==0x104F || id==0x1050) itembits |= 0x02; // clock parts
 	}
-	virtual bool decide()   {minskill=600; return cTinkerCombine::decide();}
-	virtual void createIt(int s)
+	bool decide()   {minskill=600; return cTinkerCombine::decide();}
+	void createIt(int s)
 	{
 		Items->SpawnItem(s,currchar[s],1,"clock",0,0x10,0x4B,0,1,1);
 	}
