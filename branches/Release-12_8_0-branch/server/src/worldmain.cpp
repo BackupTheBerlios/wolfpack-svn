@@ -95,20 +95,8 @@ CWorldMain::CWorldMain()
 {
 	announce(false);
 
-	iWsc = cWsc = NULL;
 	Cur = 0;
-	PerLoop = -1;
-	isSaving = false;
 }
-
-CWorldMain::~CWorldMain()
-{
-	if (iWsc)
-		fclose(iWsc);
-	if (cWsc)
-		fclose(cWsc);
-}
-
 
 void loadchar(int x) // Load a character from WSC
 {
@@ -832,6 +820,7 @@ void CWorldMain::loadnewworld(QString module) // Load world from WOLFPACK.WSC
 		}
 		else // somethine went wrong and we have a NULL pointer.
 			continue; 
+
 		pi->Init(false);
 		archive->readObject( pi );
 		cItemsManager::getInstance()->registerItem( pi );
@@ -1002,17 +991,13 @@ void CWorldMain::savenewworld(QString module)
 
 	AllTmpEff->Off();
 
-	if ( !Saving() )
+	//	gcollect();
+	if ( announce() )
 	{
-		//	gcollect();
-		if ( announce() )
-		{
-			sysbroadcast("World data saving....");
-			clConsole.send("Worldsave Started!\n" );
-			clConsole.send("items: %i\n", cItemsManager::getInstance()->size());
-			clConsole.send("chars: %i\n", cCharsManager::getInstance()->size());
-		}
-		isSaving = true;
+		sysbroadcast("World data saving....");
+		clConsole.send("Worldsave Started!\n" );
+		clConsole.send("items: %i\n", cItemsManager::getInstance()->size());
+		clConsole.send("chars: %i\n", cCharsManager::getInstance()->size());
 	}
 
 
@@ -1020,7 +1005,8 @@ void CWorldMain::savenewworld(QString module)
 	ItemsThread.start();
 
 	SrvParams->flush();
-	if (SrvParams->serverLog()) savelog("Server data save\n","server.log");
+	if (SrvParams->serverLog()) 
+		savelog("Server data save\n","server.log");
 
 	ISerialization* archive = cPluginFactory::serializationArchiver( module );
 	archive->prepareWritting("chars");
@@ -1050,8 +1036,6 @@ void CWorldMain::savenewworld(QString module)
 
 //	Guilds->Write( iWsc );
 
-	isSaving = false;
-
 	AllTmpEff->On();
 	uiCurrentTime = getNormalizedTime();
 }
@@ -1069,15 +1053,9 @@ void CWorldMain::announce(int choice)
 		DisplayWorldSaves=1;
 }
 
-bool CWorldMain::Saving( void )
-{
-	return isSaving;
-}
-
+/*   This method is deprecated REMOVE ME after release
 void CWorldMain::SaveChar( P_CHAR pc )
 {
-/*   This function is deprecated REMOVE ME after release
-
 	char valid=0;
 	int j;
 	if ( pc == NULL )
@@ -1359,9 +1337,9 @@ void CWorldMain::SaveChar( P_CHAR pc )
 	}
 	delete pc_reference;
 	pc_reference = NULL;
-	*/
-}
 
+}
+*/
 /*  Deprecated stuff, REMOVE ME after release
 #if 0
 	#define save_int(a,b) fprintf(iWsc,"%s %i\n",a,b)
@@ -1449,9 +1427,9 @@ void swapDragInfo(P_ITEM pi)
 	pi->oldlayer=tmpLayer;
 }
 
+/*	This function is deprecated REMOVE ME after release
 void CWorldMain::SaveItem( P_ITEM pi, P_ITEM pDefault)
 {
-/*	This function is deprecated REMOVE ME after release
 
 	if (pi == NULL)
 		return;
@@ -1561,8 +1539,8 @@ void CWorldMain::SaveItem( P_ITEM pi, P_ITEM pDefault)
 	{
 		swapDragInfo(pi);		// swap it back
 	}
-*/
 }
+*/
 
 //o--------------------------------------------------------------------------
 //|	Function		-	int CWorldMain::RemoveItemFromCharBody(int charserial, int type1, int type2);

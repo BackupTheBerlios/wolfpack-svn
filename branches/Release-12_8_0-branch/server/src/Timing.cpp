@@ -906,14 +906,13 @@ void checkauto() // Check automatic/timer controlled stuff (Like fighting and re
 		}
 		time( (time_t*) ( &newtime)) ;
 
-		if (dosavewarning==1)
-		if (difftime(newtime,oldtime)==saveinterval-10) 
+		if (dosavewarning && difftime(newtime,oldtime)==saveinterval-10) 
 		{
 		   sysbroadcast("World will be saved in 10 seconds..");
 		   dosavewarning = 0;
 		}
 
-		if (difftime(newtime, oldtime)>=saveinterval || cwmWorldState->Saving() )
+		if ( difftime(newtime, oldtime) >= saveinterval )
 		{
 			autosaved = 0;
 			cwmWorldState->savenewworld(0);

@@ -2565,13 +2565,10 @@ void checkkey ()
 				endmessage(0);
 				break;
 			case '#':
-				if ( !cwmWorldState->Saving() )
-				{
-					clConsole.send( "Saving worldfile...");
-					cwmWorldState->savenewworld(SrvParams->worldSaveModule());
-					SrvParams->flush();
-					clConsole.send( "Done!\n");
-				}
+				clConsole.send( "Saving worldfile...");
+				cwmWorldState->savenewworld(SrvParams->worldSaveModule());
+				SrvParams->flush();
+				clConsole.send( "Done!\n");
 				break;
 			case 'L':
 			case 'l':

@@ -461,15 +461,12 @@ void racProcessInput(int s)
 		}
 		else if (inputbuffer == "save")
 		{
-			if (!cwmWorldState->Saving())
-			{
-				clConsole.send("Saving worldfile...");
-				racPrintf(s, "Saving worldfile...");
-				cwmWorldState->savenewworld(SrvParams->worldSaveModule());
-				SrvParams->flush();
-				clConsole.send("Done!\n");
-				racPrintf(s, "[DONE]\r\n");
-			}	
+			clConsole.send("Saving worldfile...");
+			racPrintf(s, "Saving worldfile...");
+			cwmWorldState->savenewworld(SrvParams->worldSaveModule());
+			SrvParams->flush();
+			clConsole.send("Done!\n");
+			racPrintf(s, "[DONE]\r\n");
 			return;
 		}
 		else if (inputbuffer == "shutdown")

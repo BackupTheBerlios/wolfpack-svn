@@ -68,19 +68,14 @@ public:
 	virtual void loadnewworld( QString module );
 	virtual void savenewworld( QString module );
 	CWorldMain();
-	virtual ~CWorldMain();
 
-	bool Saving( void );
 	bool RemoveItemsFromCharBody(int charserial, int type1, int type2);
 private:
-	bool isSaving;
 	int DisplayWorldSaves;
-	FILE *iWsc, *cWsc;
 	unsigned long Cur, Max;
-	long PerLoop;
 
-	void SaveChar( P_CHAR );
-	void SaveItem( P_ITEM pi, P_ITEM pDefault );
+	//void SaveChar( P_CHAR );
+	//void SaveItem( P_ITEM pi, P_ITEM pDefault );
 
 	class cItemsSaver : public ZThread::Thread
 	{
