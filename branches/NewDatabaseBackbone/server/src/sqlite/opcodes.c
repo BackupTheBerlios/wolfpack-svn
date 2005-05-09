@@ -135,4 +135,6 @@ char *sqliteOpcodeNames[] = { "???",
   "SetFirst", 
   "SetNext", 
   "Vacuum", 
+  "StackDepth", 
+  "StackReset", 
 };

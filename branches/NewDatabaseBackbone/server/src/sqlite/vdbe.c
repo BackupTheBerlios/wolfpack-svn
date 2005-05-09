@@ -4545,6 +4545,10 @@ case OP_AggGet: {
     pTos->flags &= ~(MEM_Dyn|MEM_Static|MEM_Short);
     pTos->flags |= MEM_Ephem;
   }
+  if( pTos->flags & MEM_AggCtx ){
+    Release(pTos);
+    pTos->flags = MEM_Null;
+  }
   break;
 }
 

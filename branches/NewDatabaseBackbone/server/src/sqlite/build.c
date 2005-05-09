@@ -1557,7 +1557,7 @@ void sqliteCreateIndex(
     sqliteSetString(&zName, "(", pTab->zName, " autoindex ", zBuf, (char*)0);
     if( zName==0 ) goto exit_create_index;
   }else{
-    zName = sqliteStrNDup(pName->z, pName->n);
+    zName = sqliteTableNameFromToken(pName);
   }
 
   /* Check for authorization to create an index.
