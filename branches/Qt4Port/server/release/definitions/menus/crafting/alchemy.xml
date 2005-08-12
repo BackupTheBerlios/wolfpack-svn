@@ -1,0 +1,185 @@
+<!--
+=================================================================
+|   )      (\_     | WOLFPACK 13.0.0 Scripts                    |
+|  ((    _/{  "-;  | Created by: khpae                          |
+|   )).-' {{ ;'`   | Revised by:                                |
+|  ( (  ;._ \\ ctr | Last Modification: Created                 |
+=================================================================
+-->
+<definitions>
+
+	<menu id="ALCHEMY" name="Alchemy">
+		<menu id="ALCHEMY_REFRESH" />
+		<menu id="ALCHEMY_AGILITY" />
+		<menu id="ALCHEMY_NIGHTSIGHT" />
+		<menu id="ALCHEMY_HEAL" />
+		<menu id="ALCHEMY_STRENGTH" />
+		<menu id="ALCHEMY_POISON" />
+		<menu id="ALCHEMY_CURE" />
+		<menu id="ALCHEMY_EXPLOSION" />
+		<!--Shrink Potion-->
+		<craft definition="potion_shrink">
+			<alchemy min="800" max="1300" />
+			<material id="f7a" amount="8" name="Black Pearls" />
+			<material id="f86" amount="8" name="Mandrake Root" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+	</menu>
+
+	<menu id="ALCHEMY_REFRESH" name="Refresh">
+		<!--Refresh Potion-->
+		<craft definition="potion_refresh">
+			<alchemy min="-250" max="250" />
+			<material id="f7a" amount="1" name="Black Pearls" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+
+		<!--Total Refresh Potion-->
+		<craft definition="potion_totalrefresh">
+			<alchemy min="250" max="750" />
+			<material id="f7a" amount="5" name="Black Pearls" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+	</menu>
+
+	<menu id="ALCHEMY_AGILITY" name="Agility">
+		<!--Agility Potion-->
+		<craft definition="potion_agility">
+			<alchemy min="150" max="650" />
+			<material id="f7b" amount="1" name="Bloodmoss" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+
+		<!--Greater Agility Potion-->
+		<craft definition="potion_greateragility">
+			<alchemy min="350" max="850" />
+			<material id="f7b" amount="3" name="Bloodmoss" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+	</menu>
+
+	<menu id="ALCHEMY_NIGHTSIGHT" name="Nightsight">
+		<!--Nightsight Potion-->
+		<craft definition="potion_nightsight">
+			<alchemy min="-250" max="250" />
+			<material id="f8d" amount="1" name="Spider's Silk" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+	</menu>
+
+	<menu id="ALCHEMY_HEAL" name="Heal">
+		<!--Lesser Heal Potion-->
+		<craft definition="potion_lesserheal">
+			<alchemy min="-250" max="250" />
+			<material id="f85" amount="1" name="Ginseng" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+
+		<!--Heal Potion-->
+		<craft definition="potion_heal">
+			<alchemy min="150" max="650" />
+			<material id="f85" amount="3" name="Ginseng" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+
+		<!--Greater Heal Potion-->
+		<craft definition="potion_greaterheal">
+			<alchemy min="550" max="1050" />
+			<material id="f85" amount="7" name="Ginseng" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+	</menu>
+
+	<menu id="ALCHEMY_STRENGTH" name="Strength">
+		<!--Strength Potion-->
+		<craft definition="potion_strength">
+			<alchemy min="250" max="750" />
+			<material id="f86" amount="2" name="Mandrake Root" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+
+		<!--Greater Strength Potion-->
+		<craft definition="potion_greaterstrength">
+			<alchemy min="450" max="950" />
+			<material id="f86" amount="5" name="Mandrake Root" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+	</menu>
+
+	<menu id="ALCHEMY_POISON" name="Poison">
+		<!--Lesser Poison Potion-->
+		<craft definition="potion_lesserpoison">
+			<alchemy min="-50" max="450" />
+			<material id="f88" amount="1" name="Nightshade" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+
+		<!--Poison Potion-->
+		<craft definition="potion_poison">
+			<alchemy min="150" max="650" />
+			<material id="f88" amount="2" name="Nightshade" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+
+		<!--Greater Poison Potion-->
+		<craft definition="potion_greaterpoison">
+			<alchemy min="550" max="1050" />
+			<material id="f88" amount="4" name="Nightshade" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+
+		<!--Deadly Poison Potion-->
+		<craft definition="potion_deadlypoison">
+			<alchemy min="900" max="1400" />
+			<material id="f88" amount="8" name="Nightshade" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+	</menu>
+
+	<menu id="ALCHEMY_CURE" name="Cure">
+		<!--Lesser Cure Potion-->
+		<craft definition="potion_lessercure">
+			<alchemy min="-100" max="400" />
+			<material id="f84" amount="1" name="Garlic" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+
+		<!--Cure Potion-->
+		<craft definition="potion_cure">
+			<alchemy min="250" max="750" />
+			<material id="f84" amount="3" name="Garlic" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+
+		<!--Greater Cure Potion-->
+		<craft definition="potion_greatercure">
+			<alchemy min="650" max="1150" />
+			<material id="f84" amount="6" name="Garlic" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+	</menu>
+
+	<menu id="ALCHEMY_EXPLOSION" name="Explosion">
+		<!--Lesser Explosion Potion-->
+		<craft definition="potion_lesserexplosion">
+			<alchemy min="50" max="550" />
+			<material id="f8c" amount="3" name="Sulfurous Ash" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+
+		<!--Explosion Potion-->
+		<craft definition="potion_explosion">
+			<alchemy min="350" max="850" />
+			<material id="f8c" amount="5" name="Sulfurous Ash" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+
+		<!--Greater Explosion Potion-->
+		<craft definition="potion_greaterexplosion">
+			<alchemy min="650" max="1150" />
+			<material id="f8c" amount="10" name="Sulfurous Ash" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+	</menu>
+
+</definitions>
