@@ -85,7 +85,7 @@ private:
 		QString value;
 	};
 
-	Q3CString name_; // Tag Name spell for <spell i.e.
+	QString name_; // Tag Name spell for <spell i.e.
 	QString text_; // This is not really a well implemented approach. this is subject to change
 
 	cElement* parent_;
@@ -114,7 +114,7 @@ public:
 	const QString& getAttribute( const Q3CString& name, const QString& def = QString::null ) const;
 
 	void setName( const Q3CString& data );
-	const Q3CString& name() const;
+	const QString& name() const;
 
 	void setText( const QString& data );
 	const QString& text() const;

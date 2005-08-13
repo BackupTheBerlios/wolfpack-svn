@@ -37,7 +37,7 @@
 // Qt Includes
 #include <q3cstring.h>
 #include <qstring.h>
-#include <qstringlist.h>
+#include <QStringList>
 #include <q3valuevector.h>
 
 cUOPacket* getUORxPacket( const QByteArray& data );

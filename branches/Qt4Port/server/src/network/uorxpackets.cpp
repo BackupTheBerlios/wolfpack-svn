@@ -180,12 +180,12 @@ QString cUORxSpeechRequest::message()
 		if ( skipCount % 8 > 0 ) // Round up
 			skipBytes++;
 
-		QString speech = getAsciiString( 12 + skipBytes, getShort( 1 ) - ( 12 + skipBytes ) );
+		QString speech = QString::fromUtf8( getAsciiString( 12 + skipBytes, getShort( 1 ) - ( 12 + skipBytes ) ) );
 		// Sadly we are not finished yet
 		// The UO client encodes the UNICODE speech in a rather strange... format.
 		// So we need to iterate trough the speech
 
-		return QString::fromUtf8( speech.data() );
+		return speech;
 	}
 	else
 		return getUnicodeString( 12, getShort( 1 ) - 12 );

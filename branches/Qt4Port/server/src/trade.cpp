@@ -165,7 +165,7 @@ void Trade::buyAction( cUOSocket* socket, cUORxBuy* packet )
 
 			if ( packGold >= totalValue )
 			{
-				pChar->getBackpack()->removeItems( "eed", totalValue );
+				pChar->getBackpack()->removeItems( QStringList() << "eed", totalValue );
 			}
 			else
 			{
@@ -181,20 +181,20 @@ void Trade::buyAction( cUOSocket* socket, cUORxBuy* packet )
 
 			if ( packGold >= totalValue )
 			{
-				pChar->getBackpack()->removeItems( "eed", totalValue );
+				pChar->getBackpack()->removeItems( QStringList() << "eed", totalValue );
 			}
 			else if ( bankGold >= totalValue )
 			{
 				fromWhere = 1;
-				pChar->getBankbox()->removeItems( "eed", totalValue );
+				pChar->getBankbox()->removeItems( QStringList() << "eed", totalValue );
 			}
 			else if ( (bankGold + packGold) >= totalValue )
 			{
 				fromWhere = 2;
 				// From Pack the Max
-				pChar->getBackpack()->removeItems( "eed", packGold );
+				pChar->getBackpack()->removeItems( QStringList() << "eed", packGold );
 				// From Bank the rest
-				pChar->getBankbox()->removeItems( "eed", (totalValue - packGold) );
+				pChar->getBankbox()->removeItems( QStringList() << "eed", (totalValue - packGold) );
 			}
 			else
 			{

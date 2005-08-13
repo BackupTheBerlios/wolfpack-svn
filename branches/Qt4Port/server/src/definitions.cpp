@@ -30,7 +30,7 @@
 #include <qfile.h>
 #include <q3ptrstack.h>
 #include <qregexp.h>
-#include <qstringlist.h>
+#include <QStringList>
 #include <q3valuevector.h>
 #include <q3valuelist.h>
 //Added by qt3to4:
@@ -272,7 +272,7 @@ public:
 						if ( impl->unique[categories[i].key].contains( tagId ) && !Config::instance()->overwriteDefinitions() )
 						{
 							Console::instance()->log( LOG_WARNING, tr( "Duplicate %1: %2\n[File: %3, Line: %4]\n" )
-								.arg( element->name() ).arg( tagId ).arg( filenames.back() ).arg( locators.current()->lineNumber() ) );
+								.arg( QString( element->name() ) ).arg( tagId ).arg( filenames.back() ).arg( locators.current()->lineNumber() ) );
 							delete element;
 						}
 						else
@@ -291,7 +291,7 @@ public:
 			}
 
 			Console::instance()->log( LOG_WARNING, tr( "Unknown element: %1\n[File: %2, Line: %3]\n" )
-				.arg( element->name() ).arg( filenames.back() ).arg( locators.current()->lineNumber() ) );
+				.arg( QString( element->name() ) ).arg( filenames.back() ).arg( locators.current()->lineNumber() ) );
 			delete element;
 		}
 
@@ -672,7 +672,7 @@ void cElement::setName( const Q3CString& data )
 	name_ = data;
 }
 
-const Q3CString& cElement::name() const
+const QString& cElement::name() const
 {
 	return name_;
 }
@@ -943,7 +943,7 @@ static PyObject* wpElement_getAttr( wpElement* self, char* name )
 	// \rproperty element.name A string containing the name of the element.
 	if ( !strcmp( name, "name" ) )
 	{
-		return PyString_FromString( element->name().data() );
+		return QString2Python( element->name() );
 	}
 	/*
 		\rproperty element.parent An <object id="element">element</object> object for the parent of this element.

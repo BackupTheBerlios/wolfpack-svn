@@ -29,7 +29,7 @@
 #define __SERVER_H__
 
 #include <qstring.h>
-#include <qstringlist.h>
+#include <QStringList>
 #include <q3valuevector.h>
 #include "singleton.h"
 #include "objectdef.h"

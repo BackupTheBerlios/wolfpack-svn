@@ -34,7 +34,7 @@
 
 // Library Includes
 #include <qstring.h>
-#include <qstringlist.h>
+#include <QStringList>
 #include <qfile.h>
 //Added by qt3to4:
 #include <Q3CString>
@@ -231,7 +231,7 @@ void cBufferedWriter::open( const QString& filename )
 	close();
 
 	d->file.setName( filename );
-	if ( !d->file.open( IO_Raw | QIODevice::WriteOnly | QIODevice::Truncate ) )
+	if ( !d->file.open( QIODevice::WriteOnly | QIODevice::Truncate ) )
 	{
 		throw wpException( QString( "Couldn't open file %1 for writing." ).arg( filename ) );
 	}
@@ -243,8 +243,8 @@ void cBufferedWriter::open( const QString& filename )
 	d->file.writeBlock( header );
 
 	// Start writing the object type list
-	const QMap<unsigned char, Q3CString> &typemap = BinaryTypemap::instance()->getTypemap();
-	QMap<unsigned char, Q3CString>::const_iterator it;
+	const QMap<unsigned char, QString> &typemap = BinaryTypemap::instance()->getTypemap();
+	QMap<unsigned char, QString>::const_iterator it;
 
 	d->skipmap.clear();
 	writeByte( typemap.size() );
@@ -252,7 +252,7 @@ void cBufferedWriter::open( const QString& filename )
 	{
 		writeByte( it.key() );
 		writeInt( 0 ); // SkipSize
-		writeAscii( it.data() ); // Preinsert into the dictionary
+		writeAscii( qPrintable( it.data() ) ); // Preinsert into the dictionary
 		d->skipmap.insert( it.key(), 0 );
 		d->typemap.insert( it.key(), it.data() );
 	}
@@ -267,7 +267,7 @@ void cBufferedWriter::close()
 		// Flush the string dictionary at the end of the save
 		writeInt( d->dictionary.count() );
 
-		QMap<Q3CString, unsigned int>::iterator it;
+		QMap<QString, unsigned int>::iterator it;
 		for ( it = d->dictionary.begin(); it != d->dictionary.end(); ++it )
 		{
 			writeInt( it.data() );
@@ -388,7 +388,7 @@ void cBufferedReader::open( const QString& filename )
 	close();
 
 	d->file.setName( filename );
-	if ( !d->file.open( IO_Raw | QIODevice::ReadOnly ) )
+	if ( !d->file.open( QIODevice::ReadOnly ) )
 	{
 		throw wpException( QString( "Couldn't open file %1 for reading." ).arg( filename ) );
 	}
@@ -405,7 +405,7 @@ void cBufferedReader::open( const QString& filename )
 	Q3CString magic = readAscii( true );
 	if ( magic != d->magic )
 	{
-		throw wpException( QString( "File had unexpected magic '%1'. Expected: '%2'." ).arg( magic ).arg( d->magic ) );
+		throw wpException( QString( "File had unexpected magic '%1'. Expected: '%2'." ).arg( QString( magic ) ).arg( QString( d->magic ) ) );
 	}
 
 	// Check if the file has been truncated or garbage has been appended

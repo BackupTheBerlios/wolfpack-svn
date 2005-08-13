@@ -30,6 +30,7 @@
 
 #include <q3socketdevice.h>
 #include <qthread.h>
+#include <QMutex>
 
 #include <deque>
 

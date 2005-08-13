@@ -89,7 +89,7 @@ bool cLog::checkLogFile()
 
 		logfile.setName( path + filename );
 
-		if ( !logfile.open( QIODevice::WriteOnly | QIODevice::Append | QIODevice::Translate ) )
+		if ( !logfile.open( QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text ) )
 		{
 			Console::instance()->send( tr( "Couldn't open logfile '%1'\n" ).arg( path + filename ) );
 			return false;

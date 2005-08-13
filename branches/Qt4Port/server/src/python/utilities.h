@@ -197,7 +197,7 @@ class PythonFunction
 
 	static Q3ValueList<PythonFunction*> instances; // list of all known instances
 public:
-	Q_EXPLICIT PythonFunction( PyObject* function ) : pModule( 0 ), pFunc( 0 )
+	explicit PythonFunction( PyObject* function ) : pModule( 0 ), pFunc( 0 )
 	{
 		// No lambdas!
 		if ( function ) {
@@ -215,7 +215,7 @@ public:
 		instances.push_back(this); // Add this to the static list of instances
 	}
 
-	Q_EXPLICIT PythonFunction( const QString& path ) : pModule( 0 ), pFunc( 0 )
+	explicit PythonFunction( const QString& path ) : pModule( 0 ), pFunc( 0 )
 	{
 		int position = path.findRev( "." );
 		sModule = path.left( position );

@@ -729,7 +729,7 @@ bool cPythonScript::load( const Q3CString& name )
 		events[i] = PyDict_GetItemString( pDict, eventNames[i] );
 
 		if (events[i] && !PyCallable_Check(events[i])) {
-			Console::instance()->log( LOG_ERROR, tr( "Script %1 has non callable event: %1.\n" ).arg(name_).arg( eventNames[i] ) );
+			Console::instance()->log( LOG_ERROR, tr( "Script %1 has non callable event: %1.\n" ).arg(QString(name_)).arg( eventNames[i] ) );
 			Py_DECREF(events[i]);
 			events[i] = 0;
 		}

@@ -63,7 +63,8 @@
 cUOPacket::cUOPacket( const QByteArray& d ) : haveCompressed( false )
 {
 	init();
-	rawPacket = d.copy();
+	rawPacket = d;
+	rawPacket.detach();
 }
 
 cUOPacket::~cUOPacket()
@@ -120,10 +121,14 @@ void cUOPacket::init()
 */
 void cUOPacket::assign( cUOPacket& p )
 {
-	rawPacket = p.rawPacket.copy();
+	rawPacket = p.rawPacket;
+	rawPacket.detach();
 	haveCompressed = p.haveCompressed;
 	if ( p.haveCompressed )
-		compressedBuffer = p.compressedBuffer.copy();
+	{
+		compressedBuffer = p.compressedBuffer;
+		compressedBuffer.detach();
+	}
 }
 
 /*!
@@ -254,7 +259,7 @@ int cUOPacket::getInt( uint pos ) const
 	}
 #endif
 	int value;
-	wpCopyIn( value, &rawPacket[( int ) pos] );
+	wpCopyIn( value, &(*(rawPacket.data() + pos)) );
 	value = B_BENDIAN_TO_HOST_INT32( value );
 	return value;
 }
@@ -272,7 +277,7 @@ short cUOPacket::getShort( uint pos ) const
 	}
 #endif
 	short value;
-	wpCopyIn( value, &rawPacket[( int ) pos] );
+	wpCopyIn( value, &(*(rawPacket.data() + pos)) );
 	value = B_BENDIAN_TO_HOST_INT16( value );
 	return value;
 }
@@ -395,7 +400,7 @@ void cUOPacket::setAsciiString( uint pos, const char* data, uint maxlen )
 char& cUOPacket::operator[]( unsigned int index )
 {
 	haveCompressed = false; // better safe than sorry
-	return rawPacket.at( index );
+	return *(rawPacket.data() + index);
 }
 
 /*!

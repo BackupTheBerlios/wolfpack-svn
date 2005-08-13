@@ -47,10 +47,8 @@
 
 // Library includes
 #include <qstring.h>
-#include <qstringlist.h>
+#include <QStringList>
 #include <qmap.h>
-//Added by qt3to4:
-#include <QSqlQuery>
 #include <Q3CString>
 
 // Forward class declarations

@@ -39,7 +39,7 @@
 
 // Library Headers
 #include <qstring.h>
-#include <qstringlist.h>
+#include <QStringList>
 #include <qhostaddress.h>
 
 // Structs

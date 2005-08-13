@@ -30,6 +30,7 @@
 
 #include <qthread.h>
 #include <qmutex.h>
+#include <QWaitCondition>
 
 #include <qmap.h>
 

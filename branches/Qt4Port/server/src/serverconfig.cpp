@@ -35,7 +35,7 @@
 
 // Library Includes
 #include <qstring.h>
-#include <qstringlist.h>
+#include <QStringList>
 #include <qdir.h>
 #include <qhostaddress.h>
 #include <qdatetime.h>
@@ -490,7 +490,7 @@ Q3ValueVector<ServerList_st> cConfig::serverList()
 					QStringList strList2 = QStringList::split( ",", strList[1].stripWhiteSpace() );
 					QHostAddress host;
 					host.setAddress( strList2[0] );
-					server.address = resolveName( strList2[0] );
+					server.address.setAddress( resolveName( strList2[0] ) );
 
 					bool ok = false;
 					server.uiPort = strList2[1].toUShort( &ok );
@@ -513,7 +513,7 @@ Q3ValueVector<ServerList_st> cConfig::serverList()
 						// Fall back to localhost
 						if ( !server.address.toIPv4Address() )
 						{
-							server.address = 0x7F000001;
+							server.address.setAddress(0x7F000001);
 						}
 					}
 					serverList_.push_back( server );

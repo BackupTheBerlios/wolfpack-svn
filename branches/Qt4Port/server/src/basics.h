@@ -102,7 +102,7 @@ private:
 	int buffersize;
 
 public:
-	Q_EXPLICIT cBufferedWriter( const Q3CString& magic, unsigned int version );
+	cBufferedWriter( const Q3CString& magic, unsigned int version );
 	~cBufferedWriter();
 
 	void open( const QString& filename );
@@ -134,7 +134,7 @@ public:
 	bool needswap;
 	char *buffer;
 	unsigned int bufferpos;
-	QMap<Q3CString, unsigned int> dictionary;
+	QMap<QString, unsigned int> dictionary;
 	QMap<unsigned char, unsigned int> skipmap;
 	QMap<unsigned char, QString> typemap;
 	unsigned int lastStringId;

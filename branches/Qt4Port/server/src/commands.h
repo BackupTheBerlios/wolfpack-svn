@@ -34,7 +34,7 @@
 #include <qmap.h>
 #include <qstring.h>
 #include <q3cstring.h>
-#include <qstringlist.h>
+#include <QStringList>
 #include <qobject.h>
 
 class cUOSocket;

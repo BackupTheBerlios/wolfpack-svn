@@ -511,7 +511,7 @@ void cTimers::save( cBufferedWriter& writer )
 
 void cTimers::load( cBufferedReader& reader )
 {
-	Q3CString objectId = reader.readAscii();
+	QString objectId = reader.readAscii();
 
 	cTimer *timer = 0;
 

@@ -37,7 +37,7 @@
 // Qt Includes
 #include <q3valuevector.h>
 #include <qmap.h>
-#include <qstringlist.h>
+#include <QStringList>
 //Added by qt3to4:
 #include <Q3PtrList>
 

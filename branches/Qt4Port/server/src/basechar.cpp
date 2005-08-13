@@ -1403,7 +1403,7 @@ void cBaseChar::processNode( const cElement* Tag )
 			}
 			else
 			{
-				Console::instance()->log( LOG_ERROR, tr( "Invalid equipped element '%1' in npc definition '%2'." ).arg( element->name() ).arg( element->getTopmostParent()->getAttribute( "id", "unknown" ) ) );
+				Console::instance()->log( LOG_ERROR, tr( "Invalid equipped element '%1' in npc definition '%2'." ).arg( QString( element->name() ) ).arg( element->getTopmostParent()->getAttribute( "id", "unknown" ) ) );
 			}
 		}
 	}
@@ -2831,11 +2831,11 @@ bool cBaseChar::kill( cUObject* source )
 	{
 		if ( summoned )
 		{
-			logName = tr( "Summoned npc '%1' ('%2', 0x%3)" ).arg( name() ).arg( baseid() ).arg( serial_, 0, 16 );
+			logName = tr( "Summoned npc '%1' ('%2', 0x%3)" ).arg( name() ).arg( QString( baseid() ) ).arg( serial_, 0, 16 );
 		}
 		else
 		{
-			logName = tr( "Npc '%1' ('%2', 0x%3)" ).arg( name() ).arg( baseid() ).arg( serial_, 0, 16 );
+			logName = tr( "Npc '%1' ('%2', 0x%3)" ).arg( name() ).arg( QString( baseid() ) ).arg( serial_, 0, 16 );
 		}
 	}
 	else if ( player )
@@ -2853,11 +2853,11 @@ bool cBaseChar::kill( cUObject* source )
 		{
 			if ( pKillerNpc->summoned() )
 			{
-				killerName = tr( "summoned npc '%1' ('%2', 0x%3)" ).arg( pKiller->name() ).arg( pKiller->baseid() ).arg( pKiller->serial(), 0, 16 );
+				killerName = tr( "summoned npc '%1' ('%2', 0x%3)" ).arg( pKiller->name() ).arg( QString( pKiller->baseid() ) ).arg( pKiller->serial(), 0, 16 );
 			}
 			else
 			{
-				killerName = tr( "npc '%1' ('%2', 0x%3)" ).arg( pKiller->name() ).arg( pKiller->baseid() ).arg( pKiller->serial(), 0, 16 );
+				killerName = tr( "npc '%1' ('%2', 0x%3)" ).arg( pKiller->name() ).arg( QString( pKiller->baseid() ) ).arg( pKiller->serial(), 0, 16 );
 			}
 		}
 		else if ( pKillerPlayer )

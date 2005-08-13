@@ -36,7 +36,7 @@
 
 // Library includes
 #include <qstring.h>
-#include <qstringlist.h>
+#include <QStringList>
 #include <q3valuevector.h>
 #include <qmap.h>
 

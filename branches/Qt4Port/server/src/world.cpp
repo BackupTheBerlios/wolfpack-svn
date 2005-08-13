@@ -1496,7 +1496,7 @@ void cWorld::backupWorld( const QString& filename, unsigned int count, bool comp
 
 	// Rename the old worldfile
 	QDir dir = QDir::current();
-	dir.rename( filename, backupName, true );
+	dir.rename( filename, backupName );
 
 	// Start the compression thread if requested by the user
 	cBackupThread *backupThread = new cBackupThread();

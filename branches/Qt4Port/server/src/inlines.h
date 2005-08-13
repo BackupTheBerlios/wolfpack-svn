@@ -101,7 +101,7 @@ inline QString makeAscii( const QString& input )
 		QChar c = input.at( i );
 
 		// German umlauts can be represented differently
-		switch ( c )
+		switch ( c.unicode() )
 		{
 		case 129:
 			// ü

@@ -56,7 +56,7 @@ void cBaseDef::processNode( const cElement* node )
 
 			if ( !ok )
 			{
-				Console::instance()->log( LOG_WARNING, tr( "Basedef %1 has invalid integer property %2.\n" ).arg( id_ ).arg( name ) );
+				Console::instance()->log( LOG_WARNING, tr( "Basedef %1 has invalid integer property %2.\n" ).arg( QString( id_ ) ).arg( name ) );
 			}
 
 			intproperties.insert( name.lower(), intvalue, true );
@@ -274,7 +274,7 @@ void cCharBaseDef::processNode( const cElement* node )
 
 		if ( !ok1 || !ok2 )
 		{
-			Console::instance()->log( LOG_WARNING, tr( "Base definition '%1' has invalid speed tag.\n" ).arg( id_ ) );
+			Console::instance()->log( LOG_WARNING, tr( "Base definition '%1' has invalid speed tag.\n" ).arg( QString( id_ ) ) );
 		}
 		else
 		{
@@ -300,7 +300,7 @@ void cCharBaseDef::load()
 		{
 			if ( !id_.isEmpty() )
 			{
-				Console::instance()->log( LOG_WARNING, tr( "Missing npc definition '%1'.\n" ).arg( id_ ) );
+				Console::instance()->log( LOG_WARNING, tr( "Missing npc definition '%1'.\n" ).arg( QString( id_ ) ) );
 			}
 			return;
 		}
@@ -671,7 +671,7 @@ void cItemBaseDef::load()
 		{
 			if ( !id_.isEmpty() )
 			{
-				Console::instance()->log( LOG_WARNING, tr( "Missing item definition '%1'.\n" ).arg( id_ ) );
+				Console::instance()->log( LOG_WARNING, tr( "Missing item definition '%1'.\n" ).arg( QString( id_ ) ) );
 			}
 			return;
 		}
