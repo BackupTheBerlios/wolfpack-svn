@@ -70,7 +70,7 @@ protected:
 	QString getGroupDoc( const QString& group );
 	QString getEntryDoc( const QString& group, const QString& entry );
 
-	QValueVector<ServerList_st> serverList_;
+	Q3ValueVector<ServerList_st> serverList_;
 	std::vector<StartLocation_st> startLocation_;
 
 	// loaded data
@@ -194,7 +194,7 @@ public:
 	void unload();
 	void reload();
 
-	QValueVector<ServerList_st> serverList(); // read-only
+	Q3ValueVector<ServerList_st> serverList(); // read-only
 	std::vector<StartLocation_st>& startLocation();
 
 	// gets

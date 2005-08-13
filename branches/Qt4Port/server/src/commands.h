@@ -33,7 +33,7 @@
 // Library Includes
 #include <qmap.h>
 #include <qstring.h>
-#include <qcstring.h>
+#include <q3cstring.h>
 #include <qstringlist.h>
 #include <qobject.h>
 

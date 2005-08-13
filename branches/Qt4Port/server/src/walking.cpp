@@ -49,7 +49,7 @@
 #include "world.h"
 
 // Library Includes
-#include <qvaluevector.h>
+#include <q3valuevector.h>
 
 // System Includes
 #include <algorithm>
@@ -270,7 +270,7 @@ vector< stBlockItem > getBlockingItems( P_CHAR pChar, const Coord& pos )
 		if ( !def )
 			continue;
 
-		QValueVector<multiItem_st> multi = def->getEntries();
+		Q3ValueVector<multiItem_st> multi = def->getEntries();
 
 		for ( unsigned int j = 0; j < multi.size(); ++j )
 		{
@@ -930,7 +930,7 @@ Q_UINT16 DynTile( const Coord& pos )
 			if ( !def )
 				return 0;
 
-			QValueVector<multiItem_st> multi = def->getEntries();
+			Q3ValueVector<multiItem_st> multi = def->getEntries();
 			for ( Q_UINT32 j = 0; j < multi.size(); ++j )
 			{
 				if ( ( multi[j].visible && ( mapitem->pos().x + multi[j].x == pos.x ) && ( mapitem->pos().y + multi[j].y == pos.y ) && ( abs( mapitem->pos().z + multi[j].z - pos.z ) <= 1 ) ) )

@@ -35,10 +35,10 @@
 #include "../defines.h"
 
 // Qt Includes
-#include <qcstring.h>
+#include <q3cstring.h>
 #include <qstring.h>
 #include <qstringlist.h>
-#include <qvaluevector.h>
+#include <q3valuevector.h>
 
 cUOPacket* getUORxPacket( const QByteArray& data );
 
@@ -109,11 +109,11 @@ public:
 	{
 		return ( *this )[9];
 	}
-	QCString name( void ) const
+	Q3CString name( void ) const
 	{
 		return this->getAsciiString( 10, 30 );
 	}
-	QCString password( void ) const
+	Q3CString password( void ) const
 	{
 		return this->getAsciiString( 40, 30 );
 	}
@@ -215,11 +215,11 @@ public:
 	{
 		( *this )[9] = d;
 	}
-	void setName( const QCString& d )
+	void setName( const Q3CString& d )
 	{
 		this->setAsciiString( 10, d, 30 );
 	}
-	void setPassword( const QCString& d )
+	void setPassword( const Q3CString& d )
 	{
 		this->setAsciiString( 40, d, 30 );
 	}
@@ -346,11 +346,11 @@ public:
 	cUORxLoginRequest( const QByteArray& data ) : cUOPacket( data )
 	{
 	}
-	QCString username( void ) const
+	Q3CString username( void ) const
 	{
 		return this->getAsciiString( 1, 30 );
 	}
-	QCString password( void ) const
+	Q3CString password( void ) const
 	{
 		return this->getAsciiString( 31, 30 );
 	}
@@ -428,11 +428,11 @@ public:
 	{
 		return getInt( 1 );
 	}
-	QCString username( void ) const
+	Q3CString username( void ) const
 	{
 		return this->getAsciiString( 5, 30 );
 	}
-	QCString password( void ) const
+	Q3CString password( void ) const
 	{
 		return this->getAsciiString( 35, 30 );
 	}
@@ -441,11 +441,11 @@ public:
 	{
 		setInt( 1, d );
 	}
-	void setUsername( const QCString& d )
+	void setUsername( const Q3CString& d )
 	{
 		this->setAsciiString( 5, d, 30 );
 	}
-	void setPassword( const QCString& d )
+	void setPassword( const Q3CString& d )
 	{
 		this->setAsciiString( 35, d, 30 );
 	}
@@ -779,7 +779,7 @@ public:
 	{
 		return getShort( 12 ) >> 4;
 	}
-	QValueVector< ushort > keywords();
+	Q3ValueVector< ushort > keywords();
 	QString language() const
 	{
 		return this->getAsciiString( 12, 4 );

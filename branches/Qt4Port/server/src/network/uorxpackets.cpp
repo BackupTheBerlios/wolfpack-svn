@@ -234,9 +234,9 @@ gumpChoice_st cUORxGumpResponse::choice()
 	return choice;
 }
 
-QValueVector< Q_UINT16 > cUORxSpeechRequest::keywords()
+Q3ValueVector< Q_UINT16 > cUORxSpeechRequest::keywords()
 {
-	QValueVector<Q_UINT16> keywords;
+	Q3ValueVector<Q_UINT16> keywords;
 
 	ushort count = keywordCount();
 	ushort offset = 13; // Skip the count

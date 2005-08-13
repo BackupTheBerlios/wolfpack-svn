@@ -50,6 +50,8 @@
 #include <richedit.h>
 #include <commctrl.h>
 #include <qthread.h>
+//Added by qt3to4:
+#include <Q3MemArray>
 #include "../verinfo.h"
 
 #include "../sqlite/sqlite.h"
@@ -588,7 +590,7 @@ protected:
 
 	void run()
 	{
-		QMemArray<pchar> argv( 8 );
+		Q3MemArray<pchar> argv( 8 );
 		/*
 				Since Windows programs don't get passed the command name as the
 				first argument, we need to fetch it explicitly.

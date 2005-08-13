@@ -29,11 +29,13 @@
 #define __UOSOCKET__
 
 // Library Includes
-#include <qcstring.h>
-#include <qsocketdevice.h>
+#include <q3cstring.h>
+#include <q3socketdevice.h>
 #include <qobject.h>
 #include <qmap.h>
 #include <qbitarray.h>
+//Added by qt3to4:
+#include <Q3PtrList>
 #include <vector>
 
 // Forward Declarations
@@ -78,7 +80,7 @@ public:
 
 public:
 
-	cUOSocket( QSocketDevice* sDevice );
+	cUOSocket( Q3SocketDevice* sDevice );
 	virtual ~cUOSocket( void );
 
 
@@ -142,8 +144,8 @@ public:
 	void setWalkSequence( Q_UINT8 data );
 
 
-	QSocketDevice* socket( void ) const;
-	void setSocket( QSocketDevice* data );
+	Q3SocketDevice* socket( void ) const;
+	void setSocket( Q3SocketDevice* data );
 
 	eSocketState state( void ) const;
 	void setState( eSocketState data );
@@ -288,7 +290,7 @@ private:
 	void playChar( P_PLAYER player );
 
 private:
-	QValueVector<cUORxWalkRequest> packetQueue;
+	Q3ValueVector<cUORxWalkRequest> packetQueue;
 	unsigned int _uniqueId;
 	unsigned int _lastActivity;
 	Q_UINT8 _walkSequence;
@@ -301,7 +303,7 @@ private:
 	unsigned int _rxBytes;
 	unsigned int _txBytes;
 	unsigned int _txBytesRaw;
-	QSocketDevice* _socket;
+	Q3SocketDevice* _socket;
 	unsigned short _screenWidth;
 	unsigned short _screenHeight;
 	Q_UINT8 _viewRange;
@@ -309,7 +311,7 @@ private:
 	cCustomTags tags_;
 	QString _ip; // IP used to connect
 	QBitArray* tooltipscache_;
-	QPtrList<cContextMenu> contextMenu_;
+	Q3PtrList<cContextMenu> contextMenu_;
 	QMap<SERIAL, cGump*> gumps;
 	unsigned int flags_;
 
@@ -333,12 +335,12 @@ inline void cUOSocket::setWalkSequence( Q_UINT8 data )
 	_walkSequence = data;
 }
 
-inline QSocketDevice* cUOSocket::socket( void ) const
+inline Q3SocketDevice* cUOSocket::socket( void ) const
 {
 	return _socket;
 }
 
-inline void cUOSocket::setSocket( QSocketDevice* data )
+inline void cUOSocket::setSocket( Q3SocketDevice* data )
 {
 	_socket = data;
 }

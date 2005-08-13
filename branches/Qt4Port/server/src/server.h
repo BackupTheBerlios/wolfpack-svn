@@ -30,7 +30,7 @@
 
 #include <qstring.h>
 #include <qstringlist.h>
-#include <qvaluevector.h>
+#include <q3valuevector.h>
 #include "singleton.h"
 #include "objectdef.h"
 

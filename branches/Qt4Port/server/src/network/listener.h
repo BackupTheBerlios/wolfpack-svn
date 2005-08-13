@@ -28,7 +28,7 @@
 #if !defined(__LISTENER_H__)
 #define __LISTENER_H__
 
-#include <qsocketdevice.h>
+#include <q3socketdevice.h>
 #include <qthread.h>
 
 #include <deque>
@@ -36,8 +36,8 @@
 class cListener : public QThread
 {
 private:
-	QSocketDevice listenningSocket;
-	std::deque<QSocketDevice*> readyConnections;
+	Q3SocketDevice listenningSocket;
+	std::deque<Q3SocketDevice*> readyConnections;
 	QMutex readyConnectionsMutex;
 	Q_UINT16 _port;
 	bool volatile _canceled;
@@ -48,7 +48,7 @@ public:
 	~cListener() throw();
 
 
-	QSocketDevice* getNewConnection();
+	Q3SocketDevice* getNewConnection();
 	bool haveNewConnection();
 	bool canceled() const
 	{

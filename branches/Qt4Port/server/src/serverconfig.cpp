@@ -466,7 +466,7 @@ QString cConfig::getEntryDoc( const QString& group, const QString& entry )
 	return Preferences::getEntryDoc( group, entry );
 }
 
-QValueVector<ServerList_st> cConfig::serverList()
+Q3ValueVector<ServerList_st> cConfig::serverList()
 {
 	static unsigned int lastIpCheck = 0;
 	static bool dynamicIP = false;

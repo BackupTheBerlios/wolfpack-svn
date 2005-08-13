@@ -33,8 +33,8 @@
 #include "../basics.h"
 
 // Library Includes
-#include <qsocketdevice.h>
-#include <qptrlist.h>
+#include <q3socketdevice.h>
+#include <q3ptrlist.h>
 #include <qmap.h>
 
 #include <algorithm>
@@ -110,9 +110,9 @@ public:
 	cAsyncNetIOPrivate();
 	~cAsyncNetIOPrivate();
 
-	QSocketDevice* socket;			// connection socket
+	Q3SocketDevice* socket;			// connection socket
 	// ewba is the encrypted write buffer
-	QPtrList<QByteArray> rba, wba, ewba;		// list of read/write bufs
+	Q3PtrList<QByteArray> rba, wba, ewba;		// list of read/write bufs
 	Q_ULONG rsize, wsize;		// read/write total buf size
 	Q_ULONG rindex, windex;		// read/write index
 	QMutex wmutex;				// write mutex
@@ -364,7 +364,7 @@ bool cAsyncNetIOPrivate::consumeReadBuf( Q_ULONG nbytes, char* sink )
 */
 cAsyncNetIO::~cAsyncNetIO() throw()
 {
-	QMap<QSocketDevice*, cAsyncNetIOPrivate*>::iterator it = buffers.begin();
+	QMap<Q3SocketDevice*, cAsyncNetIOPrivate*>::iterator it = buffers.begin();
 	for ( ; it != buffers.end(); ++it )
 		delete it.data();
 }
@@ -374,7 +374,7 @@ cAsyncNetIO::~cAsyncNetIO() throw()
   \a login determines whether the connection has been established to
   the login server or not.
 */
-bool cAsyncNetIO::registerSocket( QSocketDevice* socket, bool login )
+bool cAsyncNetIO::registerSocket( Q3SocketDevice* socket, bool login )
 {
 	QMutexLocker lock( &mapsMutex );
 	cAsyncNetIOPrivate* d = new cAsyncNetIOPrivate;
@@ -388,7 +388,7 @@ bool cAsyncNetIO::registerSocket( QSocketDevice* socket, bool login )
   Unregisters a \a socket for asyncronous services.
   The \a socket parameter is not modified in any way.
 */
-bool cAsyncNetIO::unregisterSocket( QSocketDevice* socket )
+bool cAsyncNetIO::unregisterSocket( Q3SocketDevice* socket )
 {
 	QMutexLocker lock( &mapsMutex );
 	iterator it = buffers.find( socket );
@@ -579,7 +579,7 @@ void cAsyncNetIO::run() throw()
 /*!
   Informs the amount of data avaliable into internal buffers
 */
-Q_ULONG cAsyncNetIO::bytesAvailable( QSocketDevice* socket ) const
+Q_ULONG cAsyncNetIO::bytesAvailable( Q3SocketDevice* socket ) const
 {
 	const_iterator it = buffers.find( socket );
 	return it.data()->rsize;
@@ -755,7 +755,7 @@ void cAsyncNetIO::flushWriteBuffer( cAsyncNetIOPrivate* d )
   Packets retrieved from this method should be freed by
   the caller.
 */
-cUOPacket* cAsyncNetIO::recvPacket( QSocketDevice* socket )
+cUOPacket* cAsyncNetIO::recvPacket( Q3SocketDevice* socket )
 {
 	iterator it = buffers.find( socket );
 	if ( it.data()->packets.size() )
@@ -772,7 +772,7 @@ cUOPacket* cAsyncNetIO::recvPacket( QSocketDevice* socket )
 /*
 	Re-queues a packet to the front of the queue for a socket.
 */
-void cAsyncNetIO::pushfrontPacket( QSocketDevice* socket, cUOPacket* packet )
+void cAsyncNetIO::pushfrontPacket( Q3SocketDevice* socket, cUOPacket* packet )
 {
 	iterator it = buffers.find( socket );
 
@@ -787,7 +787,7 @@ void cAsyncNetIO::pushfrontPacket( QSocketDevice* socket, cUOPacket* packet )
   Queues \a packet for sending to \a socket. UO Huffman compression will
   be applied if \a compress is true.
 */
-void cAsyncNetIO::sendPacket( QSocketDevice* socket, cUOPacket* packet, bool compress )
+void cAsyncNetIO::sendPacket( Q3SocketDevice* socket, cUOPacket* packet, bool compress )
 {
 	QByteArray data;
 	if ( compress )
@@ -807,7 +807,7 @@ void cAsyncNetIO::sendPacket( QSocketDevice* socket, cUOPacket* packet, bool com
   is usually called prior to disconnection to ensure all data, including error
   messages have been sent.
 */
-void cAsyncNetIO::flush( QSocketDevice* socket )
+void cAsyncNetIO::flush( Q3SocketDevice* socket )
 {
 	iterator it = buffers.find( socket );
 

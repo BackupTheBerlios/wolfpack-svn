@@ -44,13 +44,15 @@
 // Library Includes
 #include <qstringlist.h>
 #include <qmutex.h>
+//Added by qt3to4:
+#include <Q3PtrList>
 
 
 class cNetwork::cNetworkPrivate
 {
 public:
-	QPtrList<cUOSocket> uoSockets;
-	QPtrList<cUOSocket> loginSockets;
+	Q3PtrList<cUOSocket> uoSockets;
+	Q3PtrList<cUOSocket> loginSockets;
 	cAsyncNetIO* netIo_;
 	cListener* loginServer_;
 	cListener* gameServer_;
@@ -90,7 +92,7 @@ void cNetwork::poll( void )
 	// Check for new Connections (LoginServer)
 	if ( d->loginServer_ && d->loginServer_->haveNewConnection() )
 	{
-		QSocketDevice* socket = d->loginServer_->getNewConnection();
+		Q3SocketDevice* socket = d->loginServer_->getNewConnection();
 		d->netIo_->registerSocket( socket, true );
 		cUOSocket* uosocket = new cUOSocket( socket );
 		d->loginSockets.append( uosocket );
@@ -102,7 +104,7 @@ void cNetwork::poll( void )
 	// Check for new Connections (GameServer)
 	if ( d->gameServer_ && d->gameServer_->haveNewConnection() )
 	{
-		QSocketDevice* socket = d->gameServer_->getNewConnection();
+		Q3SocketDevice* socket = d->gameServer_->getNewConnection();
 		d->netIo_->registerSocket( socket, false );
 		cUOSocket* uosocket = new cUOSocket( socket );
 		d->loginSockets.append( uosocket );
@@ -119,7 +121,7 @@ void cNetwork::poll( void )
 		for ( uoSocket = d->uoSockets.first(); uoSocket; uoSocket = d->uoSockets.next() )
 		{
 			// Check for disconnected sockets
-			if ( uoSocket->socket()->error() != QSocketDevice::NoError || !uoSocket->socket()->isValid() || !uoSocket->socket()->isWritable() || uoSocket->socket()->isInactive() || !uoSocket->socket()->isOpen() )
+			if ( uoSocket->socket()->error() != Q3SocketDevice::NoError || !uoSocket->socket()->isValid() || !uoSocket->socket()->isWritable() || uoSocket->socket()->isInactive() || !uoSocket->socket()->isOpen() )
 			{
 				uoSocket->log( tr( "Client disconnected.\n" ) );
 				uoSocket->disconnect();
@@ -146,7 +148,7 @@ void cNetwork::poll( void )
 
 		for ( uoSocket = d->loginSockets.first(); uoSocket; uoSocket = d->loginSockets.next() )
 		{
-			if ( uoSocket->socket()->error() != QSocketDevice::NoError || !uoSocket->socket()->isValid() || !uoSocket->socket()->isOpen() )
+			if ( uoSocket->socket()->error() != Q3SocketDevice::NoError || !uoSocket->socket()->isValid() || !uoSocket->socket()->isOpen() )
 			{
 				uoSocket->log( tr( "Client disconnected.\n" ) );
 				d->netIo_->unregisterSocket( uoSocket->socket() );
@@ -174,12 +176,12 @@ void cNetwork::load()
 		d->loginServer_ = new cListener( Config::instance()->loginPort() );
 		d->loginServer_->start();
 		Console::instance()->send( tr( "\nLoginServer running on port %1\n" ).arg( Config::instance()->loginPort() ) );
-		QValueVector<ServerList_st> serverList = Config::instance()->serverList();
+		Q3ValueVector<ServerList_st> serverList = Config::instance()->serverList();
 		if ( serverList.size() < 1 )
 			Console::instance()->log( LOG_WARNING, tr( "LoginServer enabled but there no Game server entries found\n Check your wolfpack.xml settings\n" ) );
 		else
 		{
-			for ( QValueVector<ServerList_st>::iterator it = serverList.begin(); it != serverList.end(); ++it )
+			for ( Q3ValueVector<ServerList_st>::iterator it = serverList.begin(); it != serverList.end(); ++it )
 				Console::instance()->send( tr("\t%1 using address %2\n").arg( (*it).sServer, (*it).address.toString() ) );
 		}
 	}
@@ -273,9 +275,9 @@ Q_UINT32 cNetwork::count()
 	return d->uoSockets.count();
 }
 
-QPtrListIterator<cUOSocket> cNetwork::getIterator()
+Q3PtrListIterator<cUOSocket> cNetwork::getIterator()
 {
-	return QPtrListIterator<cUOSocket>( d->uoSockets );
+	return Q3PtrListIterator<cUOSocket>( d->uoSockets );
 }
 
 void cNetwork::broadcast( const QString& message, Q_UINT16 color, Q_UINT16 font )

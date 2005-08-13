@@ -58,6 +58,9 @@
 // System Includes
 #include <math.h>
 #include <algorithm>
+//Added by qt3to4:
+#include <Q3CString>
+#include <Q3PtrList>
 
 using namespace std;
 
@@ -1347,9 +1350,9 @@ bool cItem::wearOut()
 	return false;
 }
 
-QPtrList< cItem > cItem::getContainment() const
+Q3PtrList< cItem > cItem::getContainment() const
 {
-	QPtrList<cItem> itemlist;
+	Q3PtrList<cItem> itemlist;
 
 	for ( ContainerIterator it( content_ ); !it.atEnd(); ++it )
 	{
@@ -1358,10 +1361,10 @@ QPtrList< cItem > cItem::getContainment() const
 		// we'v got a container
 		if ( pItem->type() == 1 || pItem->type() == 63 )
 		{
-			QPtrList<cItem> sublist = pItem->getContainment();
+			Q3PtrList<cItem> sublist = pItem->getContainment();
 
 			// Transfer the items
-			QPtrListIterator<cItem> pit( sublist );
+			Q3PtrListIterator<cItem> pit( sublist );
 			P_ITEM pi;
 			while ( ( pi = pit.current() ) )
 			{
@@ -2196,7 +2199,7 @@ unsigned int cItem::countItems( const QStringList& baseids ) const
 unsigned int cItem::countItems( short id, short color ) const
 {
 	unsigned int total = 0;
-	QPtrList<cItem> content = getContainment();
+	Q3PtrList<cItem> content = getContainment();
 
 	for ( P_ITEM pi = content.first(); pi; pi = content.next() )
 	{
@@ -2373,8 +2376,8 @@ PyObject* cItem::callEvent( ePythonEvent event, PyObject* args, bool ignoreError
 	// call the basescripts
 	if ( basedef_ )
 	{
-		const QPtrList<cPythonScript> &list = basedef_->baseScripts();
-		QPtrList<cPythonScript>::const_iterator it( list.begin() );
+		const Q3PtrList<cPythonScript> &list = basedef_->baseScripts();
+		Q3PtrList<cPythonScript>::const_iterator it( list.begin() );
 		for ( ; it != list.end(); ++it )
 		{
 			result = ( *it )->callEvent( event, args, ignoreErrors );
@@ -2414,8 +2417,8 @@ bool cItem::canHandleEvent( ePythonEvent event )
 
 	if ( basedef_ )
 	{
-		const QPtrList<cPythonScript> &list = basedef_->baseScripts();
-		QPtrList<cPythonScript>::const_iterator it( list.begin() );
+		const Q3PtrList<cPythonScript> &list = basedef_->baseScripts();
+		Q3PtrList<cPythonScript>::const_iterator it( list.begin() );
 		for ( ; it != list.end(); ++it )
 		{
 			if ( ( *it )->canHandleEvent( event ) )
@@ -2428,12 +2431,12 @@ bool cItem::canHandleEvent( ePythonEvent event )
 	return false;
 }
 
-bool cItem::hasScript( const QCString& name )
+bool cItem::hasScript( const Q3CString& name )
 {
 	if ( basedef_ )
 	{
-		const QPtrList<cPythonScript> &list = basedef_->baseScripts();
-		QPtrList<cPythonScript>::const_iterator it( list.begin() );
+		const Q3PtrList<cPythonScript> &list = basedef_->baseScripts();
+		Q3PtrList<cPythonScript>::const_iterator it( list.begin() );
 		for ( ; it != list.end(); ++it )
 		{
 			if ( ( *it )->name() == name )

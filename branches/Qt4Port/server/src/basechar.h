@@ -33,8 +33,11 @@
 
 // library includes
 #include <qmap.h>
-#include <qvaluevector.h>
+#include <q3valuevector.h>
 #include <qdatetime.h>
+//Added by qt3to4:
+#include <Q3CString>
+#include <Q3PtrList>
 
 // wolfpack includes
 #include "basedef.h"
@@ -72,8 +75,8 @@ public:
 
 	// type definitions
 	typedef QMap<ushort, cItem*> ItemContainer;
-	typedef QValueVector<cBaseChar*> CharContainer;
-	typedef QValueVector<cTimer*> TimerContainer;
+	typedef Q3ValueVector<cBaseChar*> CharContainer;
+	typedef Q3ValueVector<cTimer*> TimerContainer;
 	enum enLayer
 	{
 		TradeWindow					= 0,
@@ -334,7 +337,7 @@ public:
 	PyObject* callEvent( ePythonEvent event, PyObject* args = 0, bool ignoreErrors = false );
 	bool callEventHandler( ePythonEvent event, PyObject* args = 0, bool ignoreErrors = false );
 	bool canHandleEvent( ePythonEvent event );
-	bool hasScript( const QCString& name );
+	bool hasScript( const Q3CString& name );
 
 	// Combat
 	inline P_CHAR attackTarget() const
@@ -357,7 +360,7 @@ public:
 		nextSwing_ = data;
 	}
 
-	inline QCString baseid() const
+	inline Q3CString baseid() const
 	{
 		return basedef_ ? basedef_->id() : 0;
 	}
@@ -367,7 +370,7 @@ public:
 		return basedef_;
 	}
 
-	inline void setBaseid( const QCString& id )
+	inline void setBaseid( const Q3CString& id )
 	{
 		basedef_ = CharBaseDefs::instance()->get( id );
 		changed_ = true;
@@ -550,7 +553,7 @@ public:
 	/*!
 		Return a reference to the list of ongoing fights.
 	*/
-	QPtrList<cFightInfo>& fights()
+	Q3PtrList<cFightInfo>& fights()
 	{
 		return fights_;
 	}
@@ -578,7 +581,7 @@ public:
 		return CharBaseDefs::instance()->getBodyInfo( body() ).mountid;
 	}
 
-	virtual QCString bindmenu()
+	virtual Q3CString bindmenu()
 	{
 		return basedef_ ? basedef_->bindmenu() : 0;
 	}
@@ -623,12 +626,12 @@ public:
 		return basedef_ ? basedef_->minTaming() : 0;
 	}
 
-	inline QCString carve()
+	inline Q3CString carve()
 	{
 		return basedef_ ? basedef_->carve() : 0;
 	}
 
-	inline QCString lootPacks()
+	inline Q3CString lootPacks()
 	{
 		return basedef_ ? basedef_->lootPacks() : 0;
 	}
@@ -683,7 +686,7 @@ protected:
 	/*!
 		\brief Collection of information about ongoing fights.
 	*/
-	QPtrList<cFightInfo> fights_;
+	Q3PtrList<cFightInfo> fights_;
 
 	// type definitions
 	struct stSkillValue
@@ -871,7 +874,7 @@ protected:
 	ItemContainer content_;
 
 	// Skill properties of this char.
-	QValueVector<stSkillValue> skills_;
+	Q3ValueVector<stSkillValue> skills_;
 
 	// Region the char is in.
 	cTerritory* region_;

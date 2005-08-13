@@ -33,16 +33,16 @@
 
 #include <qmap.h>
 
-class QSocketDevice;
+class Q3SocketDevice;
 class cAsyncNetIOPrivate;
 class cUOPacket;
 
 class cAsyncNetIO : public QThread
 {
-	QMap<QSocketDevice*, cAsyncNetIOPrivate*> buffers;
+	QMap<Q3SocketDevice*, cAsyncNetIOPrivate*> buffers;
 
-	typedef QMap<QSocketDevice*, cAsyncNetIOPrivate*>::iterator iterator;
-	typedef QMap<QSocketDevice*, cAsyncNetIOPrivate*>::const_iterator const_iterator;
+	typedef QMap<Q3SocketDevice*, cAsyncNetIOPrivate*>::iterator iterator;
+	typedef QMap<Q3SocketDevice*, cAsyncNetIOPrivate*>::const_iterator const_iterator;
 
 	QMutex mapsMutex;
 	QWaitCondition waitCondition;
@@ -55,15 +55,15 @@ public:
 	}
 	~cAsyncNetIO() throw();
 
-	bool registerSocket( QSocketDevice*, bool loginSocket );
-	bool unregisterSocket( QSocketDevice* );
-	Q_ULONG bytesAvailable( QSocketDevice* ) const;
+	bool registerSocket( Q3SocketDevice*, bool loginSocket );
+	bool unregisterSocket( Q3SocketDevice* );
+	Q_ULONG bytesAvailable( Q3SocketDevice* ) const;
 
-	cUOPacket* recvPacket( QSocketDevice* );
-	void pushfrontPacket( QSocketDevice*, cUOPacket* packet );
-	void sendPacket( QSocketDevice*, cUOPacket*, bool );
+	cUOPacket* recvPacket( Q3SocketDevice* );
+	void pushfrontPacket( Q3SocketDevice*, cUOPacket* packet );
+	void sendPacket( Q3SocketDevice*, cUOPacket*, bool );
 
-	void flush( QSocketDevice* );
+	void flush( Q3SocketDevice* );
 	bool canceled() const
 	{
 		return canceled_;

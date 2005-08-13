@@ -58,7 +58,7 @@ cListener::cListener( Q_UINT16 port ) : _port( port ), _canceled( false )
 
 cListener::~cListener() throw()
 {
-	std::for_each( readyConnections.begin(), readyConnections.end(), destroy_obj<QSocketDevice*>() );
+	std::for_each( readyConnections.begin(), readyConnections.end(), destroy_obj<Q3SocketDevice*>() );
 }
 
 void cListener::run() throw()
@@ -73,7 +73,7 @@ void cListener::run() throw()
 		int fd = listenningSocket.accept();
 		if ( fd != -1 )
 		{
-			QSocketDevice* socket = new QSocketDevice( fd, QSocketDevice::Stream );
+			Q3SocketDevice* socket = new Q3SocketDevice( fd, Q3SocketDevice::Stream );
 			socket->setBlocking( false );
 			QMutexLocker lock( &readyConnectionsMutex );
 			readyConnections.push_back( socket );
@@ -90,10 +90,10 @@ void cListener::run() throw()
 /*!
   Retrieves stabilished connections from queue.
 */
-QSocketDevice* cListener::getNewConnection()
+Q3SocketDevice* cListener::getNewConnection()
 {
 	QMutexLocker lock( &readyConnectionsMutex );
-	QSocketDevice* s = readyConnections.front();
+	Q3SocketDevice* s = readyConnections.front();
 	readyConnections.pop_front();
 	return s;
 }

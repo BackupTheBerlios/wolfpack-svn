@@ -68,9 +68,12 @@
 
 // Qt Includes
 #include <qwaitcondition.h>
-#include <qptrvector.h>
+#include <q3ptrvector.h>
 #include <qapplication.h>
 #include <qtextcodec.h>
+//Added by qt3to4:
+#include <QTranslator>
+#include <Q3PtrList>
 
 #if defined(MYSQL_DRIVER)
 #if defined(Q_OS_WIN32)
@@ -113,13 +116,13 @@ void cComponent::unload()
 class cServer::Private
 {
 public:
-	QPtrList<cComponent> components;
+	Q3PtrList<cComponent> components;
 	bool running;
 	enServerState state;
 	bool secure;
 	QMutex actionMutex;
 	unsigned int time;
-	QValueVector<cAction*> actionQueue;
+	Q3ValueVector<cAction*> actionQueue;
 	QApplication *app;
 
 	Private() : running( true ), state( STARTUP ), secure( true ), time( 0 )
@@ -513,7 +516,7 @@ void cServer::load()
 		ScriptAI::registerInFactory( *aiit );
 	}
 
-	QPtrList<cComponent>::iterator it( d->components.begin() );
+	Q3PtrList<cComponent>::iterator it( d->components.begin() );
 	for ( ; it != d->components.end(); ++it )
 	{
 		cComponent* component = *it;
@@ -525,7 +528,7 @@ void cServer::load()
 
 void cServer::unload()
 {
-	QPtrVector<cComponent> vector;
+	Q3PtrVector<cComponent> vector;
 	d->components.toVector( &vector );
 	int i;
 
@@ -537,7 +540,7 @@ void cServer::unload()
 
 cComponent* cServer::findComponent( const QString& name )
 {
-	QPtrList<cComponent>::iterator it( d->components.begin() );
+	Q3PtrList<cComponent>::iterator it( d->components.begin() );
 	for ( ; it != d->components.end(); ++it )
 	{
 		cComponent* component = *it;
@@ -597,7 +600,7 @@ void cServer::load( const QString& name )
 	}
 
 	// Find all components depending on this one and load them.
-	QPtrList<cComponent>::iterator it( d->components.begin() );
+	Q3PtrList<cComponent>::iterator it( d->components.begin() );
 	for ( ; it != d->components.end(); ++it )
 	{
 		cComponent* subcomponent = *it;
@@ -623,7 +626,7 @@ void cServer::unload( const QString& name )
 	}
 
 	// Find all components depending on this one and unload them.
-	QPtrList<cComponent>::iterator it( d->components.begin() );
+	Q3PtrList<cComponent>::iterator it( d->components.begin() );
 	for ( ; it != d->components.end(); ++it )
 	{
 		cComponent* subcomponent = *it;
@@ -673,7 +676,7 @@ void cServer::reload( const QString& name )
 	}
 
 	// Find all components depending on this one and reload them.
-	QPtrList<cComponent>::iterator it( d->components.begin() );
+	Q3PtrList<cComponent>::iterator it( d->components.begin() );
 	for ( ; it != d->components.end(); ++it )
 	{
 		cComponent* subcomponent = *it;

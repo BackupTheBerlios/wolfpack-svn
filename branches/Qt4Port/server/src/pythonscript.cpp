@@ -34,6 +34,8 @@
 // Library Includes
 #include <qfile.h>
 #include <qglobal.h>
+//Added by qt3to4:
+#include <Q3CString>
 
 // Extension includes
 #include "python/utilities.h"
@@ -694,7 +696,7 @@ void cPythonScript::unload( void )
 	\condition Triggered when the script is loaded.
 */
 // Find our module name
-bool cPythonScript::load( const QCString& name )
+bool cPythonScript::load( const Q3CString& name )
 {
 	if ( name.isEmpty() )
 	{
@@ -983,7 +985,7 @@ bool cPythonScriptable::convertPyObject( PyObject* /*object*/, QString& /*string
 	return false;
 }
 
-bool cPythonScriptable::convertPyObject( PyObject* /*object*/, QCString& /*string*/ )
+bool cPythonScriptable::convertPyObject( PyObject* /*object*/, Q3CString& /*string*/ )
 {
 	return false;
 }

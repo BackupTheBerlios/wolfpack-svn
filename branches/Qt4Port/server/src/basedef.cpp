@@ -34,6 +34,8 @@
 #include "basics.h"
 #include <string.h>
 #include <qdom.h>
+//Added by qt3to4:
+#include <Q3CString>
 
 void cBaseDef::processNode( const cElement* node )
 {
@@ -121,7 +123,7 @@ void cBaseDef::reset()
 	properties.clear();
 }
 
-cCharBaseDef::cCharBaseDef( const QCString& id )
+cCharBaseDef::cCharBaseDef( const Q3CString& id )
 {
 	id_ = id;
 	reset();
@@ -307,7 +309,7 @@ void cCharBaseDef::load()
 	}
 }
 
-cCharBaseDef* cCharBaseDefs::get( const QCString& id )
+cCharBaseDef* cCharBaseDefs::get( const Q3CString& id )
 {
 	Iterator it = definitions.find( id );
 
@@ -338,7 +340,7 @@ void cCharBaseDefs::loadBodyInfo()
 	QString filename = Config::instance()->getString( "General", "Bodyinfo File", "definitions/system/bodyinfo.xml", true );
 	QFile file( filename );
 
-	if ( !file.open( IO_ReadOnly ) )
+	if ( !file.open( QIODevice::ReadOnly ) )
 	{
 		Console::instance()->log( LOG_WARNING, tr( "Unable to load body information from %1.\n" ).arg( filename ) );
 	}
@@ -571,7 +573,7 @@ void cCharBaseDefs::refreshScripts()
 /*
 	cItemBaseDef and cItemBaseDefs
 */
-cItemBaseDef::cItemBaseDef( const QCString& id )
+cItemBaseDef::cItemBaseDef( const Q3CString& id )
 {
 	id_ = id;
 	definitionType = WPDT_ITEM;
@@ -678,7 +680,7 @@ void cItemBaseDef::load()
 	}
 }
 
-cItemBaseDef* cItemBaseDefs::get( const QCString& id )
+cItemBaseDef* cItemBaseDefs::get( const Q3CString& id )
 {
 	Iterator it = definitions.find( id );
 
@@ -943,7 +945,7 @@ PyObject* cItemBaseDef::getProperty( const QString& name )
 	return cBaseDef::getProperty( name );
 }
 
-cMultiBaseDef::cMultiBaseDef( const QCString& id ) : cItemBaseDef( id )
+cMultiBaseDef::cMultiBaseDef( const Q3CString& id ) : cItemBaseDef( id )
 {
 	definitionType = WPDT_MULTI;
 }

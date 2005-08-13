@@ -38,8 +38,11 @@
 #include "content.h"
 
 // Library Includes
-#include <qvaluevector.h>
-#include <qdict.h>
+#include <q3valuevector.h>
+#include <q3dict.h>
+//Added by qt3to4:
+#include <Q3CString>
+#include <Q3PtrList>
 #include <math.h>
 
 // Forward Class declarations
@@ -71,7 +74,7 @@ public:
 	PyObject* callEvent( ePythonEvent event, PyObject* args = 0, bool ignoreErrors = false );
 	bool callEventHandler( ePythonEvent event, PyObject* args = 0, bool ignoreErrors = false );
 	bool canHandleEvent( ePythonEvent event );
-	bool hasScript( const QCString& name );
+	bool hasScript( const Q3CString& name );
 
 	cItem();
 	cItem( const cItem& src ); // Copy constructor
@@ -195,7 +198,7 @@ public:
 	{
 		return priv_;
 	}
-	QCString baseid() const
+	Q3CString baseid() const
 	{
 		return basedef_ ? basedef_->id() : 0;
 	}
@@ -207,7 +210,7 @@ public:
 	{
 		return basedef_;
 	}
-	inline void setBaseid( const QCString& id )
+	inline void setBaseid( const Q3CString& id )
 	{
 		float oldweight = weight();
 		basedef_ = ItemBaseDefs::instance()->get( id );
@@ -255,7 +258,7 @@ public:
 		return basedef_ ? basedef_->type() : 0;
 	}
 
-	virtual QCString bindmenu()
+	virtual Q3CString bindmenu()
 	{
 		return basedef_ ? basedef_->bindmenu() : 0;
 	}
@@ -435,7 +438,7 @@ public:
 	bool onPickup( P_CHAR pChar );
 	//	bool onShowTooltip( P_PLAYER sender, cUOTxTooltipList* tooltip ); // Shows a tool tip for specific object
 
-	QPtrList< cItem > getContainment() const;
+	Q3PtrList< cItem > getContainment() const;
 
 	P_ITEM getOutmostItem();
 	P_CHAR getOutmostChar();

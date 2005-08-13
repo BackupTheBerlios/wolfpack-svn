@@ -67,9 +67,11 @@
 
 #include <stdlib.h>
 #include <qhostaddress.h>
+//Added by qt3to4:
+#include <Q3PtrList>
 
 #include <vector>
-#include <qvaluelist.h>
+#include <q3valuelist.h>
 #include <functional>
 
 using namespace std;
@@ -93,7 +95,7 @@ using namespace std;
   Ownership of \a sDevice will be transfered to cUOSocket, that is,
   cUOSocket will call delete on the given pointer when it's destructed.
 */
-cUOSocket::cUOSocket( QSocketDevice* sDevice ) : _walkSequence( 0 ), lastPacket( 0xFF ), _state( LoggingIn ), _lang( "ENU" ), targetRequest( 0 ), _account( 0 ), _player( 0 ), _rxBytes( 0 ), _txBytes( 0 ), _socket( sDevice ), _screenWidth( 640 ), _screenHeight( 480 )
+cUOSocket::cUOSocket( Q3SocketDevice* sDevice ) : _walkSequence( 0 ), lastPacket( 0xFF ), _state( LoggingIn ), _lang( "ENU" ), targetRequest( 0 ), _account( 0 ), _player( 0 ), _rxBytes( 0 ), _txBytes( 0 ), _socket( sDevice ), _screenWidth( 640 ), _screenHeight( 480 )
 {
 	_txBytesRaw = 0;
 	flags_ = 0;
@@ -490,7 +492,7 @@ void cUOSocket::handleLoginRequest( cUORxLoginRequest* packet )
 	// Otherwise build the shard-list
 	cUOTxShardList shardList;
 
-	QValueVector<ServerList_st> shards = Config::instance()->serverList();
+	Q3ValueVector<ServerList_st> shards = Config::instance()->serverList();
 
 	for ( Q_UINT8 i = 0; i < shards.size(); ++i )
 	{
@@ -576,7 +578,7 @@ void cUOSocket::disconnect()
 void cUOSocket::handleSelectShard( cUORxSelectShard* packet )
 {
 	// Relay him - save an auth-id so we recog. him when he relays locally
-	QValueVector<ServerList_st> shards = Config::instance()->serverList();
+	Q3ValueVector<ServerList_st> shards = Config::instance()->serverList();
 
 	if ( packet->shardId() >= shards.size() )
 	{
@@ -631,7 +633,7 @@ void cUOSocket::sendCharList()
 
 	cUOTxCharTownList charList;
 	charList.setCharLimit(maxChars);
-	QValueVector<P_PLAYER> characters = _account->caracterList();
+	Q3ValueVector<P_PLAYER> characters = _account->caracterList();
 
 	// Add the characters
 	Q_UINT8 i = 0;
@@ -659,7 +661,7 @@ void cUOSocket::sendCharList()
 */
 void cUOSocket::handleDeleteCharacter( cUORxDeleteCharacter* packet )
 {
-	QValueVector<P_PLAYER> charList = _account->caracterList();
+	Q3ValueVector<P_PLAYER> charList = _account->caracterList();
 
 	if ( packet->index() >= charList.size() )
 	{
@@ -687,7 +689,7 @@ void cUOSocket::handleDeleteCharacter( cUORxDeleteCharacter* packet )
 void cUOSocket::handlePlayCharacter( cUORxPlayCharacter* packet )
 {
 	// Check the character the user wants to play
-	QValueVector<P_PLAYER> characters = _account->caracterList();
+	Q3ValueVector<P_PLAYER> characters = _account->caracterList();
 
 	if ( packet->slot() >= characters.size() )
 	{
@@ -712,7 +714,7 @@ void cUOSocket::handlePlayCharacter( cUORxPlayCharacter* packet )
 	P_PLAYER pChar = characters.at( packet->slot() );
 
 	// check if any other account character is still online (lingering)
-	for ( QValueVector<P_PLAYER>::const_iterator it = characters.begin(); it != characters.end(); ++it )
+	for ( Q3ValueVector<P_PLAYER>::const_iterator it = characters.begin(); it != characters.end(); ++it )
 	{
 		P_PLAYER otherChar = *it;
 		if ( pChar == otherChar )
@@ -974,7 +976,7 @@ void cUOSocket::handleCreateChar( cUORxCreateChar* packet )
 		return;
 	}
 
-	QValueVector<P_PLAYER> characters = _account->caracterList();
+	Q3ValueVector<P_PLAYER> characters = _account->caracterList();
 
 	// If we have more than 6 characters
 	const uint maxChars = wpMin<uint>( 6, Config::instance()->maxCharsPerAccount() );
@@ -984,7 +986,7 @@ void cUOSocket::handleCreateChar( cUORxCreateChar* packet )
 	}
 
 	// If another character in the account is still online (lingering)
-	for ( QValueVector<P_PLAYER>::const_iterator it = characters.begin(); it != characters.end(); ++it )
+	for ( Q3ValueVector<P_PLAYER>::const_iterator it = characters.begin(); it != characters.end(); ++it )
 	{
 		P_PLAYER otherChar = *it;
 		if ( otherChar->isOnline() )
@@ -1216,7 +1218,7 @@ void cUOSocket::sysMessage( const QString& message, Q_UINT16 color, Q_UINT16 fon
 void cUOSocket::updateCharList()
 {
 	cUOTxUpdateCharList charList;
-	QValueVector<P_PLAYER> characters = _account->caracterList();
+	Q3ValueVector<P_PLAYER> characters = _account->caracterList();
 
 	// Add the characters
 	for ( Q_UINT8 i = 0; i < characters.size(); ++i )
@@ -1869,7 +1871,7 @@ void cUOSocket::handleSpeechRequest( cUORxSpeechRequest* packet )
 	// Check if it's a command, then dispatch it to the command system
 	// if it's normal speech send it to the normal speech dispatcher
 	QString speech = packet->message();
-	QValueVector<Q_UINT16> keywords;
+	Q3ValueVector<Q_UINT16> keywords;
 	if ( packet->type() & 0xc0 )
 		keywords = packet->keywords();
 	Q_UINT16 color = packet->color();
@@ -2164,7 +2166,7 @@ void cUOSocket::sendContainer( P_ITEM pCont )
 	cUOTxItemContent itemContent;
 	Q_INT32 count = 0;
 
-	QPtrList<cItem> tooltipItems;
+	Q3PtrList<cItem> tooltipItems;
 
 	for ( ContainerIterator it( pCont ); !it.atEnd(); ++it )
 	{
@@ -2610,7 +2612,7 @@ void cUOSocket::sendStatWindow( P_CHAR pChar )
 		// Send the packet to our party members too
 		if ( _player->party() )
 		{
-			QPtrList<cPlayer> members = _player->party()->members();
+			Q3PtrList<cPlayer> members = _player->party()->members();
 
 			for ( P_PLAYER member = members.first(); member; member = members.next() )
 			{
@@ -2734,10 +2736,10 @@ struct buyitem_st
 	QString name;
 };
 
-class SortedSerialList : public QPtrList<cItem>
+class SortedSerialList : public Q3PtrList<cItem>
 {
 protected:
-	virtual int compareItems( QPtrCollection::Item item1, QPtrCollection::Item item2 )
+	virtual int compareItems( Q3PtrCollection::Item item1, Q3PtrCollection::Item item2 )
 	{
 		return ( ( P_ITEM ) item1 )->serial() - ( ( P_ITEM ) item2 )->serial();
 	}
@@ -2753,9 +2755,9 @@ void cUOSocket::sendVendorCont( P_ITEM pItem )
 	vendorBuy.setSerial( pItem->serial() );
 
 	/* dont ask me, but the order of the items for vendorbuy is reversed */
-	QValueList<buyitem_st> buyitems;
-	QValueList<buyitem_st>::const_iterator bit;
-	QPtrList<cItem> items;
+	Q3ValueList<buyitem_st> buyitems;
+	Q3ValueList<buyitem_st>::const_iterator bit;
+	Q3PtrList<cItem> items;
 
 	SortedSerialList sortedList;
 	for ( ContainerIterator it( pItem ); !it.atEnd(); ++it )
@@ -2980,7 +2982,7 @@ void cUOSocket::sendBuyWindow( P_NPC pVendor )
 	sendStatWindow();
 }
 
-static void walkSellItems( P_ITEM pCont, P_ITEM pPurchase, QPtrList<cItem>& items )
+static void walkSellItems( P_ITEM pCont, P_ITEM pPurchase, Q3PtrList<cItem>& items )
 {
 	// For every pack item search for an equivalent sellitem
 	for ( ContainerIterator pit( pCont ); !pit.atEnd(); ++pit )
@@ -3015,7 +3017,7 @@ void cUOSocket::sendSellWindow( P_NPC pVendor, P_CHAR pSeller )
 
 	if ( pPurchase && pBackpack )
 	{
-		QPtrList<cItem> items;
+		Q3PtrList<cItem> items;
 		cUOTxSellList itemContent;
 		itemContent.setSerial( pVendor->serial() );
 

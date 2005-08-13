@@ -31,6 +31,8 @@
 #include <typeinfo>
 #include <qobject.h>
 #include <qstringlist.h>
+//Added by qt3to4:
+#include <Q3CString>
 #include "singleton.h"
 #include "factory.h"
 
@@ -78,7 +80,7 @@ public:
 class cBinaryTypemap
 {
 protected:
-	typedef QMap<unsigned char, QCString> Container;
+	typedef QMap<unsigned char, Q3CString> Container;
 	typedef Container::iterator Iterator;
 
 	/*
@@ -91,7 +93,7 @@ public:
 		Register a new type with this object and return
 		the 8-bit identifier assigned to this type.
 	*/
-	unsigned int registerType( QCString type )
+	unsigned int registerType( Q3CString type )
 	{
 		// Find the largest typeid in use
 		int lastid = -1;
@@ -135,7 +137,7 @@ public:
 	/*
 		Return the full typemap.
 	*/
-	const QMap<unsigned char, QCString>& getTypemap()
+	const QMap<unsigned char, Q3CString>& getTypemap()
 	{
 		return typemap;
 	}
