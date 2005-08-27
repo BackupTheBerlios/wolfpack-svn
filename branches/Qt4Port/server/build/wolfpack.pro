@@ -12,6 +12,8 @@ TEMPLATE = app
 CONFIG += qt thread exceptions rtti 
 QT += network xml qt3support
 
+CONFIG -= flat
+
 unix {
 	CONFIG += console
 
@@ -201,12 +203,10 @@ TRANSLATIONS = \
 
 unix:SOURCES  += \
 	../src/unix/config_unix.cpp \
-	../src/unix/console_unix.cpp \
 	../src/unix/getopts_unix.cpp
 
 win32:SOURCES += \
 	../src/win/config_win.cpp \
-	../src/win/console_win.cpp \
 	../src/win/getopts_win.cpp
 
 DISTFILES += \

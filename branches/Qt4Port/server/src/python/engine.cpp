@@ -88,8 +88,10 @@ void stopPython()
 {
 	// Give the Python Threads time to finalize
 	Py_BEGIN_ALLOW_THREADS
+	QMutex m;
+	m.lock();
 	QWaitCondition waitCondition;
-	waitCondition.wait( 500 );
+	waitCondition.wait( &m, 500 );
 	Py_END_ALLOW_THREADS
 
 	// We have to be sure that all memory

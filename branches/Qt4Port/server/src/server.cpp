@@ -123,7 +123,6 @@ public:
 	QMutex actionMutex;
 	unsigned int time;
 	Q3ValueVector<cAction*> actionQueue;
-	QApplication *app;
 
 	Private() : running( true ), state( STARTUP ), secure( true ), time( 0 )
 	{
@@ -223,7 +222,6 @@ cServer::cServer()
 #endif
 
 	d = new Private;
-	d->app = 0;
 
 	// Register Components
 	registerComponent( Config::instance(), QT_TR_NOOP( "configuration" ), true, false );
@@ -251,7 +249,6 @@ cServer::cServer()
 
 cServer::~cServer()
 {
-	delete d->app;
 	delete d;
 }
 
@@ -275,7 +272,7 @@ bool cServer::getSecure()
 	return d->secure;
 }
 
-bool cServer::run( int argc, char** argv )
+void cServer::run()
 {
 	// If have no idea where i should put this otherwise
 #if defined(Q_OS_UNIX)
@@ -285,8 +282,6 @@ bool cServer::run( int argc, char** argv )
 	bool error = false;
 
 	setState( STARTUP );
-
-	d->app = new QApplication( argc, argv, false );
 
 	// Set the default conversion codec (This is what OSI is using)
 	// ISO-8859-15 (MIB: 111)
@@ -329,9 +324,6 @@ bool cServer::run( int argc, char** argv )
 	// Start Python
 	PythonEngine::instance()->load();
 
-	// Parse the parameters.
-	Getopts::instance()->parse_options( argc, argv );
-
 	// Print a header and useful version informations
 	setupConsole();
 
@@ -343,7 +335,7 @@ bool cServer::run( int argc, char** argv )
 	catch ( wpException& e )
 	{
 		Console::instance()->log( LOG_ERROR, e.error() + "\n" );
-		return false;
+		return;
 	}
 
 
@@ -353,13 +345,13 @@ bool cServer::run( int argc, char** argv )
 		if ( Config::instance()->databaseDriver() != "binary" && !PersistentBroker::instance()->openDriver( Config::instance()->databaseDriver() ) )
 		{
 			Console::instance()->log( LOG_ERROR, tr( "Unknown Worldsave Database Driver '%1', check your wolfpack.xml" ).arg( Config::instance()->databaseDriver() ) );
-			return 1;
+			return;
 		}
 
 		if ( !PersistentBroker::instance()->openDriver( Config::instance()->accountsDriver() ) )
 		{
 			Console::instance()->log( LOG_ERROR, tr( "Unknown Account Database Driver '%1', check your wolfpack.xml" ).arg( Config::instance()->accountsDriver() ) );
-			return 1;
+			return;
 		}
 
 		setState( RUNNING );
@@ -368,7 +360,6 @@ bool cServer::run( int argc, char** argv )
 		Console::instance()->start(); // Notify the console about the server startup
 
 		PyThreadState* _save;
-		QWaitCondition niceLevel;
 		unsigned char cycles = 0;
 
 		clearProfilingInfo();
@@ -388,27 +379,27 @@ bool cServer::run( int argc, char** argv )
 					break;	// very unnice - hog all cpu time
 				case 1:
 					if ( Network::instance()->count() != 0 )
-						niceLevel.wait( 10 );
+						msleep( 10 );
 					else
-						niceLevel.wait( 100 ); break;
+						msleep( 100 ); break;
 				case 2:
-					niceLevel.wait( 10 ); break;
+					msleep( 10 ); break;
 				case 3:
-					niceLevel.wait( 40 ); break;// very nice
+					msleep( 40 ); break;// very nice
 				case 4:
 					if ( Network::instance()->count() != 0 )
-						niceLevel.wait( 10 );
+						msleep( 10 );
 					else
-						niceLevel.wait( 4000 ); break; // anti busy waiting
+						msleep( 4000 ); break; // anti busy waiting
 				case 5:
 					if ( Network::instance()->count() != 0 )
-						niceLevel.wait( 40 );
+						msleep( 40 );
 					else
-						niceLevel.wait( 5000 ); break;
+						msleep( 5000 ); break;
 				default:
-					niceLevel.wait( 10 ); break;
+					msleep( 10 ); break;
 				}
-				qApp->processEvents( 40 );
+				qApp->processEvents();
 				PyEval_RestoreThread( _save ); // Python threading - end
 
 				stopProfiling( PF_NICENESS );
@@ -420,7 +411,6 @@ bool cServer::run( int argc, char** argv )
 
 			try
 			{
-				Network::instance()->poll();
 				Timing::instance()->poll();
 				Console::instance()->poll();
 			}
@@ -449,7 +439,7 @@ bool cServer::run( int argc, char** argv )
 	// Stop Python
 	PythonEngine::instance()->unload();
 
-	return !error;
+	return;
 }
 
 void cServer::setupConsole()

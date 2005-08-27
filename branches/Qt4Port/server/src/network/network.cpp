@@ -34,9 +34,7 @@
 
 #include "../console.h"
 #include "../inlines.h"
-#include "asyncnetio.h"
 #include "uosocket.h"
-#include "listener.h"
 #include "../basechar.h"
 #include "../player.h"
 #include "../exceptions.h"
@@ -44,8 +42,8 @@
 // Library Includes
 #include <QStringList>
 #include <qmutex.h>
-//Added by qt3to4:
 #include <Q3PtrList>
+#include <QTcpServer>
 
 
 class cNetwork::cNetworkPrivate
@@ -53,16 +51,14 @@ class cNetwork::cNetworkPrivate
 public:
 	Q3PtrList<cUOSocket> uoSockets;
 	Q3PtrList<cUOSocket> loginSockets;
-	cAsyncNetIO* netIo_;
-	cListener* loginServer_;
-	cListener* gameServer_;
+	QTcpServer* loginServer_;
+	QTcpServer* gameServer_;
 	QMutex mutex;
 
 	cNetworkPrivate()
 	{
 		loginSockets.setAutoDelete( true );
 		uoSockets.setAutoDelete( true );
-		netIo_ = new cAsyncNetIO;
 		loginServer_ = 0;
 		gameServer_ = 0;
 	}
@@ -71,7 +67,6 @@ public:
 	{
 		delete loginServer_;
 		delete gameServer_;
-		delete netIo_;
 	}
 };
 
@@ -85,87 +80,22 @@ cNetwork::~cNetwork()
 	delete d;
 }
 
-void cNetwork::poll( void )
+void cNetwork::incomingGameServerConnection()
 {
-	lock();
+	cUOSocket *uosocket = new cUOSocket( d->gameServer_->nextPendingConnection() );
+	d->loginSockets.append( uosocket );
 
-	// Check for new Connections (LoginServer)
-	if ( d->loginServer_ && d->loginServer_->haveNewConnection() )
-	{
-		Q3SocketDevice* socket = d->loginServer_->getNewConnection();
-		d->netIo_->registerSocket( socket, true );
-		cUOSocket* uosocket = new cUOSocket( socket );
-		d->loginSockets.append( uosocket );
+	// Notify the admin
+	uosocket->log( tr( "Client connected to game server (%1).\n" ).arg( uosocket->socket()->peerAddress().toString() ) );
+}
 
-		// Notify the admin
-		uosocket->log( tr( "Client connected to login server (%1).\n" ).arg( socket->peerAddress().toString() ) );
-	}
+void cNetwork::incomingLoginServerConnection()
+{
+	cUOSocket *uosocket = new cUOSocket( d->loginServer_->nextPendingConnection() );
+	d->loginSockets.append( uosocket );
 
-	// Check for new Connections (GameServer)
-	if ( d->gameServer_ && d->gameServer_->haveNewConnection() )
-	{
-		Q3SocketDevice* socket = d->gameServer_->getNewConnection();
-		d->netIo_->registerSocket( socket, false );
-		cUOSocket* uosocket = new cUOSocket( socket );
-		d->loginSockets.append( uosocket );
-
-		// Notify the admin
-		uosocket->log( tr( "Client connected to game server (%1).\n" ).arg( socket->peerAddress().toString() ) );
-	}
-
-	// fast return
-	if ( !d->uoSockets.isEmpty() || !d->loginSockets.isEmpty() )
-	{
-		// Check for new Packets
-		cUOSocket* uoSocket = 0;
-		for ( uoSocket = d->uoSockets.first(); uoSocket; uoSocket = d->uoSockets.next() )
-		{
-			// Check for disconnected sockets
-			if ( uoSocket->socket()->error() != Q3SocketDevice::NoError || !uoSocket->socket()->isValid() || !uoSocket->socket()->isWritable() || uoSocket->socket()->isInactive() || !uoSocket->socket()->isOpen() )
-			{
-				uoSocket->log( tr( "Client disconnected.\n" ) );
-				uoSocket->disconnect();
-				d->netIo_->unregisterSocket( uoSocket->socket() );
-				d->uoSockets.remove( uoSocket );
-			}
-			else
-			{
-				try
-				{
-					uoSocket->recieve();
-
-					if ( Server::instance()->time() % 500 == 0 ) // Once every 0.5 Seconds
-						uoSocket->poll();
-				}
-				catch ( wpException e )
-				{
-					uoSocket->log( LOG_PYTHON, e.error() + "\n" );
-					uoSocket->log( LOG_ERROR, tr( "Disconnecting due to an unhandled exception.\n" ) );
-					uoSocket->disconnect();
-				}
-			}
-		}
-
-		for ( uoSocket = d->loginSockets.first(); uoSocket; uoSocket = d->loginSockets.next() )
-		{
-			if ( uoSocket->socket()->error() != Q3SocketDevice::NoError || !uoSocket->socket()->isValid() || !uoSocket->socket()->isOpen() )
-			{
-				uoSocket->log( tr( "Client disconnected.\n" ) );
-				d->netIo_->unregisterSocket( uoSocket->socket() );
-				d->loginSockets.remove();
-				continue;
-			}
-			else
-				uoSocket->recieve();
-
-			if ( uoSocket->state() == cUOSocket::InGame )
-			{
-				d->uoSockets.append( d->loginSockets.take() );
-			}
-		}
-	}
-
-	unlock();
+	// Notify the admin
+	uosocket->log( tr( "Client connected to login server (%1).\n" ).arg( uosocket->socket()->peerAddress().toString() ) );
 }
 
 // Load IP Blocking rules
@@ -173,8 +103,9 @@ void cNetwork::load()
 {
 	if ( Config::instance()->enableLogin() )
 	{
-		d->loginServer_ = new cListener( Config::instance()->loginPort() );
-		d->loginServer_->start();
+		d->loginServer_ = new QTcpServer( this );
+		d->loginServer_->listen( QHostAddress::Any, Config::instance()->loginPort() );
+		connect( d->loginServer_, SIGNAL(newConnection()), this, SLOT(incomingLoginServerConnection()));
 		Console::instance()->send( tr( "\nLoginServer running on port %1\n" ).arg( Config::instance()->loginPort() ) );
 		Q3ValueVector<ServerList_st> serverList = Config::instance()->serverList();
 		if ( serverList.size() < 1 )
@@ -188,12 +119,12 @@ void cNetwork::load()
 
 	if ( Config::instance()->enableGame() )
 	{
-		d->gameServer_ = new cListener( Config::instance()->gamePort() );
-		d->gameServer_->start();
+		d->gameServer_ = new QTcpServer( this );
+		d->gameServer_->listen( QHostAddress::Any, Config::instance()->gamePort() );
+		connect( d->gameServer_, SIGNAL(newConnection()), this, SLOT(incomingGameServerConnection()));
 		Console::instance()->send( tr( "\nGameServer running on port %1\n" ).arg( Config::instance()->gamePort() ) );
 	}
 
-	d->netIo_->start();
 	cComponent::load();
 }
 
@@ -209,16 +140,12 @@ void cNetwork::unload()
 {
 	if ( d->loginServer_ )
 	{
-		d->loginServer_->cancel();
-		d->loginServer_->wait();
 		delete d->loginServer_;
 		d->loginServer_ = 0;
 	}
 
 	if ( d->gameServer_ )
 	{
-		d->gameServer_->cancel();
-		d->gameServer_->wait();
 		delete d->gameServer_;
 		d->gameServer_ = 0;
 	}
@@ -228,19 +155,14 @@ void cNetwork::unload()
 	for ( socket = d->uoSockets.first(); socket; socket = d->uoSockets.next() )
 	{
 		socket->disconnect();
-		d->netIo_->unregisterSocket( socket->socket() );
 	}
 	d->uoSockets.clear();
 
 	for ( socket = d->loginSockets.first(); socket; socket = d->loginSockets.next() )
 	{
 		socket->disconnect();
-		d->netIo_->unregisterSocket( socket->socket() );
 	}
 	d->loginSockets.clear();
-
-	d->netIo_->cancel();
-	d->netIo_->wait();
 
 	cComponent::unload();
 }
@@ -253,11 +175,6 @@ void cNetwork::lock()
 void cNetwork::unlock()
 {
 	d->mutex.unlock();
-}
-
-cAsyncNetIO* cNetwork::netIo()
-{
-	return d->netIo_;
 }
 
 cUOSocket* cNetwork::first()

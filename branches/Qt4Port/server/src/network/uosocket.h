@@ -30,11 +30,11 @@
 
 // Library Includes
 #include <q3cstring.h>
-#include <q3socketdevice.h>
-#include <qobject.h>
+#include <QTcpSocket>
 #include <qmap.h>
 #include <qbitarray.h>
-//Added by qt3to4:
+#include <QObject>
+#include <QQueue>
 #include <Q3PtrList>
 #include <vector>
 
@@ -65,9 +65,9 @@ struct stTargetItem
 	Q_UINT16 hue;
 };
 
-class cUOSocket
+class cUOSocket : public QObject
 {
-	OBJECTDEF( cUOSocket )
+	Q_OBJECT
 
 public:
 	enum eSocketState
@@ -80,7 +80,7 @@ public:
 
 public:
 
-	cUOSocket( Q3SocketDevice* sDevice );
+	cUOSocket( QTcpSocket* s );
 	virtual ~cUOSocket( void );
 
 
@@ -144,8 +144,8 @@ public:
 	void setWalkSequence( Q_UINT8 data );
 
 
-	Q3SocketDevice* socket( void ) const;
-	void setSocket( Q3SocketDevice* data );
+	QTcpSocket* socket( void ) const;
+	void setSocket( QTcpSocket* data );
 
 	eSocketState state( void ) const;
 	void setState( eSocketState data );
@@ -179,7 +179,6 @@ public:
 
 	Q_UINT32 uniqueId( void ) const;
 
-	void recieve(); // Tries to recieve one packet and process it
 	void send( cUOPacket* packet );
 	void send( cGump* gump );
 
@@ -288,6 +287,11 @@ private:
 	void updateCharList();
 	void setPlayer( P_PLAYER player );
 	void playChar( P_PLAYER player );
+	void buildPackets();
+
+private slots:
+	void recieve(); // Tries to recieve one packet and process it
+
 
 private:
 	Q3ValueVector<cUORxWalkRequest> packetQueue;
@@ -303,7 +307,9 @@ private:
 	unsigned int _rxBytes;
 	unsigned int _txBytes;
 	unsigned int _txBytesRaw;
-	Q3SocketDevice* _socket;
+	QTcpSocket* _socket;
+	QByteArray incomingBuffer;
+	QQueue<cUOPacket*> incomingQueue;
 	unsigned short _screenWidth;
 	unsigned short _screenHeight;
 	Q_UINT8 _viewRange;
@@ -335,12 +341,12 @@ inline void cUOSocket::setWalkSequence( Q_UINT8 data )
 	_walkSequence = data;
 }
 
-inline Q3SocketDevice* cUOSocket::socket( void ) const
+inline QTcpSocket* cUOSocket::socket( void ) const
 {
 	return _socket;
 }
 
-inline void cUOSocket::setSocket( Q3SocketDevice* data )
+inline void cUOSocket::setSocket( QTcpSocket* data )
 {
 	_socket = data;
 }
