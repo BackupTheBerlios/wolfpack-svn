@@ -101,7 +101,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="TRUE"
-				AdditionalDependencies="C:\Qt\4.0.0\lib\qtmaind.lib C:\Python24\Libs\python24.lib C:\Qt\4.0.0\lib\QtCored4.lib C:\Qt\4.0.0\lib\QtGuid4.lib C:\Qt\4.0.0\lib\QtNetworkd4.lib C:\Qt\4.0.0\lib\QtXmld4.lib C:\Qt\4.0.0\lib\Qt3Supportd4.lib"
+				AdditionalDependencies="ws2_32.lib C:\Qt\4.0.0\lib\qtmaind.lib C:\Python24\Libs\python24.lib C:\Qt\4.0.0\lib\QtCored4.lib C:\Qt\4.0.0\lib\QtGuid4.lib C:\Qt\4.0.0\lib\QtNetworkd4.lib C:\Qt\4.0.0\lib\QtXmld4.lib C:\Qt\4.0.0\lib\Qt3Supportd4.lib"
 				OutputFile="debug\wolfpack.exe"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="C:\Qt\4.0.0\lib"
@@ -625,6 +625,9 @@
 						Filter="">
 						<File
 							RelativePath="..\src\win\config_win.cpp">
+						</File>
+						<File
+							RelativePath="..\src\win\console_win.cpp">
 						</File>
 						<File
 							RelativePath="..\src\win\getopts_win.cpp">

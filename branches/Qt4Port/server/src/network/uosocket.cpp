@@ -143,9 +143,11 @@ cUOSocket::cUOSocket( QTcpSocket* s ) : QObject( s ), _walkSequence( 0 ), lastPa
 	_txBytesRaw = 0;
 	flags_ = 0;
 	_ip = s->peerAddress().toString();
+	_socket = s;
 	_uniqueId = s->socket();
 	tooltipscache_ = new QBitArray;
 
+	connect( _socket, SIGNAL(readyRead()), this, SLOT(recieve()) );
 	// Creation of a new socket counts as activity
 	_lastActivity = getNormalizedTime();
 }

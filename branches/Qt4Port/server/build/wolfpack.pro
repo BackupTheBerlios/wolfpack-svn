@@ -21,13 +21,13 @@ unix {
 	QMAKE_LIBS_X11 -= -lX11 -lXext -lm
 }
 
-DEFINES += QT_CLEAN_NAMESPACE QT_COMPAT_WARNINGS
 
 RC_FILE = res.rc
 OBJECTS_DIR = obj
 MOC_DIR = obj
 
 win32:DEFINES -= UNICODE
+win32:LIBS += -lws2_32.lib
 
 # make confclean
 unix {
@@ -202,10 +202,12 @@ TRANSLATIONS = \
 	languages/wolfpack_ge.ts
 
 unix:SOURCES  += \
+	../src/unix/console_unix.cpp \
 	../src/unix/config_unix.cpp \
 	../src/unix/getopts_unix.cpp
 
 win32:SOURCES += \
+	../src/win/console_win.cpp \
 	../src/win/config_win.cpp \
 	../src/win/getopts_win.cpp
 

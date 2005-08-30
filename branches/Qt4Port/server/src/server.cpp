@@ -222,29 +222,6 @@ cServer::cServer()
 #endif
 
 	d = new Private;
-
-	// Register Components
-	registerComponent( Config::instance(), QT_TR_NOOP( "configuration" ), true, false );
-
-	// We want to start this independently
-	//registerComponent(PythonEngine::instance(), "python", false, true, "configuration");
-
-	registerComponent( Maps::instance(), QT_TR_NOOP( "maps" ), true, false, "configuration" );
-	registerComponent( MapObjects::instance(), QT_TR_NOOP( "sectormaps" ), false, true, "maps" );
-	registerComponent( TileCache::instance(), QT_TR_NOOP( "tiledata" ), true, false, "configuration" );
-	registerComponent( MultiCache::instance(), QT_TR_NOOP( "multis" ), true, false, "configuration" );
-
-	registerComponent( Definitions::instance(), QT_TR_NOOP( "definitions" ), true, false, "configuration" );
-	registerComponent( ScriptManager::instance(), QT_TR_NOOP( "scripts" ), true, false, "definitions" );
-	registerComponent( ContextMenus::instance(), QT_TR_NOOP( "contextmenus" ), true, false, "scripts" );
-	registerComponent( SpawnRegions::instance(), QT_TR_NOOP( "spawnregions" ), true, false, "definitions" );
-	registerComponent( Territories::instance(), QT_TR_NOOP( "territories" ), true, false, "definitions" );
-
-	// Accounts come before world
-	registerComponent( Accounts::instance(), QT_TR_NOOP( "accounts" ), true, false );
-	registerComponent( World::instance(), QT_TR_NOOP( "world" ), false, true );
-
-	registerComponent( Network::instance(), QT_TR_NOOP( "network" ), true, false );
 }
 
 cServer::~cServer()
@@ -280,6 +257,29 @@ void cServer::run()
 #endif
 
 	bool error = false;
+
+	// Register Components
+	registerComponent( Config::instance(), QT_TR_NOOP( "configuration" ), true, false );
+
+	// We want to start this independently
+	//registerComponent(PythonEngine::instance(), "python", false, true, "configuration");
+
+	registerComponent( Maps::instance(), QT_TR_NOOP( "maps" ), true, false, "configuration" );
+	registerComponent( MapObjects::instance(), QT_TR_NOOP( "sectormaps" ), false, true, "maps" );
+	registerComponent( TileCache::instance(), QT_TR_NOOP( "tiledata" ), true, false, "configuration" );
+	registerComponent( MultiCache::instance(), QT_TR_NOOP( "multis" ), true, false, "configuration" );
+
+	registerComponent( Definitions::instance(), QT_TR_NOOP( "definitions" ), true, false, "configuration" );
+	registerComponent( ScriptManager::instance(), QT_TR_NOOP( "scripts" ), true, false, "definitions" );
+	registerComponent( ContextMenus::instance(), QT_TR_NOOP( "contextmenus" ), true, false, "scripts" );
+	registerComponent( SpawnRegions::instance(), QT_TR_NOOP( "spawnregions" ), true, false, "definitions" );
+	registerComponent( Territories::instance(), QT_TR_NOOP( "territories" ), true, false, "definitions" );
+
+	// Accounts come before world
+	registerComponent( Accounts::instance(), QT_TR_NOOP( "accounts" ), true, false );
+	registerComponent( World::instance(), QT_TR_NOOP( "world" ), false, true );
+
+	registerComponent( Network::instance(), QT_TR_NOOP( "network" ), true, false );
 
 	setState( STARTUP );
 
