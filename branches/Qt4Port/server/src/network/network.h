@@ -71,6 +71,8 @@ public:
 private slots:
 	void incomingLoginServerConnection();
 	void incomingGameServerConnection();
+	void partingLoginServerConnection();
+	void partingGameServerConnection();
 };
 
 typedef Singleton<cNetwork> Network;

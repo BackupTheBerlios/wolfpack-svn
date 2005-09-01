@@ -319,6 +319,8 @@ private:
 	QBitArray* tooltipscache_;
 	Q3PtrList<cContextMenu> contextMenu_;
 	QMap<SERIAL, cGump*> gumps;
+	bool skippedUOHeader;
+	qint32 seed;
 	unsigned int flags_;
 
 	bool authenticate( const QString& username, const QString& password );

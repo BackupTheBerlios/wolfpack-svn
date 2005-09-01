@@ -345,7 +345,7 @@ void cUOPacket::setInt( unsigned int pos, unsigned int value )
 {
 	haveCompressed = false; // changed
 	value = B_HOST_TO_BENDIAN_INT32( value );
-	wpCopyOut( &rawPacket[( int ) pos], value );
+	wpCopyOut( rawPacket.data() + pos, value );
 }
 
 /*!
@@ -355,7 +355,7 @@ void cUOPacket::setShort( unsigned int pos, unsigned short value )
 {
 	haveCompressed = false; // changed
 	value = B_HOST_TO_BENDIAN_INT16( value );
-	wpCopyOut( &rawPacket[( int ) pos], value );
+	wpCopyOut( rawPacket.data() + pos, value );
 }
 
 /*!

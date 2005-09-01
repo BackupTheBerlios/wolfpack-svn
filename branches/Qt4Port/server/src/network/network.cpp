@@ -84,6 +84,7 @@ void cNetwork::incomingGameServerConnection()
 {
 	cUOSocket *uosocket = new cUOSocket( d->gameServer_->nextPendingConnection() );
 	d->loginSockets.append( uosocket );
+	connect( uosocket, SIGNAL(disconnected()), this, SLOT(partingGameServerConnection()) );
 
 	// Notify the admin
 	uosocket->log( tr( "Client connected to game server (%1).\n" ).arg( uosocket->socket()->peerAddress().toString() ) );
@@ -93,9 +94,27 @@ void cNetwork::incomingLoginServerConnection()
 {
 	cUOSocket *uosocket = new cUOSocket( d->loginServer_->nextPendingConnection() );
 	d->loginSockets.append( uosocket );
-
+	
+	connect( uosocket, SIGNAL(disconnected()), this, SLOT(partingLoginServerConnection()) );
 	// Notify the admin
 	uosocket->log( tr( "Client connected to login server (%1).\n" ).arg( uosocket->socket()->peerAddress().toString() ) );
+}
+
+void cNetwork::partingLoginServerConnection()
+{
+	cUOSocket* uoSocket = qobject_cast<cUOSocket *>(sender());
+	uoSocket->log( tr( "Client disconnected.\n" ) );
+	d->loginSockets.remove( uoSocket );
+	uoSocket->deleteLater();
+}
+
+void cNetwork::partingGameServerConnection()
+{
+	cUOSocket* uoSocket = qobject_cast<cUOSocket *>(sender());
+	uoSocket->log( tr( "Client disconnected.\n" ) );
+	uoSocket->disconnect();
+	d->uoSockets.remove( uoSocket );
+	uoSocket->deleteLater();
 }
 
 // Load IP Blocking rules

@@ -146,6 +146,7 @@ cUOSocket::cUOSocket( QTcpSocket* s ) : QObject( s ), _walkSequence( 0 ), lastPa
 	_socket = s;
 	_uniqueId = s->socket();
 	tooltipscache_ = new QBitArray;
+	skippedUOHeader = false;
 
 	connect( _socket, SIGNAL(readyRead()), this, SLOT(recieve()) );
 	// Creation of a new socket counts as activity
@@ -227,7 +228,7 @@ void cUOSocket::send( cUOPacket* packet )
 		_txBytes += packet->size();
 		_socket->write( packet->uncompressed() );
 	}
-	
+	qWarning( packet->dump( packet->uncompressed() ) );
 	// Once send, flush if in Debug mode
 #if defined(_DEBUG)
 	//Network::instance()->netIo()->flush( _socket );
@@ -328,8 +329,17 @@ void cUOSocket::buildPackets()
 */
 void cUOSocket::recieve()
 {
+	if ( !skippedUOHeader )
+	{
+		_socket->read( (char*)&seed, 4 );
+		skippedUOHeader = true;
+	}
+
 	incomingBuffer.append( _socket->readAll() );
 	buildPackets();
+	if ( incomingQueue.isEmpty() )
+		return; 
+
 	cUOPacket* packet = incomingQueue.dequeue();
 
 	if ( !packet )
@@ -396,7 +406,7 @@ void cUOSocket::recieve()
 		}
 	}
 
-	if ( handlers[packetId] )
+	if ( false && handlers[packetId] )
 	{
 		PyObject* args = Py_BuildValue( "(NN)", PyGetSocketObject( this ), CreatePyPacket( packet ) );
 		PyObject* result = PyObject_CallObject( handlers[packetId], args );
