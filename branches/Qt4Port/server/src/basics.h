@@ -134,7 +134,7 @@ public:
 	bool needswap;
 	char *buffer;
 	unsigned int bufferpos;
-	QMap<QString, unsigned int> dictionary;
+	QMap<Q3CString, unsigned int> dictionary;
 	QMap<unsigned char, unsigned int> skipmap;
 	QMap<unsigned char, QString> typemap;
 	unsigned int lastStringId;

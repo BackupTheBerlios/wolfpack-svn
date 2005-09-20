@@ -267,7 +267,7 @@ void cBufferedWriter::close()
 		// Flush the string dictionary at the end of the save
 		writeInt( d->dictionary.count() );
 
-		QMap<QString, unsigned int>::iterator it;
+		QMap<Q3CString, unsigned int>::iterator it;
 		for ( it = d->dictionary.begin(); it != d->dictionary.end(); ++it )
 		{
 			writeInt( it.data() );
@@ -368,8 +368,7 @@ cBufferedReader::cBufferedReader( const Q3CString& magic, unsigned int version )
 	d->objectCount = 0;
 
 	// Check Endianess
-	int wordSize;
-	qSysInfo( &wordSize, &d->needswap );
+	d->needswap = QSysInfo::ByteOrder == QSysInfo::BigEndian;
 }
 
 cBufferedReader::~cBufferedReader()
