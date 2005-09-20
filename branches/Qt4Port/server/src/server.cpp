@@ -249,8 +249,29 @@ bool cServer::getSecure()
 	return d->secure;
 }
 
+void myMessageOutput( QtMsgType type, const char *msg )
+{
+    switch ( type ) {
+        case QtDebugMsg:
+			// This is crazy...
+			// Log->print(LOG_DEBUG, tr("QT Debug: %1\n").arg(msg));
+            break;
+        case QtWarningMsg:			
+			Console::instance()->log(LOG_WARNING, msg);
+            break;
+        case QtFatalMsg:
+			Console::instance()->log(LOG_ERROR, msg);
+			break;
+		default:
+			Console::instance()->log(LOG_ERROR, msg);
+			break;
+    }
+}
+
 void cServer::run()
 {
+	qInstallMsgHandler(myMessageOutput);
+
 	// If have no idea where i should put this otherwise
 #if defined(Q_OS_UNIX)
 	signal( SIGPIPE, SIG_IGN );
@@ -399,8 +420,8 @@ void cServer::run()
 				default:
 					msleep( 10 ); break;
 				}
-				qApp->processEvents();
 				PyEval_RestoreThread( _save ); // Python threading - end
+				qApp->processEvents();
 
 				stopProfiling( PF_NICENESS );
 			}

@@ -57,14 +57,20 @@ public:
 
 	cNetworkPrivate()
 	{
-		loginSockets.setAutoDelete( true );
-		uoSockets.setAutoDelete( true );
+		/*loginSockets.setAutoDelete( true );
+		uoSockets.setAutoDelete( true );*/
 		loginServer_ = 0;
 		gameServer_ = 0;
 	}
 
 	~cNetworkPrivate()
 	{
+		foreach (cUOSocket *socket, uoSockets) {
+			socket->deleteLater();
+		}
+		foreach (cUOSocket *socket, loginSockets) {
+			socket->deleteLater();
+		}
 		delete loginServer_;
 		delete gameServer_;
 	}
@@ -83,7 +89,7 @@ cNetwork::~cNetwork()
 void cNetwork::incomingGameServerConnection()
 {
 	cUOSocket *uosocket = new cUOSocket( d->gameServer_->nextPendingConnection() );
-	d->loginSockets.append( uosocket );
+	d->uoSockets.append( uosocket );
 	connect( uosocket, SIGNAL(disconnected()), this, SLOT(partingGameServerConnection()) );
 
 	// Notify the admin
@@ -122,7 +128,7 @@ void cNetwork::load()
 {
 	if ( Config::instance()->enableLogin() )
 	{
-		d->loginServer_ = new QTcpServer( this );
+		d->loginServer_ = new QTcpServer( 0 );
 		d->loginServer_->listen( QHostAddress::Any, Config::instance()->loginPort() );
 		connect( d->loginServer_, SIGNAL(newConnection()), this, SLOT(incomingLoginServerConnection()));
 		Console::instance()->send( tr( "\nLoginServer running on port %1\n" ).arg( Config::instance()->loginPort() ) );
@@ -138,7 +144,7 @@ void cNetwork::load()
 
 	if ( Config::instance()->enableGame() )
 	{
-		d->gameServer_ = new QTcpServer( this );
+		d->gameServer_ = new QTcpServer( 0 );
 		d->gameServer_->listen( QHostAddress::Any, Config::instance()->gamePort() );
 		connect( d->gameServer_, SIGNAL(newConnection()), this, SLOT(incomingGameServerConnection()));
 		Console::instance()->send( tr( "\nGameServer running on port %1\n" ).arg( Config::instance()->gamePort() ) );
@@ -157,6 +163,18 @@ void cNetwork::reload()
 // Unload IP Blocking rules
 void cNetwork::unload()
 {
+	// Disconnect all connected sockets
+	Q3PtrList<cUOSocket> socketList = d->uoSockets;
+	d->uoSockets.clear();
+	foreach (cUOSocket *socket, socketList) {		
+		socket->disconnect();
+	}
+	socketList = d->loginSockets;
+	d->loginSockets.clear();
+	foreach (cUOSocket *socket, d->loginSockets) {
+		socket->disconnect();
+	}
+
 	if ( d->loginServer_ )
 	{
 		delete d->loginServer_;
@@ -168,20 +186,6 @@ void cNetwork::unload()
 		delete d->gameServer_;
 		d->gameServer_ = 0;
 	}
-
-	// Disconnect all connected sockets
-	cUOSocket* socket;
-	for ( socket = d->uoSockets.first(); socket; socket = d->uoSockets.next() )
-	{
-		socket->disconnect();
-	}
-	d->uoSockets.clear();
-
-	for ( socket = d->loginSockets.first(); socket; socket = d->loginSockets.next() )
-	{
-		socket->disconnect();
-	}
-	d->loginSockets.clear();
 
 	cComponent::unload();
 }

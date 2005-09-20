@@ -39,6 +39,7 @@
 #include <vector>
 
 // Forward Declarations
+class cClientEncryption;
 class cUOPacket;
 class cAccount;
 class cTargetRequest;
@@ -290,8 +291,10 @@ private:
 	void buildPackets();
 
 private slots:
-	void recieve(); // Tries to recieve one packet and process it
+	void receive(); // Tries to recieve one packet and process it
 
+signals:
+	void disconnected();
 
 private:
 	Q3ValueVector<cUORxWalkRequest> packetQueue;
@@ -322,6 +325,7 @@ private:
 	bool skippedUOHeader;
 	qint32 seed;
 	unsigned int flags_;
+	cClientEncryption *encryption;
 
 	bool authenticate( const QString& username, const QString& password );
 

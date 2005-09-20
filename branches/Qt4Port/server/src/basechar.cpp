@@ -1491,8 +1491,9 @@ void cBaseChar::addItem( cBaseChar::enLayer layer, cItem* pi, bool handleWeight,
 	if ( !noRemove )
 	{
 		// Dragging doesnt count as Equipping
-		if ( layer != Dragging )
+		if ( layer != Dragging ) {
 			pi->onEquip( this, layer );
+		}
 	}
 }
 

@@ -31,12 +31,13 @@
 				BrowseInformation="1"
 				WarningLevel="1"
 				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="4"/>
+				DebugInformationFormat="4"
+				DisableSpecificWarnings="4311;4312"/>
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ws2_32.lib comctl32.lib qtmain.lib python24.lib $(QTDIR)\lib\QtCore4.lib $(QTDIR)\lib\QtGui4.lib $(QTDIR)\lib\QtNetwork4.lib $(QTDIR)\lib\QtXml4.lib $(QTDIR)\lib\Qt3Support4.lib"
+				AdditionalDependencies="ws2_32.lib comctl32.lib python24.lib $(QTDIR)\lib\QtCored4.lib $(QTDIR)\lib\QtGuid4.lib $(QTDIR)\lib\QtNetworkd4.lib $(QTDIR)\lib\QtXmld4.lib $(QTDIR)\lib\Qt3Supportd4.lib"
 				OutputFile="../release/wolfpackd.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
@@ -499,6 +500,24 @@
 			</File>
 			<File
 				RelativePath="..\src\server.h">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="moc&apos;ing $(InputFileName)"
+						CommandLine="$(QTDIR)\bin\moc.exe &quot;$(InputPath)&quot; -o &quot;$(ProjectDir)\obj\moc_$(InputName).cpp&quot;
+"
+						Outputs="&quot;$(ProjectDir)\obj\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="moc&apos;ing $(InputFileName)"
+						CommandLine="$(QTDIR)\bin\moc.exe &quot;$(InputPath)&quot; -o &quot;$(ProjectDir)\obj\moc_$(InputName).cpp&quot;
+"
+						Outputs="&quot;$(ProjectDir)\obj\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\src\serverconfig.cpp">
@@ -598,28 +617,34 @@
 			Name="Network"
 			Filter="">
 			<File
-				RelativePath="..\src\network\asyncnetio.cpp">
-			</File>
-			<File
-				RelativePath="..\src\network\asyncnetio.h">
-			</File>
-			<File
 				RelativePath="..\src\network\encryption.cpp">
 			</File>
 			<File
 				RelativePath="..\src\network\encryption.h">
 			</File>
 			<File
-				RelativePath="..\src\network\listener.cpp">
-			</File>
-			<File
-				RelativePath="..\src\network\listener.h">
-			</File>
-			<File
 				RelativePath="..\src\network\network.cpp">
 			</File>
 			<File
 				RelativePath="..\src\network\network.h">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="moc&apos;ing $(InputFileName)"
+						CommandLine="$(QTDIR)\bin\moc.exe &quot;$(InputPath)&quot; -o &quot;$(ProjectDir)\obj\moc_$(InputName).cpp&quot;
+"
+						Outputs="&quot;$(ProjectDir)\obj\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="moc&apos;ing $(InputFileName)"
+						CommandLine="$(QTDIR)\bin\moc.exe &quot;$(InputPath)&quot; -o &quot;$(ProjectDir)\obj\moc_$(InputName).cpp&quot;
+"
+						Outputs="&quot;$(ProjectDir)\obj\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\src\network\uopacket.cpp">
@@ -638,6 +663,24 @@
 			</File>
 			<File
 				RelativePath="..\src\network\uosocket.h">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="moc&apos;ing $(InputFileName)"
+						CommandLine="$(QTDIR)\bin\moc.exe &quot;$(InputPath)&quot; -o &quot;$(ProjectDir)\obj\moc_$(InputName).cpp&quot;
+"
+						Outputs="&quot;$(ProjectDir)\obj\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="moc&apos;ing $(InputFileName)"
+						CommandLine="$(QTDIR)\bin\moc.exe &quot;$(InputPath)&quot; -o &quot;$(ProjectDir)\obj\moc_$(InputName).cpp&quot;
+"
+						Outputs="&quot;$(ProjectDir)\obj\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\src\network\uotxpackets.cpp">
@@ -764,94 +807,127 @@
 			Name="SQLite"
 			Filter="">
 			<File
-				RelativePath="..\src\sqlite\attach.c">
+				RelativePath="..\src\sqlite\btree.h">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\auth.c">
+				RelativePath="..\src\sqlite\config.h">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\btree.c">
+				RelativePath="..\src\sqlite\hash.h">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\btree_rb.c">
+				RelativePath="..\src\sqlite\opcodes.h">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\build.c">
+				RelativePath="..\src\sqlite\os.h">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\copy.c">
+				RelativePath="..\src\sqlite\pager.h">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\date.c">
+				RelativePath="..\src\sqlite\parse.h">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\delete.c">
+				RelativePath="..\src\sqlite\sqlite.h">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\expr.c">
+				RelativePath="..\src\sqlite\sqlite_attach.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\func.c">
+				RelativePath="..\src\sqlite\sqlite_auth.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\hash.c">
+				RelativePath="..\src\sqlite\sqlite_btree.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\insert.c">
+				RelativePath="..\src\sqlite\sqlite_btree_rb.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\main.c">
+				RelativePath="..\src\sqlite\sqlite_build.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\opcodes.c">
+				RelativePath="..\src\sqlite\sqlite_copy.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\os.c">
+				RelativePath="..\src\sqlite\sqlite_date.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\pager.c">
+				RelativePath="..\src\sqlite\sqlite_delete.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\parse.c">
+				RelativePath="..\src\sqlite\sqlite_expr.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\pragma.c">
+				RelativePath="..\src\sqlite\sqlite_func.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\printf.c">
+				RelativePath="..\src\sqlite\sqlite_hash.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\random.c">
+				RelativePath="..\src\sqlite\sqlite_insert.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\select.c">
+				RelativePath="..\src\sqlite\sqlite_main.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\table.c">
+				RelativePath="..\src\sqlite\sqlite_opcodes.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\tokenize.c">
+				RelativePath="..\src\sqlite\sqlite_os.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\trigger.c">
+				RelativePath="..\src\sqlite\sqlite_pager.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\update.c">
+				RelativePath="..\src\sqlite\sqlite_parse.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\util.c">
+				RelativePath="..\src\sqlite\sqlite_pragma.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\vacuum.c">
+				RelativePath="..\src\sqlite\sqlite_printf.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\vdbe.c">
+				RelativePath="..\src\sqlite\sqlite_random.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\vdbeaux.c">
+				RelativePath="..\src\sqlite\sqlite_select.c">
 			</File>
 			<File
-				RelativePath="..\src\sqlite\where.c">
+				RelativePath="..\src\sqlite\sqlite_table.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite\sqlite_tokenize.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite\sqlite_trigger.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite\sqlite_update.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite\sqlite_util.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite\sqlite_vacuum.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite\sqlite_vdbe.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite\sqlite_vdbeaux.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite\sqlite_where.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite\sqliteInt.h">
+			</File>
+			<File
+				RelativePath="..\src\sqlite\vdbe.h">
+			</File>
+			<File
+				RelativePath="..\src\sqlite\vdbeInt.h">
 			</File>
 		</Filter>
 		<Filter
@@ -981,6 +1057,170 @@
 			</File>
 			<File
 				RelativePath="..\src\ai\ai_monsters.cpp">
+			</File>
+		</Filter>
+		<Filter
+			Name="SQLite3"
+			Filter="">
+			<File
+				RelativePath="..\src\sqlite3\alter.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\attach.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\auth.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\btree.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\btree.h">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\build.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\config.h">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\date.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\delete.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\expr.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\func.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\hash.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\hash.h">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\insert.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\keywordhash.h">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\legacy.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\main.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\opcodes.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\opcodes.h">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\os.h">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\os_common.h">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\os_unix.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\os_unix.h">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\os_win.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\os_win.h">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\pager.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\pager.h">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\parse.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\parse.h">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\pragma.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\printf.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\random.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\select.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\sqlite3.h">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\sqliteInt.h">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\table.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\tokenize.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\trigger.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\update.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\utf.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\util.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\vacuum.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\vdbe.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\vdbe.h">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\vdbeapi.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\vdbeaux.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\vdbeInt.h">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\vdbemem.c">
+			</File>
+			<File
+				RelativePath="..\src\sqlite3\where.c">
+			</File>
+		</Filter>
+		<Filter
+			Name="MOC"
+			Filter="">
+			<File
+				RelativePath=".\obj\moc_network.cpp">
+			</File>
+			<File
+				RelativePath=".\obj\moc_server.cpp">
+			</File>
+			<File
+				RelativePath=".\obj\moc_uosocket.cpp">
 			</File>
 		</Filter>
 		<File
