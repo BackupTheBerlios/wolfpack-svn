@@ -136,12 +136,13 @@ struct compareTiles : public std::binary_function<stBlockItem, stBlockItem, bool
 	bool operator()( stBlockItem a, stBlockItem b )
 	{
 		// If the items have the same top, the one with the surface flag has precedence
+		// but it has to be strict, that is, if they are "equal", return false
 		int itemTopA = a.height + a.z;
 		int itemTopB = b.height + b.z;
 
 		if ( itemTopA == itemTopB )
 		{
-			if ( a.height == 0 && a.walkable )
+			if ( a.height == 0 && a.walkable && !b.walkable )
 			{
 				return true;
 			}
