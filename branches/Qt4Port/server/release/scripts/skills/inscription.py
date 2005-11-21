@@ -5,18 +5,15 @@
 #  ( (  ;._ \\ ctr # Last Modification: Created                 #
 #################################################################
 
-from wolfpack import console, tr
+from wolfpack import tr
 from wolfpack.consts import *
 import math
 import wolfpack
 from system.makemenus import CraftItemAction, MakeMenu, findmenu
-from wolfpack.utilities import hex2dec, tobackpack
-from wolfpack.properties import itemcheck, fromitem
-import magic.utilities
 import random
 import magic
-from magic.utilities import *
 import skills
+from magic.utilities import *
 
 # reagent names
 reagents = {
@@ -103,7 +100,7 @@ class ScribeItemAction(CraftItemAction):
 				return False
 			
 			# Check for availability of spell
-			if self.spellid > 0 and not magic.utilities.hasSpell(player, self.spellid - 1, False):
+			if self.spellid > 0 and not hasSpell(player, self.spellid - 1, False):
 				return False
 		
 		return result

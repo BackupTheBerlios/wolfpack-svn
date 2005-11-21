@@ -8,7 +8,7 @@ from wolfpack.consts import SND_IDLE, ANIM_CASTDIRECTED
 #
 def onUse(player, item):
 	if not item.getoutmostchar() == player:
-		player.socket.sysmessage('The figurine needs to be in your posession to use it.')
+		player.socket.sysmessage(tr('The figurine needs to be in your posession to use it.'))
 		return 1
 
 	if not item.hastag('pet'):
@@ -75,7 +75,7 @@ def onDelete(object):
 # targetted npc.
 #
 def shrink(socket, command, arguments):
-	socket.sysmessage( 'What do you want to shrink?' )
+	socket.sysmessage( tr('What do you want to shrink?') )
 	socket.attachtarget( 'figurine.shrinktarget', [] )
 
 def shrinktarget( char, args, target ):

@@ -121,6 +121,9 @@ CLUMSY_DURATION = 60000
 # How long does it take Cotton plants to regrow (in seconds)
 COTTONPLANTS_REGROW = 30
 
+# Maximum Skills
+MAX_SKILL_FOR_DUMMIE = 300
+
 # Potion Delays
 HEAL_POT_DELAY = 10.0 # 10 Seconds
 AGILITY_TIME = 120.0  # 2 minutes
@@ -210,7 +213,8 @@ FOCUS = 50
 CHIVALRY = 51
 BUSHIDO = 52
 NINJITSU = 53
-ALLSKILLS = 54 # skills + 1
+SPELLWEAVING = 54
+ALLSKILLS = 55 # skills + 1
 """
 	\end
 """
@@ -223,7 +227,7 @@ SKILLNAMES = [ 'alchemy', 'anatomy', 'animallore', 'itemid', 'armslore', 'parryi
 	'musicianship', 'poisoning', 'archery', 'spiritspeak', 'stealing', 'tailoring',
 	'taming', 'tasteid', 'tinkering', 'tracking', 'veterinary', 'swordsmanship',
 	'macefighting', 'fencing', 'wrestling', 'lumberjacking', 'mining', 'meditation',
-	'stealth', 'removetraps', 'necromancy', 'focus', 'chivalry', 'ninjitsu', 'bushido' ]
+	'stealth', 'removetraps', 'necromancy', 'focus', 'chivalry', 'bushido', 'ninjitsu', 'spellweaving' ]
 
 skillnamesids = {
 	'alchemy' : ALCHEMY,
@@ -278,8 +282,9 @@ skillnamesids = {
 	'necromancy' : NECROMANCY,
 	'focus' : FOCUS,
 	'chivalry' : CHIVALRY,
+	'bushido' : BUSHIDO,
 	'ninjitsu' : NINJITSU,
-	'bushido' : BUSHIDO
+	'spellweaving' : SPELLWEAVING
 }
 
 STATNAMES = [ 'str', 'int', 'dex' ]
@@ -438,7 +443,12 @@ EVENT_DISCONNECT = 54
 EVENT_GUILDBUTTON = 55
 EVENT_SELECTABILITY = 56
 EVENT_LOG = 57
-EVENT_COUNT = 58
+EVENT_REGENHITS = 58
+EVENT_REGENMANA = 59
+EVENT_REGENSTAMINA = 60
+EVENT_BECOMECRIMINAL = 61
+EVENT_QUESTBUTTON = 62
+EVENT_COUNT = 63
 """
 	\end
 """
@@ -824,6 +834,8 @@ WPDT_DEFINE = 19
 WPDT_RESOURCE = 20
 WPDT_CONTEXTMENU = 21
 WPDT_AI = 22
+WPDT_TELEPORTER = 23
+WPDT_QUEST = 24
 """
 	\end
 """
@@ -836,3 +848,11 @@ BODY_ANIMAL = 3
 BODY_HUMAN = 4
 
 MAX_TITHING_POINTS = 100000 # Maximum amount of tithing points
+
+PLAYER_BODIES_ALIVE = [ 0x190, 0x191, 0x25d, 0x25e ]
+PLAYER_BODIES_DEAD = [ 0x192, 0x193, 0x25f, 0x260 ]
+PLAYER_BODIES_ALL = PLAYER_BODIES_ALIVE + PLAYER_BODIES_DEAD + [ 0x3db ]
+PLAYER_BODIES_ALIVE_MALE = [ 0x190, 0x25d ]
+PLAYER_BODIES_ALIVE_FEMALE = [ 0x191, 0x25e ]
+PLAYER_BODIES_ALIVE_HUMAN = [ 0x190, 0x191 ]
+PLAYER_BODIES_ALIVE_ELVEN = [ 0x25d, 0x25e ]

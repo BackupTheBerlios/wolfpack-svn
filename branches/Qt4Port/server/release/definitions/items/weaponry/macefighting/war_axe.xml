@@ -21,9 +21,10 @@
 		<weight>3.0</weight>
 		<basescripts>equipment,blades</basescripts>
 		<type>1004</type>
-		<category>Base Weapons\Axes\War Axe (N/S)</category>
+		<category>Base Weapons\Maces\War Axe (N/S)</category>
 		<!-- Properties -->
 		<tag name="resname" value="iron" />
+		<tag name="remaining_uses" type="int" value="35" />
 		<intproperty name="req_strength" value="35" />
 		<intproperty name="speed" value="33" />
 		<intproperty name="mindamage" value="14" />
@@ -33,7 +34,7 @@
 	<item id="13af" inherit="13b0">
 		<id>0x13af</id>
 		<baseid>13b0</baseid>
-		<category>Base Weapons\Axes\War Axe (E/W)</category>
+		<category>Base Weapons\Maces\War Axe (E/W)</category>
 	</item>
 
 </definitions>

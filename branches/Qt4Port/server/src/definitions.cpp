@@ -47,6 +47,7 @@
 #include "serverconfig.h"
 #include "basechar.h"
 #include "network/network.h"
+#include "quests.h"
 
 #include "definitions.h"
 
@@ -92,6 +93,7 @@ stCategory categories[] =
 { "contextmenu", WPDT_CONTEXTMENU },
 { "ai", WPDT_AI },
 { "teleporter", WPDT_TELEPORTER },
+{ "quest", WPDT_QUEST },
 { 0, WPDT_COUNT },
 };
 
@@ -429,6 +431,7 @@ void cDefinitions::load( void )
 	Skills::instance()->load();
 	Commands::instance()->loadACLs();
 	KeyManager::instance()->load();
+	Quests::instance()->load();
 
 	// Script NPC AI types
 	QStringList aiSections = Definitions::instance()->getSections( WPDT_AI );

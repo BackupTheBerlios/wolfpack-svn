@@ -8,11 +8,12 @@
 #===============================================================#
 import wolfpack
 from math import floor
+from wolfpack import tr
 
 def countspells(item):
 	count = 0
 
-	for i in range( 1, 3 ):
+	for i in range( 1, 4 ):
 		if item.hastag('circle' + str(i)):
 			spells = int(item.gettag('circle' + str(i)))
 			for j in range(0, 9):
@@ -52,7 +53,7 @@ def addspell( item, spell ):
 
 def onUse(char, item):
 	if item.getoutmostchar() != char:
-		char.socket.sysmessage('The book has to be in your belongings to be used.')
+		char.socket.sysmessage(tr('The book has to be in your belongings to be used.'))
 		return True
 
 	# This is annoying and eats bandwith but its the only way to "reopen" the spellbook
@@ -75,7 +76,7 @@ def onUse(char, item):
 	packet.setshort( 11, item.id ) # Item id
 	packet.setshort( 13, 101 ) # Scroll offset (1 = regular, 101 = necro, 201 = paladin)
 
-	for i in range( 0, 2 ):
+	for i in range( 0, 3 ):
 		if not item.hastag( 'circle' + str( i + 1 ) ):
 			packet.setbyte( 15 + i, 0 )
 		else:

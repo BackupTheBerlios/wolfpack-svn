@@ -117,9 +117,11 @@ struct stBlockingItem
 	int bottom;
 	int top;
 	bool maptile;
+	bool noblock; // floor that does not block
 };
 
-// Get blocking tiles at the given x,y,map coordinate
+// Get floor tiles, that are not blocking, too
+// we need these floor tiles to know, if the 'black map' tile is the only floor here
 void getBlockingTiles( const Coord& pos, Q3ValueList<stBlockingItem>& items )
 {
 	stBlockingItem item;
@@ -127,6 +129,7 @@ void getBlockingTiles( const Coord& pos, Q3ValueList<stBlockingItem>& items )
 	// Maptiles first
 	Maps::instance()->mapTileSpan( pos, item.id, item.bottom, item.top );
 	item.maptile = true;
+	item.noblock = false;
 
 	// Only include this maptile if it's relevant for our line of sight
 	if ( item.id != 2 && item.id != 0x1DB && ( item.id <0x1AE || item.id> 0x1B5 ) )
@@ -152,6 +155,17 @@ void getBlockingTiles( const Coord& pos, Q3ValueList<stBlockingItem>& items )
 			// Bridges are only half as high
 			item.top = item.bottom + ( ( tile.flag2 & 0x04 ) ? ( tile.height / 2 ) : tile.height );
 			item.id = sitem.itemid;
+			item.noblock = false;
+			items.append( item );
+		}
+		// floor tiles that aren't blocking
+		else if ( tile.flag2 & 0x2 )
+		{
+			item.bottom = sitem.zoff;
+			// Bridges are only half as high
+			item.top = item.bottom + ( ( tile.flag2 & 0x04 ) ? ( tile.height / 2 ) : tile.height );
+			item.id = sitem.itemid;
+			item.noblock = true;			
 			items.append( item );
 		}
 	}
@@ -173,6 +187,17 @@ void getBlockingTiles( const Coord& pos, Q3ValueList<stBlockingItem>& items )
 			item.bottom = pItem->pos().z;
 			// Bridges are only half as high
 			item.top = item.bottom + ( ( tile.flag2 & 0x04 ) ? ( tile.height / 2 ) : tile.height );
+			item.noblock = false;
+			items.append( item );
+		}
+		// floor tiles that aren't blocking
+		else if ( tile.flag2 & 0x2 )
+		{
+			item.id = pItem->id();
+			item.bottom = pItem->pos().z;
+			// Bridges are only half as high
+			item.top = item.bottom + ( ( tile.flag2 & 0x04 ) ? ( tile.height / 2 ) : tile.height );
+			item.noblock = true;
 			items.append( item );
 		}
 	}
@@ -208,6 +233,16 @@ void getBlockingTiles( const Coord& pos, Q3ValueList<stBlockingItem>& items )
 					item.bottom = mitem.z + pMulti->pos().z;
 					item.top = item.bottom + ( ( tile.flag2 & 0x04 ) ? ( tile.height / 2 ) : tile.height );
 					item.id = mitem.tile;
+					item.noblock = false;
+					items.append( item );
+				}
+				// floor tiles that aren't blocking
+				else if ( tile.flag2 & 0x2 )
+				{
+					item.bottom = mitem.z + pMulti->pos().z;
+					item.top = item.bottom + ( ( tile.flag2 & 0x04 ) ? ( tile.height / 2 ) : tile.height );
+					item.id = mitem.tile;
+					item.noblock = true;
 					items.append( item );
 				}
 			}
@@ -235,13 +270,17 @@ inline bool checkBlockingTiles( const Q3ValueList<stBlockingItem>& items, const 
 			return true;
 		}
 
-		// Do we intersect the blocking tile?
-		if ( pos.z >= item.bottom && pos.z <= item.top )
+		// check only blocking tiles
+		if ( !item.noblock )
 		{
-			// If the blocking item is within our target area, forget about it.
-			if ( pos.x != target.x || pos.y != target.y || item.bottom > target.z || item.top < target.z )
+			// Do we intersect the blocking tile?
+			if ( pos.z >= item.bottom && pos.z <= item.top )
 			{
-				return true;
+				// If the blocking item is within our target area, forget about it.
+				if ( pos.x != target.x || pos.y != target.y || item.bottom > target.z || item.top < target.z )
+				{
+					return true;
+				}
 			}
 		}
 	}

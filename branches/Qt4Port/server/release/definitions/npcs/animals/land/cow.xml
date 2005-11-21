@@ -33,12 +33,13 @@
 		<skill id="magicresistance">55</skill>
 		<!-- Misc. -->
 		<basescripts>npc.cow</basescripts>
+		<scripts>farming</scripts>
 		<controlslots>1</controlslots>
 		<mintaming>111</mintaming>
-		<food>6</food>
+		<strproperty name="food" value="3,5" />
+		<intproperty name="barddifficulty" value="66" />
 		<bindmenu>tame_menu,pet_menu</bindmenu>
 		<category>Animals\Land\Cow (Random)</category>
-
 		<!-- Carve -->
 		<intproperty name="carve_hides" value="12" />
 		<intproperty name="carve_meat" value="8" />

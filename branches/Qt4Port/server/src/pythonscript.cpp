@@ -288,6 +288,8 @@ no other npc scripts will be called then.
 \condition Triggered when a player tries to equip an item.
 \return Return 1 if the server should reject the equip request and
 should bounce the item back.
+\notes The event is called first for the item and then for the
+character.
 */
 "onWearItem",
 
@@ -452,8 +454,8 @@ for scripts in the objects basescripts list.
 
 /*
 \event onTimeChange
-\param player The player.
-\condition This event is called for every connected client once an ingame hour has elapsed.
+\param char The char.
+\condition This event is called for every connected client (or npcs) once an ingame hour has elapsed.
 */
 "onTimeChange",
 
@@ -647,6 +649,52 @@ container that is being snooped into.
 \condition This event is only triggered globally. If an logging event occurs, this event will be called.
 */
 "onLog",
+
+/*
+\event onRegenHitpoints
+\param char The character who will recover Hitpoints
+\param points The points for timer calculation to next Hitpoints recover.
+\return Return how many points have to be added to calculations for the next Hitpoints recover
+\condition Triggered when a character Recover Hitpoints from Regen time.
+*/
+"onRegenHitpoints",
+
+/*
+\event onRegenMana
+\param char The character who will recover Mana
+\param points The points for timer calculation to next Mana recover.
+\return Return how many points have to be added to calculations for the next Mana recover
+\condition Triggered when a character Recover Mana from Regen time.
+*/
+"onRegenMana",
+
+/*
+\event onRegenStamina
+\param char The character who will recover Stamina
+\param points The points for timer calculation to next Stamina recover.
+\return Return how many points have to be added to calculations for the next Stamina recover
+\condition Triggered when a character Recover Stamina from Regen time.
+*/
+"onRegenStamina",
+
+/*
+\event onBecomeCriminal
+\param char The character who will becomes Criminal
+\param reason The number of the Reason (See the Indexed table in notes)
+\param sourcechar The Character source (or target) for criminal act (may be none)
+\param sourceitem The Item source (or target) for criminal act (may be none)
+\return True if you want to player becomes criminal or False to block player becomes criminal
+\condition Triggered when a character will be flagged as a Criminal.
+\notes The List of reason is: 0 when called by scripts (.criminal), 1 when called because player killed someone, 2 when called because player begin a fight against a Innocent target, 3 for Looting and related things
+*/
+"onBecomeCriminal",
+
+/*
+\event onQuestButton
+\param player The player who pressed the button.
+\condition Triggered when a player presses the quest button on his client.
+*/
+"onQuestButton",
 
 0
 };

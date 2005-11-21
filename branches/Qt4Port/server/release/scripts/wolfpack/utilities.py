@@ -20,6 +20,60 @@ import string
 from types import *
 from wolfpack.consts import *
 
+payfrompackonly = wolfpack.settings.getbool( "General", "Pay From Pack Only", False, True )
+
+"""
+	\function wolfpack.utilities.countGold
+	\param char The character whose gold shall be count.
+	\return The amount of gold as an integer.
+	\description Counts the amount of gold the character possess. If 'Pay From Pack Only' option is enabled gold in characters bankbox is ignored.
+"""
+def countGold( char ):
+	if payfrompackonly:
+		return char.countresource( 0xeed )
+	else:
+		return char.countresource( 0xeed ) + char.getbankbox().countresource( 0xeed )
+
+"""
+	\function wolfpack.utilities.consumeGold
+	\param char The character whose gold shall be consumed.
+	\param amount The amount of gold that shall be consumed.
+	\return True if the gold could be consumed, false otherwise.
+	\description Consumes a specified amount of gold from character. If 'Pay From Pack Only' option is enabled gold in characters bankbox is ignored.
+	Always succeeds for GMs.
+"""
+def consumeGold( char, amount ):
+	if char.gm:
+		return True
+
+	if payfrompackonly:
+		# check if we have enough gold
+		if countgold( char ) > amount:
+			char.useresource( amount, 0xeed )
+			return True
+		else:
+			return False
+
+	bankbox = char.getbankbox()
+	bankgold = bankbox.countresource( 0xeed )
+	packgold = char.countresource( 0xeed )
+
+	if packgold >= amount:
+		# gold from pack
+		char.useresource( amount, 0xeed )
+	elif bankgold >= amount:
+		# gold from bank
+		bankbox.useresource( amount, 0xeed )
+	elif bankgold + packgold >= amount:
+		# gold from bank and pack
+		char.useresource( packgold, 0xeed )
+		bankbox.useresource( amount - packgold, 0xeed )
+	else:
+		# we don't have enough gold
+		return False
+
+	return True
+
 """
 	\function wolfpack.utilities.rolldice
 	\param dice This is either the number of dice you want to roll or a string representation of the number of dice, the sides
@@ -144,11 +198,11 @@ def tocontainer( item, container ):
 				content.update()
 				content.resendtooltip()
 				item.delete()
-				return 1 # Stacked
+				return True # Stacked
 
 	# We couldn't stack
 	container.additem( item, 1, 1, 0 )
-	return 0 # Not stacked
+	return False # Not stacked
 
 """
 	\function wolfpack.utilities.cont2cont
@@ -180,9 +234,9 @@ def isclothing( item ):
 			0x1516, 0x1517, 0x1518, 0x1efe, 0x1eff ]
 
 	if item.id in clothes:
-		return 1
+		return True
 	else:
-		return 0
+		return False
 
 """
 	\function wolfpack.utilities.ishat
@@ -197,9 +251,9 @@ def ishat ( item ):
 		0x171b, 0x171c ]
 
 	if item.id in hats:
-		return 1
+		return True
 	else:
-		return 0
+		return False
 
 """
 	\function wolfpack.utilities.isarmor
@@ -223,9 +277,9 @@ def isarmor( item ):
 			0x154c, 0x2646, 0x2647, 0x13bb ]
 
 	if item.id in armors:
-		return 1
+		return True
 	else:
-		return 0
+		return False
 
 """
 	\function wolfpack.utilities.isweapon
@@ -238,9 +292,9 @@ def isweapon( item ):
 	weapontypes = [ 1001, 1002, 1003, 1004, 1005, 1006, 1007 ]
 
 	if item.type in weapontypes:
-		return 1
+		return True
 	else:
-		return 0
+		return False
 
 """
 	\function wolfpack.utilities.isshield
@@ -253,9 +307,9 @@ def isshield( item ):
 		0x1b79, 0x1b7a, 0x1b7b, 0x1bc3, 0x1bc4, 0x1bc5 ]
 
 	if item.id in shields:
-		return 1
+		return True
 	else:
-		return 0
+		return False
 
 """
 	\function wolfpack.utilities.isspellbook
@@ -267,9 +321,9 @@ def isspellbook( item ):
 	sbtypes = [ 9 ]
 	sbids = [ 0xe3b, 0xefa, 0x2252, 0x2253 ]
 	if item.id in sbids and item.type in sbtypes:
-		return 1
+		return True
 	else:
-		return 0
+		return False
 
 """
 	\function wolfpack.utilities.isinstrument
@@ -467,7 +521,7 @@ def isdirt( tile ):
 	\param container The container you want to search in.
 	\param baseid The baseid of the resource you are looking for.
 	\param amount The amount that is required of the given resource.
-	\return 0 if all the required resources have been found. Otherwise the remaining amount of
+	\return False if all the required resources have been found. Otherwise the remaining amount of
 	the resource that has not been found.
 	\description Recursively searches for items with a given baseid in a container and checks if a
 	given amount can be found.
@@ -514,7 +568,7 @@ def consumeresources(container, baseid, amount):
 	if checkresources(container, baseid, amount) == 0:
 		return consumeresourcesinternal(container, baseid, amount) == 0
 
-	return 0
+	return False
 
 """
 	\function wolfpack.utilities.energydamage
@@ -655,44 +709,44 @@ def checkLoS( object1, object2, rangecheck=10 ):
 		char1 = wolfpack.findchar(object1.serial)
 		char2 = wolfpack.findchar(object2.serial)
 		if not char1.cansee(char2):
-			return 0
+			return False
 		if char1.distanceto(char2) > rangecheck:
-			return 0
+			return False
 		if not char1.canreach(char2, rangecheck):
-			return 0
-		return 1
+			return False
+		return True
 	# Item -> Item Check
 	elif ( object1.isitem() and object2.isitem() ):
 		item1 = wolfpack.finditem(object1.serial)
 		item2 = wolfpack.finditem(object2.serial)
 		if item1.distanceto(item2) > rangecheck:
-			return 0
-		return 1
+			return False
+		return True
 	# Char -> Item Check
 	elif ( object1.ischar() and object2.isitem() ):
 		char = wolfpack.findchar(object1.serial)
 		item = wolfpack.finditem(object2.serial)
 		if not char.cansee(item):
-			return 0
+			return False
 		if (char.distanceto(item) > rangecheck) or (item.distanceto(char) > rangecheck):
-			return 0
+			return False
 		if not char.canreach(item, rangecheck):
-			return 0
-		return 1
+			return False
+		return True
 	# Item -> Char Check
 	elif ( object1.isitem() and object2.ischar() ):
 		item = wolfpack.finditem(object1.serial)
 		char = wolfpack.findchar(object2.serial)
 		if not char.cansee(item):
-			return 0
+			return False
 		if (item.distanceto(char) > rangecheck) or (char.distanceto(item) > rangecheck):
-			return 0
+			return False
 		if not char.canreach(item, rangecheck):
-			return 0
-		return 1
+			return False
+		return True
 	# Failed Object Check
 	else:
-		return 0
+		return False
 
 """
 	\function wolfpack.utilities.itemsincontainer
@@ -817,7 +871,7 @@ def mayAreaHarm(player, char, excludeself = True, includeinnocents = False):
 		return False
 
 	# Invulnerable, Invisible and Hidden creatures aren't affected
-	if char.dead or char.invulnerable or not player.cansee(char):
+	if char.dead or char.invulnerable or char.region.safe or not player.cansee(char):
 		return False
 
 	# If we're allied with the given character, Return right away
@@ -861,17 +915,23 @@ def mayAreaBenefit(player, char, excludeself = False, includeinnocents = False):
 	\return Returns a boolean value if the position is valid.
 	\description Checks to see if a given coord object is a valid map position.
 """
+usesMondaingsLegacyMap = wolfpack.settings.getbool( "General", "Uses Mondains Legacy Map", True, True )
+
 def isValidPosition( pos ):
 	# Check if the map is valid.
 	if wolfpack.hasmap( pos.map ):
 		# Z Checking
-		if pos.z > 127 or pos.z < -127:
+		if pos.z > 127 or pos.z < -128:
 			return False
 		# X & Y Checking
 		# Felucca & Trammel
 		if pos.map == 0 or pos.map == 1:
-			if pos.x >= 7167 or pos.x < 0:
-				return False
+			if usesMondaingsLegacyMap:		
+				if pos.x >= 7168 or pos.x < 0:
+					return False
+			else:
+				if pos.x >= 6144 or pos.x < 0:
+					return False
 			if pos.y >= 4096 or pos.y < 0:
 				return False
 		# Ilshenar
@@ -918,3 +978,21 @@ def isMapAvailableTo(player, mapid):
 			return False
 
 	return True
+
+def changeResistance( char, resistance, amount ):
+	if amount == 0:
+		return
+
+	value = 0
+	# get curren value
+	if char.hastag( resistance ):
+		value = char.gettag( resistance )
+
+	# new value
+	value += amount
+
+	# only save positive values
+	if value > 0:
+		char.settag( resistance, value)
+	else:
+		char.deltag( resistance )

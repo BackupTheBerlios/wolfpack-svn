@@ -45,14 +45,13 @@ import wolfpack
 from wolfpack.consts import *
 from wolfpack.gumps import cGump
 from wolfpack.utilities import hex2dec, isValidPosition
-from wolfpack import console
 from string import lstrip
 import os
 
 def import_command( socket, command, arguments ):
 	char = socket.player
 
-	gump = cGump( x=100, y=100, callback="commands.import.callback" )
+	gump = cGump( x=100, y=100, callback=callback )
 
 	gump.addBackground( id=0x2436, width=350, height=300 )
 

@@ -8,7 +8,7 @@
 
 import wolfpack
 import wolfpack.utilities
-from wolfpack.consts import PROVOCATION, MUSICIANSHIP, ALLSKILLS, MAGERY, LOG_MESSAGE
+from wolfpack.consts import PROVOCATION, MUSICIANSHIP, ALLSKILLS, MAGERY, LOG_MESSAGE, PLAYER_BODIES_ALIVE
 from math import floor
 import skills
 from musicianship import play_instrument
@@ -61,7 +61,7 @@ def response1( char, args, target ):
 			socket.clilocmessage( 0x7A755, "", 0x3b2, 3 ) # You can't incite that!
 			return False
 
-		if target.char.id == 0x191 or target.char.id == 0x190:
+		if target.char.id in PLAYER_BODIES_ALIVE:
 			socket.clilocmessage( 0x7A757, "", 0x3b2, 3, target.char )
 			return False
 
@@ -138,7 +138,6 @@ def response2( char, args, target ):
 		else:
 			instrument.delete()
 			socket.clilocmessage(502079) # The instrument played its last tune.
-	
 
 	play_instrument( char, instrument, True )
 	creature1.war = 1
@@ -183,7 +182,7 @@ def findinstrument( char, args, target ):
 		return False
 
 	socket.settag( 'instrument', serial )
-	socket.clilocmessage( 0x7A753, "", 0x3b2, 3, )
+	socket.clilocmessage( 0x7A753, "", 0x3b2, 3, ) # Whom do you wish to incite?
 	socket.attachtarget( "skills.provocation.response1", [target.item.serial] )
 	return True
 

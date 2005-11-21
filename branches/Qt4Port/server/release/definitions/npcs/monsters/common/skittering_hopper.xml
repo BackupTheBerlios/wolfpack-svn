@@ -8,7 +8,7 @@
 -->
 <definitions>
 
-	<!--  -->
+	<!-- skittering hopper -->
 	<npc id="skittering_hopper" inherit="monster_base">
 		<name>skittering hopper</name>
 		<id>302</id>
@@ -32,9 +32,10 @@
 		<tag name="res_cold" value="10,20" type="int" />
 		<tag name="res_energy" value="5,10" type="int" />
 		<!-- Loot Packs -->
-		<!--<lootpacks></lootpacks>-->
+		<lootpacks>gold_meager;gold_meager</lootpacks>
 		<!-- Misc. -->
 		<category>Monsters\Common\Skittering Hopper</category>
+		<intproperty name="barddifficulty" value="388" />
 	</npc>
 
 </definitions>

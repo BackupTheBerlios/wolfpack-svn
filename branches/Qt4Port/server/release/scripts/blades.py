@@ -17,7 +17,7 @@ blood = [ "122a", "122b", "122d", "122f" ]
 fish = [ 0x9cc, 0x9cd, 0x9ce, 0x9cf ]
 
 def onUse( char, item ):
-	char.socket.clilocmessage( 0xF69A6 ) # What do you want to use this on?
+	char.socket.clilocmessage( 1010086 ) # What do you want to use this on?
 	char.socket.attachtarget( "blades.response", [ item.serial ] )
 	return 1
 
@@ -33,35 +33,39 @@ def response( char, args, target ):
 		return
 
 	if target.char and not char.canreach(target.char, 5):
-		char.socket.clilocmessage(500312)
-		return
+		char.socket.clilocmessage(500312) # You cannot reach that.
+		return False
 
 	elif not target.item and not char.canreach(target.pos, 5):
-		char.socket.clilocmessage(500312)
-		return
+		char.socket.clilocmessage(500312) # You cannot reach that.
+		return False
 
+	docarve( char, item, target )
+	return True
+
+def carve_item( char, tool, target ):
+	if target.item.id == 0x2006 and target.item.corpse:
+		carve_corpse( char, tool, target.item )
+		return True
+
+	# For cutting fish
+	elif target.item.id in fish:
+		if target.item.getoutmostchar() != char:
+			char.socket.clilocmessage(500312) # You cannot reach that.
+			return True
+
+		cut_fish(char, target.item)
+		return True
+	return False
+
+def docarve( char, item, target ):
 	# Corpse => Carve
 	# Wood => Kindling/Logs
 	model = 0
 
-	if target.item:	
-		if target.item.id == 0x2006 and target.item.corpse:
-			if not char.canreach(target.item, 5):
-				char.socket.clilocmessage(500312)
-				return
-
-			carve_corpse( char, target.item )
+	if target.item:
+		if carve_item( char, item, target ):
 			return
-
-		# For cutting fish
-		elif target.item.id in fish:
-			if target.item.getoutmostchar() != char:
-				char.socket.clilocmessage(500312)
-				return
-
-			cut_fish(char, target.item)
-			return
-			
 		else:
 			model = target.item.id
 
@@ -69,7 +73,7 @@ def response( char, args, target ):
 	elif target.char and target.char.npc:
 		if target.char.baseid == 'sheep_unsheered':
 			target.char.id = 223
-			target.char.baseid = 'sheep'
+			target.char.baseid = 'sheep_sheered'
 			target.char.update()
 
 			# Create Wool
@@ -78,11 +82,11 @@ def response( char, args, target ):
 
 			if not utilities.tobackpack(wool, char):
 				wool.update()
-				
+
 			# Resend weight
 			char.socket.resendstatus()
 
-			char.socket.clilocmessage( 0x7A2E4 ) # You place the gathered wool into your backpack.
+			char.socket.clilocmessage( 500452 ) # You place the gathered wool into your backpack.
 
 			# Let the wool regrow (minutes)
 			delay = settings.getnumber('Game Speed', 'Regrow Wool Minutes', 180, 1)
@@ -90,11 +94,11 @@ def response( char, args, target ):
 			target.char.dispel(None, 1, "regrow_wool", [])
 			target.char.addtimer(delay, regrow_wool, [], 1, 0, "regrow_wool")
 			return
-		elif target.char.baseid == 'sheep':
-			char.socket.clilocmessage( 0x7A2E1 ) # This sheep is not yet ready to be shorn.
+		elif target.char.baseid == 'sheep' or target.char.baseid == 'sheep_sheered':
+			char.socket.clilocmessage( 500449 ) # This sheep is not yet ready to be shorn.
 			return
 		else:
-			char.socket.clilocmessage( 0x7A2E2 ) # You can only skin dead creatures.
+			char.socket.clilocmessage( 500450 ) # You can only skin dead creatures.
 			return
 	else:
 		model = target.model
@@ -110,7 +114,7 @@ def response( char, args, target ):
 		# Also allows a mace's war axe to be use. 0x13af and 0x13b0
 		if item.type == 1002 or item.id == 0x13af or item.id == 0x13b0:
 			if not item or not item.container == char:
-				char.message( "You must equip this item to use it on this target!" )
+				char.message( 502641, "" ) # You must equip this item to use it.
 				return
 			else:
 				skills.lumberjacking.response( [ target, item, char ] )
@@ -118,32 +122,38 @@ def response( char, args, target ):
 		elif item.type == 1001 or item.type == 1005:
 			skills.lumberjacking.hack_kindling( char, target.pos )
 	else:
-		# You can't use a bladed item on that.
-		char.socket.clilocmessage( 500494, "", GRAY )
+		char.socket.clilocmessage( 500494, "", GRAY ) # You can't use a bladed item on that.
 		return False
 
 # CARVE CORPSE
-def carve_corpse( char, corpse ):
+def carve_corpse( char, tool, corpse ):
 	if corpse.container:
-		char.socket.sysmessage( "You can't carve corpses in a container" )
+		char.socket.sysmessage( tr("You can't carve corpses in a container") )
 		return
 
 	if not char.canreach(corpse, 3):
-		char.socket.clilocmessage( 0x7A258, "", 0x3b2, 3, corpse ) # You cannot reach that
+		char.socket.clilocmessage( 500312, "", 0x3b2, 3, corpse ) # You cannot reach that
 		return
 
 	# Human Bodies can always be carved
-	if corpse.bodyid == 0x190 or corpse.bodyid == 0x191:
+	if corpse.bodyid in PLAYER_BODIES_ALIVE:
 		if corpse.hastag('carved') or not corpse.owner:
 			char.socket.clilocmessage(500485) # You see nothing useful to carve from the corpse.
 		else:	
-			ITEMS = ['122d', '1d9f', '1da4', '1da2', '1da3', '1da1'] # Components of the carved body
+			ITEMS = ['1d9f', '1da4', '1da2', '1da3', '1da1'] # Components of the carved body
 			for item in ITEMS:
 				item = wolfpack.additem(item)
 				item.moveto(corpse.pos)
 				item.decay = True # Make sure they decay
 				item.movable = 1 # Make sure they are movable
 				item.update()
+
+			# Blood should not be movable
+			blooditem = wolfpack.additem('122d')
+			blooditem.moveto(corpse.pos)
+			blooditem.decay = True
+			blooditem.movable = 3
+			blooditem.update()
 
 			# Add the head
 			head = wolfpack.additem('1da0')
@@ -163,13 +173,13 @@ def carve_corpse( char, corpse ):
 
 	# Not carvable or already carved
 	if corpse.hastag('carved'):
-		char.socket.clilocmessage( 0x7A305, "", 0x3b2, 3, corpse ) # You see nothing useful to carve..
+		char.socket.clilocmessage( 500485, "", 0x3b2, 3, corpse ) # You see nothing useful to carve..
 		return
 
 	basedef = wolfpack.charbase(corpse.charbaseid)
 
 	if not basedef:
-		char.socket.clilocmessage( 0x7A305, "", 0x3b2, 3, corpse ) # You see nothing useful to carve..
+		char.socket.clilocmessage( 500485, "", 0x3b2, 3, corpse ) # You see nothing useful to carve..
 		return
 
 	feathers = basedef.getintproperty('carve_feathers', 0)
@@ -182,7 +192,7 @@ def carve_corpse( char, corpse ):
 	meat_type = basedef.getstrproperty('carve_meat_type', 'ribs')
 
 	if feathers == 0 and wool == 0 and hides == 0 and scales == 0 and meat == 0:
-		char.socket.clilocmessage( 0x7A305, "", 0x3b2, 3, corpse ) # You see nothing useful to carve..
+		char.socket.clilocmessage( 500485, "", 0x3b2, 3, corpse ) # You see nothing useful to carve..
 		return
 
 	# See if the corpse has blood
@@ -206,78 +216,95 @@ def carve_corpse( char, corpse ):
 
 	# Mark the corpse as carved
 	corpse.settag('carved', 1)
-	
+
 	# Feathers
 	if feathers != 0:
-		item = wolfpack.additem('1bd1')
-		item.amount = feathers
-		if not wolfpack.utilities.tocontainer(item, corpse):
-			item.update()
-		char.socket.clilocmessage( 500479, "", 0x3b2, 3 )
+		carve_feathers( char, corpse, tool, feathers )
 
 	# Wool
 	if wool != 0:
-		item = wolfpack.additem('df8')
-		item.amount = wool
-		if not wolfpack.utilities.tocontainer(item, corpse):
-			item.update()
-		char.socket.clilocmessage( 500483, "", 0x3b2, 3 )
+		carve_wool( char, corpse, tool, wool )
 
 	# Meat
 	if meat != 0:
-		if meat_type == 'bird':			
-			item = wolfpack.additem('9b9') # Raw Bird
-		elif meat_type == 'lambleg':
-			item = wolfpack.additem('1609') # Raw Lamb Leg
-		else:		
-			item = wolfpack.additem('9f1') # Raw Ribs
-
-		item.amount = meat
-		if not wolfpack.utilities.tocontainer(item, corpse):
-			item.update()
-		char.socket.clilocmessage( 500467, "", 0x3b2, 3 )
+		carve_meat( char, corpse, tool, meat_type, meat )
 
 	# Hides
 	if hides != 0:
-		if hides_type == 'spined':
-			item = wolfpack.additem('spined_leather_hides')
-		elif hides_type == 'horned':
-			item = wolfpack.additem('horned_leather_hides')
-		elif hides_type == 'barbed':
-			item = wolfpack.additem('barbed_leather_hides')
-		else:
-			item = wolfpack.additem('leather_hides')
-
-		item.amount = hides
-		if not wolfpack.utilities.tocontainer(item, corpse):
-			item.update()
-		char.socket.clilocmessage( 500471, "", 0x3b2, 3 )
+		carve_hides( char, corpse, tool, hides_type, hides )
 
 	# Scales
 	if scales != 0:
-		# Random scales type
-		if ',' in scales_type:
-			scales_type = random.choice(scales_type.split(','))
+		carve_scales( char, corpse, tool, scales_type, scales )
 
-		items = []
-		if scales_type in ['blue', 'all']:
-			items.append(wolfpack.additem('blue_scales'))
-		if scales_type in ['green', 'all']:
-			items.append(wolfpack.additem('green_scales'))
-		if scales_type in ['yellow', 'all']:
-			items.append(wolfpack.additem('yellow_scales'))
-		if scales_type in ['black', 'all']:
-			items.append(wolfpack.additem('black_scales'))
-		if scales_type in ['white', 'all']:
-			items.append(wolfpack.additem('white_scales'))
-		if scales_type in ['red', 'all']:
-			items.append(wolfpack.additem('red_scales'))
 
-		for item in items:
-			item.amount = scales
-			if not wolfpack.utilities.tocontainer(item, corpse):
-				item.update()
-		char.socket.sysmessage("You cut away some scales, but they remain on the corpse.")
+def carve_feathers( char, corpse, tool, feathers ):
+	item = wolfpack.additem('1bd1')
+	item.amount = feathers
+	if not wolfpack.utilities.tocontainer(item, corpse):
+		item.update()
+	char.socket.clilocmessage( 500479, "", 0x3b2, 3 ) # You pluck the bird. The feathers are now on the corpse.
+
+def carve_wool( char, corpse, tool, wool ):
+	item = wolfpack.additem('df8')
+	item.amount = wool
+	if not wolfpack.utilities.tocontainer(item, corpse):
+		item.update()
+	char.socket.clilocmessage( 500483, "", 0x3b2, 3 ) # You shear it, and the wool is now on the corpse.
+
+def carve_meat( char, corpse, tool, meat_type, meat ):
+	if meat_type == 'bird':			
+		item = wolfpack.additem('9b9') # Raw Bird
+	elif meat_type == 'lambleg':
+		item = wolfpack.additem('1609') # Raw Lamb Leg
+	elif meat_type == 'fishsteak':
+		item = wolfpack.additem('97a') # Raw Fish Steak
+	else:		
+		item = wolfpack.additem('9f1') # Raw Ribs
+
+	item.amount = meat
+	if not wolfpack.utilities.tocontainer(item, corpse):
+		item.update()
+	char.socket.clilocmessage( 500467, "", 0x3b2, 3 ) # You carve some meat, which remains on the corpse.
+
+def carve_hides( char, corpse, tool, hides_type, hides ):
+	if hides_type == 'spined':
+		item = wolfpack.additem('spined_leather_hides')
+	elif hides_type == 'horned':
+		item = wolfpack.additem('horned_leather_hides')
+	elif hides_type == 'barbed':
+		item = wolfpack.additem('barbed_leather_hides')
+	else:
+		item = wolfpack.additem('leather_hides')
+
+	item.amount = hides
+	if not wolfpack.utilities.tocontainer(item, corpse):
+		item.update()
+	char.socket.clilocmessage( 500471, "", 0x3b2, 3 ) # You skin it, and the hides are now in the corpse.
+
+def carve_scales( char, corpse, tool, scales_type, scales ):
+	# Random scales type
+	if ',' in scales_type:
+		scales_type = random.choice(scales_type.split(','))
+
+	items = []
+	if scales_type in ['blue', 'all']:
+		items.append(wolfpack.additem('blue_scales'))
+	if scales_type in ['green', 'all']:
+		items.append(wolfpack.additem('green_scales'))
+	if scales_type in ['yellow', 'all']:
+		items.append(wolfpack.additem('yellow_scales'))
+	if scales_type in ['black', 'all']:
+		items.append(wolfpack.additem('black_scales'))
+	if scales_type in ['white', 'all']:
+		items.append(wolfpack.additem('white_scales'))
+	if scales_type in ['red', 'all']:
+		items.append(wolfpack.additem('red_scales'))
+	for item in items:
+		item.amount = scales
+		if not wolfpack.utilities.tocontainer(item, corpse):
+			item.update()
+	char.socket.sysmessage( tr("You cut away some scales, but they remain on the corpse.") )
 
 # CUT FISH
 def cut_fish( char, item ):

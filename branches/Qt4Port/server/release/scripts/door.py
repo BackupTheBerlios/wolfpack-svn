@@ -8,6 +8,7 @@
 #===============================================================#
 
 import wolfpack
+from wolfpack import tr
 
 # Sound constants for opening and closing a door
 SOUND_OPENWOOD = 0xEA
@@ -147,6 +148,36 @@ doors = [
 			[ 0x1ff9, 0x1ffa, 0, 0, SOUND_OPENGATE, SOUND_CLOSEGATE ],
 			[ 0x1ffb, 0x1ffc, 0, -1, SOUND_OPENGATE, SOUND_CLOSEGATE ],
 
+			# Heartwood Door
+			[ 0x2d67, 0x2d68, 0, 0, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+			[ 0x2d69, 0x2d6a, -1, 0, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+			[ 0x31a4, 0x31a5, 1, -1, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+			[ 0x31a6, 0x31a7, 0, -1, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+
+			# Whitewood Door
+			[ 0x2d63, 0x2d64, 0, 0, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+			[ 0x2d65, 0x2d66, -1, 0, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+			[ 0x31a0, 0x31a1, 1, -1, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+			[ 0x31a2, 0x31a3, 0, -1, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+
+			# Kiawood Door
+			[ 0x2d6b, 0x2d6c, 0, 0, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+			[ 0x2d6d, 0x2d6e, -1, 0, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+			[ 0x31a8, 0x31a9, 0, -1, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+			[ 0x31aa, 0x31ab, 1, -1, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+
+			# Moon Door
+			[ 0x2fe2, 0x2fe3, 0, 0, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+			[ 0x2fe4, 0x2fe5, -1, 0, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+			[ 0x319c, 0x319d, 1, 0, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+			[ 0x319e, 0x319f, 0, -1, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+
+			# Tanglewood Door
+			[ 0x2d46, 0x2d47, 0, -1, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+			[ 0x2d48, 0x2d49, 0, 0, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+			[ 0x31ac, 0x31ad, 1, -1, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+			[ 0x31ae, 0x31af, -1, 0, SOUND_OPENWOOD, SOUND_CLOSEWOOD ],
+
 			# Secret Doors
 			[ 0xE8, 0xE9, -1, 1, SOUND_OPENSECRET, SOUND_CLOSESECRET ],
 			[ 0xEA, 0xEB, 1, 1, SOUND_OPENSECRET, SOUND_CLOSESECRET ],
@@ -274,7 +305,7 @@ def opendoor( char, item ):
 						break
 
 			if blocked == 1:
-				char.socket.sysmessage( "There is someone blocking the door!" )
+				char.socket.sysmessage( tr("There is someone blocking the door!") )
 				return True
 			else:
 				pos = item.pos
@@ -347,10 +378,10 @@ def onUse(char, item, norange=0):
 
 	# In Range?
 	if not char.cansee( item ):
-		char.socket.sysmessage( "You cannot see the door from here." )
+		char.socket.sysmessage( tr("You cannot see the door from here.") )
 		return True
 	elif not norange and not char.canreach(item, 2):
-		char.socket.sysmessage( "You cannot reach the handle from here." )
+		char.socket.sysmessage( tr("You cannot reach the handle from here.") )
 		return True
 
 	# Do we have a linked door, is this door not open?

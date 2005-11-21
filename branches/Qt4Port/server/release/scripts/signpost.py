@@ -1,5 +1,7 @@
 
 import wolfpack
+import housing
+from housing.house import *
 from wolfpack.gumps import cGump
 from wolfpack.consts import EVENT_CHLEVELCHANGE
 
@@ -10,17 +12,20 @@ def onLoad():
 def onCHLevelChange( char, level ):
 	if not char.hastag( 'customizing' ):
 		return
-	multi = wolfpack.findmulti( int( char.gettag( 'customizing' ) ) )
+	multi = wolfpack.findobject( char.gettag( 'customizing' ) )
 
+	char.socket.sysmessage( 'Level selected: ' + str( level ) )
 	char.socket.sysmessage( 'multi at: ' + str( multi.pos.z ) )
 	char.socket.sysmessage( 'char at: ' + str( char.pos.z ) )
-	alt = (level-1) * 49
+	
+	#alt = (level-1) * 49
+
 	if level == 3:
-		char.moveto( wolfpack.coord( multi.pos.x, multi.pos.y, char.pos.z+1, multi.pos.map ) )
+		char.moveto( wolfpack.coord( multi.pos.x, multi.pos.y, multi.pos.z+47, multi.pos.map ) )
 	if level == 2:
-		char.moveto( wolfpack.coord( multi.pos.x+4, multi.pos.y+4, multi.pos.z+alt, multi.pos.map ) )
+		char.moveto( wolfpack.coord( multi.pos.x, multi.pos.y, multi.pos.z+27, multi.pos.map ) )
 	if level == 1:
-		char.moveto( wolfpack.coord( multi.pos.x, multi.pos.y, char.pos.z-1, multi.pos.map ) )
+		char.moveto( wolfpack.coord( multi.pos.x, multi.pos.y, multi.pos.z+7, multi.pos.map ) )
 	char.update()
 	return 1
 
@@ -208,6 +213,7 @@ def gump2( char, callback, item ):
 	mygump.send( char )
 
 
+# Customization Gump
 def gump3( char, callback, item ):
 	gump_params = [
 	"a house",
@@ -242,8 +248,12 @@ def gump3( char, callback, item ):
 	mygump.addRawLayout( "{button 150 90 4005 4007 1 0 62}" )
 	mygump.addRawLayout( "{xmfhtmlgumpcolor 195 90 200 20 1060672 0 0 32767}" )
 	mygump.addRawLayout( "{xmfhtmlgumpcolor 45 120 240 20 1060759 0 0 16912}" )
-	mygump.addRawLayout( "{button 10 160 4005 4007 1 0 21}" )
-	mygump.addRawLayout( "{xmfhtmlgumpcolor 45 160 240 20 1060765 0 0 32767}" )
+	# Customize this House - Just to Custom Houses (Checked by wich script sign has)
+	if item.hasscript( 'signpost' ):
+		mygump.addRawLayout( "{button 10 160 4005 4007 1 0 21}" )
+		mygump.addRawLayout( "{xmfhtmlgumpcolor 45 160 240 20 1060765 0 0 32767}" )
+	else:
+		mygump.addRawLayout( "{xmfhtmlgumpcolor 45 160 240 20 1060765 0 0 16912}" )
 	mygump.addRawLayout( "{xmfhtmlgumpcolor 45 180 240 20 1060760 0 0 16912}" )
 	mygump.addRawLayout( "{xmfhtmlgumpcolor 45 210 240 20 1060761 0 0 16912}" )
 	mygump.addRawLayout( "{button 10 230 4005 4007 1 0 66}" )
@@ -311,8 +321,9 @@ def customize( char, item ):
 	if not item.hastag( 'house' ):
 		return
 
-	multi = wolfpack.findmulti( int( item.gettag( 'house' ) ) )
-	multi.sendcustomhouse( char )
+	multi = wolfpack.findobject( item.gettag( 'house' ) )
+	# I Commented the last line... it servers for what exactly? no references for this
+	#multi.sendcustomhouse( char )
 	char.socket.sysmessage( str( multi.serial ) )
 	#char.socket.sysmessage( "Multi serial : %i" % multi.serial )
 	char.moveto( wolfpack.coord( multi.pos.x, multi.pos.y, multi.pos.z+7, multi.pos.map ) )
@@ -324,6 +335,33 @@ def customize( char, item ):
 
 	return 1
 
+def demolish( char, item ):
+
+	# If Sign has no Multi, then we have problems here
+	if not item.hastag( 'house' ):
+		return
+
+	# Assign the Multi
+	multi = wolfpack.findobject( item.gettag( 'house' ) )
+
+	# Looking for the list of items in the Multi
+	listitems = multi.objects
+
+	# Now... the Loop to remove all items
+	contador = 0
+	for multiitem in listitems:
+		multiitem.delete()
+		contador += 1
+	
+	# Message about how many items are deleted in the house
+	char.socket.sysmessage( "Deleted %i items in house!" % contador )
+
+	# Unregistering the House
+	housing.unregisterHouse(multi)
+
+	# Erasing Multi
+	multi.delete()
+
 def switchgump( char, target, args ):
 	item = args[0]
 	gumphandler = {
@@ -333,6 +371,7 @@ def switchgump( char, target, args ):
 	47: gump3,
 	62: gump4 }
 	actionhandler = {
+	7: demolish, 
 	21: customize }
 
 	button = target.button

@@ -1,6 +1,6 @@
 
 import wolfpack
-from wolfpack import console, tr
+from wolfpack import tr
 from wolfpack.consts import *
 from combat.utilities import weaponskill
 from wolfpack.utilities import energydamage, tobackpack
@@ -468,7 +468,7 @@ class Dismount (BaseAbility):
 	def checkuse(self, attacker):
 		result = BaseAbility.checkuse(self, attacker)
 		if result:
-			if attacker.itemonlayer(LAYER_MOUNT):
+			if attacker.ismounted():
 				weapon = attacker.getweapon()
 				if not weapon or not weapon.baseid in ['26c0', '26ca']:
 					if attacker.socket:
@@ -487,7 +487,7 @@ class Dismount (BaseAbility):
 		if defender.dead or defender.pos.map == 0xFF:
 			return # Out of reach		
 
-		if not defender.socket or not defender.itemonlayer(LAYER_MOUNT):
+		if not defender.socket or not defender.ismounted():
 			if attacker.socket:
 				attacker.socket.clilocmessage(1060848)
 			return
@@ -497,7 +497,7 @@ class Dismount (BaseAbility):
 		if attacker.socket:
 			attacker.socket.clilocmessage(1060082)
 
-		mounted = attacker.itemonlayer(LAYER_MOUNT)
+		mounted = attacker.ismounted()
 
 		if mounted:
 			defender.socket.clilocmessage(1062315)
@@ -604,6 +604,7 @@ class InfectiousStrike(BaseAbility):
 		poisoning_uses -= 1
 		if poisoning_uses <= 0:
 			weapon.deltag('poisoning_uses')
+			weapon.resendtooltip()
 		else:
 			weapon.settag('poisoning_uses', poisoning_uses)
 
@@ -853,7 +854,7 @@ class WhirlwindAttack(BaseAbility):
 			if not attacker.canreach(target, 1):
 				continue
 
-			if not target.dead and not target.invulnerable and (not party or party != target.party) and (not guild or target.guild != guild):
+			if not target.dead and not target.invulnerable and not target.region.safe and (not party or party != target.party) and (not guild or target.guild != guild):
 				if attacker.socket:
 					attacker.socket.clilocmessage(1060161) # The whirling attack strikes a target!
 				if defender.socket:

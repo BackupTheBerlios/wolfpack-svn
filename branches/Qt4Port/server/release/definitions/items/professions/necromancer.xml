@@ -18,7 +18,6 @@
 		<decay />
 		<buyprice>18</buyprice>
 		<sellprice>9</sellprice>
-		<value>30</value>
 		<category>Professions\Necromancer\Spellbook</category>
 		<basescripts>magic.necrospellbook</basescripts>
 	</item>
@@ -38,7 +37,7 @@
 	<item id="2262">
 		<id>0x2262</id>
 		<basescripts>magic.scroll</basescripts>
-		<category>Professions\Necromancer\Scrolls\Corpse Ski</category>
+		<category>Professions\Necromancer\Scrolls\Corpse Skin</category>
 	</item>
 
 	<item id="2263">
@@ -74,7 +73,7 @@
 	<item id="2268">
 		<id>0x2268</id>
 		<basescripts>magic.scroll</basescripts>
-		<category>Professions\Necromancer\Scrolls\Pain Strike</category>
+		<category>Professions\Necromancer\Scrolls\Pain Spike</category>
 	</item>
 
 	<item id="2269">
@@ -117,6 +116,12 @@
 		<id>0x226f</id>
 		<basescripts>magic.scroll</basescripts>
 		<category>Professions\Necromancer\Scrolls\Wraith Form</category>
+	</item>
+
+	<item id="2270">
+		<id>0x2270</id>
+		<basescripts>magic.scroll</basescripts>
+		<category>Professions\Necromancer\Scrolls\Exorzism</category>
 	</item>
 
 </definitions>

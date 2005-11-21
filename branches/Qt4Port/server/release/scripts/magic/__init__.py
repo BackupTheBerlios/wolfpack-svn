@@ -91,6 +91,10 @@ def target_response( char, args, target ):
 			if char.socket:
 				char.socket.clilocmessage(1061621)
 			return False
+		if (target.char.region and target.char.region.safe) and spell.harmful:
+			if char.socket:
+				char.socket.clilocmessage(1001018) # You can not perform negative acts on your target.
+			return False
 		if target.char.dead and not spell.affectdead:
 			if char.socket:
 				char.socket.clilocmessage(501857)
@@ -134,11 +138,14 @@ def target_response( char, args, target ):
 	elif (target.item or target.char or target.pos) and (spell.validtarget == TARGET_IGNORE or spell.validtarget == TARGET_GROUND):
 		pos = target.pos
 		if target.item:
-			item = target.item.getoutmostitem()
-			if not item.container:
-				pos = item.pos
+			if target.item.getoutmostchar():
+				pos = target.item.getoutmostchar().pos
 			else:
-				pos = item.container.pos
+				item = target.item.getoutmostitem()
+				if not item.container:
+					pos = item.pos
+				else:
+					pos = item.container.pos
 		elif target.char:
 			pos = target.char.pos
 
@@ -187,6 +194,12 @@ def onWalk( char, direction, sequence ):
 	if maymove(char, direction, sequence):
 		return False
 
+	direction &= 0x7F
+
+	# Just turning
+	if direction != char.direction:
+		return False
+
 	# Disallow movement for players
 	packet = wolfpack.packet(0x21, 8)
 	packet.setbyte(1, sequence)
@@ -197,16 +210,6 @@ def onWalk( char, direction, sequence ):
 	packet.send(char.socket)
 	char.socket.walksequence = 0
 	return True
-
-	running = direction & 0x80
-	direction &= 0x7F
-
-	# Just turning
-	if direction != char.direction:
-		return
-
-	char.socket.clilocmessage(500641)
-	fizzle(char)
 
 def onWarModeToggle(char, warmode):
 	char.socket.clilocmessage(500641)

@@ -2,7 +2,7 @@
 #   )      (\_     # Wolfpack 13.0.0 Build Script               #
 #  ((    _/{  "-;  # Created by: Wolfpack Development Team      #
 #   )).-" {{ ;"`   # Revised by: Wolfpack Development Team      #
-#  ( (  ;._ \\ ctr # Last Modification: check cvs logs          #
+#  ( (  ;._ \\ ctr # Last Modification: check svn logs          #
 #################################################################
 
 PROJECT = wolfpack
@@ -117,6 +117,7 @@ HEADERS += \
 	../src/profile.h \
 	../src/progress.h \
 	../src/pythonscript.h \
+	../src/quests.h \
 	../src/scriptmanager.h \
 	../src/server.h \
 	../src/singleton.h \
@@ -127,7 +128,6 @@ HEADERS += \
 	../src/territories.h \
 	../src/timing.h \
 	../src/timers.h \
-	../src/tracking.h \
 	../src/trade.h \
 	../src/typedefs.h \
 	../src/uobject.h \
@@ -173,6 +173,7 @@ SOURCES += \
 	../src/preferences.cpp \
 	../src/profile.cpp \
 	../src/pythonscript.cpp \
+	../src/quests.cpp \
 	../src/scriptmanager.cpp \
 	../src/server.cpp \
 	../src/skills.cpp \
@@ -182,7 +183,6 @@ SOURCES += \
 	../src/territories.cpp \
 	../src/timing.cpp \
 	../src/timers.cpp \
-	../src/tracking.cpp \
 	../src/trade.cpp \
 	../src/uobject.cpp \
 	../src/walking.cpp \

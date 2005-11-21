@@ -27,10 +27,12 @@
 		<maxdamage>10</maxdamage>
 		<!-- Resists -->
 		<tag name="res_physical" value="10,20" type="int" />
-		<!-- Misc. -->
-		<!-- Missing: -->
+		<!-- Lootpacks -->
 		<lootpacks>lootpack_poor</lootpacks>
+		<!-- Misc. -->
 		<category>Monsters\Daemonic\Mongbat (Strong)</category>
+		<strproperty name="food" value="1" />
+		<intproperty name="barddifficulty" value="313" />		
 		<!-- Carve -->
 		<intproperty name="carve_hides" value="6" />
 		<intproperty name="carve_meat" value="1" />

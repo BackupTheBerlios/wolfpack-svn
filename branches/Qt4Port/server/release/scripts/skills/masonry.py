@@ -5,7 +5,7 @@
 #  ( (  ;._ \\ ctr | Last Modification: Created                 #
 #===============================================================#
 
-from wolfpack import console
+from wolfpack import console, tr
 from wolfpack.consts import *
 import math
 import wolfpack
@@ -17,15 +17,15 @@ import random
 # Granites used by masonry
 # The first four values are required by the makemenu system.
 GRANITES = [
-	['Granite',		BLACKSMITHING, 0, ['granite'], 0x0],
-	['Dull Copper Granite', BLACKSMITHING, 0, ['dullcopper_granite'], 0x973],
-	['Shadow Granite', 	BLACKSMITHING, 0, ['shadowiron_granite'], 0x966],
-	['Copper Granite',	BLACKSMITHING, 0, ['copper_granite'], 0x96d],
-	['Bronze Granite',	BLACKSMITHING, 0, ['bronze_granite'], 0x972],
-	['Gold Granite',	BLACKSMITHING, 0, ['gold_granite'], 0x8a5],
-	['Agapite Granite',	BLACKSMITHING, 0, ['agapite_granite'], 0x979],
-	['Verite Granite',	BLACKSMITHING, 0, ['verite_granite'], 0x89f],
-	['Valorite Granite',	BLACKSMITHING, 0, ['valorite_granite'], 0x8ab],
+	[tr('Granite'),		CARPENTRY, 0, ['granite'], 0x0],
+	[tr('Dull Copper Granite'), CARPENTRY, 0, ['dullcopper_granite'], 0x973],
+	[tr('Shadow Granite'), 	CARPENTRY, 0, ['shadowiron_granite'], 0x966],
+	[tr('Copper Granite'),	CARPENTRY, 0, ['copper_granite'], 0x96d],
+	[tr('Bronze Granite'),	CARPENTRY, 0, ['bronze_granite'], 0x972],
+	[tr('Gold Granite'),	CARPENTRY, 0, ['gold_granite'], 0x8a5],
+	[tr('Agapite Granite'),	CARPENTRY, 0, ['agapite_granite'], 0x979],
+	[tr('Verite Granite'),	CARPENTRY, 0, ['verite_granite'], 0x89f],
+	[tr('Valorite Granite'),CARPENTRY, 0, ['valorite_granite'], 0x8ab],
 ]
 
 #
@@ -36,7 +36,7 @@ def onUse(char, item):
 	if menu:
 		menu.send(char, [item.serial])
 	return True
-	
+
 #
 # Craft an item.
 #
@@ -44,17 +44,16 @@ class StonecrafterItemAction(CraftItemAction):
 	def __init__(self, parent, title, itemid, definition):
 		CraftItemAction.__init__(self, parent, title, itemid, definition)
 		self.markable = 0 # All masonry items are not markable
-		
+
 	def visible(self, player, arguments):
 		return True
-		
+
 	def checkskills(self, player, arguments, check = 0):
 		success = 1
 		percent = self.percentage
 		rate = random.randint(0, 100)
 		player.socket.sysmessage(str(check))
 		if check:
-			player.socket.sysmessage("tet")
 			if rate >= percent:
 				success = 0
 		return success
@@ -71,10 +70,10 @@ class StonecrafterItemAction(CraftItemAction):
 			item.color = material[4]
 
 	#
-	# Play a simple soundeffect
+	# We have no soundeffect
 	#
 	def playcrafteffect(self, player, arguments):
-		player.soundeffect(0x2a)
+		pass
 
 #
 # The user has to have Samurai Empire installed
@@ -88,7 +87,7 @@ class SeStonecrafterItemAction(StonecrafterItemAction):
 			return False
 		else:
 			return StonecrafterItemAction.visible(self, char, arguments)
-			
+
 	def checkmaterial(self, player, arguments, silent = 0):
 		if player.socket and player.socket.flags & 0x10 == 0:
 			return False

@@ -165,14 +165,9 @@ void cConfig::readData()
 	checkTamedTime_ = getDouble( "Game Speed", "Tamed Check Time", 0.6, true );
 	niceLevel_ = getNumber( "Game Speed", "Nice Level", 2, true );
 	skillDelay_ = getNumber( "Game Speed", "SkillDelay", 7, true );
-	skillLevel_ = getNumber( "Game Speed", "SkillLevel", 3, true );
-	maxStealthSteps_ = getNumber( "Game Speed", "Max Stealth Steps", 10, true );
-	runningStamSteps_ = getNumber( "Game Speed", "Running Stamina Steps", 15, true );
 	hungerRate_ = getNumber( "Game Speed", "Hunger Rate", 120, true );
 	hungerDamageRate_ = getNumber( "Game Speed", "Hunger Damage Rate", 10, true );
-	boatSpeed_ = getDouble( "Game Speed", "Boat Speed", 0.750000, true );
 	snoopdelay_ = getNumber( "Game Speed", "Snoop Delay", 7, true );
-	housedecay_secs_ = getNumber( "Game Speed", "House Decay-Sec.", 604800, true );
 	spawnRegionCheckTime_ = getNumber( "Game Speed", "SpawnRegion Check Time", 5, true );
 	itemDecayTime_ = getNumber( "Game Speed", "Item Decay Time", 300, true );
 	npcCorpseDecayTime_ = getNumber( "Game Speed", "NPC Corpse Decay Time", 600, true );
@@ -181,44 +176,44 @@ void cConfig::readData()
 	secondsPerUOMinute_ = getNumber( "Game Speed", "Seconds Per UO Minute", 5, true );
 
 	// General Group
+	usesMondainsLegacyMap_ = getBool( "General", "Uses Mondains Legacy Map", true, true );
 	enableFeluccaSeason_ = getBool( "General", "Enable Felucca Season", true, true );
 	enableTrammelSeason_ = getBool( "General", "Enable Trammel Season", true, true );
 	showSkillTitles_ = getBool( "General", "ShowSkillTitles", true, true );
 	skillcap_ = getNumber( "General", "SkillCap", 700, true );
 	statcap_ = getNumber( "General", "StatsCap", 225, true );
 	commandPrefix_ = getString( "General", "Command Prefix", "'", true );
-	skillAdvanceModifier_ = getNumber( "General", "Skill Advance Modifier", 1000, true );
-	statsAdvanceModifier_ = getNumber( "General", "Stats Advance Modifier", 500, true );
 	stealing_ = getBool( "General", "Stealing Enabled", true, true );
 	guardsActive_ = getBool( "General", "Guards Enabled", true, true );
-	saveSpawns_ = getBool( "General", "Save Spawned Regions", true, true );
-	lootdecayswithcorpse_ = getBool( "General", "Loot Decays With Corpse", true, true );
-	invisTimer_ = getDouble( "General", "InvisTimer", 60, true );
-	poisonTimer_ = getNumber( "General", "PoisonTimer", 180, true );
 	hungerDamage_ = getNumber( "General", "Hunger Damage", 0, true );
 	tamedDisappear_ = getNumber( "General", "Tamed Disappear", 0, true );
-	houseInTown_ = getNumber( "General", "House In Town", 0, true );
 	shopRestock_ = getNumber( "General", "Shop Restock", 60, true );
 	quittime_ = getNumber( "General", "Char Time Out", 300, true );
-	cacheMulFiles_ = getBool( "General", "Cache Mul Files", true, true );
-	categoryTagAddMenu_ = getBool( "General", "Build AddMenu by Category Tags", true, true );
 	showNpcTitles_ = getBool( "General", "Show Npc Titles", true, true );
 	logMask_ = getNumber( "General", "Logging Mask", LOG_ALL, true );
 	overwriteDefinitions_ = getBool( "General", "Overwrite Definitions", false, true );
-	dontStackSpawnedObjects_ = getBool( "General", "Don't Stack Spawned Objects", true, true );
 	antiSpeedHack_ = getBool( "General", "Anti Speed Hack", true, true );
 	antiSpeedHackDelay_ = getNumber( "General", "Anti Speed Hack Delay", 175, true );
 	antiSpeedHackDelayMounted_ = getNumber( "General", "Anti Speed Hack Delay Mounted", 75, true );
 	refreshMaxValues_ = getBool( "General", "Refresh Characters Maximum Values", true, true );
 	sendAsciiNames_ = getBool( "General", "Send ASCII Character Names", false, true );
 	payfrompackonly_ = getBool( "General", "Pay From Pack Only", false, true );
-
+	instalogoutfromguarded_ = getBool( "General", "Insta Logout from Guarded Regions", true, true );
+	percentHitsAfterRess_ = getNumber( "General", "Percent Hits after Ress", 10, true );
+	percentManaAfterRess_ = getNumber( "General", "Percent Mana after Ress", 50, true );
+	percentStaminaAfterRess_ = getNumber( "General", "Percent Stamina after Ress", 50, true );
+	disableKarma_ = getBool( "General", "Disable Karma", false, true );
+	disableFame_ = getBool( "General", "Disable Fame", false, true );
 	saveInterval_ = getNumber( "General", "Save Interval", 900, true );
 	mulPath_ = QDir::convertSeparators( getString( "General", "MulPath", "./muls/", true ) );
 	logPath_ = QDir::convertSeparators( getString( "General", "LogPath", "./logs/", true ) );
 	logRotate_ = getBool( "General", "LogRotate", true, true );
 	mountRange_ = getNumber( "General", "Mount Range", 2, true );
 	newTooltipPackets_ = getBool( "General", "New Tooltip Packets", true, true );
+	factorMaxHits_ = getDouble( "General", "Factor for MaxHitPoints Calculation", 1.0, true );
+	factorMaxMana_ = getDouble( "General", "Factor for MaxMana Calculation", 1.0, true );
+	factorMaxStam_ = getDouble( "General", "Factor for MaxStamina Calculation", 1.0, true );
+	simpleMaxHitsCalculation_ = getBool( "General", "Simple MaxHitPoints Calculation", false, true );
 
 	// Network
 	loginPort_ = getNumber( "Network", "Loginserver Port", 2593, true );
@@ -229,11 +224,7 @@ void cConfig::readData()
 	allowStatRequest_ = getBool( "Network", "Allow Stat Request", true, true );
 
 	// Combat
-	attackstamina_ = getNumber( "Combat", "Attack Stamina", -2, true );
 	attack_distance_ = getNumber( "Combat", "Attack Distance", 13, true );
-
-	// Resources 60*60*12
-	resourceitemdecaytime_ = getNumber( "Resources", "ResourceItem Decay Time (not empty)", 43200, true );
 
 	// Light
 	worldBrightLevel_ = getNumber( "Light", "World Bright Level", 1, true );
@@ -251,6 +242,17 @@ void cConfig::readData()
 	binarySavepath_ = getString( "Binary Save Driver", "Save Path", "world.bin", true );
 	binaryBackups_ = getNumber( "Binary Save Driver", "Number Of Backups", 5, true );
 	binaryCompressBackups_ = getBool( "Binary Save Driver", "Compress Backups", false, true );
+
+	// Racial Features
+	elffullnightsight_ = getBool( "Racial Features", "Elves always have full nightsight", true, true );
+	elfwisdombonus_ = getDouble( "Racial Features", "Elven Wisdom Bonus", 1.2, true );
+	humanstrongback_ = getDouble( "Racial Features", "Human Strong Back", 1.5, true );
+	humantough_ = getDouble( "Racial Features", "Human Tough", 0.6, true );
+
+	// Monetary System
+	usenewmonetary_ = getBool( "Monetary", "Use New Monetary", false, true );
+	usereversedvaluable_ = getBool( "Monetary", "Use Reversed Valuable Base", false, true );
+
 }
 
 void cConfig::load()

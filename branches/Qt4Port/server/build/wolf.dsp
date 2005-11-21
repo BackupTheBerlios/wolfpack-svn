@@ -287,6 +287,10 @@ SOURCE=..\src\pythonscript.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\quests.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\scriptmanager.cpp
 # End Source File
 # Begin Source File
@@ -328,10 +332,6 @@ SOURCE=..\src\timers.cpp
 # Begin Source File
 
 SOURCE=..\src\timing.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\tracking.cpp
 # End Source File
 # Begin Source File
 
@@ -575,6 +575,10 @@ SOURCE=..\src\pythonscript.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\quests.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\resource.h
 # End Source File
 # Begin Source File
@@ -632,10 +636,6 @@ SOURCE=..\src\timers.h
 # Begin Source File
 
 SOURCE=..\src\timing.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\tracking.h
 # End Source File
 # Begin Source File
 

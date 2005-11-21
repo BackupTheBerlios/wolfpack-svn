@@ -12,7 +12,7 @@
 	<npc id="gazer_larva" inherit="monster_base">
 		<name>gazer larva</name>
 		<id>778</id>
-		<karma>0</karma>
+		<inherit id="KARMA_L1" />
 		<inherit id="FAME_L1" />
 		<!-- Stats -->
 		<str><random min="76" max="100"/></str>
@@ -30,11 +30,17 @@
 		<!-- Resist Properties -->
 		<tag name="res_physical" value="15,25" type="int" />
 		<!-- Loot Packs -->
-		<!-- Missing: 3 Nightshade -->
 		<lootpacks>gold_meager</lootpacks>
+		<backpack>
+			<content>
+				<item id="f88"> <!-- Nightshade -->
+					<amount><random min="2" max="3"/></amount>
+				</item>
+			</content>
+		</backpack>
 		<!-- Misc. -->
 		<category>Monsters\Common\Gazer Larva</category>
-
+		<intproperty name="barddifficulty" value="567" />
 		<intproperty name="carve_meat" value="1" />
 		<inherit id="speed_slow" />
 	</npc>

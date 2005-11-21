@@ -581,7 +581,25 @@ void cNPC::showName( cUOSocket* socket )
 	if ( !socket->player() )
 		return;
 
-	QString charName = name();
+	// Prefix
+	QString charName( "" );
+
+	// Tag for Prefix
+	if ( this->hasTag( "name.prefix" ) )
+	{
+		charName.append( this->getTag( "name.prefix" ).toString() );
+		charName.append( " " );
+	}
+
+	// Adding the Name
+	charName.append( name() );
+
+	// Tag for Suffix
+	if ( this->hasTag( "name.suffix" ) )
+	{
+		charName.append( " " );
+		charName.append( this->getTag( "name.suffix" ).toString() );
+	}
 
 	// apply titles
 	if ( Config::instance()->showNpcTitles() && !title_.isEmpty() ) {
@@ -1209,6 +1227,9 @@ void cNPC::awardKarma( P_CHAR pKilled, short amount, bool showmessage )
 {
 	Q_UNUSED( showmessage );
 
+	if ( Config::instance()->disableKarma() )
+		return;
+
 	int nCurKarma = 0, nChange = 0, nEffect = 0;
 
 	nCurKarma = karma();
@@ -1243,6 +1264,9 @@ void cNPC::awardKarma( P_CHAR pKilled, short amount, bool showmessage )
 void cNPC::awardFame( short amount, bool showmessage )
 {
 	Q_UNUSED( showmessage );
+
+	if ( Config::instance()->disableFame() )
+		return;
 
 	int nCurFame, nChange = 0;
 
@@ -1330,12 +1354,33 @@ void cNPC::createTooltip( cUOTxTooltipList& tooltip, cPlayer* player )
 {
 	cUObject::createTooltip( tooltip, player );
 
-	QString affix( " " );
+	// Prefix
+	QString prefix( "" );
+
+	// Tag for Prefix
+	if ( this->hasTag( "name.prefix" ) )
+	{
+		prefix.append( " " );
+		prefix.append( this->getTag( "name.prefix" ).toString() );
+		prefix.append( " " );
+	}
+
+	// Suffix
+	QString affix( "" );
+
+	// Tag for Suffix
+	if ( this->hasTag( "name.suffix" ) )
+	{
+		affix.append( " " );
+		affix.append( this->getTag( "name.suffix" ).toString() );
+	}
 
 	if ( !title_.isEmpty() )
 	{
-		affix = ", " + title_;
+		affix.append( ", " + title_ );
 	}
+	else
+		affix.append( " " );
 
 	// Append the (frozen) tag
 	if ( isFrozen() )
@@ -1346,8 +1391,23 @@ void cNPC::createTooltip( cUOTxTooltipList& tooltip, cPlayer* player )
 	{
 		affix.append( QString( " [0x%1]" ).arg( serial(), 3, 16 ) );
 	}
-	tooltip.addLine( 1050045, QString( " \t%1\t%2" ).arg( name_ ).arg( affix ) );
+	tooltip.addLine( 1050045, QString( "%3\t%1\t%2" ).arg( name_ ).arg( affix ).arg( prefix ) );
 	onShowTooltip( player, &tooltip );
+}
+
+void cNPC::poll( unsigned int time, unsigned int events )
+{
+	cBaseChar::poll( time, events );
+
+	if ( events & EventTime )
+	{
+		if ( canHandleEvent( EVENT_TIMECHANGE ) )
+		{
+			PyObject* args = Py_BuildValue( "(N)", getPyObject() );
+			callEventHandler( EVENT_TIMECHANGE, args );
+			Py_DECREF( args );
+		}
+	}
 }
 
 void cNPC::setStablemasterSerial( SERIAL data )
@@ -1394,6 +1454,7 @@ cNPC* cNPC::createFromScript( const QString& section, const Coord& pos )
 	pChar->setOrgBody( pChar->body() );
 	pChar->setOrgSkin( pChar->skin() );
 	pChar->setOrgName( pChar->name() );
+	pChar->setBody( pChar->body() );
 
 	// Now we call onCreate
 	cDelayedOnCreateCall* onCreateCall = new cDelayedOnCreateCall( pChar, section );

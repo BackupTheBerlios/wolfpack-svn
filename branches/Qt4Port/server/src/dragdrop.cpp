@@ -156,7 +156,7 @@ void DragAndDrop::grabItem( cUOSocket* socket, cUORxDragItem* packet )
 
 	// If the top-most container ( thats important ) is a corpse
 	// and looting is a crime, flag the character criminal.
-	if ( !pChar->isGM() && outmostCont && outmostCont->corpse() )
+	if ( !Config::instance()->disableKarma() && !pChar->isGM() && outmostCont && outmostCont->corpse() )
 	{
 		// For each item we take out we loose carma
 		// if the corpse is innocent and not in our guild
@@ -166,7 +166,9 @@ void DragAndDrop::grabItem( cUOSocket* socket, cUORxDragItem* packet )
 		{
 			//			pChar->karma -= 5;
 			pChar->setKarma( pChar->karma() - 5 );
-			pChar->makeCriminal();
+			// Calling Become Criminal Event
+			if (pChar->onBecomeCriminal(3, NULL, outmostCont ))
+				pChar->makeCriminal();
 			socket->sysMessage( tr( "You lost some karma." ) );
 		}
 	}
@@ -393,6 +395,12 @@ void DragAndDrop::equipItem( cUOSocket* socket, cUORxWearItem* packet )
 		return;
 	}
 
+	if ( pWearer->onWearItem( pChar, pItem, packet->layer() ) )
+	{
+		socket->bounceItem( pItem, BR_NO_REASON );
+		return;
+	}
+
 	// Males can't wear female armor
 	if ( ( pChar->body() == 0x0190 ) && ( pItem->id() >= 0x1C00 ) && ( pItem->id() <= 0x1C0D ) )
 	{
@@ -604,29 +612,6 @@ void DragAndDrop::dropOnChar( cUOSocket* socket, P_ITEM pItem, P_CHAR pOtherChar
 		dynamic_cast<P_PLAYER>( pChar )->onTradeStart( dynamic_cast<P_PLAYER>( pOtherChar ), pItem );
 		return;
 	}
-
-	// Dropping based on AI Type
-	/*switch( pOtherChar->npcaitype() )
-	{
-	case 4:
-		dropOnGuard( client, pItem, pOtherChar );
-		break;
-	case 5:
-		dropOnBeggar( client, pItem, pOtherChar );
-		break;
-	case 8:
-		dropOnBanker( client, pItem, pOtherChar );
-		break;
-	case 19:
-		dropOnBroker( client, pItem, pOtherChar );
-		break;
-	};
-	// Try to train - works for any NPC
-	if( pOtherChar->cantrain() )
-		if( pChar->trainer() == pOtherChar->serial )
-			dropOnTrainer( client, pItem, pOtherChar );
-		else
-			pOtherChar->talk( "You need to tell me what you want to learn first" );*/
 
 	socket->sysMessage( tr( "The character does not seem to want the item." ) );
 	socket->bounceItem( pItem, BR_NO_REASON );
@@ -932,96 +917,4 @@ void DragAndDrop::dropOnItem( cUOSocket* socket, P_ITEM pItem, P_ITEM pCont, con
 	}
 
 	pItem->update();
-}
-
-void DragAndDrop::dropOnBeggar( cUOSocket* socket, P_ITEM pItem, P_CHAR pBeggar )
-{
-	int tempint;
-
-	if ( ( pBeggar->hunger() < 6 ) && pItem->hasScript( 'food' ) )
-	{
-		pBeggar->talk( tr( "*cough* Thank thee!" ) );
-		pBeggar->soundEffect( 0x3A + RandomNum( 1, 3 ) );
-
-		// *You see Snowwhite eating some poisoned apples*
-		// Color: 0x0026
-		pBeggar->emote( tr( "*You see %1 eating %2*" ).arg( pBeggar->name() ).arg( pItem->getName() ) );
-
-		// We try to feed it more than it needs
-		if ( pBeggar->hunger() + pItem->amount() > 6 )
-		{
-			//			client->player()->karma += ( 6 - pBeggar->hunger() ) * 10;
-			tempint = ( 6 - pBeggar->hunger() ) * 10;
-			socket->player()->setKarma( socket->player()->karma() + tempint );
-
-			pItem->setAmount( pItem->amount() - ( 6 - pBeggar->hunger() ) );
-			pBeggar->setHunger( 6 );
-
-			// Pack the rest into his backpack
-			bounceItem( socket, pItem );
-			return;
-		}
-
-		pBeggar->setHunger( pBeggar->hunger() + pItem->amount() );
-		//		client->player()->karma += pItem->amount() * 10;
-		tempint = pItem->amount() * 10;
-		socket->player()->setKarma( socket->player()->karma() + tempint );
-
-		pItem->remove();
-		return;
-	}
-
-	// No Food? Then it has to be Gold
-	if ( pItem->id() != 0xEED )
-	{
-		pBeggar->talk( tr( "Sorry, but i can only use gold." ) );
-		bounceItem( socket, pItem );
-		return;
-	}
-
-	pBeggar->talk( tr( "Thank you %1 for the %2 gold!" ).arg( socket->player()->name() ).arg( pItem->amount() ) );
-	socket->sysMessage( tr( "You have gained some karma!" ) );
-
-	if ( pItem->amount() <= 100 )
-		socket->player()->awardKarma( socket->player(), pItem->amount() );
-		//socket->player()->setKarma( socket->player()->karma() + 10 );
-	else
-		socket->player()->setKarma( socket->player()->karma() + 50 );
-
-	pItem->remove();
-}
-
-void DragAndDrop::dropOnBroker( cUOSocket* socket, P_ITEM pItem, P_CHAR pBroker )
-{
-	// For House and Boat deeds we should pay back 75% of the value
-	if ( pItem->id() == 0x14EF )
-	{
-		if ( !pItem->sellprice() )
-		{
-			pBroker->talk( tr( "I can only accept deeds with value!" ) );
-			bounceItem( socket, pItem );
-			return;
-		}
-
-		socket->player()->giveGold( pItem->sellprice(), true );
-		pBroker->talk( tr( "Here you have your %1 gold, %2" ).arg( pItem->sellprice() ).arg( socket->player()->name() ) );
-		pItem->remove();
-		return;
-	}
-
-	bounceItem( socket, pItem );
-}
-
-void DragAndDrop::dropOnBanker( cUOSocket* socket, P_ITEM pItem, P_CHAR pBanker )
-{
-	Q_UNUSED( socket );
-	Q_UNUSED( pItem );
-	Q_UNUSED( pBanker );
-}
-
-void DragAndDrop::dropOnTrainer( cUOSocket* socket, P_ITEM pItem, P_CHAR pTrainer )
-{
-	Q_UNUSED( socket );
-	Q_UNUSED( pItem );
-	Q_UNUSED( pTrainer );
 }

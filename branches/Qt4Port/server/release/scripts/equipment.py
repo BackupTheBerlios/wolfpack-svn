@@ -1,4 +1,3 @@
-
 import wolfpack
 from wolfpack.utilities import *
 from wolfpack.consts import *
@@ -104,6 +103,22 @@ def modifiers(object, tooltip):
 	if selfrepair != 0:
 		tooltip.add(1060450, str(selfrepair))
 
+def requirements(object, tooltip):
+	# Tag will override.
+	lower = properties.fromitem(object, LOWERREQS)
+	if lower:
+		tooltip.add(1060435, str(lower))
+	lower /= 100.0
+
+	req_str = object.getintproperty( 'req_strength', 0 )
+	if object.hastag( 'req_strength' ):
+		req_str = int( object.gettag( 'req_strength' ) )
+
+	if lower:
+		req_str = int(ceil(req_str) * (1.0 - lower))
+	if req_str:
+		tooltip.add(1061170, str(req_str))
+
 #
 # Equipment has a lot of additional effects.
 # These are shown to the user in form of tooltips.
@@ -112,13 +127,14 @@ def onShowTooltip(viewer, object, tooltip):
 	armor = properties.itemcheck(object, ITEM_ARMOR)
 	weapon = properties.itemcheck(object, ITEM_WEAPON)
 	shield = properties.itemcheck(object, ITEM_SHIELD)
+	footwear = object.id in range(0x170b, 0x1713) #leather foorwear
 
-	if (armor or weapon or shield) and object.amount == 1:
+	if (armor or weapon or shield or footwear) and object.amount == 1:
 		# Reinsert the name if we need an ore prefix
 		prefix1 = None
 		if object.hastag('resname'):
 			resname = str(object.gettag('resname'))
-			if (armor or shield) and wolfpack.armorinfo.ARMOR_RESNAME_BONI.has_key(resname):
+			if (armor or shield or footwear) and wolfpack.armorinfo.ARMOR_RESNAME_BONI.has_key(resname):
 				resinfo = wolfpack.armorinfo.ARMOR_RESNAME_BONI[resname]
 				if resinfo.has_key(MATERIALPREFIX):
 					prefix1 = resinfo[MATERIALPREFIX]
@@ -128,7 +144,7 @@ def onShowTooltip(viewer, object, tooltip):
 					prefix1 = resinfo[MATERIALPREFIX]
 		elif object.hasstrproperty( 'resname' ):
 			resname = str( object.getstrproperty( 'resname' ) )
-			if (armor or shield) and wolfpack.armorinfo.ARMOR_RESNAME_BONI.has_key(resname):
+			if (armor or shield or footwear) and wolfpack.armorinfo.ARMOR_RESNAME_BONI.has_key(resname):
 				resinfo = wolfpack.armorinfo.ARMOR_RESNAME_BONI[resname]
 				if resinfo.has_key(MATERIALPREFIX):
 					prefix1 = resinfo[MATERIALPREFIX]
@@ -140,7 +156,7 @@ def onShowTooltip(viewer, object, tooltip):
 		prefix2 = None
 		if object.hastag('resname2'):
 			resname2 = str(object.gettag('resname2'))
-			if (armor or shield) and wolfpack.armorinfo.ARMOR_RESNAME_BONI.has_key(resname2):
+			if (armor or shield or footwear) and wolfpack.armorinfo.ARMOR_RESNAME_BONI.has_key(resname2):
 				resinfo = wolfpack.armorinfo.ARMOR_RESNAME_BONI[resname2]
 				if resinfo.has_key(MATERIALPREFIX):
 					prefix2 = resinfo[MATERIALPREFIX]
@@ -150,7 +166,7 @@ def onShowTooltip(viewer, object, tooltip):
 					prefix2 = resinfo[MATERIALPREFIX]
 		elif object.hasstrproperty( 'resname2' ):
 			resname2 = str( object.getstrproperty( 'resname2' ) )
-			if (armor or shield) and wolfpack.armorinfo.ARMOR_RESNAME_BONI.has_key(resname2):
+			if (armor or shield or footwear) and wolfpack.armorinfo.ARMOR_RESNAME_BONI.has_key(resname2):
 				resinfo = wolfpack.armorinfo.ARMOR_RESNAME_BONI[resname2]
 				if resinfo.has_key(MATERIALPREFIX):
 					prefix2 = resinfo[MATERIALPREFIX]
@@ -303,6 +319,11 @@ def onShowTooltip(viewer, object, tooltip):
 		if energy:
 			tooltip.add(1060407, str(energy))
 
+		if object.hastag('poisoning_uses'):
+			poisoning_uses = int(object.gettag('poisoning_uses'))
+			if poisoning_uses > 0:
+				tooltip.add( 1017383, '' )
+
 	if weapon or shield:
 		# Spell Channeling
 		spellchanneling = properties.fromitem(object, SPELLCHANNELING)
@@ -359,20 +380,7 @@ def onShowTooltip(viewer, object, tooltip):
 	if lowerreags:
 		tooltip.add(1060434, str(lowerreags))
 
-	lower = properties.fromitem(object, LOWERREQS)
-	if lower:
-		tooltip.add(1060435, str(lower))
-	lower /= 100.0
-
-	# Tag will override.
-	req_str = object.getintproperty( 'req_strength', 0 )
-	if object.hastag( 'req_strength' ):
-		req_str = int( object.gettag( 'req_strength' ) )
-
-	if lower:
-		req_str = int(ceil(req_str) * (1.0 - lower))
-	if req_str:
-		tooltip.add(1061170, str(req_str))
+	requirements(object, tooltip)
 
 	# Skill Boni (1-5)
 	for i in range(0, 5):
@@ -428,23 +436,23 @@ def onWearItem(player, wearer, item, layer):
 
 	if wearer.strength < req_str:
 		if player != wearer:
-			player.socket.sysmessage('This person can\'t wear that item, seems not strong enough.')
+			player.socket.sysmessage( tr('This person can\'t wear that item, seems not strong enough.') )
 		else:
 			player.socket.clilocmessage(500213)
 		return True
 
 	if wearer.dexterity < req_dex:
 		if player != wearer:
-			player.socket.sysmessage('This person can\'t wear that item, seems not agile enough.')
+			player.socket.sysmessage( tr('This person can\'t wear that item, seems not agile enough.') )
 		else:
 			player.socket.clilocmessage(502077)
 		return True
 
 	if wearer.intelligence < req_int:
 		if player != wearer:
-			player.socket.sysmessage('This person can\'t wear that item, seems not smart enough.')
+			player.socket.sysmessage( tr('This person can\'t wear that item, seems not smart enough.') )
 		else:
-			player.socket.sysmessage('You are not intelligent enough to equip this item.')
+			player.socket.sysmessage( tr('You are not intelligent enough to equip this item.') )
 		return True
 
 	# Reject equipping an item with durability 1 or less
@@ -454,7 +462,7 @@ def onWearItem(player, wearer, item, layer):
 	shield = properties.itemcheck(item, ITEM_SHIELD)
 
 	if (armor or weapon or shield) and item.health < 1:
-		player.socket.sysmessage('You need to repair this before using it again.')
+		player.socket.sysmessage( tr('You need to repair this before using it again.') )
 		return True
 
 	return False
@@ -769,12 +777,21 @@ def onUnequip(char, item, layer):
 
 	# Add nightsight
 	nightsight = properties.fromitem(item, NIGHTSIGHT)
-	if nightsight and char.player:
-		bonus = char.gettag('nightsight')
-		char.lightbonus = max(0, char.lightbonus - bonus)
-		char.deltag('nightsight')
-		char.socket.updatelightlevel()
-
+	if nightsight and char.player and char.hastag('nightsight'):
+		# Check if another nightsight item is equipped
+		found = False
+		for i in range(LAYER_RIGHTHAND, LAYER_LEGS):
+			if char.itemonlayer(i) and char.itemonlayer(i).hastag('nightsight'):
+				found = True
+				break
+		# We have magic spell on char e.g.
+		if char.hasscript('magic.nightsight'):
+			found = True
+		if not found:
+			bonus = char.gettag('nightsight')
+			char.lightbonus = max(0, char.lightbonus - bonus)
+			char.deltag('nightsight')
+			char.socket.updatelightlevel()
 	# Update Stats
 	if changed:
 		char.updatestats()
@@ -793,7 +810,7 @@ def onDelete(item):
 def onUse(player, item):
 	if item.container == player:
 		return False
-	if player.id == 0x190 and item.id > 0x1c00 and item.id <= 0x1c0d:
+	if player.id in PLAYER_BODIES_ALIVE_MALE and item.id > 0x1c00 and item.id <= 0x1c0d:
 		player.socket.sysmessage( tr("You cannot wear female armor.") )
 		return True
 	tile = wolfpack.tiledata(item.id)
@@ -834,7 +851,7 @@ def onUse(player, item):
 	# Check if there is another dclick handler
 	# in the eventchain somewhere. if not,
 	# return True to handle the equip event.
-	scripts = list(item.scripts) + item.basescripts.split(',')
+	scripts = list(item.scripts) + item.basescripts.split(',') + list(player.scripts) + player.basescripts.split(',')
 
 	for script in scripts:
 		if wolfpack.hasevent(script, EVENT_WEARITEM):

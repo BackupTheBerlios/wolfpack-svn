@@ -1,6 +1,8 @@
 
 import wolfpack
 import wolfpack.time
+from wolfpack import tr
+from wolfpack.consts import LAYER_RIGHTHAND, LAYER_LEGS
 
 #
 # Remove the nightsight event and bonus
@@ -11,10 +13,15 @@ def wearout(player):
 	else:
 		bonus = int(player.gettag('nightsight'))
 
-	player.lightbonus = max(0, player.lightbonus - bonus)
-
+	found = False
+	for i in range(LAYER_RIGHTHAND, LAYER_LEGS):
+		if player.itemonlayer(i) and player.itemonlayer(i).hastag('nightsight'):
+			found = True
+			break
+	if not found:
+		player.deltag('nightsight')
+		player.lightbonus = max(0, player.lightbonus - bonus)
 	player.removescript('magic.nightsight')
-	player.deltag('nightsight')
 	player.deltag('nightsight_start')
 
 	if player.socket:
@@ -46,5 +53,5 @@ def onTimeChange(player):
 	# Nightsight lasts 1440 ingame minutes
 	if nightsight_start + 1440 < wolfpack.time.minutes():
 		if player.socket:
-			player.socket.sysmessage('Your nightsight is wearing out.')
+			player.socket.sysmessage(tr('Your nightsight is wearing out.'))
 		wearout(player)

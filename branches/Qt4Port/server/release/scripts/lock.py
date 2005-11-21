@@ -17,7 +17,17 @@ def createkey(char, id):
 	key.settag('lock', id)
 	key.container = char.getbackpack()
 	key.update()
-	char.socket.sysmessage('A key has been added to your backpack.')
+	char.socket.sysmessage( tr('A key has been added to your backpack.') )
+
+def generateKeyId():
+	# Create a random key id (several characters are excluded that can be easily mistaken for something else)
+	parts = ['A','B','C','D','E','F','G','H','J','K','L','M','N','P','Q','R','S','T','U','V','W','X','Y','Z','2','3','4','5','6','7','8','9']
+	rkeyid = ''
+
+	for i in range(1,8):
+		rkeyid += random.choice(parts)
+
+	return rkeyid
 
 def gump_response(char, args, response):
 	if len(args) < 1:
@@ -38,7 +48,7 @@ def gump_response(char, args, response):
 		item.settag('lock', response.text[1])
 		item.resendtooltip()
 
-		char.socket.sysmessage('Added the lock to the item.')
+		char.socket.sysmessage( tr('Added the lock to the item.') )
 
 		# Should we create a key in the backpack of the user?
 		if 1 in response.switches:
@@ -57,7 +67,7 @@ def gump_response(char, args, response):
 
 		item.resendtooltip()
 
-		char.socket.sysmessage('Modified the lock of this item.')
+		char.socket.sysmessage( tr('Modified the lock of this item.') )
 
 	# Remove lock
 	elif response.button == 3:
@@ -68,12 +78,12 @@ def gump_response(char, args, response):
 		item.removescript( 'lock' )
 		item.resendtooltip()
 
-		char.socket.sysmessage('The lock has been removed from the item.')
+		char.socket.sysmessage( tr('The lock has been removed from the item.') )
 
 	# Create a key
 	elif response.button == 4:
 		if not item.hastag('lock'):
-			char.socket.sysmessage('This item has no lock.')
+			char.socket.sysmessage( tr('This item has no lock.') )
 		else:
 			lock = str(item.gettag('lock'))
 			createkey(char, lock)
@@ -81,7 +91,7 @@ def gump_response(char, args, response):
 def lock_response(char, args, target):
 	# Check if an item was targetted
 	if not target.item:
-		char.socket.sysmessage('You have to target an item.')
+		char.socket.sysmessage( tr('You have to target an item.') )
 		return
 
 	# Build the lock gump
@@ -130,12 +140,7 @@ def lock_response(char, args, target):
 		text = tr('<basefont color="#FECECE"><h3>Add Lock</h3><br><basefont color="#FEFEFE">This dialog will help you to add a lock to this item.Please enter a unique identifier for this lock. The lock has to share the same identifier with any key that is supposed to fit.')
 		gump.addHtmlGump(x=20, y=20, width=390, height=200, html=text)
 
-		# Create a random key id (several characters are excluded that can be easily mistaken for something else)
-		parts = ['A','B','C','D','E','F','G','H','J','K','L','M','N','P','Q','R','S','T','U','V','W','X','Y','Z','2','3','4','5','6','7','8','9']
-		rkeyid = ''
-
-		for i in range(1,8):
-			rkeyid += random.choice(parts)
+		rkeyid = generateKeyId()
 
 		# InputField for the key id
 		gump.addText(x=20, y=105, text=tr('Please enter an id for this lock:'), hue=0x835)
@@ -157,7 +162,7 @@ def lock_response(char, args, target):
 
 def commandLock( socket, command, arguments ):
 	# Select a target you want to edit.
-	socket.sysmessage("Select a target you want to modify.")
+	socket.sysmessage( tr("Select a target you want to modify.") )
 	socket.attachtarget("lock.lock_response")
 
 def onLoad():
@@ -220,16 +225,16 @@ def onTelekinesis(char, item):
 # Show a special tooltip
 #
 def onShowTooltip(viewer, object, tooltip):
-  # If the character is a gm and the targetted item has a lock, display the lock id
-  if viewer.gm:
-    lock = 'None'
+	# If the character is a gm and the targetted item has a lock, display the lock id
+	if viewer.gm:
+		lock = 'None'
 
-    if object.hastag('lock'):
-      lock = unicode(object.gettag('lock'))
+		if object.hastag('lock'):
+			lock = unicode(object.gettag('lock'))
 
-    if object.hastag('locked') and int(object.gettag('locked')) != 0:
-      suffix = ' (Locked)'
-    else:
-      suffix = ' (Unlocked)'
+		if object.hastag('locked') and int(object.gettag('locked')) != 0:
+			suffix = tr(' (Locked)')
+		else:
+			suffix = tr(' (Unlocked)')
 
-    tooltip.add(1050045, " \tLock: " + lock + suffix + "\t ")
+		tooltip.add(1050045, tr(" \tLock: ") + lock + suffix + "\t ")

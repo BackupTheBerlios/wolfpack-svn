@@ -1,6 +1,5 @@
 
 import wolfpack
-from wolfpack import console
 from wolfpack.consts import *
 import random
 
@@ -43,11 +42,12 @@ undead = SlayerGroup()
 elemental = SlayerGroup()
 abyss = SlayerGroup()
 arachnid = SlayerGroup()
+fey = SlayerGroup()
 reptilian = SlayerGroup()
 
 # HUMANOID SLAYER GROUP
 humanoid.opposition = undead
-humanoid.addsuper( SlayerEntry('repond', 1017388, ['orcs', 'ogres', 'trolls', 'giants'] ) )
+humanoid.addsuper( SlayerEntry('repond', 1017388, ['orcs', 'ogres', 'trolls', 'giants', 'meers', 'ratmen', 'mages'] ) )
 humanoid.add( SlayerEntry('ogretrashing', 1017387, ['ogres']) )
 humanoid.add( SlayerEntry('orcslaying', 1017385, ['orcs']) )
 humanoid.add( SlayerEntry('trollslaying', 1017386, ['trolls']) )
@@ -57,7 +57,7 @@ undead.opposition = humanoid
 undead.addsuper( SlayerEntry('silver', 1017384, ['undeads']) ) # Only super slayer
 
 # ELEMENTAL SLAYER GROUP
-elemental.opposition = abyss
+elemental.opposition = abyss # and fey]
 elemental.addsuper( SlayerEntry('elementalban', 1017409, ['bloodelementals', 'earthelementals', 'poisonelementals', 'fireelementals', 'snowelementals', 'airelementals', 'waterelementals', 'oreelementals']) )
 elemental.add( SlayerEntry( 'blooddrinking', 1017407, ['bloodelementals'] ) )
 elemental.add( SlayerEntry( 'earthshatter', 1017406, ['earthelementals'] ) )
@@ -81,15 +81,19 @@ arachnid.add( SlayerEntry('scorpionsbane', 1017400, ['scorpions']) )
 arachnid.add( SlayerEntry('spidersdeath', 1017399, ['spiders']) )
 arachnid.add( SlayerEntry('terathan', 1017390, ['terathans']) )
 
+# FEY SLAYER GROUP
+fey.opposition = abyss
+fey.addsuper( SlayerEntry('fey', 1070855, ['feys']) )
+
 # REPTILIAN SLAYER GROUP
 reptilian.opposition = arachnid
-reptilian.addsuper( SlayerEntry( 'reptiliandeath', 1017393, ['dragons', 'lizards', 'ophidians', 'snakes'] ) )
+reptilian.addsuper( SlayerEntry( 'reptiliandeath', 1017393, ['dragons', 'lizards', 'ophidians', 'snakes', 'jukas'] ) )
 reptilian.add( SlayerEntry( 'dragonslaying', 1017389, ['dragons'] ) )
 reptilian.add( SlayerEntry( 'lizardmanslaughter', 1017392, ['lizards'] ) )
 reptilian.add( SlayerEntry( 'ophidian', 1017398, ['ophidians'] ) )
 reptilian.add( SlayerEntry( 'snakes', 1017391, ['snakes'] ) )
 
-GROUPS = [humanoid, undead, elemental, abyss, arachnid, reptilian]
+GROUPS = [humanoid, undead, elemental, abyss, arachnid, fey, reptilian]
 SLAYERS = {}
 
 # Build Slayer Entry table

@@ -47,8 +47,9 @@ import os
 # BaseID's not to save.
 # World Gems
 # Doors/Gates
+# Spawngems
 nonsaves = [ \
-	'gem', 'ore_gem', 'wood_gem', \
+	'gem', 'ore_gem', 'wood_gem', 'spawngem', \
 	'675','676','677','678','679','67a','67b','67c','67d','67e','67f','680','681','682', \
 	'683','684','685','686','687','688','689','68a','68b','68c','68d','68e','68f','690', \
 	'691','692','693','694','695','696','697','698','699','69a','69b','69c','69d','69e', \
@@ -100,7 +101,7 @@ def callback( char, args, target ):
 		y1 = min( args[1], target.pos.y )
 		y2 = max( args[1], target.pos.y )
 
-		gump = cGump( x=100, y=100, callback="commands.export.export", args=[ x1, y1, x2, y2 ] )
+		gump = cGump( x=100, y=100, callback=export, args=[ x1, y1, x2, y2 ] )
 
 		gump.addBackground( id=0x2436, width=350, height=300 )
 		#gump.addCheckerTrans( 15, 15, 320, 270 )

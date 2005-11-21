@@ -12,8 +12,8 @@
 	<npc id="lord_oaks" inherit="monster_base_magi">
 		<name>Lord Oaks</name>
 		<id>175</id>
-		<karma>25000</karma>
-		<fame>25000</fame>
+		<inherit id="KARMA_NL5" />
+		<inherit id="FAME_L5" />
 		<!-- Stats -->
 		<str><random min="403" max="850"/></str>
 		<dex><random min="101" max="150"/></dex>
@@ -31,12 +31,7 @@
 		<mindamage>71</mindamage>
 		<maxdamage>157</maxdamage>
 		<!-- Damage Properties -->
-		<!--
-		<tag name="dmg_fire" value="0" type="int" />
-		<tag name="dmg_cold" value="0" type="int" />
-		<tag name="dmg_poison" value="0" type="int" />
-		<tag name="dmg_energy" value="0" type="int" />
-		-->
+		<tag name="dmg_fire" value="25" type="int" />
 		<!-- Resist Properties -->
 		<tag name="res_physical" value="85,90" type="int" />
 		<tag name="res_fire" value="60,70" type="int" />
@@ -44,11 +39,13 @@
 		<tag name="res_poison" value="80,90" type="int" />
 		<tag name="res_energy" value="80,90" type="int" />
 		<!-- Loot Packs -->
-		<!-- Missing: Skull of Enlightenment -->
-		<lootpacks>lootpack_ultra_rich;lootpack_ultra_rich;lootpack_ultra_rich;gems</lootpacks>
+		<!-- Missing: Level 5 Treasure Map -->
+		<lootpacks>lootpack_ultra_rich;lootpack_ultra_rich;lootpack_ultra_rich</lootpacks>
 		<!-- Misc. -->
 		<category>Monsters\Champions\Lord Oaks</category>
+		<strproperty name="slayer_group" value="feys" />
 		<inherit id="speed_fast" />
+		<intproperty name="barddifficulty" value="1600" />
 	</npc>
 
 </definitions>

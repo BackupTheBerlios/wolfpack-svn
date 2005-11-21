@@ -5,7 +5,8 @@ import random
 import wolfpack
 from wolfpack.utilities import tobackpack, energydamage, mayAreaHarm
 from math import ceil
-from magic import polymorph
+from magic import polymorph, necromancy
+from wolfpack.consts import PLAYER_BODIES_ALIVE
 
 class ChainLightning (Spell):
 	def __init__(self):
@@ -260,13 +261,16 @@ class MassDispel (Spell):
 			if not mayAreaHarm(char, target):
 				continue
 
-			if self.checkresist(char, target):
+			dispelChance = 50.0 + (100 * ((char.magery / 10.0 - (target.getintproperty('dispeldifficulty', 1) / 10)) / ((target.getintproperty('dispelfocus', 1) / 10) * 2))) / 100.0
+
+			if dispelChance > random.random():
 				target.effect(0x3779, 10, 20)
+				target.fight(char)
 			else:
 				wolfpack.effect(0x3728, target.pos, 8, 20)
 				target.soundeffect(0x201)
 				target.delete()
-			
+
 		# Field spells
 		for item in items:
 			if item.hastag('dispellable_field'):
@@ -308,13 +312,13 @@ class MeteorSwarm (Spell):
 def polymorph_expire(char, arguments):
 	# Remove all timers from this char
 	char.dispel(None, True, 'POLYMORPH_EXPIRE')	
-	
+
 	# Hidden beard?
 	if char.hastag('polymorph_beard_id'):
 		current = char.itemonlayer(LAYER_BEARD)
 		if current:
 			current.delete()
-		
+
 		newid = char.gettag('polymorph_beard_id')
 		color = 0
 		if char.hastag('polymorph_beard_color'):
@@ -323,10 +327,10 @@ def polymorph_expire(char, arguments):
 		item.color = color
 		char.additem(LAYER_BEARD, item)
 		item.update()
-		
+
 		char.deltag('polymorph_beard_id')
 		char.deltag('polymorph_beard_color')
-	
+
 	char.id = char.orgid
 	char.skin = char.orgskin
 	char.polymorph = 0
@@ -347,7 +351,10 @@ class Polymorph (Spell):
 			if char.socket:
 				char.socket.clilocmessage(502167)
 			return 0
-
+		if necromancy.transformed(char):
+			if char.socket:
+				char.socket.clilocmessage(1061633 ) # You cannot polymorph while in that form.
+			return 0
 		if len(args) == 0:
 			polymorph.showmenu(char)
 			return 0
@@ -369,19 +376,19 @@ class Polymorph (Spell):
 		char.orgid = char.id
 		char.id = args[0]
 		char.orgskin = char.skin
-		if char.id == 0x190 or char.id == 0x191:
+		if char.id in PLAYER_BODIES_ALIVE:
 			char.skin = random.randint(1002, 1059)
 		else:
 			char.skin = 0
-			
+
 		# Remove the beard if morphing into a female
-		if char.id == 0x191:
+		if char.id in PLAYER_BODIES_ALIVE_FEMALE:
 			beard = char.itemonlayer(LAYER_BEARD)
 			if beard:
 				char.settag('polymorph_beard_id', beard.baseid)
 				char.settag('polymorph_beard_color', beard.color)
 				beard.delete()			
-						
+
 		char.polymorph = 1
 		char.update()
 

@@ -1,15 +1,8 @@
 
-from wolfpack.consts import RESISTANCE_PHYSICAL, RESISTANCE_ENERGY, \
-	RESISTANCE_COLD, RESISTANCE_POISON, RESISTANCE_FIRE, DAMAGE_PHYSICAL, \
-	DAMAGE_ENERGY, DAMAGE_COLD, DAMAGE_POISON, DAMAGE_FIRE, DAMAGEBONUS, \
-	SPEEDBONUS, HITBONUS, DEFENSEBONUS, MINDAMAGE, MAXDAMAGE, SPEED, MISSSOUND, \
-	HITSOUND, PROJECTILE, PROJECTILEHUE, AMMUNITION, REQSTR, REQDEX, REQINT, \
-	LUCK, GOLDINCREASE, LOWERREQS, HITPOINTRATE, STAMINARATE, MANARATE, \
-	SPELLDAMAGEBONUS, MATERIALPREFIX, SWING, REFLECTPHYSICAL, \
-	DURABILITYBONUS, \
-	MAGICRESISTANCE, INSCRIPTION, LAYER_RIGHTHAND, LAYER_MOUNT, \
-	ITEM_ARMOR, ITEM_WEAPON, ITEM_SHIELD, ITEM_MELEE, ITEM_RANGED, \
-	ITEM_PIERCING, ITEM_SLASHING, ITEM_BASHING, SPELLCHANNELING
+from wolfpack.consts import DAMAGE_FIRE, DAMAGE_COLD, DAMAGE_POISON, \
+		DAMAGE_ENERGY, MATERIALPREFIX, DURABILITYBONUS, \
+		LUCK, LOWERREQS, SPEEDBONUS, DAMAGEBONUS, \
+		SWING, HITSOUND, MISSSOUND
 
 WEAPON_RESNAME_BONI = {
 	# Metals
@@ -79,8 +72,85 @@ WEAPON_RESNAME_BONI = {
 		DAMAGE_POISON: 10,
 		DAMAGE_ENERGY: 20,
 		MATERIALPREFIX: 'Valorite',
+	},
+	# Wood
+	'beech': {
+		MATERIALPREFIX: 'Beech Wood',
+		DAMAGEBONUS: 0,
+		DURABILITYBONUS: 0,
+		SPEEDBONUS: 0,
+		LUCK: 0
+	},
+	'apple': {
+		MATERIALPREFIX: 'Apple Wood',
+		DAMAGEBONUS: 0,
+		DURABILITYBONUS: 20,
+		SPEEDBONUS: -10,
+		LUCK: 0
+	},
+	'peach': {
+		MATERIALPREFIX: 'Peach Wood',
+		DAMAGEBONUS: 5,
+		DURABILITYBONUS: 5,
+		SPEEDBONUS: -10,
+		LUCK: 20
+	},
+	'pear': {
+		MATERIALPREFIX: 'Pear Wood',
+		DAMAGEBONUS: 10,
+		DURABILITYBONUS: -5,
+		SPEEDBONUS: 5,
+		LUCK: 20
+	},
+	'cedar': {
+		MATERIALPREFIX: 'Cedar Wood',
+		DAMAGEBONUS: 10,
+		DURABILITYBONUS: 10,
+		SPEEDBONUS: 10,
+		LUCK: 0
+	},
+	'willow': {
+		MATERIALPREFIX: 'Willow Wood',
+		DAMAGEBONUS: 0,
+		DURABILITYBONUS: 40,
+		SPEEDBONUS: 0,
+		LUCK: 0
+	},
+	'cypress': {
+		MATERIALPREFIX: 'Cypress Wood',
+		DAMAGEBONUS: 15,
+		DURABILITYBONUS: 0,
+		SPEEDBONUS: 0,
+		LUCK: 0
+	},
+	'oak': {
+		MATERIALPREFIX: 'Oak Wood',
+		DAMAGEBONUS: 20,
+		DURABILITYBONUS: 10,
+		SPEEDBONUS: -5,
+		LUCK: 25
+	},
+	'walnut': {
+		MATERIALPREFIX: 'Walnut Wood',
+		DAMAGEBONUS: 15,
+		DURABILITYBONUS: 15,
+		SPEEDBONUS: 15,
+		LUCK: 0
+	},
+	'yew': {
+		MATERIALPREFIX: 'Yew Wood',
+		DAMAGEBONUS: 10,
+		DURABILITYBONUS: 30,
+		SPEEDBONUS: 10,
+		LUCK: 40
+	},
+	'tropical': {
+		MATERIALPREFIX: 'Tropical Wood',
+		DAMAGEBONUS: 25,
+		DURABILITYBONUS: -20,
+		SPEEDBONUS: 10,
+		LUCK: -20
 	}
-
 }
 
 #
@@ -426,13 +496,13 @@ SAMURAIWEAPONINFO = {
 	# Bokuto
 	'27a8': {
 		SWING: [0x9],
-		HITSOUND: [0x233, 0x232],
+		HITSOUND: [0x536, 0x537],
 		MISSSOUND: [ 0x23a, 0x239 ]
 	},
 	# Daisho
 	'27a9': {
 		SWING: [0x9],
-		HITSOUND: [0x233, 0x232],
+		HITSOUND: [0x23b, 0x23c],
 		MISSSOUND: [ 0x23a, 0x239 ]
 	},
 	# Fukiya
@@ -443,32 +513,32 @@ SAMURAIWEAPONINFO = {
 	},
 	# Kama
 	'27ad': {
-		SWING: [0x9],
+		SWING: [0x9, 0xa],
 		HITSOUND: [0x233, 0x232],
-		MISSSOUND: [ 0x23a, 0x239 ]
+		MISSSOUND: [ 0x23a, 0x239, 0x238 ]
 	},
 	# Lajatang
 	'27a7': {
-		SWING: [0x9],
+		SWING: [0x9, 0xa, 0xb, 0xc],
 		HITSOUND: [0x233, 0x232],
-		MISSSOUND: [ 0x23a, 0x239 ]
+		MISSSOUND: [ 0x23a, 0x239, 0x238 ]
 	},
 	# No-Dachi
 	'27a2': {
 		SWING: [0x9],
-		HITSOUND: [0x233, 0x232],
+		HITSOUND: [0x23b, 0x23c],
 		MISSSOUND: [ 0x23a, 0x239 ]
 	},
 	# Nunchaku
 	'27ae': {
-		SWING: [0x9],
-		HITSOUND: [0x233, 0x232],
+		SWING: [0x9, 0xb],
+		HITSOUND: [0x535],
 		MISSSOUND: [ 0x23a, 0x239 ]
 	},
 	# Sai
 	'27af': {
 		SWING: [0x9],
-		HITSOUND: [0x233, 0x232],
+		HITSOUND: [0x23b, 0x23c],
 		MISSSOUND: [ 0x23a, 0x239 ]
 	},
 	# Shuriken
@@ -498,15 +568,91 @@ SAMURAIWEAPONINFO = {
 	# Wakizashi
 	'27a4': {
 		SWING: [0x9],
-		HITSOUND: [0x233, 0x232],
+		HITSOUND: [0x23b, 0x23c],
 		MISSSOUND: [ 0x23a, 0x239 ]
 	},
 	# Yumi
 	'27a5': {
+		SWING: [ 0x12 ],
+		HITSOUND: [ 0x234 ],
+		MISSSOUND: [ 0x238 ]
+	}
+}
+
+MONDAINSLEGACYWEAPONINFO = {
+	# Elven Composite Longbow
+	'2d1e': {
+		SWING: [ 0x12 ],
+		HITSOUND: [ 0x234 ],
+		MISSSOUND: [ 0x238 ]
+	},
+	# Magical Shortbow
+	'2d1f': {
+		SWING: [ 0x12 ],
+		HITSOUND: [ 0x234 ],
+		MISSSOUND: [ 0x238 ]
+	},
+	# Elven Spellblade
+	'2d20': {
+		SWING: [0xa],
+		HITSOUND: [0x23b, 0x23c],
+		MISSSOUND: [ 0x23a, 0x239 ]
+	},
+	# Assassin Spike
+	'2d21': {
+		SWING: [0xa],
+		HITSOUND: [0x23b, 0x23c],
+		MISSSOUND: [ 0x23a, 0x239 ]
+	},
+	# Leafblade
+	'2d22': {
+		SWING: [0xa],
+		HITSOUND: [0x23b, 0x23c],
+		MISSSOUND: [ 0x23a, 0x239 ]
+	},
+	# War Cleaver
+	'2d23': {
+		SWING: [0x9, 0xa],
+		HITSOUND: [0x23b, 0x23c],
+		MISSSOUND: [ 0x23a, 0x238, 0x239 ]
+	},
+	# Diamond Mace
+	'2d24': {
 		SWING: [0x9],
 		HITSOUND: [0x233, 0x232],
 		MISSSOUND: [ 0x23a, 0x239 ]
+	},
+	# Wild Staff
+	'2d25': {
+		SWING: [0xc],
+		HITSOUND: [0x233, 0x232],
+		MISSSOUND: [ 0x23a, 0x239 ]
+	},
+	# Rune Blade
+	'2d26': {
+		SWING: [0xc, 0xd],
+		HITSOUND: [0x23b, 0x23c],
+		MISSSOUND: [ 0x23a, 0x239 ]
+	},
+	# Radiant Scimitar
+	'2d27': {
+		SWING: [0x9],
+		HITSOUND: [0x23b, 0x23c],
+		MISSSOUND: [ 0x23a, 0x238, 0x239 ]
+	},
+	# Ornate Axe
+	'2d28': {
+		SWING: [0x9, 0xb],
+		HITSOUND: [0x233, 0x232, 0x237],
+		MISSSOUND: [ 0x23a, 0x239 ]
+	},
+	# Elven Machete
+	'2d29': {
+		SWING: [0x9],
+		HITSOUND: [0x23b, 0x23c],
+		MISSSOUND: [ 0x23a, 0x238, 0x239 ]
 	}
 }
 
 WEAPONINFO.update( SAMURAIWEAPONINFO )
+WEAPONINFO.update( MONDAINSLEGACYWEAPONINFO )

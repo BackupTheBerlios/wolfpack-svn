@@ -38,7 +38,9 @@ def onDropOnItem( cont, item ):
 
 	if not char.ischar():
 		return False
+	addtobook(char, cont, item)
 
+def addtobook(char, cont, item):
 	if cont == char.getbackpack() or cont == item.container:
 		return False
 
@@ -62,8 +64,8 @@ def onDropOnItem( cont, item ):
 
 				else:
 					item.delete() # Consume the scroll
-				return True # Do nothing else.
 			else:
+				char.socket.clilocmessage( 500179 ) # That spell is already present in that spellbook.
 				return False
 
 	elif cont.hasscript( 'magic.chivalryspellbook' ):
@@ -80,12 +82,12 @@ def onDropOnItem( cont, item ):
 
 				else:
 					item.delete() # Consume the scroll
-				return True # Do nothing else.
 			else:
+				char.socket.clilocmessage( 500179 ) # That spell is already present in that spellbook.
 				return False
 
 	elif cont.hasscript( 'magic.necrospellbook' ):
-		if spell >= 116:
+		if spell >= 117:
 			char.socket.sysmessage( "Scroll with invalid spell-id: %d" % spell )
 		else:
 			if not magic.necrospellbook.hasspell( cont, spell ):
@@ -98,11 +100,32 @@ def onDropOnItem( cont, item ):
 
 				else:
 					item.delete() # Consume the scroll
-				return True # Do nothing else.
 			else:
+				char.socket.clilocmessage( 500179 ) # That spell is already present in that spellbook.
 				return False
 
 	else:
 		return False
 
-	return False
+	char.soundeffect(0x249)
+
+	return True
+
+def onContextCheckVisible(player, object, tag):
+	if player.dead:
+		return False
+	if tag == 500:
+		if not object.getoutmostchar() == player:
+			return False
+	return True
+
+def onContextEntry(player, object, entry):
+	if entry == 500:
+		player.socket.attachtarget("magic.scroll.target", [object.serial])
+	return True
+
+def target(char, args, target):
+	if not target.item:
+		return False
+	addtobook(char, target.item, wolfpack.finditem(args[0]))
+	return True

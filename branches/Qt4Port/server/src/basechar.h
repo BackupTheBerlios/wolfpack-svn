@@ -306,6 +306,9 @@ public:
 	void Init( bool ser = true );
 	bool isSameAs( P_CHAR pc ) const;
 	bool inGuardedArea();
+	bool inSafeArea();
+	bool inNoCriminalCombatArea();
+	bool inNoKillCountArea();
 	void emote( const QString& emote, UI16 color = 0xFFFF );
 	P_ITEM rightHandItem() const;
 	P_ITEM leftHandItem() const;
@@ -330,6 +333,12 @@ public:
 	virtual bool onDeath( cUObject* source, P_ITEM corpse );
 	virtual bool onResurrect( cUObject* source );
 	virtual bool onDropOnChar( P_ITEM pItem );
+	virtual bool onWearItem( P_PLAYER pPlayer, P_ITEM pItem, unsigned char layer );
+	// Regens
+	virtual unsigned int onRegenHitpoints( unsigned int timer );
+	virtual unsigned int onRegenMana( unsigned int timer );
+	virtual unsigned int onRegenStamina( unsigned int timer );
+	//
 	virtual QString onShowPaperdollName( P_CHAR pOrigin ); // only change the viewed name
 	//	virtual bool onShowTooltip( P_PLAYER sender, cUOTxTooltipList* tooltip ); // Shows a tool tip for specific object
 	virtual bool onCHLevelChange( uint level ); // Fired when player moving trough levels
@@ -439,6 +448,7 @@ public:
 	bool isDead() const;
 	bool isAtWar() const;
 	bool isInvulnerable() const;
+	bool isElf() const;
 	bool isReputationHidden() const;
 	bool isUnderwearDisabled() const;
 	unsigned char direction() const;
@@ -520,6 +530,7 @@ public:
 	void setDead( bool data );
 	void setAtWar( bool data );
 	void setInvulnerable( bool data );
+	void setElf( bool data );
 	void setHitpointsBonus( short data );
 	void setStaminaBonus( short data );
 	void setManaBonus( short data );
@@ -746,6 +757,7 @@ protected:
 	// 21 - Mana Drain (0x100000)
 	// 22 - Disable Fame/Karma Titles (0x200000)
 	// 23 - Disable Underwear (0x400000)
+	// 24 - Elf - is an elf (0x800000)
 	uint propertyFlags_;
 
 	// Weight of the char, including worn items.
@@ -812,7 +824,7 @@ protected:
 	// Times the char has died.
 	ushort deaths_;
 
-	// The hunger value of the char. 6 means not hungry, 0 means starving.
+	// The hunger value of the char. 20 means not hungry, 0 means starving.
 	// cOldChar::hunger_
 	unsigned char hunger_;
 
@@ -941,11 +953,11 @@ inline void cBaseChar::setBody( ushort data )
 {
 	body_ = data;
 
-	if ( data == 0x190 )
+	if ( ( data == 0x190 ) || ( data == 0x25d ) )
 	{
 		gender_ = 0;
 	}
-	else if ( data == 0x191 )
+	else if ( ( data == 0x191 ) || ( data == 0x25e ) )
 	{
 		gender_ = 1;
 	}
@@ -1465,6 +1477,11 @@ inline bool cBaseChar::isInvulnerable() const
 	return propertyFlags_ & 0x1000;
 }
 
+inline bool cBaseChar::isElf() const
+{
+	return propertyFlags_ & 0x800000;
+}
+
 inline void cBaseChar::setIncognito( bool data )
 {
 	if ( data )
@@ -1573,6 +1590,15 @@ inline void cBaseChar::setInvulnerable( bool data )
 	changed_ = true;
 }
 
+inline void cBaseChar::setElf( bool data )
+{
+	if ( data )
+		propertyFlags_ |= 0x800000;
+	else
+		propertyFlags_ &= ~0x800000;
+	changed_ = true;
+}
+
 inline cBaseChar::CharContainer cBaseChar::guardedby() const
 {
 	return guardedby_;
@@ -1585,7 +1611,7 @@ inline cBaseChar::ItemContainer cBaseChar::content() const
 
 inline bool cBaseChar::isFemale() const
 {
-	return ( body_ == 0x191 || body_ == 0x193 );
+	return ( body_ == 0x191 || body_ == 0x193 || body_ == 0x25e || body_ == 0x260 );
 }
 
 inline bool cBaseChar::isHuman() const
@@ -1593,6 +1619,11 @@ inline bool cBaseChar::isHuman() const
 	if ( body_ >= 0x190 && body_ <= 0x193 )
 	{
 		return true; // Human female, Human male + ghosts
+	}
+
+	if ( body_ >= 0x25d && body_ <= 0x260 )
+	{
+		return true; // Elven female, Elven male + ghosts
 	}
 
 	if ( body_ == 0x3df || body_ == 0x3db || body_ == 0x3e2 )

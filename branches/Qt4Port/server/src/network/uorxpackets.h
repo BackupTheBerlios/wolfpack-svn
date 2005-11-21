@@ -113,14 +113,16 @@ public:
 	{
 		return this->getAsciiString( 10, 30 );
 	}
-	Q3CString password( void ) const
+	// Here are 4 unkown bytes
+	ushort flags( void ) const
 	{
-		return this->getAsciiString( 40, 30 );
+		return getShort( 44 );
 	}
+	// Here are 24 unkown bytes
 	uchar gender( void ) const
 	{
 		return ( *this )[70];
-	} // 0 = male, 1 = female
+	} // 0 = male, 1 = female, 2 = Elf Male, 3 = Elf Female
 	uchar strength( void ) const
 	{
 		return ( *this )[71];
@@ -219,10 +221,12 @@ public:
 	{
 		this->setAsciiString( 10, d, 30 );
 	}
-	void setPassword( const Q3CString& d )
+	// Here are 4 unkown bytes
+	void setFlags( ushort d )
 	{
-		this->setAsciiString( 40, d, 30 );
+		setShort( 44, d );
 	}
+	// Here are 24 unkown bytes
 	void setGender( uchar d )
 	{
 		( *this )[70] = d;
@@ -1122,6 +1126,7 @@ public:
 		AbilitySelect		= 0x19, //Ability select
 		CHRevert			= 0x1A, //Revert (nadip)
 		GuildButton			= 0x28, //Guild Button
+		QuestButton			= 0x32, //Quest Button
 	};
 
 	cUORxAosMultiPurpose( const QByteArray& data ) : cUOPacket( data )

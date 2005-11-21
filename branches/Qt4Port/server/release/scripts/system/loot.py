@@ -116,8 +116,21 @@ PACKS = {
 	],
 
 	# Scroll Packs
+	'scroll_low': [
+		[1.0, SCROLLS_C1 + SCROLLS_C2 + SCROLLS_C3, 1, 1] # 1 Scroll of Circle 1 - 3
+	],
 	'scroll_medium': [
-		[1.0, SCROLLS_C4 + SCROLLS_C5 + SCROLLS_C6 + SCROLLS_C7, 1, 1] # 1 Scroll of Circle 4 - 7	
+		[1.0, SCROLLS_C4 + SCROLLS_C5 + SCROLLS_C6 + SCROLLS_C7, 1, 1] # 1 Scroll of Circle 4 - 7
+	],
+	'scroll_high': [
+		[1.0, SCROLLS_C7 + SCROLLS_C8, 1, 1] # 1 Scroll of Circle 7 - 8
+	],
+
+	'necro_scroll_low': [
+		[1.0, SCROLLS_NECRO_LOW, 1, 1] # 1 Scroll
+	],
+	'necro_scroll_medium': [
+		[1.0, SCROLLS_NECRO_MED, 1, 1] # 1 Scroll
 	],
 
 	# Gem Packs
@@ -125,7 +138,7 @@ PACKS = {
 		[1.0, DEF_BASEGEMS, 1, 1]
 	],
 	'gems_poor': [
-		[1.0, DEF_BASEGEMS, '1d2', 1] # 100%, 1 - 2
+		[1.0, DEF_BASEGEMS, '1d3', 1] # 100%, 1 - 3
 	],
 	'gems_low': [
 		[1.0, DEF_BASEGEMS, '1d4+1', 1], # 100%, 2 - 5
@@ -431,7 +444,6 @@ PACKS = {
 	'necroregs_high': [
 		[1.0, DEF_NECROREGS, "1d8+2", 0]
 	],
-	# Scroll Packs
 
 	# Monster Specific
 	'mummy_pack': [
@@ -460,6 +472,16 @@ PACKS = {
 	'vorpal_bunny' : [
 		[1.0, DEF_STATUE, 1, 0], # Statue
 		[0.2, 'brightly_colored_eggs', 1, 0] # Brightly Colored Eggs
+	],
+
+	# Statue
+	'statue' : [
+		[1.0, DEF_STATUE, 1, 0], # Statue
+	],
+
+	# Potion
+	'potion' : [
+		[1.0, DEF_ALLPOTIONS, 1, 0], # Potion
 	]
 }
 

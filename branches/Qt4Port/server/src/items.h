@@ -381,6 +381,7 @@ public:
 	unsigned int countItems( short ID, short col = -1 ) const;
 
 	unsigned int removeItems( const QStringList& baseids, unsigned int amount );
+	unsigned int removeItem( const QString& id, unsigned int amount );
 	void remove();
 
 	int deleteAmount( int amount, ushort _id, ushort _color = 0 );
@@ -393,19 +394,19 @@ public:
 	{
 		return ( movable_ == 1 );
 	}
-	void setGMMovable()
+	void setOwnerMovable()
 	{
 		this->movable_ = 2; flagChanged();
-	} // set it GM movable.
-	bool isGMMovable()
+	} // set it owner movable.
+	bool isOwnerMovable()
 	{
 		return ( movable_ == 2 );
 	}
-	void setOwnerMovable()
+	void setGMMovable()
 	{
 		this->movable_ = 3; flagChanged();
-	} // set it owner movable.
-	bool isOwnerMovable()
+	} // set it GM movable.
+	bool isGMMovable()
 	{
 		return ( movable_ == 3 );
 	}

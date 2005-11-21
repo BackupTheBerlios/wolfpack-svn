@@ -12,9 +12,16 @@
 	\description Remove items in a certain area.
 	\usage - <code>nuke</code>
 	- <code>nuke all</code>
+	- <code>nuke nomulti</code>
+	- <code>nuke onlymulti</code>
 	If you don't specify any parameters, you will
 	be able to select a region to nuke. If you
 	use wipe all, the whole world will be nuked.
+	Using nomulti, you will nuke all items in selected 
+	region,	except items that are in some multi.
+	Using onlymulti, you will nuke all items in the
+	selected region that are in any multi, and just
+	these items.
 	\notes There is also <b>WIPE</b> which is an alias for this command.
 """
 """
@@ -22,9 +29,16 @@
 	\description Remove items in a certain area.
 	\usage - <code>wipe</code>
 	- <code>wipe all</code>
+	- <code>wipe nomulti</code>
+	- <code>wipe onlymulti</code>
 	If you don't specify any parameters, you will
-	be able to select a region to wipe. If you
-	use wipe all, the whole world will be wiped.
+	be able to select a region to nuke. If you
+	use wipe all, the whole world will be nuked.
+	Using nomulti, you will nuke all items in selected 
+	region,	except items that are in some multi.
+	Using onlymulti, you will nuke all items in the
+	selected region that are in any multi, and just
+	these items.
 	\notes There is also <b>NUKE</b> which is an alias for this command.
 """
 """
@@ -40,6 +54,7 @@ import wolfpack
 import string
 import wolfpack.gumps
 from wolfpack.gumps import WarningGump
+import wolfpack.consts
 
 def getBoundingBox( socket, callback, args ) :
 	socket.attachtarget( "commands.wipe.getBoundingBoxResponse", [0, callback, None, args] )
@@ -53,13 +68,22 @@ def getBoundingBoxResponse( char, args, target ):
 	return
 
 def nuke( socket, command, argstring ):
+	argstring = argstring.strip() # Remove trailing and leading whitespaces
 	if len( argstring ) > 0:
 		if argstring.lower() == "all":
 			gump = WarningGump( 1060635, 30720, "Wiping <i>all</i> items in the world.<br>Do you wish to proceed?", 0xFFC000, 420, 400, wipeAllWorld, [] )
 			gump.send( socket )
 			return
 		else:
-			baseid = argstring
+			if argstring.lower() == "nomulti":
+				socket.sysmessage("You choose to nuke anything except items in multis")
+				baseid = argstring
+			else:
+				if argstring.lower() == "onlymulti":
+					socket.sysmessage("You choose to nuke just items in multis")
+					baseid = argstring
+				else:
+					baseid = argstring
 	else:
 		baseid = None
 
@@ -68,6 +92,7 @@ def nuke( socket, command, argstring ):
 	return True
 
 def nukez( socket, command, arguments ):
+	arguments = arguments.strip() # Remove trailing and leading whitespaces
 	if( len(arguments) == 0 or arguments.count(' ') > 1 ):
 		socket.sysmessage('Usage: .nukez z [ baseid ]')
 		return
@@ -76,7 +101,7 @@ def nukez( socket, command, arguments ):
 		(z, baseid) = arguments.split(' ')
 	else:
 		z = arguments
-		baseid =  None
+		baseid = None
 	try:
 		z = int(z)
 	except:
@@ -95,17 +120,14 @@ def wipeAllWorld( player, accept, state ):
 	player.socket.sysmessage( "Removing all items from world, this may take a while" )
 	iterator = wolfpack.itemiterator()
 	item = iterator.first
-	serials = []
+	counter = 0
 	while item:
 		if item.container == None:
-			serials.append(item.serial)
-		item = iterator.next
-	for serial in serials:
-		item = wolfpack.finditem(serial)
-		if item:
 			item.delete()
+			counter += 1
+		item = iterator.next
 
-	player.socket.sysmessage( "%i items have been removed from world" % len(serials) )
+	player.socket.sysmessage( "%i items have been removed from world" % counter )
 	return
 
 def wipeBoundingBox( socket, target1, target2, argstring ):
@@ -119,6 +141,7 @@ def wipeBoundingBox( socket, target1, target2, argstring ):
 	iterator = wolfpack.itemregion( x1, y1, x2, y2, target2.pos.map )
 	item = iterator.first
 	count = 0
+
 	if( argstring and (type(argstring) == list or type(argstring) == tuple) ):
 		(z, baseid) = argstring
 	else:
@@ -129,9 +152,24 @@ def wipeBoundingBox( socket, target1, target2, argstring ):
 		if (type(z) != int or z == item.pos.z) and (not baseid or item.baseid == baseid):
 			item.delete()
 			count += 1
+		else:
+			if baseid and baseid.lower() == "nomulti":
+				if not item.multi:
+					item.delete()
+					count += 1
+			else:
+				if baseid and baseid.lower() == "onlymulti":
+					if item.multi:
+						item.delete()
+						count += 1
+
 		item = iterator.next
 	socket.sysmessage( "%i items removed" % count )
 
+	if socket.player:
+		socket.player.log(wolfpack.consts.LOG_MESSAGE,"Nuking from (%d,%d) to (%d,%d). %d items deleted. Arguments given: %s \n" % (x1,y1,x2,y2,count,argstring) )
+	else:
+		wolfpack.log(wolfpack.consts.LOG_MESSAGE,"Nuking from (%d,%d) to (%d,%d). %d items deleted. Arguments given: %s (Socket-ID: %s)\n" % (x1,y1,x2,y2,count,argstring,socket.id) )
 	return True
 
 def onLoad():

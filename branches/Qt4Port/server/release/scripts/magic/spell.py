@@ -108,7 +108,7 @@ class Spell:
 	# Show the cast action
 	#
 	def docastaction(self, char, mode):
-		if char.bodytype == BODY_HUMAN and not char.itemonlayer( LAYER_MOUNT ):
+		if char.bodytype == BODY_HUMAN and not char.ismounted():
 			char.action(self.castaction)
 
 	#
@@ -206,8 +206,17 @@ class Spell:
 		if mode == MODE_SCROLL:
 			mana = (mana + 1) / 2
 
-		percent = properties.fromchar(char, LOWERMANACOST) / 100.0
-		return max(0, mana - int(percent * float(mana)))
+		scalar = 1.0
+		if char.hasscript('magic.mindrot'):
+			scalar = 1.25
+			if char.npc:
+				scalar = 2.0
+
+		# Lower Mana Cost
+		lmc = properties.fromchar(char, LOWERMANACOST) / 100.0
+		scalar -= lmc / 100
+
+		return max(0, int(mana * scalar))
 
 	#
 	# Calculate the time required to cast this spell
@@ -416,8 +425,14 @@ class Spell:
 
 		return True
 
-	# Not implemented yet
+	# Is this all? what about reflecting from players????
 	def checkreflect(self, char, mode, targettype, target, args, item):
+		reflecting = ["copper_elemental", "valorite_elemental"]
+		male_only = ["semidar"]
+		if target.baseid in reflecting:
+			return True
+		elif target.baseid in male_only and not target.char.gender:
+			return True
 		return False
 
 	#
@@ -544,11 +559,23 @@ class CharEffectSpell (Spell):
 
 		if self.reflectable and self.checkreflect(char, mode, targettype, target, args, item):
 			target = char
+			target.effect( 0x37B9, 10, 5 )
 
 		if self.harmful:
 			self.harmchar(char, target)
 
 		self.effect(char, target, mode, args, item)
+
+# for necromancers
+class TransformationSpell (Spell):
+	def __init__(self, circle):
+		Spell.__init__(self, circle)
+
+	def precast(self, char, mode=0, args=[], target = None, item = None):	
+		if char.polymorph:
+			char.socket.clilocmessage( 1061628 ) # You can't do that while polymorphed.
+			return False
+		return Spell.precast(self, char, mode, args, target, item)
 
 #
 # A damage spell. It can be delayed but doesnt need

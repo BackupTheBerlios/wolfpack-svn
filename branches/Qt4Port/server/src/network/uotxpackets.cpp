@@ -112,7 +112,7 @@ void cUOTxCharTownList::compile( void )
 		offset += 63;
 	}
 
-	unsigned int flags = 0xA8; // Samurai Empire + Context Menus + AOS
+	unsigned int flags = 0x1A8; // Samurai Empire + Context Menus + AOS + Mondain's Legacy
 
 	if (charLimit == 6) {
 		flags |= 0x40;
@@ -173,7 +173,14 @@ void cUOTxConfirmLogin::fromChar( P_CHAR pChar )
 {
 	if ( pChar->isDead() )
 	{
-		setBody( pChar->gender() ? 0x193 : 0x192 );
+		if ( pChar->body() == 0x25d || pChar->body() == 0x25e )
+		{
+			setBody( pChar->gender() ? 0x260 : 0x25f );
+		}
+		else
+		{
+			setBody( pChar->gender() ? 0x193 : 0x192 );
+		}		
 	}
 	else
 	{
@@ -272,7 +279,14 @@ void cUOTxUpdatePlayer::fromChar( P_CHAR pChar )
 
 	if ( pChar->isDead() )
 	{
-		setBody( pChar->gender() ? 0x193 : 0x192 );
+		if ( pChar->body() == 0x25d || pChar->body() == 0x25e )
+		{
+			setBody( pChar->gender() ? 0x260 : 0x25f );
+		}
+		else
+		{
+			setBody( pChar->gender() ? 0x193 : 0x192 );
+		}		
 		setHue( 0 );
 	}
 	else
@@ -337,7 +351,14 @@ void cUOTxDrawChar::fromChar( P_CHAR pChar )
 
 	if ( pChar->isDead() )
 	{
-		setModel( pChar->gender() ? 0x193 : 0x192 );
+		if ( pChar->body() == 0x25d || pChar->body() == 0x25e )
+		{
+			setModel( pChar->gender() ? 0x260 : 0x25f );
+		}
+		else
+		{
+			setModel( pChar->gender() ? 0x193 : 0x192 );
+		}		
 		setColor( 0 );
 	}
 	else
@@ -400,6 +421,13 @@ void cUOTxDrawChar::fromChar( P_CHAR pChar )
 		// -> Shop containers need to be send
 		if ( pItem->layer() > 0x19 && pItem->layer() != 0x1A && pItem->layer() != 0x1B && pItem->layer() != 0x1C )
 			continue;
+			
+		// Skip the mount item if we're not sending it to ourself
+		// which we wont do since 0x78 wont be sent to the player 
+		// at least not normally
+		if ( !pChar->isHuman() && pItem->layer() == 0x19 ) {
+			continue;
+		}
 
 		// Only send items once
 		if ( layers[pItem->layer()] )
@@ -430,8 +458,15 @@ void cUOTxDrawPlayer::fromChar( P_CHAR pChar )
 	setSerial( pChar->serial() );
 
 	if ( pChar->isDead() )
-	{
-		setBody( pChar->gender() ? 0x193 : 0x192 );
+	{		
+		if ( pChar->body() == 0x25d || pChar->body() == 0x25e )
+		{
+			setBody( pChar->gender() ? 0x260 : 0x25f );
+		}
+		else
+		{
+			setBody( pChar->gender() ? 0x193 : 0x192 );
+		}		
 	}
 	else
 	{
@@ -581,11 +616,20 @@ void cUOTxOpenPaperdoll::fromChar( P_CHAR pChar, P_CHAR pOrigin )
 				prefix.append( " " );
 			}
 
-			// Lord/Lady Title
-			if ( pChar->fame() >= 10000 )
+
+			// Tag for Prefix or Lord and Lady
+			if ( !pChar->isIncognito() && !pChar->isPolymorphed() )
 			{
-				prefix.append( pChar->gender() ? tr( "Lady" ) : tr( "Lord" ) );
-				prefix.append( " " );
+				if ( pChar->hasTag( "name.prefix" ) )
+				{
+					prefix.append( pChar->getTag( "name.prefix" ).toString() );
+					prefix.append( " " );
+				}
+				else if ( pChar->fame() >= 10000 && !pChar->isReputationHidden() )
+				{
+					prefix.append( pChar->gender() ? tr( "Lady" ) : tr( "Lord" ) );
+					prefix.append( " " );
+				}
 			}
 
 			setName( makeAscii( prefix + pChar->name() + ( title.isEmpty() ? QString( "" ) : ", " + title ) ) );

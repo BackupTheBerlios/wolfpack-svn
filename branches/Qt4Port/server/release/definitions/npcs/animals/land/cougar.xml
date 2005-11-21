@@ -37,7 +37,9 @@
 		<!-- Misc. -->
 		<controlslots>2</controlslots>
 		<mintaming>411</mintaming>
-		<food>5</food>
+		<strproperty name="food" value="2,1" />
+		<intproperty name="barddifficulty" value="333" />
+		<strproperty name="packinstinct" value="feline" />
 		<bindmenu>tame_menu,pet_menu</bindmenu>
 		<category>Animals\Land\Cougar</category>
 		<!-- Carve -->

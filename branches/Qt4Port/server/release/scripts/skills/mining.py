@@ -4,6 +4,7 @@
 #   )).-' {{ ;'`   # Revised by: Dreoth
 #  ( (  ;._ \\ ctr # Last Modification: Jan 26 2004
 #################################################################
+#mining called from pickaxe.py
 
 import wolfpack
 import wolfpack.time
@@ -11,11 +12,10 @@ import skills
 import random
 from wolfpack.consts import MINING, GRAY, MINING_REFILLTIME, MINING_ORE, \
 	MINING_MAX_DISTANCE, ANIM_ATTACK3, FELUCIA2XRESGAIN, MINING_SAND
-from wolfpack import console
+from wolfpack import tr
 from wolfpack.utilities import ismountainorcave, issand, tobackpack
 
-
-#mining called from pickaxe.py
+KNOWLEDGE_OF_NATURE_FACTOR =  int( wolfpack.settings.getnumber("Racial Features", "Elves Knowledge of Nature factor", 2, True) )
 
 MININGDELAY = 1000 #ms
 
@@ -84,7 +84,7 @@ def mining( char, pos, tool, sand = False ):
 	char.action( ANIM_ATTACK3 )
 	return True
 
-def createoregem(Oretable, pos):
+def createoregem(Oretable, pos, char):
 	gem = wolfpack.additem('ore_gem')
 
 	# Finding the Default Vein (It is the easiest to find ore in list)
@@ -101,21 +101,48 @@ def createoregem(Oretable, pos):
 
 	# This will give it a chance to be a random ore type, this can change later.
 	totalchance = 0
+
 	for ore in Oretable.values():
-		totalchance += ore[FINDCHANCE]
+		# Implementing Knowledge of Nature Factor for Elves
+		if (ore[FINDCHANCE] == HigherChance):
+			totalchance += ore[FINDCHANCE]
+		else:
+			if char.elf:
+				totalchance += (ore[FINDCHANCE] * KNOWLEDGE_OF_NATURE_FACTOR)
+			else:
+				totalchance += ore[FINDCHANCE]
 
 	colorchance = random.randint(0, totalchance - 1)
 	offset = 0
 	maxreqskill = 0
 
 	for (resname, ore) in Oretable.items():
-		if colorchance >= offset and colorchance < offset + ore[FINDCHANCE]:
-			gem.settag('resname2', resname)
-			maxreqskill = ore[REQSKILL]
-			gem.color = ore[COLORID]
-			gem.settag('resourcecount', random.randint(ore[MINAMOUNT], ore[MAXAMOUNT]))
-			break
-		offset += ore[FINDCHANCE]
+		if (ore[FINDCHANCE] == HigherChance):
+			if colorchance >= offset and colorchance < offset + ore[FINDCHANCE]:
+				gem.settag('resname2', resname)
+				maxreqskill = ore[REQSKILL]
+				gem.color = ore[COLORID]
+				gem.settag('resourcecount', random.randint(ore[MINAMOUNT], ore[MAXAMOUNT]))
+				break
+			offset += ore[FINDCHANCE]
+		else:
+			if char.elf:
+				if colorchance >= offset and colorchance < offset + (ore[FINDCHANCE] * KNOWLEDGE_OF_NATURE_FACTOR):
+					gem.settag('resname2', resname)
+					maxreqskill = ore[REQSKILL]
+					gem.color = ore[COLORID]
+					gem.settag('resourcecount', random.randint(ore[MINAMOUNT], ore[MAXAMOUNT]))
+					break
+				offset += (ore[FINDCHANCE] * KNOWLEDGE_OF_NATURE_FACTOR)
+			else:
+				if colorchance >= offset and colorchance < offset + ore[FINDCHANCE]:
+					gem.settag('resname2', resname)
+					maxreqskill = ore[REQSKILL]
+					gem.color = ore[COLORID]
+					gem.settag('resourcecount', random.randint(ore[MINAMOUNT], ore[MAXAMOUNT]))
+					break
+				offset += ore[FINDCHANCE]
+			
 
 	# Finally, finalizing the Created Ore
 	gem.name = 'Ore Gem (%s,%s)' % (gem.gettag('resname'), gem.gettag('resname2'))
@@ -132,7 +159,7 @@ def createsandgem(pos):
 	gem.update()
 	return gem
 
-def getvein(Oretable, socket, pos):
+def getvein(Oretable, pos, char):
 	# 8x8 resource grid
 	gem_x = (pos.x / 8) * 8
 	gem_y = (pos.y / 8) * 8
@@ -148,7 +175,7 @@ def getvein(Oretable, socket, pos):
 	pos.x = gem_x
 	pos.y = gem_y
 
-	return createoregem(Oretable, pos)
+	return createoregem(Oretable, pos, char)
 
 def getsandvein(socket, pos):
 	# 8x8 resource grid
@@ -232,7 +259,7 @@ def domining(char, args):
 	region = char.region
 	Oretable = FindOreTable(region)
 
-	veingem = getvein(Oretable, socket, pos)
+	veingem = getvein(Oretable, pos, char)
 
 	if not veingem or not veingem.hastag('resourcecount'):
 		return False
@@ -249,7 +276,7 @@ def domining(char, args):
 
 	# Refill the resource gem.
 	if resourcecount == 0:
-		socket.sysmessage("There is no ore here to mine.")
+		socket.sysmessage( tr("There is no ore here to mine.") )
 
 		if not veingem.hastag('resource_empty'):
 			# Picking the next amount
@@ -260,7 +287,7 @@ def domining(char, args):
 		return False
 
 	# You loosen some rocks but fail to find any usable ore.
-	if char.skill < reqskill:
+	if char.skill[MINING] < reqskill:
 		socket.clilocmessage(501869)
 		return False
 
@@ -400,7 +427,6 @@ def successmining(Oretable, char, gem, resname, size):
 		if random.randint(1,100) <= 50:
 			minegranite(Oretable, char, resname, gem)
 			return True
-			#char.socket.sysmessage("tet")
 
 	# Create the ore and put it into the players backpack
 	if size == 1:

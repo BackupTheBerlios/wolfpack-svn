@@ -6,6 +6,7 @@ import system.bleeding
 import wolfpack.utilities
 from wolfpack.consts import *
 from combat.specialmoves import ismortallywounded
+from wolfpack import tr
 
 def onUse( char, item ):
 	if not char.canreach(item, 2):
@@ -14,7 +15,7 @@ def onUse( char, item ):
 
 	# already healing?
 	if char.socket.hastag( 'bandage_slipped' ):
-		char.socket.sysmessage( 'You are already healing somebody.' )
+		char.socket.sysmessage( tr('You are already healing somebody.') )
 		return True
 
 	char.reveal() # Reveal
@@ -59,7 +60,7 @@ def response(char, arguments, target):
 			bandage.delete()
 
 def getskills(target):
-	if not target.player and target.id not in [0x190, 0x191, 0x192, 0x193]:
+	if not target.player and target.id not in PLAYER_BODIES_ALL:
 		return (VETERINARY, ANIMALLORE)
 	else:
 		return (HEALING, ANATOMY)

@@ -27,7 +27,6 @@
 
 #include "definitions.h"
 #include "basics.h"
-#include "tracking.h"
 #include "muls/tilecache.h"
 #include "combat.h"
 #include "targetrequests.h"
@@ -266,7 +265,7 @@ void cSkills::Meditation( cUOSocket* socket )
 	{
 		socket->clilocMessage( 502626 );
 	}
-	else if ( pc_currchar->mana() >= pc_currchar->intelligence() )
+	else if ( pc_currchar->mana() >= pc_currchar->maxMana() )
 	{
 		socket->clilocMessage( 501846 );
 	}

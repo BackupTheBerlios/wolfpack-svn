@@ -53,7 +53,7 @@ ALLOWED = [ 0x13f6, 0x13f7, 0xec2, 0xec3, 0xf51, 0xf52, 0x26bf, 0x26c9, 0x26be, 
 def selecttarget( char, args, target ):
 	# you cannot use skill while dead
 	if char.dead:
-		socket.clilocmessage( 502796 )
+		char.socket.clilocmessage( 502796 )
 		return
 
 	potion = wolfpack.finditem(args[ 0 ])
@@ -94,10 +94,12 @@ def poisonit( char, args ):
 	if not char.checkskill( POISONING, MINSKILLS[strength], MAXSKILLS[strength] ):
 		# 5% of chance of getting poisoned if failed
 		if skill < 800 and random.randint(1,20) == 0:
-			char.socket.clilocmessage( 502148 ) # You make a grave mistake while applying the poison.
+			if char.socket:
+				char.socket.clilocmessage( 502148 ) # You make a grave mistake while applying the poison.
 			poison(char, strength)
-		else:				
-			char.socket.clilocmessage( 1010518 )
+		else:
+			if char.socket:
+				char.socket.clilocmessage( 1010518 )
 		return 1
 
 	char.socket.clilocmessage(1010517)
@@ -113,6 +115,7 @@ def poisonit( char, args ):
 	# 	number of uses before the poison wears off
 	if item.hasscript( 'blades' ):
 		item.settag( 'poisoning_uses', 18 - strength * 2 )
+	item.resendtooltip()
 	return 1
 
 def getstrength( potiontype ):

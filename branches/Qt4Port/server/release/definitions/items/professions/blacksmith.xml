@@ -21,6 +21,23 @@
 		<category>Professions\Blacksmith\Anvil (W/E)</category>
 	</item>
 
+	<!-- Elven Anvil -->
+	<item id="2dd5" inherit="ITEM_NO_DECAY">
+		<id>0x2dd5</id>
+		<category>Professions\Blacksmith\Elven Anvil (N/S)</category>
+	</item>
+
+	<item id="2dd6" inherit="ITEM_NO_DECAY">
+		<id>0x2dd6</id>
+		<category>Professions\Blacksmith\Elven Anvil (W/E)</category>
+	</item>
+
+	<!-- Elven Forge -->
+	<item id="2dd8" inherit="ITEM_NO_DECAY">
+		<id>0x2dd8</id>
+		<category>Professions\Blacksmith\Elven Forge</category>
+	</item>
+
 	<item id="fb1" inherit="ITEM_NO_DECAY">
 		<id>0xfb1</id>
 		<category>Professions\Blacksmith\Small Forge</category>
@@ -43,7 +60,7 @@
 
 	<item id="fbb">
 		<id>0xfbb</id>
-		<basescripts>skills.blacksmithing,equipment</basescripts>
+		<basescripts>equipment,skills.blacksmithing</basescripts>
 		<category>Professions\Blacksmith\Tongs (W/E)</category>
 		<tag name="remaining_uses" type="int" value="35" />
 		<buyprice>3</buyprice>
@@ -403,7 +420,7 @@
 		<color>0x482</color>
 		<name>#1045127</name>		
 		<tag name="remaining_uses" type="int" value="600" />
-		<basescripts>skills.blacksmithing,equipment</basescripts>
+		<basescripts>equipment,skills.blacksmithing</basescripts>
 	</item>
 	
 	<item id="ancient_smiths_hammer_10" inherit="ancient_smiths_hammer">

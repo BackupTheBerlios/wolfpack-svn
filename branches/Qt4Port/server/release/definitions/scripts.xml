@@ -22,25 +22,23 @@
 
 	<script>ankh</script>
 	<script>arcanegem</script>
-	<script>ballotbox</script>
-	<script>bola</script>
-	<script>test</script>
-	<script>leatherdye</script>
-	<script>specialdye</script>
-	<script>runedye</script>
 	<script>archery_butte</script>
+	<script>ballotbox</script>
 	<script>bandages</script>
+	<script>beverage</script>
 	<script>blades</script>
+	<script>bola</script>
 	<script>book</script>
 	<script>bulletinboard</script>
 	<script>check</script>
 	<script>comcrystals</script>
-	<script>daggermenu</script>
+	<script>cooking</script>
 	<script>dicecup</script>
 	<script>door</script>
 	<script>dyes</script>
 	<script>environment</script>
 	<script>equipment</script>
+	<script>farming</script>
 	<script>figurine</script>
 	<script>furniture</script>
 	<script>food</script>
@@ -50,28 +48,33 @@
 	<script>key</script>
 	<script>keyring</script>
 	<script>kindling</script>
+	<script>leatherdye</script>
 	<script>lightsource</script>
 	<script>lock</script>
 	<script>lockpick</script>
+	<script>map</script>
 	<script>moongate</script>
 	<script>oil_cloth</script>
 	<script>ore</script>
 	<script>pickaxe</script>
-	<script>beverage</script>
 	<script>pickpocket_dip</script>
 	<script>potionkeg</script>
+	<script>runedye</script>
+	<script>sextant</script>
 	<script>scissors</script>
 	<script>shrine</script>
 	<script>shrink</script>
 	<script>signpost</script>
 	<script>slotmachine</script>
 	<script>spawngem</script>
-	<script>map</script>
+	<script>specialdye</script>
 	<script>spiderweb</script>
+	<script>test</script>
 	<script>training_dummy</script>
 	<script>trashcan</script>
 	<script>tribal_paint</script>
 	<script>wall_clock</script>
+	<script>wheat</script>
 	<script>wool</script>
 <!--	<script>xmlconfig</script> -->
 	<script>yarn</script>
@@ -125,6 +128,7 @@
 	<script>commands.eval</script>
 	<script>commands.events</script>
 	<script>commands.export</script>
+	<script>commands.exportmissingids</script>
 	<script>commands.exportstatics</script>
 	<script>commands.findlock</script>
 	<script>commands.fix</script>
@@ -143,6 +147,8 @@
 	<script>commands.password</script>
 	<script>commands.remove</script>
 	<script>commands.removedupes</script>
+	<script>commands.removemulti</script>
+	<script>commands.restock</script>
 	<script>commands.restore</script>
 	<script>commands.resurrect</script>
 	<script>commands.serverinfo</script>
@@ -191,12 +197,25 @@
 	<script>magic.spell</script>
 	<script>magic.spellbook</script>
 	<script>magic.trap</script>
+	<script>magic.bloodoath</script>
+	<script>magic.corpseskin</script>
+	<script>magic.evilomen</script>
+	<script>magic.curseweapon</script>
+	<script>magic.vampiricembrace</script>
+	<script>magic.vengefulspirit</script>
+	<script>magic.strangle</script>
+	<script>magic.mindrot</script>
+	<script>magic.horrificbeast</script>
+	<script>magic.divinefury</script>
+	<script>magic.lichform</script>
+	<script>magic.wraithform</script>
 
 	<!-- NPC -->
 	<script>npc.healer</script>
 	<script>npc.poison</script>
 	<script>npc.mount</script>
 	<script>npc.cow</script>
+	<script>npc.chicken</script>
 
 	<!-- Context menu scripts -->
 	<script>contextmenus.bankermenu</script>
@@ -225,6 +244,7 @@
 	<script>system.loot</script>
 	<script>system.clientmacros</script>
 	<script>system.makemenus</script>
+	<script>system.quest</script>
 	<!-- These require testing -->
 	<!--
 	<script>system.mysql_backup_db</script>
@@ -288,6 +308,10 @@
 	<script>plants.greenthorns</script>
 	<script>plants.redleaves</script>
 	<script>plants.orangepetals</script>
+
+	<!-- Plants -->
+	<script>crops.growing</script>
+	<script>crops.harvest</script>
 
 	<!-- Playervendors -->
 	<script>npc.playervendor</script>

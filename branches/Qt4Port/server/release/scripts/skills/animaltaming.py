@@ -5,7 +5,6 @@
 #  ( (  ;._ \\ ctr # Last Modification: Created                 #
 #################################################################
 
-
 import wolfpack.time
 import skills
 import wolfpack
@@ -79,7 +78,7 @@ def dotame(char, totame):
 		return
 
 	# Too Many Followers
-	if len(char.followers) + totame.controlslots > char.maxcontrolslots:
+	if char.controlslots + totame.controlslots > char.maxcontrolslots:
 		socket.clilocmessage( 1049611, "", 0x3b2, 3, totame )
 		return
 
@@ -116,8 +115,6 @@ def dotame(char, totame):
 		if totame.hastag( str ):
 			if totame.gettag( str ) == char.serial:
 				havetamed = 1
-		else:
-			totame.settag( str, 0 )
 
 	# flags
 	totame.settag( 'taming', 1 )
@@ -174,13 +171,14 @@ def callback( char, args ):
 	# no. trying = args[ 2 ]
 	num_try = args[ 2 ]
 	if num_try > 3:
-		# if have-tamed, do not advance the skill - will be added
-		success = char.checkskill( TAMING, totame.mintaming, 1200 )
+		# if have-tamed, do not advance the skill
+		success = char.checkskill( TAMING, totame.mintaming, 1200, not havetamed )
 		if success:
 			removetags( totame )
 
 			# Too Many Followers
-			if len(char.followers) + totame.controlslots > char.maxcontrolslots:
+			if char.controlslots + totame.controlslots > char.maxcontrolslots:
+				# You have too many followers to tame that creature.
 				socket.clilocmessage( 1049611, "", 0x3b2, 3, totame )
 				return
 
@@ -189,7 +187,10 @@ def callback( char, args ):
 			if totame.hunger < 3:
 				totame.hunger = 3 # Otherwise they go wild again
 			totame.owner = char
-			
+
+			# tamed npc should go to tamer
+			totame.follow( char )
+
 			# Remove the tamed npc from the spawngem system too
 			if totame.hasscript('system.spawns'):
 				if totame.hastag('spawner'):
@@ -209,6 +210,27 @@ def callback( char, args ):
 				num_tamed = totame.gettag( 'num_tamed' ) + 1
 			totame.settag( 'num_tamed', num_tamed )
 
+			# save that we have tamed it
+			# we'll never gain for this creature again
+			if not havetamed:
+				saved = False
+				for i in range( 0, MAXTAME ):
+					str = "tamer%i" % i
+					if totame.hastag( str ):
+						if not int( totame.gettag( str ) ):
+							totame.settag( str, char.serial )
+							saved = True
+							break
+					else:
+						totame.settag( str, char.serial )
+						saved = True
+						break
+			
+				# assure that we get saved!
+				if not saved:
+					str = "tamer%i" % (MAXTAME-1)
+					totame.settag( str, char.serial )
+				
 			# remove "Tame" context menu
 			totame.addscript('speech.pets') # Only adds if it doesnt exist yet.
 
@@ -218,8 +240,6 @@ def callback( char, args ):
 			removetags( totame )
 			# fail msg : 502798
 			char.socket.clilocmessage( 502798, "", 0x3b2, 3, totame )
-#			if totame.ai:
-#				totame.ai.tameattempt()
 		return
 
 	num_try += 1
@@ -232,11 +252,6 @@ def callback( char, args ):
 			totame.settag( 'angry', m + 1 )
 		else:
 			totame.settag( 'angry', 1 )
-
-#		if totame.ai:
-#			totame.ai.tameattempt()
-
-#		print totame.ai.state
 
 	char.socket.clilocmessage( msgID, "", 0x3b2, 3, char )
 	char.addtimer( TAMING_DURATION, callback, [ havetamed, totame.serial, num_try ] )

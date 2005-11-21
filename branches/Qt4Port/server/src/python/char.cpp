@@ -636,6 +636,8 @@ static PyObject* wpChar_directionto( wpChar* self, PyObject* args )
 	\param skill The id of the skill that should be checked.
 	\param min The lower boundary of the difficulty range.
 	\param max The upper boundary of the difficulty range.
+	\param advance Defaults to True.
+	If set to False, the character will not gain for this skillcheck.
 	\return True if the skillcheck succeeded, false otherwise.
 */
 static PyObject* wpChar_checkskill( wpChar* self, PyObject* args )
@@ -645,11 +647,20 @@ static PyObject* wpChar_checkskill( wpChar* self, PyObject* args )
 
 	unsigned short skill;
 	int min, max;
+	bool advance = true;
 
-	if ( !PyArg_ParseTuple( args, "hii|char.checkskill( skill, min, max )", &skill, &min, &max ) )
-		return 0;
+	if ( PyTuple_Size( args ) == 3 )
+	{
+		if ( !PyArg_ParseTuple( args, "hii|char.checkskill( skill, min, max )", &skill, &min, &max ) )
+			return 0;
+	}
+	else
+	{
+		if ( !PyArg_ParseTuple( args, "hiii|char.checkskill( skill, min, max, advance )", &skill, &min, &max, &advance ) )
+			return 0;
+	}
 
-	if ( self->pChar->checkSkill( skill, min, max ) )
+	if ( self->pChar->checkSkill( skill, min, max, advance ) )
 		Py_RETURN_TRUE;
 	Py_RETURN_FALSE;
 }
@@ -1932,6 +1943,20 @@ static PyObject* wpChar_delete( wpChar* self, PyObject* args )
 }
 
 /*
+	\method char.ismounted
+	\description Check if the character is mounted.
+	\return True if the character is mounted, false otherwise.
+*/
+static PyObject* wpChar_ismounted( wpChar* self, PyObject* args )
+{
+	Q_UNUSED( args );
+	if ( !self->pChar || self->pChar->free )
+		Py_RETURN_FALSE;
+
+	return self->pChar->atLayer( cBaseChar::Mount ) ? PyTrue() : PyFalse();
+}
+
+/*
 	\method char.ismurderer
 	\description Check if the character is a murderer.
 	\return True if the character is a murderer, false otherwise.
@@ -1958,7 +1983,10 @@ static PyObject* wpChar_criminal( wpChar* self, PyObject* args )
 	P_PLAYER player = dynamic_cast<P_PLAYER>( self->pChar );
 
 	if ( player )
-		player->makeCriminal();
+	{
+		if (player->onBecomeCriminal(0, NULL, NULL ))
+			player->makeCriminal();
+	}
 
 	Py_RETURN_NONE;
 }
@@ -2766,6 +2794,7 @@ static PyMethodDef wpCharMethods[] =
 // Mount/Unmount
 { "unmount",		( getattrofunc ) wpChar_unmount,			METH_VARARGS, "Unmounts this character and returns the character it was previously mounted." },
 { "mount",			( getattrofunc ) wpChar_mount,				METH_VARARGS, "Mounts this on a specific mount." },
+{ "ismounted",	( getattrofunc ) wpChar_ismounted,		METH_VARARGS, "Is this char mounted." },
 
 // Effects
 { "movingeffect",	( getattrofunc ) wpChar_movingeffect,		METH_VARARGS, "Shows a moving effect moving toward a given object or coordinate." },

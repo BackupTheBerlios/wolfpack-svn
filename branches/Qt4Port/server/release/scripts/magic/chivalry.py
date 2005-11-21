@@ -10,6 +10,8 @@ import random
 import math
 from wolfpack.utilities import energydamage, mayAreaHarm
 from combat.specialmoves import ismortallywounded
+import magic.circle4
+from magic import necromancy
 
 def ComputePowerValue( char, div ):
 	if not char:
@@ -47,12 +49,12 @@ class CleanseByFire(CharEffectSpell):
 				target.socket.clilocmessage( 1010059 ) # You have been cured of all poisons.
 		else:
 			char.socket.clilocmessage(1010060) # You have failed to cure your target!
-	
+
 		target.soundeffect( 0x1e0 );
-		target.effect(0x373a, 1, 15)
-		target.effect(0x374b, 5, 10) # should move from feet to head...
+		target.effect(0x373a, 1, 15, 3, 2)
+		target.effect(0x374b, 5, 10, 63, 2) # should move from feet to head...
 		char.soundeffect( 0x208 );
-		char.effect(0x3709, 1, 30)
+		char.effect(0x3709, 1, 30, 0, 7)
 
 		damage = 50 - ComputePowerValue( char, 4 )
 
@@ -103,12 +105,12 @@ class CloseWounds(CharEffectSpell):
 			toHeal = 39
 		if (target.hitpoints + toHeal) > target.maxhitpoints:
 			toHeal = target.maxhitpoints - target.hitpoints
-		target.hitpoints += toHeal;
+		target.hitpoints += int(toHeal)
 		if target.socket:
-			target.socket.clilocmessage( 1060203, str(toHeal) ) # You have had ~1_HEALED_AMOUNT~ hit points of damage healed.
+			target.socket.clilocmessage( 1060203, str(int(toHeal)) ) # You have had ~1_HEALED_AMOUNT~ hit points of damage healed.
 		target.soundeffect( 0x202 );
-		target.effect( 0x376A, 1, 62 )
-		target.effect( 0x3779, 1, 46 )
+		target.effect( 0x376A, 1, 62, 3, 3 )
+		target.effect( 0x3779, 1, 46, 5, 3 )
 
 def isConsecrated( item ):
 	if item.hastag( 'consecrated' ):
@@ -143,14 +145,14 @@ class ConsecrateWeapon(Spell):
 		# be converted to the target's worst Resistance type.
 		# Duration of the effect is affected by the caster's Karma and lasts for 3 to 11 seconds.
 
-		itemID = 0xF5F
+		itemID = 0xf5f
 		soundID = 0x56
 		
 		if weapon.type in [1003, 1004]:
-			itemID = 0xFB4
+			itemID = 0xfb4
 			soundID = 0x232
 		elif weapon.type in [1006, 1007]:
-			itemID = 0x13B1
+			itemID = 0x13b1
 			soundID = 0x145
 
 		seconds = ComputePowerValue( char, 20 )
@@ -161,8 +163,10 @@ class ConsecrateWeapon(Spell):
 
 		weapon.settag( "consecrated", 1 )
 		weapon.addtimer( seconds * 1000, expire_consecrate, [] )
-		char.effect( itemID, 1 )
+		char.soundeffect( 0x20c )
 		weapon.soundeffect( soundID )
+		char.effect( 0x3779, 1, 30, 3, 3 )
+		char.movingeffect(itemID, char, 0, 0, 1, 33, 3)
 
 def expire_consecrate( weapon, args ):
 	if not weapon:
@@ -181,9 +185,53 @@ class DispelEvil(Spell):
 		self.mana = 10
 		self.tithingpoints = 10
 		self.mantra = 'Dispiro Malas'
+		self.harmful = 1
 
 	def cast(self, char, mode, args=[], target=None, item=None):
-		char.socket.sysmessage( tr("Not yet implemented.") )
+		if not self.consumerequirements(char, mode, args, target, item):
+			return False
+		char.effect( 0x37c4, 10, 7, 4, 3 )
+		char.soundeffect( 0x299 );
+		char.effect( 0x37c4, 1, 25, 14, 3 )
+
+		dispelSkill = ComputePowerValue( char, 2 )
+
+		chiv = char.skill[self.skill]
+
+		chars = wolfpack.chars(char.pos.x, char.pos.y, char.pos.map, 8)
+		for target in chars:
+			if not target == char:
+				dispellable = target.summoned # and not target.IsAnimatedDead
+				if dispellable:
+					dispelChance = (50.0 + ((100 * (chiv - (target.getintproperty('dispeldifficulty', 1) / 10))) / ((target.getintproperty('dispelfocus', 1) / 10)*2))) / 10
+					dispelChance *= dispelSkill / 100.0
+
+					if dispelChance > random.random():
+						target.pos.effect( 0x3728, 8, 20 )
+						target.pos.soundeffect( 0x201 )
+						target.delete()
+						continue
+
+				# We have no "flee" method
+				#evil = not target.owner and target.karma < 0
+
+				#if evil:
+				#	# TODO: Is this right?
+				#	fleeChance = (100 - math.sqrt( target.fame / 2 )) * chiv * dispelSkill
+				#	fleeChance /= 1000000
+
+				#	if fleeChance > random.random():
+				#		# guide says 2 seconds, it's longer
+				#		target.BeginFlee( TimeSpan.FromSeconds( 30.0 ) )
+
+			if necromancy.transformed(target):
+				drainChance = 0.5 * (char.skill[self.skill] / max( (target.skill[NECROMANCY]/10), 1 ))
+
+				if drainChance >random.random():
+					drain = (5 * dispelSkill) / 100
+
+					target.stamina -= drain
+					target.mana -= drain
 
 class DivineFury(Spell):
 	def __init__(self):
@@ -204,10 +252,16 @@ class DivineFury(Spell):
 		if char.gender:
 			sound = 0x338
 		char.soundeffect( sound  )
-		char.effect( 0x376A, 1, 31 )
-		char.effect( 0x37C4, 1, 31 )
+		char.effect( 0x376A, 1, 31, 1160, 0 )
+		char.effect( 0x37C4, 1, 31, 43, 2 )
+		char.stamina = char.maxstamina
+		if char.hasscript('magic.divinefury'):
+			char.dispel(char, True, 'DIVINEFURY')
+			return
 
-		char.socket.sysmessage( tr("Not yet implemented.") )
+		char.addscript('magic.divinefury')
+		duration = random.randint(7000, 24000)
+		char.addtimer(duration, magic.divinefury.expire, [], True, False, 'DIVINEFURY', magic.divinefury.dispel)
 
 class EnemyOfOne(Spell):
 	def __init__(self):
@@ -222,11 +276,13 @@ class EnemyOfOne(Spell):
 	def cast(self, char, mode, args=[], target=None, item=None):
 		if not self.consumerequirements(char, mode, args, target, item):
 			return False
-
+		if char.hastag( "waitingforenemy" ) or char.hastag( "enemyofonetype" ):
+			char.dispel(None, True, "enemyofone")
+			return
 		char.soundeffect( 0x0F5 )
 		char.soundeffect( 0x1ED )
-		char.effect( 0x375A, 1, 30 )
-		char.effect( 0x37B9, 1, 30 )
+		char.effect( 0x375A, 1, 30, 33, 2 )
+		char.effect( 0x37B9, 1, 30, 43, 3 )
 
 		char.stamina = char.maxstamina
 		char.updatestamina()
@@ -237,13 +293,20 @@ class EnemyOfOne(Spell):
 			delay = 3.5
 
 		char.settag( "waitingforenemy", 0 )
-		char.addtimer( delay * 1000 * 60, expire_enemyofone, [] )
+		char.addtimer( delay * 1000 * 60, expire_enemyofone, [], 0, 0, "enemyofone", dispel_enemyofone )
 
-def expire_enemyofone( char, args ):
+def clearchar( char ):
 	if char.hastag( "waitingforenemy" ):
 		char.deltag( "waitingforenemy" )
 	if char.hastag( "enemyofonetype" ):
 		char.deltag( "enemyofonetype" )
+	return True
+
+def dispel_enemyofone(char, args, source, dispelargs):
+	return clearchar( char )
+
+def expire_enemyofone( char, args ):
+	clearchar( char )
 	char.soundeffect( 0x1F8 )
 	return
 
@@ -313,8 +376,8 @@ class NobleSacrifice(Spell):
 				targets.append(target)
 
 		char.soundeffect( 0x244 )
-		char.effect( 0x3709, 1, 30 )
-		char.effect( 0x376A, 1, 30 )
+		char.effect( 0x3709, 1, 30, 5, 7 )
+		char.effect( 0x376A, 1, 30, 5, 3 )
 
 		# Attempts to Resurrect, Cure and Heal all targets in a radius around the caster.
 		# If any target is successfully assisted, the Paladin's current
@@ -324,14 +387,14 @@ class NobleSacrifice(Spell):
 		sacrifice = False
 
 		# TODO: Is there really a resurrection chance?
-		resChance = 0.1 + (0.9 * (double(char.karma / 10000)))
+		resChance = 0.1 + (0.9 * (char.karma / 10000))
 
 		for target in targets:
 			if char.dead:
 				if char.region and char.region.name == "Khaldun":
 					char.socket.clilocmessage( 1010395 ) # The veil of death in this area is too strong and resists thy efforts to restore life.
 				elif resChance > Utility.RandomDouble():
-					target.effect( 0x375A, 1, 15 )
+					target.effect( 0x375A, 1, 15, 5, 3 )
 					# we need a resurrect gump here...
 					#target.SendGump( new ResurrectGump( m, Caster ) )
 					sacrifice = True
@@ -365,14 +428,18 @@ class NobleSacrifice(Spell):
 					target.frozen = False
 					target.resendtooltip()
 
-				# ToDo:
-				# remove from char:
-				# EvilOmenSpell
-				# StrangleSpell
-				# CorpseSkinSpell
+				if target.hasscript('magic.evilomen'):
+					target.dispel(target, True, 'EVILOMEN')
+					sendEffect = True
+				if target.hasscript('magic.strangle'):
+					target.dispel(target, True, 'STRANGLE')
+					sendEffect = True
+				if target.hasscript('magic.corpseskin'):
+					target.dispel(target, True, 'COPRSESKIN')
+					sendEffect = True
 
 				if sendEffect:
-					target.effect( 0x375A, 1, 15 )
+					target.effect( 0x375A, 1, 15, 5, 3 )
 					sacrifice = True
 		if sacrifice:
 			char.soundeffect( 0x423 );
@@ -383,7 +450,7 @@ class NobleSacrifice(Spell):
 
 class RemoveCurse(CharEffectSpell):
 	def __init__(self):
-		Spell.__init__(self, 7)
+		CharEffectSpell.__init__(self, 7)
 		self.skill = CHIVALRY
 		self.requiredskill = 50
 		self.damageskill = FOCUS
@@ -400,7 +467,7 @@ class RemoveCurse(CharEffectSpell):
 		if char.karma < -5000:
 			chance = 0
 		elif char.karma < 0:
-			chance = int( math.sqrt( 20000 + Caster.Karma ) - 122 )
+			chance = int( math.sqrt( 20000 + char.karma ) - 122 )
 		elif char.karma < 5625:
 			chance = int( math.sqrt( char.karma ) + 25 )
 		else:
@@ -409,9 +476,22 @@ class RemoveCurse(CharEffectSpell):
 		if chance > random.randint(1, 101):
 			target.soundeffect( 0xF6 )
 			target.soundeffect( 0x1F7 )
-			target.effect( 0x3709, 1, 30 )
+			target.effect( 0x3709, 1, 30, 13, 3 )
 
-		char.socket.sysmessage( tr("Not yet implemented.") )
+			target.frozen = False
+
+			if target.hasscript('magic.evilomen'):
+				target.dispel(target, True, 'EVILOMEN')
+			if target.hasscript('magic.strangle'):
+				target.dispel(target, True, 'STRANGLE')
+			if target.hasscript('magic.corpseskin'):
+				target.dispel(target, True, 'COPRSESKIN')
+			# remove curse spell
+			magic.circle4.curse_remove(char, [], True)
+		else:
+			target.soundeffect( 0x1df )
+
+		char.socket.sysmessage( tr("Not yet fully implemented.") )
 
 class SacredJourney(Spell):
 	def __init__(self):

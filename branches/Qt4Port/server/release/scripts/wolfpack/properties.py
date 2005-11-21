@@ -1,11 +1,8 @@
 
 from math import floor, sqrt, ceil
 import random
-#from wolfpack import weaponinfo
-#from wolfpack import armorinfo
 import wolfpack.armorinfo
 import wolfpack.weaponinfo
-from wolfpack import console
 from wolfpack.consts import *
 from system.lootlists import *
 import system.slayer
@@ -20,6 +17,9 @@ def getdelay(attacker, weapon):
 	value = (attacker.stamina + 100) * speed
 
 	bonus = fromchar(attacker, SPEEDBONUS)
+
+	if attacker.hasscript('divinefury'):
+		bonus += 10
 
 	# Scale value according to bonus
 	value += bonus * value / 100

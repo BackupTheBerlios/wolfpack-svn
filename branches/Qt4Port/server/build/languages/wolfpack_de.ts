@@ -99,19 +99,19 @@
     </message>
     <message>
         <source>Enter a description for this item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gib eine Beschreibung für diesen Gegenstand ein.</translation>
     </message>
     <message>
         <source>This item is now described as %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Gegenstand ist nun beschrieben als %1.</translation>
     </message>
     <message>
         <source>Your new name is: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Dein neuer Name ist: %1</translation>
     </message>
     <message>
         <source>Your house has been renamed to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Dein Haus wurde umbenannt in: %1</translation>
     </message>
     <message>
         <source>Hello, my name is %1.</source>
@@ -128,10 +128,6 @@
     <message>
         <source>You are in the wilderness</source>
         <translation>Du befindest dich in der Wildnis</translation>
-    </message>
-    <message>
-        <source>You seem to be unable to track the traces of creatures who have been here.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Compiled: %1 %2
@@ -174,180 +170,183 @@
 This is an unsorted and not neccesarily complete list of people who contributed to Wolfpack:
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Das ist eine unsortierte und nicht unbedingt vollständige Liste mit den Namen der Personen, die an Wolfpack mitgewirkt haben:
+</translation>
     </message>
     <message>
         <source>Total Users Online: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzer insgesamt online: %1
+</translation>
     </message>
     <message>
         <source>the Pirate</source>
-        <translation type="unfinished"></translation>
+        <translation>der Pirat</translation>
     </message>
     <message>
         <source>the guard</source>
-        <translation type="unfinished"></translation>
+        <translation>die Wache</translation>
     </message>
     <message>
         <source>the piper</source>
-        <translation type="unfinished"></translation>
+        <translation>der Pfeifer</translation>
     </message>
     <message>
         <source>the Spider</source>
-        <translation type="unfinished"></translation>
+        <translation>die Spinne</translation>
     </message>
     <message>
         <source>The Necromancer</source>
-        <translation type="unfinished"></translation>
+        <translation>der Totenbeschwörer</translation>
     </message>
     <message>
         <source>the Dragon</source>
-        <translation type="unfinished"></translation>
+        <translation>der Drache</translation>
     </message>
     <message>
         <source>the Succubus</source>
-        <translation type="unfinished"></translation>
+        <translation>die Sukkubi</translation>
     </message>
     <message>
         <source>the Sprite Queen</source>
-        <translation type="unfinished"></translation>
+        <translation>die Feenkönigin</translation>
     </message>
     <message>
         <source>Alchemist</source>
-        <translation type="unfinished"></translation>
+        <translation>Alchimist</translation>
     </message>
     <message>
         <source>Healer</source>
-        <translation type="unfinished"></translation>
+        <translation>Heiler</translation>
     </message>
     <message>
         <source>Ranger</source>
-        <translation type="unfinished"></translation>
+        <translation>Waldläufer</translation>
     </message>
     <message>
         <source>Merchant</source>
-        <translation type="unfinished"></translation>
+        <translation>Händler</translation>
     </message>
     <message>
         <source>Warrior</source>
-        <translation type="unfinished"></translation>
+        <translation>Krieger</translation>
     </message>
     <message>
         <source>Beggar</source>
-        <translation type="unfinished"></translation>
+        <translation>Bettler</translation>
     </message>
     <message>
         <source>Blacksmith</source>
-        <translation type="unfinished"></translation>
+        <translation>Schmied</translation>
     </message>
     <message>
         <source>Bowyer</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogner</translation>
     </message>
     <message>
         <source>Bard</source>
-        <translation type="unfinished"></translation>
+        <translation>Barde</translation>
     </message>
     <message>
         <source>Carpenter</source>
-        <translation type="unfinished"></translation>
+        <translation>Schreiner</translation>
     </message>
     <message>
         <source>Cartographer</source>
-        <translation type="unfinished"></translation>
+        <translation>Kartograph</translation>
     </message>
     <message>
         <source>Chef</source>
-        <translation type="unfinished"></translation>
+        <translation>Koch</translation>
     </message>
     <message>
         <source>Scout</source>
-        <translation type="unfinished"></translation>
+        <translation>Späher</translation>
     </message>
     <message>
         <source>Scholar</source>
-        <translation type="unfinished"></translation>
+        <translation>Student</translation>
     </message>
     <message>
         <source>Fisherman</source>
-        <translation type="unfinished"></translation>
+        <translation>Fischer</translation>
     </message>
     <message>
         <source>Detective</source>
-        <translation type="unfinished"></translation>
+        <translation>Detektiv</translation>
     </message>
     <message>
         <source>Sheperd</source>
-        <translation type="unfinished"></translation>
+        <translation>Hirte</translation>
     </message>
     <message>
         <source>Rogue</source>
-        <translation type="unfinished"></translation>
+        <translation>Schurke</translation>
     </message>
     <message>
         <source>Scribe</source>
-        <translation type="unfinished"></translation>
+        <translation>Schreiber</translation>
     </message>
     <message>
         <source>Mage</source>
-        <translation type="unfinished"></translation>
+        <translation>Magier</translation>
     </message>
     <message>
         <source>Pickpocket</source>
-        <translation type="unfinished"></translation>
+        <translation>Taschendieb</translation>
     </message>
     <message>
         <source>Assassin</source>
-        <translation type="unfinished"></translation>
+        <translation>Mörder</translation>
     </message>
     <message>
         <source>Archer</source>
-        <translation type="unfinished"></translation>
+        <translation>Schütze</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Medium</translation>
     </message>
     <message>
         <source>Tailor</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneider</translation>
     </message>
     <message>
         <source>Animal Tamer</source>
-        <translation type="unfinished"></translation>
+        <translation>Tierbändiger</translation>
     </message>
     <message>
         <source>Tinker</source>
-        <translation type="unfinished"></translation>
+        <translation>Feinwerker</translation>
     </message>
     <message>
         <source>Veterinarian</source>
-        <translation type="unfinished"></translation>
+        <translation>Tierarzt</translation>
     </message>
     <message>
         <source>Swordsman</source>
-        <translation type="unfinished"></translation>
+        <translation>Schwertkämpfer</translation>
     </message>
     <message>
         <source>Armsman</source>
-        <translation type="unfinished"></translation>
+        <translation>Kämpfer</translation>
     </message>
     <message>
         <source>Fencer</source>
-        <translation type="unfinished"></translation>
+        <translation>Fechter</translation>
     </message>
     <message>
         <source>Wrestler</source>
-        <translation type="unfinished"></translation>
+        <translation>Faustkämpfer</translation>
     </message>
     <message>
         <source>Lumberjack</source>
-        <translation type="unfinished"></translation>
+        <translation>Holzfäller</translation>
     </message>
     <message>
         <source>Miner</source>
-        <translation type="unfinished"></translation>
+        <translation>Bergarbeiter</translation>
     </message>
     <message>
         <source>Stoic</source>
@@ -355,11 +354,11 @@ This is an unsorted and not neccesarily complete list of people who contributed 
     </message>
     <message>
         <source>Necromancer</source>
-        <translation type="unfinished"></translation>
+        <translation>Totenbeschwörer</translation>
     </message>
     <message>
         <source>Paladin</source>
-        <translation type="unfinished"></translation>
+        <translation>Paladin</translation>
     </message>
     <message>
         <source>Spawnregion %1 does not exist.</source>
@@ -456,11 +455,11 @@ This is an unsorted and not neccesarily complete list of people who contributed 
     </message>
     <message>
         <source>The offline characters on your screen have been revealed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die ausgeloggten Charaktere sind nun sichtbar.</translation>
     </message>
     <message>
         <source>You may not walk in that direction.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kannst nicht in diese Richtung gehen.</translation>
     </message>
     <message>
         <source>You may walk in that direction. (New Z: %1)</source>
@@ -472,7 +471,7 @@ This is an unsorted and not neccesarily complete list of people who contributed 
     </message>
     <message>
         <source>No player with the given serial could be found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es konnte kein Spieler mit der gegebenen Serial gefunden werden.</translation>
     </message>
     <message>
         <source>Saving player 0x%1 to player-%2.bin</source>
@@ -536,703 +535,36 @@ This is an unsorted and not neccesarily complete list of people who contributed 
         <source>Using deprecated string as callback identifier [%1]</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>ShowSerials is [enabled]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ShowSerials is [disabled]</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>@pythonscript</name>
     <message>
-        <source>Who Menu</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/commands/who.py</comment>
-        <translation type="obsolete">Online Menü</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/commands/who.py</comment>
-        <translation type="obsolete">Schließen</translation>
-    </message>
-    <message>
-        <source>Players: %u</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/commands/who.py</comment>
-        <translation type="obsolete">Spieler: %u</translation>
-    </message>
-    <message>
-        <source>Page %i of %i</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/commands/who.py</comment>
-        <translation type="obsolete">Seite %i von %i</translation>
-    </message>
-    <message>
-        <source>%s [%s]</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/commands/who.py</comment>
-        <translation type="obsolete">%s [%s]</translation>
-    </message>
-    <message>
-        <source>Here is your bank box, %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/contextmenus/bankermenu.py</comment>
-        <translation type="obsolete">Hier ist euer Bankfach, %s.</translation>
-    </message>
-    <message>
-        <source>Alas you don&apos;t have any money in your bank.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/contextmenus/bankermenu.py</comment>
-        <translation type="obsolete">Ihr habt leider kein Geld in eurem Bankfach.</translation>
-    </message>
-    <message>
-        <source>You have %i gold in your bank.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/contextmenus/bankermenu.py</comment>
-        <translation type="obsolete">Ihr habt %i Goldmünzen in eurem Bankfach.</translation>
-    </message>
-    <message>
         <source>You can only shrink characters.</source>
         <comment>../release/scripts/figurine.py</comment>
-        <translation type="unfinished"></translation>
+        <translation>Du kannst nur Wesen schrumpfen.</translation>
     </message>
     <message>
         <source>You cannot shrink other players.</source>
         <comment>../release/scripts/figurine.py</comment>
-        <translation type="unfinished"></translation>
+        <translation>Du kannst keine anderen Spieler schrumpfen.</translation>
     </message>
     <message>
         <source>You cannot shrink that.</source>
         <comment>../release/scripts/figurine.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Your guild permissions have been modified by %s. See your guildstone for details.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Deine Gildenbefugnise wurden von %s geändert. Für näheres gehe zu deinem Gildenstein.</translation>
-    </message>
-    <message>
-        <source>You have been granted the title &apos;%s&apos; by %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Dir wurde der Titel &apos;%s&apos; von %s zugesprochen.</translation>
-    </message>
-    <message>
-        <source>Guildstone for %s%s</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Gildenstein für %s%s</translation>
-    </message>
-    <message>
-        <source>Member Details</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Mitgliederdetails</translation>
-    </message>
-    <message>
-        <source>Member Name: %s</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Mitgliedsname: %s</translation>
-    </message>
-    <message>
-        <source>General Information</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Allgemeine Informationen</translation>
-    </message>
-    <message>
-        <source>Member Since: %s</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Mitglied seit: %s</translation>
-    </message>
-    <message>
-        <source>Membership Status: %s</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Mitgliedsstatus: %s</translation>
-    </message>
-    <message>
-        <source>Guild Title:</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Gildentitel:</translation>
-    </message>
-    <message>
-        <source>Guild Title: %s</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Gildentitel: %s</translation>
-    </message>
-    <message>
-        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Profile Information:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;%s</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Profil Informationen:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;%s</translation>
-    </message>
-    <message>
-        <source>Permissions</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Befugnisse</translation>
-    </message>
-    <message>
-        <source>Miscellaneous Actions</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Verschiedene Aktionen</translation>
-    </message>
-    <message>
-        <source>May edit the guild properties.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Darf die Gildeneigenschaften bearbeiten.</translation>
-    </message>
-    <message>
-        <source>May recruit new canidates for the guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Darf neue Kanidaten in die Gilde aufnehmen.</translation>
-    </message>
-    <message>
-        <source>May promote canidates to full member status.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Darf Kanidaten zu Mitgliedern ernennen.</translation>
-    </message>
-    <message>
-        <source>May act as an diplomat for this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Darf als ein Diplomat für diese Gilde auftreten.</translation>
-    </message>
-    <message>
-        <source>May kick members out of this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Darf Mitglieder aus der Gilde werfen.</translation>
-    </message>
-    <message>
-        <source>May expel canidates from the guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Darf Kanidaten aus der Gilde ausschließen.</translation>
-    </message>
-    <message>
-        <source>May grant guild titles to members of this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Darf Gildentitel an Mitglieder erteilen.</translation>
-    </message>
-    <message>
-        <source>May grant permissions to other guild members.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Darf Befugnisse an andere Mitglieder weitergeben.</translation>
-    </message>
-    <message>
-        <source>Send this member a private message:</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Eine private Nachricht senden:</translation>
-    </message>
-    <message>
-        <source>Enter message...</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Nachricht eingeben...</translation>
-    </message>
-    <message>
-        <source>Kick this member out of the guild:</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Werfe dieses Mitglied aus der Gilde:</translation>
-    </message>
-    <message>
-        <source>Vote for a new leader:</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Stimme für einen neuen Leiter:</translation>
-    </message>
-    <message>
-        <source>You vote for this member.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Du stimmst für dieses Mitglied.</translation>
-    </message>
-    <message>
-        <source>Member Overview</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Mitgliedsübersicht</translation>
-    </message>
-    <message>
-        <source>Select a member you wish to see details about:</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Wähle ein Mitglied über das du Details sehen möchtest:</translation>
-    </message>
-    <message>
-        <source>Previous Page</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Vorherige Seite</translation>
-    </message>
-    <message>
-        <source>Next Page</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Nächste Seite</translation>
-    </message>
-    <message>
-        <source>Joined: </source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Beitritt:</translation>
-    </message>
-    <message>
-        <source>Title: %s</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Titel: %s</translation>
-    </message>
-    <message>
-        <source>No Title</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Kein Titel</translation>
-    </message>
-    <message>
-        <source>Canidate Overview</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Kanidatenübersicht</translation>
-    </message>
-    <message>
-        <source>Canidates</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Kanidaten</translation>
-    </message>
-    <message>
-        <source>A new canidate %s has been recruited into your guild by %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Ein neuer Kanidat %s wurde in deine Gilde aufgenommen durch %s.</translation>
-    </message>
-    <message>
-        <source>You have been expelled from your guild by %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Du wurdest von %s aus deiner Gilde ausgeschlossen.</translation>
-    </message>
-    <message>
-        <source>The canidate %s has been expelled from your guild by %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Der Kanidat %s wurde von %s aus deiner Gilde ausgeschlossen.</translation>
-    </message>
-    <message>
-        <source>You have been promoted to be a full member of your guild by %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Du wurdest von %s zu einem vollen Mitglied deiner Gilde erhoben.</translation>
-    </message>
-    <message>
-        <source>The canidate %s has been promoted to full member status by %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Der Kanidat %s wurde von %s zum vollen Mitglied deiner Gilde ernannt.</translation>
-    </message>
-    <message>
-        <source>Canidate Management</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Kanidatenverwaltung</translation>
-    </message>
-    <message>
-        <source>Recruit a new canidate for this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Rekrutiere einen neuen Kanidaten.</translation>
-    </message>
-    <message>
-        <source>Recruit a new member for this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Rekrutiere ein neues Mitglied.</translation>
-    </message>
-    <message>
-        <source>Expel this canidate</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Kanidaten ausschließen</translation>
-    </message>
-    <message>
-        <source>Accept this canidate</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Kanidaten akzeptieren</translation>
-    </message>
-    <message>
-        <source>The name of your guild has been changed to &apos;%s&apos; by %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Der Name deiner Gilde wurde in &apos;%s&apos; geändert von %s.</translation>
-    </message>
-    <message>
-        <source>The abbreviation of your guild has been changed to [%s] by %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Die Abkürzung deiner Gilde wurde in [%s] geändert von %s.</translation>
-    </message>
-    <message>
-        <source>The alignment of your guild has been changed to neutral by %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Die Gesinnung deiner Gilde wurde von %s geändert. Sie ist nun Neutral.</translation>
-    </message>
-    <message>
-        <source>The alignment of your guild has been changed to good by %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Die Gesinnung deiner Gilde wurde von %s geändert. Sie ist nun Gut.</translation>
-    </message>
-    <message>
-        <source>The alignment of your guild has been changed to evil by %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Die Gesinnung deiner Gilde wurde von %s geänert. Sie ist nun Böse.</translation>
-    </message>
-    <message>
-        <source>The website of your guild has been changed to %s by %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Die Webseite deiner Seite wurde auf %s gesetzt von %s.</translation>
-    </message>
-    <message>
-        <source>The charta of your guild has been changed by %s. Check your guildstone for details.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Die Charta deiner Gilde wurde von %s geändert. Besuche deinen Gildenstein für Details.</translation>
-    </message>
-    <message>
-        <source>General Properties</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Allgemeine Eigenschaften</translation>
-    </message>
-    <message>
-        <source>Guildname</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Name</translation>
-    </message>
-    <message>
-        <source>Abbreviation (3 chars max.)</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Abkürzung (3 Zeichen max.)</translation>
-    </message>
-    <message>
-        <source>Alignment</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Gesinnung</translation>
-    </message>
-    <message>
-        <source>Good</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Gut</translation>
-    </message>
-    <message>
-        <source>Neutral</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Neutral</translation>
-    </message>
-    <message>
-        <source>Evil</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Böse</translation>
-    </message>
-    <message>
-        <source>Website</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Webseite</translation>
-    </message>
-    <message>
-        <source>Charta (HTML allowed)</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Charta (HTML erlaubt)</translation>
-    </message>
-    <message>
-        <source>Additional Information</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Zusätzliche Informationen</translation>
-    </message>
-    <message>
-        <source>%s has left your guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">%s hat deine Gilde verlassen.</translation>
-    </message>
-    <message>
-        <source>Modify the general properties of this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Ändere die Eigenschaften dieser Gilde.</translation>
-    </message>
-    <message>
-        <source>View information about this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Zeige die Eigenschaften dieser Gilde.</translation>
-    </message>
-    <message>
-        <source>Manage the members of this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Verwalte die Mitglieder dieser Gilde.</translation>
-    </message>
-    <message>
-        <source>View the members of this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Zeige die Mitglieder dieser Gilde.</translation>
-    </message>
-    <message>
-        <source>Manage the canidates of this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Verwalte die Anwärter dieser Gilde.</translation>
-    </message>
-    <message>
-        <source>View the canidates of this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Zeige die Anwärter dieser Gilde.</translation>
-    </message>
-    <message>
-        <source>View the diplomatic relations of this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Zeige die diplomatischen Beziehungen dieser Gilde.</translation>
-    </message>
-    <message>
-        <source>Membership options.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Mitgliedsoptionen.</translation>
-    </message>
-    <message>
-        <source>Disband this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Löse diese Gilde auf.</translation>
-    </message>
-    <message>
-        <source>%s [%s]</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">%s [%s]</translation>
-    </message>
-    <message>
-        <source>Members: %u</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Mitglieder: %u</translation>
-    </message>
-    <message>
-        <source>Canidates: %u</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Anwärter: %u</translation>
-    </message>
-    <message>
-        <source>Leader: %s</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Leiter: %s</translation>
-    </message>
-    <message>
-        <source>Leader: None</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Leiter: Niemand</translation>
-    </message>
-    <message>
-        <source>Abandoned</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Aufgegeben</translation>
-    </message>
-    <message>
-        <source>The guild you try to manage has already been disbanded.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Die Gilde die du zu verwalten versuchst wurde bereits aufgelöst.</translation>
-    </message>
-    <message>
-        <source>The character has already left this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Der Spieler hat die Gilde bereits verlassen.</translation>
-    </message>
-    <message>
-        <source>The permissions for %s have been modified.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Die Befugnisse von %s wurden geändert.</translation>
-    </message>
-    <message>
-        <source>The guildtitle for %s has been changed.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Der Gildentitel für %s wurde geändert.</translation>
-    </message>
-    <message>
-        <source>Your message to %s has been sent.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Deine Nachricht an %s wurde gesendet.</translation>
-    </message>
-    <message>
-        <source>Your message has been queued up. You may edit your message on the guildstone until the recipient logs in.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Deine Nachricht wurde in die Warteschlange eingefügt. Du kannst sie am Gildenstein ändern bis der Empfänger wieder ins Spiel kommt.</translation>
-    </message>
-    <message>
-        <source>You lack the permission to kick members out of this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Du hast nicht die Befugnis Mitglieder aus der Gilde zu werfen.</translation>
-    </message>
-    <message>
-        <source>You have been removed from your guild by %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Du wurdest von %s aus deiner Gilde entfernt.</translation>
-    </message>
-    <message>
-        <source>%s has been removed from your guild by %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">%s wurde von %s aus deiner Gilde entfernt.</translation>
-    </message>
-    <message>
-        <source>%s has withdrawn the vote for your leadership position.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">%s hat seine Stimme für deine Gildenleitung zurückgezogen.</translation>
-    </message>
-    <message>
-        <source>You place your vote for %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Du stimmts für %s.</translation>
-    </message>
-    <message>
-        <source>%s has voted for your leadership position.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">%s hat für deine Gildenleitung gestimmt.</translation>
-    </message>
-    <message>
-        <source>You place your vote for yourself.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Du stimmts für dich selbst.</translation>
-    </message>
-    <message>
-        <source>You withdraw your vote for %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Du ziehst deine Stimme für %s zurück.</translation>
-    </message>
-    <message>
-        <source>You withdraw your vote for yourself.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Du ziehst deine Stimme für dich selbst zurück.</translation>
-    </message>
-    <message>
-        <source>%s has been elected as the new leader of your guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">%s wurde zum neuen Leiter deiner Gilde gewählt.</translation>
-    </message>
-    <message>
-        <source>You have been elected as the new leader of your guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Du wurdest zum neuen Leiter deiner Gilde gewählt.</translation>
-    </message>
-    <message>
-        <source>You have enough votes to become the new leader of your guild. To accept this result, please vote for yourself at your guildstone.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Du hast genug Stimmen um zum Leiter deiner Gilde gewählt zu werden. Gehe zum Gildenstein und stimme für dich selbst um die Wahl anzunehmen.</translation>
-    </message>
-    <message>
-        <source> [%s]</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">[%s]</translation>
-    </message>
-    <message>
-        <source>Member</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Mitglied</translation>
-    </message>
-    <message>
-        <source>Leader</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Leiter</translation>
-    </message>
-    <message>
-        <source>Shows Guildsign: Yes</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Zeigt Gildenzeichen: Ja</translation>
-    </message>
-    <message>
-        <source>Shows Guildsign: No</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Zeigt Gildenzeichen: Nein</translation>
-    </message>
-    <message>
-        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Online:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Online:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>%s&lt;br&gt;</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">%s&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;br&gt;</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Offline:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Offline:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>There are currently no known canidates for a membership in this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Es befinden sich momentan keine Anwärter in dieser Gilde.</translation>
-    </message>
-    <message>
-        <source>&lt;br&gt;&lt;br&gt;</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">&lt;br&gt;&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source> (Leader)</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">(Leiter)</translation>
-    </message>
-    <message>
-        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Responsible For Recruitment:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Verantwortlich für Rekrutierung:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>There is currently no one responsible for recruiting canidates.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Es gibt momentan niemanden der für die Rekrutierung zuständig ist.</translation>
-    </message>
-    <message>
-        <source>You are not allowed to recruit canidates for this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Dir fehlt die Befugnis zum rekrutieren neuer Anwärter.</translation>
-    </message>
-    <message>
-        <source>You can only recruit players for your guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Du kannst nur Spieler rekrutieren.</translation>
-    </message>
-    <message>
-        <source>That character is already in a guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Dieser Spieler befindet sich bereits in einer Gilde.</translation>
-    </message>
-    <message>
-        <source>You have been recruited as a canidate for %s by %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Du wurdest in %s als Kanidat von %s aufgenommen.</translation>
-    </message>
-    <message>
-        <source>The selected player is not a canidate of this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Dieser Spieler ist kein Anwärter dieser Gilde.</translation>
-    </message>
-    <message>
-        <source>You are not allowed to expel canidates in this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Dir fehlt die Befugnis Anwärter aus der Gilde zu entfernen.</translation>
-    </message>
-    <message>
-        <source>You are not allowed to promote canidates in this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Es fehlt dir die Befugnis Anwärter zu vollen Mitgliedern zu ernennen.</translation>
-    </message>
-    <message>
-        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Website:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;&lt;a href=&quot;%s&quot;&gt;%s&lt;/a&gt;&lt;br&gt;&lt;br&gt;</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Webseite:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;&lt;a href=&quot;%s&quot;&gt;%s&lt;/a&gt;&lt;br&gt;&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Website:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;This guild has no website.&lt;br&gt;&lt;br&gt;</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Webseite:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;Diese Gilde hat keine Webseite.&lt;br&gt;&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Charta:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;%s</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Charta:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;%s</translation>
-    </message>
-    <message>
-        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Charta:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;This guild has not defined a charta yet.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Charta:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;Diese Gilde hat bisher keine Charta festgelegt.</translation>
-    </message>
-    <message>
-        <source>You decide not to show your guildsign any longer.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Du entscheidest dich dein Gildenzeichen abzulegen.</translation>
-    </message>
-    <message>
-        <source>You decide to show your guildsign from now on.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Du entscheidest dich dein Gildenzeichen wieder anzulegen.</translation>
-    </message>
-    <message>
-        <source>You have resigned from your guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Du hast deine Gilde verlassen.</translation>
-    </message>
-    <message>
-        <source>You have resigned from your position as the leader of this guild.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Du hast die Position des Gildenleiters abgegeben.</translation>
-    </message>
-    <message>
-        <source>You need to be the leader of this guild or a gamemaster to disband it.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Du musst der Leiter der Gilde oder ein Spielleiter sein um diese Gilde aufzulösen.</translation>
-    </message>
-    <message>
-        <source>This guildstone is abandoned.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/guilds/stone.py</comment>
-        <translation type="obsolete">Dieser Gildenstein ist aufgegeben.</translation>
+        <translation>Das kannst du nicht schrumpfen.</translation>
     </message>
     <message>
         <source>You renamed the key to &apos;%s&apos;</source>
         <comment>../release/scripts/key.py</comment>
-        <translation type="unfinished">Du benennst den Schlüssel in &apos;%s&apos; um</translation>
+        <translation>Du benennst den Schlüssel in &apos;%s&apos; um</translation>
     </message>
     <message>
         <source>Changing lock of key 0x%x from &apos;%s&apos; to &apos;%s&apos;.
@@ -1243,57 +575,57 @@ This is an unsorted and not neccesarily complete list of people who contributed 
     <message>
         <source>Unlocks: </source>
         <comment>../release/scripts/key.py</comment>
-        <translation type="unfinished">Öffnet:</translation>
+        <translation>Öffnet:</translation>
     </message>
     <message>
         <source>Lock: </source>
         <comment>../release/scripts/key.py</comment>
-        <translation type="unfinished">Schloss: </translation>
+        <translation>Schloss: </translation>
     </message>
     <message>
         <source>This key is blank</source>
         <comment>../release/scripts/key.py</comment>
-        <translation type="unfinished">Dies ist ein Rohling</translation>
+        <translation>Dies ist ein Rohling</translation>
     </message>
     <message>
         <source>This key now unlocks: </source>
         <comment>../release/scripts/key.py</comment>
-        <translation type="unfinished">Dieser Schlüssel öffnet nun:</translation>
+        <translation>Dieser Schlüssel öffnet nun:</translation>
     </message>
     <message>
         <source>You erase the lock information from the key.</source>
         <comment>../release/scripts/key.py</comment>
-        <translation type="unfinished">Du machst den Schlüssel zu einem Rohling.</translation>
+        <translation>Du machst den Schlüssel zu einem Rohling.</translation>
     </message>
     <message>
         <source>&lt;basefont color=&quot;#FECECE&quot;&gt;&lt;h3&gt;Manage Key&lt;/h3&gt;&lt;br&gt;&lt;basefont color=&quot;#FEFEFE&quot;&gt;This dialog will help you to manage or rename this key.</source>
         <comment>../release/scripts/key.py</comment>
-        <translation type="unfinished">&lt;basefont color=&quot;#FECECE&quot;&gt;&lt;h3&gt;Schlüssel verwalten&lt;/h3&gt;&lt;br&gt;&lt;basefont color=&quot;#FEFEFE&quot;&gt;Dieser Dialog hilft dir den Schlüssel zu verändern.</translation>
+        <translation>&lt;basefont color=&quot;#FECECE&quot;&gt;&lt;h3&gt;Schlüssel verwalten&lt;/h3&gt;&lt;br&gt;&lt;basefont color=&quot;#FEFEFE&quot;&gt;Dieser Dialog hilft dir den Schlüssel zu verändern.</translation>
     </message>
     <message>
         <source>&lt;basefont color=&quot;#FECECE&quot;&gt;&lt;h3&gt;Manage Key&lt;/h3&gt;&lt;br&gt;&lt;basefont color=&quot;#FEFEFE&quot;&gt;This dialog will help you to rename this key.</source>
         <comment>../release/scripts/key.py</comment>
-        <translation type="unfinished">&lt;basefont color=&quot;#FECECE&quot;&gt;&lt;h3&gt;Schlüssel benennen&lt;/h3&gt;&lt;br&gt;&lt;basefont color=&quot;#FEFEFE&quot;&gt;Dieser Dialog wird dir helfen den Schlüssel zu benennen.</translation>
+        <translation>&lt;basefont color=&quot;#FECECE&quot;&gt;&lt;h3&gt;Schlüssel benennen&lt;/h3&gt;&lt;br&gt;&lt;basefont color=&quot;#FEFEFE&quot;&gt;Dieser Dialog wird dir helfen den Schlüssel zu benennen.</translation>
     </message>
     <message>
         <source>The name of this key:</source>
         <comment>../release/scripts/key.py</comment>
-        <translation type="unfinished">Der Name dieses Schlüssels:</translation>
+        <translation>Der Name dieses Schlüssels:</translation>
     </message>
     <message>
         <source>The lock id of this key:</source>
         <comment>../release/scripts/key.py</comment>
-        <translation type="unfinished">Die ID dieses Schlüssels:</translation>
+        <translation>Die ID dieses Schlüssels:</translation>
     </message>
     <message>
         <source>Modify key</source>
         <comment>../release/scripts/key.py</comment>
-        <translation type="unfinished">Schlüssel ändern</translation>
+        <translation>Schlüssel ändern</translation>
     </message>
     <message>
         <source>Cancel</source>
         <comment>../release/scripts/key.py</comment>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Accessed locked object 0x%x.
@@ -1320,7 +652,7 @@ This is an unsorted and not neccesarily complete list of people who contributed 
     <message>
         <source>Locked</source>
         <comment>../release/scripts/lock.py</comment>
-        <translation type="unfinished"></translation>
+        <translation>Abgeschlossen</translation>
     </message>
     <message>
         <source>Modify lock</source>
@@ -1330,7 +662,7 @@ This is an unsorted and not neccesarily complete list of people who contributed 
     <message>
         <source>Cancel</source>
         <comment>../release/scripts/lock.py</comment>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Remove lock</source>
@@ -1363,36 +695,6 @@ This is an unsorted and not neccesarily complete list of people who contributed 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Alas you don&apos;t have any money in your bank.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/speech/banker.py</comment>
-        <translation type="obsolete">Ihr habt leider kein Geld in eurem Bankfach.</translation>
-    </message>
-    <message>
-        <source>You have %i gold in your bank.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/speech/banker.py</comment>
-        <translation type="obsolete">Ihr habt %i Goldmünzen in eurem Bankfach.</translation>
-    </message>
-    <message>
-        <source>Here is your bank box, %s.</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/speech/banker.py</comment>
-        <translation type="obsolete">Hier ist euer Bankfach, %s.</translation>
-    </message>
-    <message>
-        <source>Previous Page</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/system/makemenus.py</comment>
-        <translation type="obsolete">Vorherige Seite</translation>
-    </message>
-    <message>
-        <source>Next Page</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/system/makemenus.py</comment>
-        <translation type="obsolete">Nächste Seite</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <comment>/home/a/ancient-realms.org/wolfpack/release/scripts/system/pages.py</comment>
-        <translation type="obsolete">Schließen</translation>
-    </message>
-    <message>
         <source>Gold:</source>
         <comment>../release/scripts/ankh.py</comment>
         <translation type="unfinished"></translation>
@@ -1405,938 +707,27 @@ This is an unsorted and not neccesarily complete list of people who contributed 
     <message>
         <source>You cannot equip another so soon after being disarmed.</source>
         <comment>../release/scripts/equipment.py</comment>
-        <translation type="unfinished"></translation>
+        <translation>Du kannst nichts anlegen, so kurz nachdem du entwaffnet wurdest.</translation>
     </message>
     <message>
         <source>They cannot equip another so soon after being disarmed.</source>
         <comment>../release/scripts/equipment.py</comment>
-        <translation type="unfinished"></translation>
+        <translation>Er kannst nichts anlegen, so kurz nachdem er entwaffnet wurde.</translation>
     </message>
     <message>
         <source>Only potions may be added to a potion keg!</source>
         <comment>../release/scripts/potionkeg.py</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nur Tränke können in ein Fass eingefüllt werden!</translation>
     </message>
     <message>
         <source>the head of %s</source>
         <comment>../release/scripts/blades.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You cannot use this ability with that weapon.</source>
-        <comment>C:/wolfpack/server/release/scripts/combat/specialmoves.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This ability has not been implemented yet.</source>
-        <comment>C:/wolfpack/server/release/scripts/combat/specialmoves.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sorting items, please wait...</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/decoration.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Writting file...</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/decoration.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Decorating map %i, please wait...</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/decoration.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Stopped following 0x%x.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/follow.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You chose an invalid follow target.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/follow.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You better don</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/follow.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Started following 0x%x.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/follow.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose a new character to follow.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/follow.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>That player has been released from jail already.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/jail.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>That player is in jail already.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/jail.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The targetted player has been jailed.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/jail.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The targetted player has been unjailed.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/jail.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You have to target a player character.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/jail.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You burn your fingers.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/jail.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Target the player you want to send to jail.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/jail.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Target the player you want to release from jail.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/jail.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You have to target a player character.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/mute.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You burn your fingers.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/mute.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The targetted player can no longer talk.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/mute.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The targetted player can now talk again.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/mute.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Target the player you want to mute.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/mute.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Target the player you want to unmute.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/mute.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The position (%s) you targetted is more than 30 tiles away. Are you sure to add a spawn there?</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/spawn.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Adding %s spawn at %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/spawn.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>a %s spawn</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/spawn.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Usage: spawn npc radius mintime maxtime</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/spawn.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Usage: npc spawn radius mintime maxtime</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/spawn.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Where do you want to spawn npc %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/spawn.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The maximum width or height of a pattern is 10. The minimum width or height of a pattern is 1.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/tilepattern.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You have to specify a valid width and height.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/tilepattern.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The tile pattern has been cleared.</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/tilepattern.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Who Menu</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/who.py</comment>
-        <translation type="unfinished">Online Menü</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/who.py</comment>
-        <translation type="unfinished">Schließen</translation>
-    </message>
-    <message>
-        <source>Players: %u</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/who.py</comment>
-        <translation type="unfinished">Spieler: %u</translation>
-    </message>
-    <message>
-        <source>Page %i of %i</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/who.py</comment>
-        <translation type="unfinished">Seite %i von %i</translation>
-    </message>
-    <message>
-        <source>%s [%s]</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/who.py</comment>
-        <translation type="unfinished">%s [%s]</translation>
-    </message>
-    <message>
-        <source>A private message from %s: %s</source>
-        <comment>C:/wolfpack/server/release/scripts/commands/who.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Here is your bank box, %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/contextmenus/bankermenu.py</comment>
-        <translation type="unfinished">Hier ist euer Bankfach, %s.</translation>
-    </message>
-    <message>
-        <source>Alas you don&apos;t have any money in your bank.</source>
-        <comment>C:/wolfpack/server/release/scripts/contextmenus/bankermenu.py</comment>
-        <translation type="unfinished">Ihr habt leider kein Geld in eurem Bankfach.</translation>
-    </message>
-    <message>
-        <source>You have %i gold in your bank.</source>
-        <comment>C:/wolfpack/server/release/scripts/contextmenus/bankermenu.py</comment>
-        <translation type="unfinished">Ihr habt %i Goldmünzen in eurem Bankfach.</translation>
+        <translation>der Kopf von %s</translation>
     </message>
     <message>
         <source>You cannot wear female armor.</source>
         <comment>../release/scripts/equipment.py</comment>
-        <translation type="unfinished">Du kannst keine Frauenrüstungen anziehen.</translation>
-    </message>
-    <message>
-        <source>Your guild permissions have been modified by %s. See your guildstone for details.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Deine Gildenbefugnise wurden von %s geändert. Für näheres gehe zu deinem Gildenstein.</translation>
-    </message>
-    <message>
-        <source>You have been granted the title &apos;%s&apos; by %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Dir wurde der Titel &apos;%s&apos; von %s zugesprochen.</translation>
-    </message>
-    <message>
-        <source>Guildstone for %s%s</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Gildenstein für %s%s</translation>
-    </message>
-    <message>
-        <source>Member Details</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Mitgliederdetails</translation>
-    </message>
-    <message>
-        <source>Member Name: %s</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Mitgliedsname: %s</translation>
-    </message>
-    <message>
-        <source>General Information</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Allgemeine Informationen</translation>
-    </message>
-    <message>
-        <source>Member Since: %s</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Mitglied seit: %s</translation>
-    </message>
-    <message>
-        <source>Membership Status: %s</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Mitgliedsstatus: %s</translation>
-    </message>
-    <message>
-        <source>Guild Title:</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Gildentitel:</translation>
-    </message>
-    <message>
-        <source>Guild Title: %s</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Gildentitel: %s</translation>
-    </message>
-    <message>
-        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Profile Information:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;%s</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Profil Informationen:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;%s</translation>
-    </message>
-    <message>
-        <source>Permissions</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Befugnisse</translation>
-    </message>
-    <message>
-        <source>Miscellaneous Actions</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Verschiedene Aktionen</translation>
-    </message>
-    <message>
-        <source>May edit the guild properties.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Darf die Gildeneigenschaften bearbeiten.</translation>
-    </message>
-    <message>
-        <source>May recruit new canidates for the guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Darf neue Kanidaten in die Gilde aufnehmen.</translation>
-    </message>
-    <message>
-        <source>May promote canidates to full member status.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Darf Kanidaten zu Mitgliedern ernennen.</translation>
-    </message>
-    <message>
-        <source>May act as an diplomat for this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Darf als ein Diplomat für diese Gilde auftreten.</translation>
-    </message>
-    <message>
-        <source>May kick members out of this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Darf Mitglieder aus der Gilde werfen.</translation>
-    </message>
-    <message>
-        <source>May expel canidates from the guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Darf Kanidaten aus der Gilde ausschließen.</translation>
-    </message>
-    <message>
-        <source>May grant guild titles to members of this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Darf Gildentitel an Mitglieder erteilen.</translation>
-    </message>
-    <message>
-        <source>May grant permissions to other guild members.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Darf Befugnisse an andere Mitglieder weitergeben.</translation>
-    </message>
-    <message>
-        <source>Send this member a private message:</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Eine private Nachricht senden:</translation>
-    </message>
-    <message>
-        <source>Enter message...</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Nachricht eingeben...</translation>
-    </message>
-    <message>
-        <source>Kick this member out of the guild:</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Werfe dieses Mitglied aus der Gilde:</translation>
-    </message>
-    <message>
-        <source>Vote for a new leader:</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Stimme für einen neuen Leiter:</translation>
-    </message>
-    <message>
-        <source>You vote for this member.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Du stimmst für dieses Mitglied.</translation>
-    </message>
-    <message>
-        <source>Member Overview</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Mitgliedsübersicht</translation>
-    </message>
-    <message>
-        <source>Select a member you wish to see details about:</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Wähle ein Mitglied über das du Details sehen möchtest:</translation>
-    </message>
-    <message>
-        <source>Previous Page</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Vorherige Seite</translation>
-    </message>
-    <message>
-        <source>Next Page</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Nächste Seite</translation>
-    </message>
-    <message>
-        <source>Joined: </source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Beitritt:</translation>
-    </message>
-    <message>
-        <source>Title: %s</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Titel: %s</translation>
-    </message>
-    <message>
-        <source>No Title</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Kein Titel</translation>
-    </message>
-    <message>
-        <source>Canidate Overview</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Kanidatenübersicht</translation>
-    </message>
-    <message>
-        <source>Canidates</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Kanidaten</translation>
-    </message>
-    <message>
-        <source>A new canidate %s has been recruited into your guild by %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Ein neuer Kanidat %s wurde in deine Gilde aufgenommen durch %s.</translation>
-    </message>
-    <message>
-        <source>You have been expelled from your guild by %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Du wurdest von %s aus deiner Gilde ausgeschlossen.</translation>
-    </message>
-    <message>
-        <source>The canidate %s has been expelled from your guild by %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Der Kanidat %s wurde von %s aus deiner Gilde ausgeschlossen.</translation>
-    </message>
-    <message>
-        <source>You have been promoted to be a full member of your guild by %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Du wurdest von %s zu einem vollen Mitglied deiner Gilde erhoben.</translation>
-    </message>
-    <message>
-        <source>The canidate %s has been promoted to full member status by %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Der Kanidat %s wurde von %s zum vollen Mitglied deiner Gilde ernannt.</translation>
-    </message>
-    <message>
-        <source>Canidate Management</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Kanidatenverwaltung</translation>
-    </message>
-    <message>
-        <source>Recruit a new canidate for this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Rekrutiere einen neuen Kanidaten.</translation>
-    </message>
-    <message>
-        <source>Recruit a new member for this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Rekrutiere ein neues Mitglied.</translation>
-    </message>
-    <message>
-        <source>Expel this canidate</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Kanidaten ausschließen</translation>
-    </message>
-    <message>
-        <source>Accept this canidate</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Kanidaten akzeptieren</translation>
-    </message>
-    <message>
-        <source>The name of your guild has been changed to &apos;%s&apos; by %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Der Name deiner Gilde wurde in &apos;%s&apos; geändert von %s.</translation>
-    </message>
-    <message>
-        <source>The abbreviation of your guild has been changed to [%s] by %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Die Abkürzung deiner Gilde wurde in [%s] geändert von %s.</translation>
-    </message>
-    <message>
-        <source>The alignment of your guild has been changed to neutral by %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Die Gesinnung deiner Gilde wurde von %s geändert. Sie ist nun Neutral.</translation>
-    </message>
-    <message>
-        <source>The alignment of your guild has been changed to good by %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Die Gesinnung deiner Gilde wurde von %s geändert. Sie ist nun Gut.</translation>
-    </message>
-    <message>
-        <source>The alignment of your guild has been changed to evil by %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Die Gesinnung deiner Gilde wurde von %s geänert. Sie ist nun Böse.</translation>
-    </message>
-    <message>
-        <source>The website of your guild has been changed to %s by %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Die Webseite deiner Seite wurde auf %s gesetzt von %s.</translation>
-    </message>
-    <message>
-        <source>The charta of your guild has been changed by %s. Check your guildstone for details.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Die Charta deiner Gilde wurde von %s geändert. Besuche deinen Gildenstein für Details.</translation>
-    </message>
-    <message>
-        <source>General Properties</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Allgemeine Eigenschaften</translation>
-    </message>
-    <message>
-        <source>Guildname</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Name</translation>
-    </message>
-    <message>
-        <source>Abbreviation (3 chars max.)</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Abkürzung (3 Zeichen max.)</translation>
-    </message>
-    <message>
-        <source>Alignment</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Gesinnung</translation>
-    </message>
-    <message>
-        <source>Good</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Gut</translation>
-    </message>
-    <message>
-        <source>Neutral</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Neutral</translation>
-    </message>
-    <message>
-        <source>Evil</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Böse</translation>
-    </message>
-    <message>
-        <source>Website</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Webseite</translation>
-    </message>
-    <message>
-        <source>Charta (HTML allowed)</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Charta (HTML erlaubt)</translation>
-    </message>
-    <message>
-        <source>Additional Information</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Zusätzliche Informationen</translation>
-    </message>
-    <message>
-        <source>%s has left your guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">%s hat deine Gilde verlassen.</translation>
-    </message>
-    <message>
-        <source>%s has resigned from the leadership position of your guild. You can elect a new leader by voting for a member at your guildstone.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Membership Options</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Disable your guildsign.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enable your guildsign.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Resign from this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Resign from your leadership position.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Your guild has been disbanded by %s!</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Main Menu</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Modify the general properties of this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Ändere die Eigenschaften dieser Gilde.</translation>
-    </message>
-    <message>
-        <source>View information about this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Zeige die Eigenschaften dieser Gilde.</translation>
-    </message>
-    <message>
-        <source>Manage the members of this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Verwalte die Mitglieder dieser Gilde.</translation>
-    </message>
-    <message>
-        <source>View the members of this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Zeige die Mitglieder dieser Gilde.</translation>
-    </message>
-    <message>
-        <source>Manage the canidates of this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Verwalte die Anwärter dieser Gilde.</translation>
-    </message>
-    <message>
-        <source>View the canidates of this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Zeige die Anwärter dieser Gilde.</translation>
-    </message>
-    <message>
-        <source>View the diplomatic relations of this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Zeige die diplomatischen Beziehungen dieser Gilde.</translation>
-    </message>
-    <message>
-        <source>Membership options.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Mitgliedsoptionen.</translation>
-    </message>
-    <message>
-        <source>Disband this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Löse diese Gilde auf.</translation>
-    </message>
-    <message>
-        <source>%st
-</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%s</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%s [%s]</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">%s [%s]</translation>
-    </message>
-    <message>
-        <source>Members: %u</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Mitglieder: %u</translation>
-    </message>
-    <message>
-        <source>Canidates: %u</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Anwärter: %u</translation>
-    </message>
-    <message>
-        <source>Leader: %s</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Leiter: %s</translation>
-    </message>
-    <message>
-        <source>Leader: None</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Leiter: Niemand</translation>
-    </message>
-    <message>
-        <source>Abandoned</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Aufgegeben</translation>
-    </message>
-    <message>
-        <source>The guild you try to manage has already been disbanded.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Die Gilde die du zu verwalten versuchst wurde bereits aufgelöst.</translation>
-    </message>
-    <message>
-        <source>The character has already left this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Der Spieler hat die Gilde bereits verlassen.</translation>
-    </message>
-    <message>
-        <source>Original Switches: %x</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The permissions for %s have been modified.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Die Befugnisse von %s wurden geändert.</translation>
-    </message>
-    <message>
-        <source>The guildtitle for %s has been changed.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Der Gildentitel für %s wurde geändert.</translation>
-    </message>
-    <message>
-        <source>Your message to %s has been sent.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Deine Nachricht an %s wurde gesendet.</translation>
-    </message>
-    <message>
-        <source>%s: %s</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Your message has been queued up. You may edit your message on the guildstone until the recipient logs in.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Deine Nachricht wurde in die Warteschlange eingefügt. Du kannst sie am Gildenstein ändern bis der Empfänger wieder ins Spiel kommt.</translation>
-    </message>
-    <message>
-        <source>You lack the permission to kick members out of this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Du hast nicht die Befugnis Mitglieder aus der Gilde zu werfen.</translation>
-    </message>
-    <message>
-        <source>You have been removed from your guild by %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Du wurdest von %s aus deiner Gilde entfernt.</translation>
-    </message>
-    <message>
-        <source>%s has been removed from your guild by %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">%s wurde von %s aus deiner Gilde entfernt.</translation>
-    </message>
-    <message>
-        <source>%s has withdrawn the vote for your leadership position.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">%s hat seine Stimme für deine Gildenleitung zurückgezogen.</translation>
-    </message>
-    <message>
-        <source>You place your vote for %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Du stimmts für %s.</translation>
-    </message>
-    <message>
-        <source>%s has voted for your leadership position.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">%s hat für deine Gildenleitung gestimmt.</translation>
-    </message>
-    <message>
-        <source>You place your vote for yourself.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Du stimmts für dich selbst.</translation>
-    </message>
-    <message>
-        <source>You withdraw your vote for %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Du ziehst deine Stimme für %s zurück.</translation>
-    </message>
-    <message>
-        <source>You withdraw your vote for yourself.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Du ziehst deine Stimme für dich selbst zurück.</translation>
-    </message>
-    <message>
-        <source>%s has been elected as the new leader of your guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">%s wurde zum neuen Leiter deiner Gilde gewählt.</translation>
-    </message>
-    <message>
-        <source>You have been elected as the new leader of your guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Du wurdest zum neuen Leiter deiner Gilde gewählt.</translation>
-    </message>
-    <message>
-        <source>You have enough votes to become the new leader of your guild. To accept this result, please vote for yourself at your guildstone.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Du hast genug Stimmen um zum Leiter deiner Gilde gewählt zu werden. Gehe zum Gildenstein und stimme für dich selbst um die Wahl anzunehmen.</translation>
-    </message>
-    <message>
-        <source> [%s]</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">[%s]</translation>
-    </message>
-    <message>
-        <source>Member</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Mitglied</translation>
-    </message>
-    <message>
-        <source>Leader</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Leiter</translation>
-    </message>
-    <message>
-        <source>Shows Guildsign: Yes</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Zeigt Gildenzeichen: Ja</translation>
-    </message>
-    <message>
-        <source>Shows Guildsign: No</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Zeigt Gildenzeichen: Nein</translation>
-    </message>
-    <message>
-        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Online:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Online:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>%s&lt;br&gt;</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">%s&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;br&gt;</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Offline:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Offline:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>There are currently no known canidates for a membership in this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Es befinden sich momentan keine Anwärter in dieser Gilde.</translation>
-    </message>
-    <message>
-        <source>&lt;br&gt;&lt;br&gt;</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">&lt;br&gt;&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source> (Leader)</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">(Leiter)</translation>
-    </message>
-    <message>
-        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Responsible For Recruitment:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Verantwortlich für Rekrutierung:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>There is currently no one responsible for recruiting canidates.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Es gibt momentan niemanden der für die Rekrutierung zuständig ist.</translation>
-    </message>
-    <message>
-        <source>You are not allowed to recruit canidates for this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Dir fehlt die Befugnis zum rekrutieren neuer Anwärter.</translation>
-    </message>
-    <message>
-        <source>You can only recruit players for your guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Du kannst nur Spieler rekrutieren.</translation>
-    </message>
-    <message>
-        <source>That character is already in a guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Dieser Spieler befindet sich bereits in einer Gilde.</translation>
-    </message>
-    <message>
-        <source>You have been recruited as a canidate for %s by %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Du wurdest in %s als Kanidat von %s aufgenommen.</translation>
-    </message>
-    <message>
-        <source>The selected player is not a canidate of this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Dieser Spieler ist kein Anwärter dieser Gilde.</translation>
-    </message>
-    <message>
-        <source>You are not allowed to expel canidates in this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Dir fehlt die Befugnis Anwärter aus der Gilde zu entfernen.</translation>
-    </message>
-    <message>
-        <source>You are not allowed to promote canidates in this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Es fehlt dir die Befugnis Anwärter zu vollen Mitgliedern zu ernennen.</translation>
-    </message>
-    <message>
-        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Website:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;&lt;a href=&quot;%s&quot;&gt;%s&lt;/a&gt;&lt;br&gt;&lt;br&gt;</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Webseite:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;&lt;a href=&quot;%s&quot;&gt;%s&lt;/a&gt;&lt;br&gt;&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Website:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;This guild has no website.&lt;br&gt;&lt;br&gt;</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Webseite:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;Diese Gilde hat keine Webseite.&lt;br&gt;&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Charta:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;%s</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Charta:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;%s</translation>
-    </message>
-    <message>
-        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Charta:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;This guild has not defined a charta yet.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Charta:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;Diese Gilde hat bisher keine Charta festgelegt.</translation>
-    </message>
-    <message>
-        <source>You decide not to show your guildsign any longer.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Du entscheidest dich dein Gildenzeichen abzulegen.</translation>
-    </message>
-    <message>
-        <source>You decide to show your guildsign from now on.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Du entscheidest dich dein Gildenzeichen wieder anzulegen.</translation>
-    </message>
-    <message>
-        <source>You have resigned from your guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Du hast deine Gilde verlassen.</translation>
-    </message>
-    <message>
-        <source>You have resigned from your position as the leader of this guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Du hast die Position des Gildenleiters abgegeben.</translation>
-    </message>
-    <message>
-        <source>You need to be the leader of this guild or a gamemaster to disband it.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Du musst der Leiter der Gilde oder ein Spielleiter sein um diese Gilde aufzulösen.</translation>
-    </message>
-    <message>
-        <source>This guildstone is abandoned.</source>
-        <comment>C:/wolfpack/server/release/scripts/guilds/stone.py</comment>
-        <translation type="unfinished">Dieser Gildenstein ist aufgegeben.</translation>
-    </message>
-    <message>
-        <source>This deed is broken.</source>
-        <comment>C:/wolfpack/server/release/scripts/housing/deed.py</comment>
-        <translation type="unfinished"></translation>
+        <translation>Du kannst keine Frauenrüstungen anziehen.</translation>
     </message>
     <message>
         <source>Accessed locked object 0x%x using key 0x%x.
@@ -2351,908 +742,3591 @@ This is an unsorted and not neccesarily complete list of people who contributed 
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>What do you wish to use the gem on?</source>
+        <comment>../release/scripts/arcanegem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>That item is already fully charged.</source>
+        <comment>../release/scripts/arcanegem.py</comment>
+        <translation>Dieser Gegenstand ist bereits voll aufgeladen.</translation>
+    </message>
+    <message>
+        <source>You recharge the item.</source>
+        <comment>../release/scripts/arcanegem.py</comment>
+        <translation>Du lädst den Gegenstand auf.</translation>
+    </message>
+    <message>
+        <source>You enhance the item with your gem.</source>
+        <comment>../release/scripts/arcanegem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Only exceptional items can be enhanced with the gem.</source>
+        <comment>../release/scripts/arcanegem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You do not have enough skill in tailoring to enhance the item.</source>
+        <comment>../release/scripts/arcanegem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You cannot use the gem on that.</source>
+        <comment>../release/scripts/arcanegem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>shot is well off target.</source>
+        <comment>../release/scripts/archery_butte.py</comment>
+        <translation>Schuss weit danaben geht.</translation>
+    </message>
+    <message>
+        <source>shot is wide of the mark.</source>
+        <comment>../release/scripts/archery_butte.py</comment>
+        <translation>Schuss weit am Ziel vorbei geht.</translation>
+    </message>
+    <message>
+        <source>shot misses terribly.</source>
+        <comment>../release/scripts/archery_butte.py</comment>
+        <translation>Schuss das Ziel ziemlich verfehlt.</translation>
+    </message>
+    <message>
+        <source>shot nearly misses the archery butte.</source>
+        <comment>../release/scripts/archery_butte.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hit the outer ring.</source>
+        <comment>../release/scripts/archery_butte.py</comment>
+        <translation>trifft den äußeren Ring.</translation>
+    </message>
+    <message>
+        <source>hit the middle ring.</source>
+        <comment>../release/scripts/archery_butte.py</comment>
+        <translation>trifft den mittleren Ring.</translation>
+    </message>
+    <message>
+        <source>hit the inner ring.</source>
+        <comment>../release/scripts/archery_butte.py</comment>
+        <translation>trifft den inneren Ring.</translation>
+    </message>
+    <message>
+        <source>hit the bullseye!.</source>
+        <comment>../release/scripts/archery_butte.py</comment>
+        <translation>trifft ins Schwarze.</translation>
+    </message>
+    <message>
+        <source>The butte is empty.</source>
+        <comment>../release/scripts/archery_butte.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You see %s&apos;s poor shot destroys the %s</source>
+        <comment>../release/scripts/archery_butte.py</comment>
+        <translation>Du siehst wie %s&apos;s schlechter Schuss den %s zerstört</translation>
+    </message>
+    <message>
+        <source>You see %s&apos;s %s</source>
+        <comment>../release/scripts/archery_butte.py</comment>
+        <translation>Du siehst wie %s&apos;s %s</translation>
+    </message>
+    <message>
+        <source>You are already healing somebody.</source>
+        <comment>../release/scripts/bandages.py</comment>
+        <translation>Du heilst bereits jemanden.</translation>
+    </message>
+    <message>
+        <source>You shouldn&apos;t drink this strange fluid.</source>
+        <comment>../release/scripts/beverage.py</comment>
+        <translation>Du solltest diese seltsame Flüssigkeit nicht trinken.</translation>
+    </message>
+    <message>
+        <source>You can&apos;t carve corpses in a container</source>
+        <comment>../release/scripts/blades.py</comment>
+        <translation>Du kannst keine Leichen zerlegen, die sich in einem Behältnis befinden</translation>
+    </message>
+    <message>
+        <source>You cut away some scales, but they remain on the corpse.</source>
+        <comment>../release/scripts/blades.py</comment>
+        <translation>Du schneidest einige Schuppen los, die nun auf der Leiche liegen.</translation>
+    </message>
+    <message>
+        <source>This book is read only.</source>
+        <comment>../release/scripts/book.py</comment>
+        <translation>Dieses Buch kann nur gelesen werden.</translation>
+    </message>
+    <message>
+        <source>You can&apos;t read this message.</source>
+        <comment>../release/scripts/bulletinboard.py</comment>
+        <translation>Du kannst diese Nachricht nicht lesen.</translation>
+    </message>
+    <message>
+        <source>%u Days %02u:%02u</source>
+        <comment>../release/scripts/bulletinboard.py</comment>
+        <translation>%u Tage %02u:%02u</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <comment>../release/scripts/bulletinboard.py</comment>
+        <translation>Unbekannt</translation>
+    </message>
+    <message>
+        <source>%u day %02u:%02u</source>
+        <comment>../release/scripts/bulletinboard.py</comment>
+        <translation>%u Tag %02u:%02u</translation>
+    </message>
+    <message>
+        <source>%u days %02u:%02u</source>
+        <comment>../release/scripts/bulletinboard.py</comment>
+        <translation>%u Tage %02u:%02u</translation>
+    </message>
+    <message>
+        <source>Invalid bulletin board packet.</source>
+        <comment>../release/scripts/bulletinboard.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bulletin board</source>
+        <comment>../release/scripts/bulletinboard.py</comment>
+        <translation>Scharzes Brett</translation>
+    </message>
+    <message>
+        <source>You cannot use this ability with that weapon.</source>
+        <comment>../release/scripts/combat/specialmoves.py</comment>
+        <translation>Du kannst diese Fertigkeit nicht mit dieser Waffe benutzen.</translation>
+    </message>
+    <message>
+        <source>This ability has not been implemented yet.</source>
+        <comment>../release/scripts/combat/specialmoves.py</comment>
+        <translation>Diese Fertigkeit wurde noch nicht eingebaut.</translation>
+    </message>
+    <message>
+        <source>Sorting items, please wait...</source>
+        <comment>../release/scripts/commands/decoration.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Writing file...</source>
+        <comment>../release/scripts/commands/decoration.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decorating map %i, please wait...</source>
+        <comment>../release/scripts/commands/decoration.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stopped following 0x%x.</source>
+        <comment>../release/scripts/commands/follow.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You chose an invalid follow target.</source>
+        <comment>../release/scripts/commands/follow.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You better don</source>
+        <comment>../release/scripts/commands/follow.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Started following 0x%x.</source>
+        <comment>../release/scripts/commands/follow.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose a new character to follow.</source>
+        <comment>../release/scripts/commands/follow.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>That player has been released from jail already.</source>
+        <comment>../release/scripts/commands/jail.py</comment>
+        <translation>Dieser Spieler wurde bereits aus dem Jail entlassen.</translation>
+    </message>
+    <message>
+        <source>That player is in jail already.</source>
+        <comment>../release/scripts/commands/jail.py</comment>
+        <translation>Dieser Spieler ist bereits im Jail.</translation>
+    </message>
+    <message>
+        <source>The targetted player has been jailed.</source>
+        <comment>../release/scripts/commands/jail.py</comment>
+        <translation>Der gewählte Spieler wurde gejailt.</translation>
+    </message>
+    <message>
+        <source>The targetted player has been unjailed.</source>
+        <comment>../release/scripts/commands/jail.py</comment>
+        <translation>Der gewählte Spieler wurde aus dem Jail entlassen.</translation>
+    </message>
+    <message>
+        <source>You have to target a player character.</source>
+        <comment>../release/scripts/commands/jail.py</comment>
+        <translation>Du musst einen Spielercharakter wählen.</translation>
+    </message>
+    <message>
+        <source>You burn your fingers.</source>
+        <comment>../release/scripts/commands/jail.py</comment>
+        <translation>Du verbrennst dir die Finger.</translation>
+    </message>
+    <message>
+        <source>Target the player you want to send to jail.</source>
+        <comment>../release/scripts/commands/jail.py</comment>
+        <translation>Wähle den Spieler, den du ins Jail schicken willst.</translation>
+    </message>
+    <message>
+        <source>Target the player you want to release from jail.</source>
+        <comment>../release/scripts/commands/jail.py</comment>
+        <translation>Wähle den Spieler, den du aus dem Jail freilassen willst.</translation>
+    </message>
+    <message>
+        <source>You have to target a player character.</source>
+        <comment>../release/scripts/commands/mute.py</comment>
+        <translation>Du musst einen Spielercharakter wählen.</translation>
+    </message>
+    <message>
+        <source>You burn your fingers.</source>
+        <comment>../release/scripts/commands/mute.py</comment>
+        <translation>Du verbrennst dir die Finger.</translation>
+    </message>
+    <message>
+        <source>The targetted player can no longer talk.</source>
+        <comment>../release/scripts/commands/mute.py</comment>
+        <translation>Der gewählte Spieler kann nicht länger sprechen.</translation>
+    </message>
+    <message>
+        <source>The targetted player can now talk again.</source>
+        <comment>../release/scripts/commands/mute.py</comment>
+        <translation>Der gewählte Spieler kann jetzt wieder sprechen.</translation>
+    </message>
+    <message>
+        <source>Target the player you want to mute.</source>
+        <comment>../release/scripts/commands/mute.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Target the player you want to unmute.</source>
+        <comment>../release/scripts/commands/mute.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The position (%s) you targetted is more than 30 tiles away. Are you sure to add a spawn there?</source>
+        <comment>../release/scripts/commands/spawn.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adding %s spawn at %s.</source>
+        <comment>../release/scripts/commands/spawn.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>a %s spawn</source>
+        <comment>../release/scripts/commands/spawn.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Usage: spawn npc radius mintime maxtime</source>
+        <comment>../release/scripts/commands/spawn.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Usage: npc spawn radius mintime maxtime</source>
+        <comment>../release/scripts/commands/spawn.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Where do you want to spawn npc %s.</source>
+        <comment>../release/scripts/commands/spawn.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A private message from %s: %s</source>
+        <comment>../release/scripts/commands/sysmessage.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The maximum width or height of a pattern is 10. The minimum width or height of a pattern is 1.</source>
+        <comment>../release/scripts/commands/tilepattern.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have to specify a valid width and height.</source>
+        <comment>../release/scripts/commands/tilepattern.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The tile pattern has been cleared.</source>
+        <comment>../release/scripts/commands/tilepattern.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Who Menu</source>
+        <comment>../release/scripts/commands/who.py</comment>
+        <translation>Online Menü</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <comment>../release/scripts/commands/who.py</comment>
+        <translation>Schließen</translation>
+    </message>
+    <message>
+        <source>Players: %u</source>
+        <comment>../release/scripts/commands/who.py</comment>
+        <translation>Spieler: %u</translation>
+    </message>
+    <message>
+        <source>Page %i of %i</source>
+        <comment>../release/scripts/commands/who.py</comment>
+        <translation>Seite %i von %i</translation>
+    </message>
+    <message>
+        <source>%s [%s]</source>
+        <comment>../release/scripts/commands/who.py</comment>
+        <translation>%s [%s]</translation>
+    </message>
+    <message>
+        <source>A private message from %s: %s</source>
+        <comment>../release/scripts/commands/who.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Here is your bank box, %s.</source>
+        <comment>../release/scripts/contextmenus/bankermenu.py</comment>
+        <translation>Hier ist euer Bankfach, %s.</translation>
+    </message>
+    <message>
+        <source>Alas you don&apos;t have any money in your bank.</source>
+        <comment>../release/scripts/contextmenus/bankermenu.py</comment>
+        <translation>Ihr habt leider kein Geld in eurem Bankfach.</translation>
+    </message>
+    <message>
+        <source>You have %i gold in your bank.</source>
+        <comment>../release/scripts/contextmenus/bankermenu.py</comment>
+        <translation>Ihr habt %i Goldmünzen in eurem Bankfach.</translation>
+    </message>
+    <message>
+        <source>rolls a </source>
+        <comment>../release/scripts/dicecup.py</comment>
+        <translation>wirft eine </translation>
+    </message>
+    <message>
+        <source> and a </source>
+        <comment>../release/scripts/dicecup.py</comment>
+        <translation> und </translation>
+    </message>
+    <message>
+        <source>You cannot see the door from here.</source>
+        <comment>../release/scripts/door.py</comment>
+        <translation>Du kannst die Tür von hier nicht sehen.</translation>
+    </message>
+    <message>
+        <source>You cannot reach the handle from here.</source>
+        <comment>../release/scripts/door.py</comment>
+        <translation>Du kannst den Griff nicht erreichen.</translation>
+    </message>
+    <message>
+        <source>You selected an invalid color.</source>
+        <comment>../release/scripts/dyes.py</comment>
+        <translation>Du hast eine ungültige Farbe gewählt.</translation>
+    </message>
+    <message>
+        <source>You cannot pick cotton here yet.</source>
+        <comment>../release/scripts/environment.py</comment>
+        <translation>Du kannst die Baumwolle noch nicht pflücken.</translation>
+    </message>
+    <message>
+        <source>You reach down and pick some cotton.</source>
+        <comment>../release/scripts/environment.py</comment>
+        <translation>Du bückst dich und pflückst etwas Baumwolle.</translation>
+    </message>
+    <message>
+        <source> and break the parts.</source>
+        <comment>../release/scripts/environment.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You fail to create the sextant</source>
+        <comment>../release/scripts/environment.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You put the sextant into your backpack</source>
+        <comment>../release/scripts/environment.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry but this feature is not implemented yet!</source>
+        <comment>../release/scripts/environment.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have to choose a hair color.</source>
+        <comment>../release/scripts/environment.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>That is an invalid color.</source>
+        <comment>../release/scripts/environment.py</comment>
+        <translation>Das ist eine ungültige Farbe.</translation>
+    </message>
+    <message>
+        <source>Please select the object you wish to dye.</source>
+        <comment>../release/scripts/environment.py</comment>
+        <translation>Bitte wähle den Gegenstand den du färben möchtest.</translation>
+    </message>
+    <message>
+        <source>You must target an item.</source>
+        <comment>../release/scripts/environment.py</comment>
+        <translation>Du musst einen Gegenständ wählen.</translation>
+    </message>
+    <message>
+        <source>This person can&apos;t wear that item, seems not strong enough.</source>
+        <comment>../release/scripts/equipment.py</comment>
+        <translation>Diese Person kann diesen Gegenstand nicht tragen. Sie scheint nicht stark genug zu sein.</translation>
+    </message>
+    <message>
+        <source>This person can&apos;t wear that item, seems not agile enough.</source>
+        <comment>../release/scripts/equipment.py</comment>
+        <translation>Diese Person kann diesen Gegenstand nicht tragen. Sie scheint nicht agil genug zu sein.</translation>
+    </message>
+    <message>
+        <source>This person can&apos;t wear that item, seems not smart enough.</source>
+        <comment>../release/scripts/equipment.py</comment>
+        <translation>Diese Person kann diesen Gegenstand nicht tragen. Sie scheint nicht klug genug zu sein.</translation>
+    </message>
+    <message>
+        <source>You are not intelligent enough to equip this item.</source>
+        <comment>../release/scripts/equipment.py</comment>
+        <translation>Du bist nicht intelligent genug um diesen Gegenstand anzulegen.</translation>
+    </message>
+    <message>
+        <source>You need to repair this before using it again.</source>
+        <comment>../release/scripts/equipment.py</comment>
+        <translation>Du musst dies reparieren bevor du es wieder verwenden kannst.</translation>
+    </message>
+    <message>
+        <source>What do you want to shrink?</source>
+        <comment>../release/scripts/figurine.py</comment>
+        <translation>Was möchtest du schrumpfen?</translation>
+    </message>
+    <message>
+        <source>*nibbles*</source>
+        <comment>../release/scripts/food.py</comment>
+        <translation>*knabbert*</translation>
+    </message>
+    <message>
+        <source>*munch*</source>
+        <comment>../release/scripts/food.py</comment>
+        <translation>*mampft*</translation>
+    </message>
+    <message>
+        <source>It doesn</source>
+        <comment>../release/scripts/food.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>NPC [%x] using gate [%x] without target.
+</source>
+        <comment>../release/scripts/gate.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This gate leads nowhere...</source>
+        <comment>../release/scripts/gate.py</comment>
+        <translation>Dieses Tor führt nirgends hin...</translation>
+    </message>
+    <message>
+        <source>&lt;basefont size=&quot;7&quot; color=&quot;#336699&quot;&gt;&lt;center&gt;Set target for teleportaion&lt;/center&gt;&lt;/basefont&gt;</source>
+        <comment>../release/scripts/gate.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your guild permissions have been modified by %s. See your guildstone for details.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Deine Gildenbefugnise wurden von %s geändert. Für näheres gehe zu deinem Gildenstein.</translation>
+    </message>
+    <message>
+        <source>You have been granted the title &apos;%s&apos; by %s.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Dir wurde der Titel &apos;%s&apos; von %s zugesprochen.</translation>
+    </message>
+    <message>
+        <source>Guildstone for %s%s</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Gildenstein für %s%s</translation>
+    </message>
+    <message>
+        <source>Member Details</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Mitgliederdetails</translation>
+    </message>
+    <message>
+        <source>Member Name: %s</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Mitgliedsname: %s</translation>
+    </message>
+    <message>
+        <source>General Information</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Allgemeine Informationen</translation>
+    </message>
+    <message>
+        <source>Member Since: %s</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Mitglied seit: %s</translation>
+    </message>
+    <message>
+        <source>Membership Status: %s</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Mitgliedsstatus: %s</translation>
+    </message>
+    <message>
+        <source>Guild Title:</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Gildentitel:</translation>
+    </message>
+    <message>
+        <source>Guild Title: %s</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Gildentitel: %s</translation>
+    </message>
+    <message>
+        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Profile Information:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;%s</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Profil Informationen:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;%s</translation>
+    </message>
+    <message>
+        <source>Permissions</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Befugnisse</translation>
+    </message>
+    <message>
+        <source>Miscellaneous Actions</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Verschiedene Aktionen</translation>
+    </message>
+    <message>
+        <source>May edit the guild properties.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Darf die Gildeneigenschaften bearbeiten.</translation>
+    </message>
+    <message>
+        <source>May recruit new canidates for the guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Darf neue Kanidaten in die Gilde aufnehmen.</translation>
+    </message>
+    <message>
+        <source>May promote canidates to full member status.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Darf Kanidaten zu Mitgliedern ernennen.</translation>
+    </message>
+    <message>
+        <source>May act as an diplomat for this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Darf als ein Diplomat für diese Gilde auftreten.</translation>
+    </message>
+    <message>
+        <source>May kick members out of this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Darf Mitglieder aus der Gilde werfen.</translation>
+    </message>
+    <message>
+        <source>May expel canidates from the guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Darf Kanidaten aus der Gilde ausschließen.</translation>
+    </message>
+    <message>
+        <source>May grant guild titles to members of this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Darf Gildentitel an Mitglieder erteilen.</translation>
+    </message>
+    <message>
+        <source>May grant permissions to other guild members.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Darf Befugnisse an andere Mitglieder weitergeben.</translation>
+    </message>
+    <message>
+        <source>Send this member a private message:</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Eine private Nachricht senden:</translation>
+    </message>
+    <message>
+        <source>Enter message...</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Nachricht eingeben...</translation>
+    </message>
+    <message>
+        <source>Kick this member out of the guild:</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Werfe dieses Mitglied aus der Gilde:</translation>
+    </message>
+    <message>
+        <source>Vote for a new leader:</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Stimme für einen neuen Leiter:</translation>
+    </message>
+    <message>
+        <source>You vote for this member.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Du stimmst für dieses Mitglied.</translation>
+    </message>
+    <message>
+        <source>Member Overview</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Mitgliedsübersicht</translation>
+    </message>
+    <message>
+        <source>Select a member you wish to see details about:</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Wähle ein Mitglied über das du Details sehen möchtest:</translation>
+    </message>
+    <message>
+        <source>Previous Page</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Vorherige Seite</translation>
+    </message>
+    <message>
+        <source>Next Page</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Nächste Seite</translation>
+    </message>
+    <message>
+        <source>Joined: </source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Beitritt:</translation>
+    </message>
+    <message>
+        <source>Title: %s</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Titel: %s</translation>
+    </message>
+    <message>
+        <source>No Title</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Kein Titel</translation>
+    </message>
+    <message>
+        <source>Canidate Overview</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Kanidatenübersicht</translation>
+    </message>
+    <message>
+        <source>Canidates</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Kanidaten</translation>
+    </message>
+    <message>
+        <source>A new canidate %s has been recruited into your guild by %s.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Ein neuer Kanidat %s wurde in deine Gilde aufgenommen durch %s.</translation>
+    </message>
+    <message>
+        <source>You have been expelled from your guild by %s.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Du wurdest von %s aus deiner Gilde ausgeschlossen.</translation>
+    </message>
+    <message>
+        <source>The canidate %s has been expelled from your guild by %s.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Der Kanidat %s wurde von %s aus deiner Gilde ausgeschlossen.</translation>
+    </message>
+    <message>
+        <source>You have been promoted to be a full member of your guild by %s.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Du wurdest von %s zu einem vollen Mitglied deiner Gilde erhoben.</translation>
+    </message>
+    <message>
+        <source>The canidate %s has been promoted to full member status by %s.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Der Kanidat %s wurde von %s zum vollen Mitglied deiner Gilde ernannt.</translation>
+    </message>
+    <message>
+        <source>Canidate Management</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Kanidatenverwaltung</translation>
+    </message>
+    <message>
+        <source>Recruit a new canidate for this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Rekrutiere einen neuen Kanidaten.</translation>
+    </message>
+    <message>
+        <source>Recruit a new member for this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Rekrutiere ein neues Mitglied.</translation>
+    </message>
+    <message>
+        <source>Expel this canidate</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Kanidaten ausschließen</translation>
+    </message>
+    <message>
+        <source>Accept this canidate</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Kanidaten akzeptieren</translation>
+    </message>
+    <message>
+        <source>The name of your guild has been changed to &apos;%s&apos; by %s.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Der Name deiner Gilde wurde in &apos;%s&apos; geändert von %s.</translation>
+    </message>
+    <message>
+        <source>The abbreviation of your guild has been changed to [%s] by %s.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Die Abkürzung deiner Gilde wurde in [%s] geändert von %s.</translation>
+    </message>
+    <message>
+        <source>The alignment of your guild has been changed to neutral by %s.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Die Gesinnung deiner Gilde wurde von %s geändert. Sie ist nun Neutral.</translation>
+    </message>
+    <message>
+        <source>The alignment of your guild has been changed to good by %s.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Die Gesinnung deiner Gilde wurde von %s geändert. Sie ist nun Gut.</translation>
+    </message>
+    <message>
+        <source>The alignment of your guild has been changed to evil by %s.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Die Gesinnung deiner Gilde wurde von %s geänert. Sie ist nun Böse.</translation>
+    </message>
+    <message>
+        <source>The website of your guild has been changed to %s by %s.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Die Webseite deiner Seite wurde auf %s gesetzt von %s.</translation>
+    </message>
+    <message>
+        <source>The charta of your guild has been changed by %s. Check your guildstone for details.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Die Charta deiner Gilde wurde von %s geändert. Besuche deinen Gildenstein für Details.</translation>
+    </message>
+    <message>
+        <source>General Properties</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Allgemeine Eigenschaften</translation>
+    </message>
+    <message>
+        <source>Guildname</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Name</translation>
+    </message>
+    <message>
+        <source>Abbreviation (3 chars max.)</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Abkürzung (3 Zeichen max.)</translation>
+    </message>
+    <message>
+        <source>Alignment</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Gesinnung</translation>
+    </message>
+    <message>
+        <source>Good</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Gut</translation>
+    </message>
+    <message>
+        <source>Neutral</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Neutral</translation>
+    </message>
+    <message>
+        <source>Evil</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Böse</translation>
+    </message>
+    <message>
+        <source>Website</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Webseite</translation>
+    </message>
+    <message>
+        <source>Charta (HTML allowed)</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Charta (HTML erlaubt)</translation>
+    </message>
+    <message>
+        <source>Additional Information</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Zusätzliche Informationen</translation>
+    </message>
+    <message>
+        <source>%s has left your guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>%s hat deine Gilde verlassen.</translation>
+    </message>
+    <message>
+        <source>%s has resigned from the leadership position of your guild. You can elect a new leader by voting for a member at your guildstone.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Membership Options</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable your guildsign.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable your guildsign.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resign from this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Aus dieser Gilde austreten.</translation>
+    </message>
+    <message>
+        <source>Resign from your leadership position.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your guild has been disbanded by %s!</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Main Menu</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Hauptmenü</translation>
+    </message>
+    <message>
+        <source>Modify the general properties of this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Ändere die Eigenschaften dieser Gilde.</translation>
+    </message>
+    <message>
+        <source>View information about this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Zeige die Eigenschaften dieser Gilde.</translation>
+    </message>
+    <message>
+        <source>Manage the members of this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Verwalte die Mitglieder dieser Gilde.</translation>
+    </message>
+    <message>
+        <source>View the members of this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Zeige die Mitglieder dieser Gilde.</translation>
+    </message>
+    <message>
+        <source>Manage the canidates of this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Verwalte die Anwärter dieser Gilde.</translation>
+    </message>
+    <message>
+        <source>View the canidates of this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Zeige die Anwärter dieser Gilde.</translation>
+    </message>
+    <message>
+        <source>View the diplomatic relations of this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Zeige die diplomatischen Beziehungen dieser Gilde.</translation>
+    </message>
+    <message>
+        <source>Membership options.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Mitgliedsoptionen.</translation>
+    </message>
+    <message>
+        <source>Disband this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Löse diese Gilde auf.</translation>
+    </message>
+    <message>
+        <source>%st
+</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%s</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%s [%s]</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation type="unfinished">%s [%s]</translation>
+    </message>
+    <message>
+        <source>Members: %u</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Mitglieder: %u</translation>
+    </message>
+    <message>
+        <source>Canidates: %u</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Anwärter: %u</translation>
+    </message>
+    <message>
+        <source>Leader: %s</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Leiter: %s</translation>
+    </message>
+    <message>
+        <source>Leader: None</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Leiter: Niemand</translation>
+    </message>
+    <message>
+        <source>Abandoned</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Aufgegeben</translation>
+    </message>
+    <message>
+        <source>The guild you try to manage has already been disbanded.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Die Gilde die du zu verwalten versuchst wurde bereits aufgelöst.</translation>
+    </message>
+    <message>
+        <source>The character has already left this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Der Spieler hat die Gilde bereits verlassen.</translation>
+    </message>
+    <message>
+        <source>Original Switches: %x</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The permissions for %s have been modified.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Die Befugnisse von %s wurden geändert.</translation>
+    </message>
+    <message>
+        <source>The guildtitle for %s has been changed.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Der Gildentitel für %s wurde geändert.</translation>
+    </message>
+    <message>
+        <source>Your message to %s has been sent.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Deine Nachricht an %s wurde gesendet.</translation>
+    </message>
+    <message>
+        <source>%s: %s</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your message has been queued up. You may edit your message on the guildstone until the recipient logs in.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Deine Nachricht wurde in die Warteschlange eingefügt. Du kannst sie am Gildenstein ändern bis der Empfänger wieder ins Spiel kommt.</translation>
+    </message>
+    <message>
+        <source>You lack the permission to kick members out of this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Du hast nicht die Befugnis Mitglieder aus der Gilde zu werfen.</translation>
+    </message>
+    <message>
+        <source>You have been removed from your guild by %s.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Du wurdest von %s aus deiner Gilde entfernt.</translation>
+    </message>
+    <message>
+        <source>%s has been removed from your guild by %s.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>%s wurde von %s aus deiner Gilde entfernt.</translation>
+    </message>
+    <message>
+        <source>%s has withdrawn the vote for your leadership position.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>%s hat seine Stimme für deine Gildenleitung zurückgezogen.</translation>
+    </message>
+    <message>
+        <source>You place your vote for %s.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Du stimmts für %s.</translation>
+    </message>
+    <message>
+        <source>%s has voted for your leadership position.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>%s hat für deine Gildenleitung gestimmt.</translation>
+    </message>
+    <message>
+        <source>You place your vote for yourself.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Du stimmts für dich selbst.</translation>
+    </message>
+    <message>
+        <source>You withdraw your vote for %s.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Du ziehst deine Stimme für %s zurück.</translation>
+    </message>
+    <message>
+        <source>You withdraw your vote for yourself.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Du ziehst deine Stimme für dich selbst zurück.</translation>
+    </message>
+    <message>
+        <source>%s has been elected as the new leader of your guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>%s wurde zum neuen Leiter deiner Gilde gewählt.</translation>
+    </message>
+    <message>
+        <source>You have been elected as the new leader of your guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Du wurdest zum neuen Leiter deiner Gilde gewählt.</translation>
+    </message>
+    <message>
+        <source>You have enough votes to become the new leader of your guild. To accept this result, please vote for yourself at your guildstone.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Du hast genug Stimmen um zum Leiter deiner Gilde gewählt zu werden. Gehe zum Gildenstein und stimme für dich selbst um die Wahl anzunehmen.</translation>
+    </message>
+    <message>
+        <source> [%s]</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>[%s]</translation>
+    </message>
+    <message>
+        <source>Member</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Mitglied</translation>
+    </message>
+    <message>
+        <source>Leader</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Leiter</translation>
+    </message>
+    <message>
+        <source>Shows Guildsign: Yes</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Zeigt Gildenzeichen: Ja</translation>
+    </message>
+    <message>
+        <source>Shows Guildsign: No</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Zeigt Gildenzeichen: Nein</translation>
+    </message>
+    <message>
+        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Online:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Online:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>%s&lt;br&gt;</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>%s&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Offline:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Offline:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>There are currently no known canidates for a membership in this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Es befinden sich momentan keine Anwärter in dieser Gilde.</translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;&lt;br&gt;</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>&lt;br&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source> (Leader)</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>(Leiter)</translation>
+    </message>
+    <message>
+        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Responsible For Recruitment:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Verantwortlich für Rekrutierung:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>There is currently no one responsible for recruiting canidates.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Es gibt momentan niemanden der für die Rekrutierung zuständig ist.</translation>
+    </message>
+    <message>
+        <source>You are not allowed to recruit canidates for this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Dir fehlt die Befugnis zum rekrutieren neuer Anwärter.</translation>
+    </message>
+    <message>
+        <source>You can only recruit players for your guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Du kannst nur Spieler rekrutieren.</translation>
+    </message>
+    <message>
+        <source>That character is already in a guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Dieser Spieler befindet sich bereits in einer Gilde.</translation>
+    </message>
+    <message>
+        <source>You have been recruited as a canidate for %s by %s.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Du wurdest in %s als Kanidat von %s aufgenommen.</translation>
+    </message>
+    <message>
+        <source>The selected player is not a canidate of this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Dieser Spieler ist kein Anwärter dieser Gilde.</translation>
+    </message>
+    <message>
+        <source>You are not allowed to expel canidates in this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Dir fehlt die Befugnis Anwärter aus der Gilde zu entfernen.</translation>
+    </message>
+    <message>
+        <source>You are not allowed to promote canidates in this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Es fehlt dir die Befugnis Anwärter zu vollen Mitgliedern zu ernennen.</translation>
+    </message>
+    <message>
+        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Website:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;&lt;a href=&quot;%s&quot;&gt;%s&lt;/a&gt;&lt;br&gt;&lt;br&gt;</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Webseite:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;&lt;a href=&quot;%s&quot;&gt;%s&lt;/a&gt;&lt;br&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Website:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;This guild has no website.&lt;br&gt;&lt;br&gt;</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Webseite:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;Diese Gilde hat keine Webseite.&lt;br&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Charta:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;%s</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Charta:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;%s</translation>
+    </message>
+    <message>
+        <source>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Charta:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;This guild has not defined a charta yet.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>&lt;basefont color=&quot;#666666&quot;&gt;&lt;h3&gt;&lt;u&gt;Charta:&lt;/u&gt;&lt;/h3&gt;&lt;basefont color=&quot;#333333&quot;&gt;&lt;br&gt;Diese Gilde hat bisher keine Charta festgelegt.</translation>
+    </message>
+    <message>
+        <source>You decide not to show your guildsign any longer.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Du entscheidest dich dein Gildenzeichen abzulegen.</translation>
+    </message>
+    <message>
+        <source>You decide to show your guildsign from now on.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Du entscheidest dich dein Gildenzeichen wieder anzulegen.</translation>
+    </message>
+    <message>
+        <source>You have resigned from your guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Du hast deine Gilde verlassen.</translation>
+    </message>
+    <message>
+        <source>You have resigned from your position as the leader of this guild.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Du hast die Position des Gildenleiters abgegeben.</translation>
+    </message>
+    <message>
+        <source>You need to be the leader of this guild or a gamemaster to disband it.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Du musst der Leiter der Gilde oder ein Spielleiter sein um diese Gilde aufzulösen.</translation>
+    </message>
+    <message>
+        <source>This guildstone is abandoned.</source>
+        <comment>../release/scripts/guilds/stone.py</comment>
+        <translation>Dieser Gildenstein ist aufgegeben.</translation>
+    </message>
+    <message>
+        <source>Wrong item id</source>
+        <comment>../release/scripts/guillotine.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This deed is broken.</source>
+        <comment>../release/scripts/housing/deed.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown Ingot</source>
+        <comment>../release/scripts/ingot.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a target you want to modify.</source>
+        <comment>../release/scripts/lock.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> tLock: </source>
+        <comment>../release/scripts/lock.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A key has been added to your backpack.</source>
+        <comment>../release/scripts/lock.py</comment>
+        <translation>Ein Schlüssel wurde deinem Rucksack hinzugefügt.</translation>
+    </message>
+    <message>
+        <source>Added the lock to the item.</source>
+        <comment>../release/scripts/lock.py</comment>
+        <translation>Das Schloss wurde dem Gegenstand hinzugefügt.</translation>
+    </message>
+    <message>
+        <source>Modified the lock of this item.</source>
+        <comment>../release/scripts/lock.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The lock has been removed from the item.</source>
+        <comment>../release/scripts/lock.py</comment>
+        <translation>Das Schloss wurde von dem Gegenstand entfernt.</translation>
+    </message>
+    <message>
+        <source>This item has no lock.</source>
+        <comment>../release/scripts/lock.py</comment>
+        <translation>Dieser Gegenstand hat kein Schloss.</translation>
+    </message>
+    <message>
+        <source>You have to target an item.</source>
+        <comment>../release/scripts/lock.py</comment>
+        <translation>Du musst einen Gegenstand wählen.</translation>
+    </message>
+    <message>
+        <source> (Locked)</source>
+        <comment>../release/scripts/lock.py</comment>
+        <translation>(Verschlossen)</translation>
+    </message>
+    <message>
+        <source> (Unlocked)</source>
+        <comment>../release/scripts/lock.py</comment>
+        <translation>(Unverschlossen)</translation>
+    </message>
+    <message>
         <source>a recall rune for %s</source>
-        <comment>C:/wolfpack/server/release/scripts/magic/rune.py</comment>
+        <comment>../release/scripts/magic/rune.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>an unmarked recall rune</source>
-        <comment>C:/wolfpack/server/release/scripts/magic/rune.py</comment>
+        <comment>../release/scripts/magic/rune.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rename Book</source>
-        <comment>C:/wolfpack/server/release/scripts/magic/runebook.py</comment>
+        <comment>../release/scripts/magic/runebook.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Drop rune</source>
-        <comment>C:/wolfpack/server/release/scripts/magic/runebook.py</comment>
+        <comment>../release/scripts/magic/runebook.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The book&apos;s title has been changed.</source>
-        <comment>C:/wolfpack/server/release/scripts/magic/runebook.py</comment>
+        <comment>../release/scripts/magic/runebook.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>(indescript)</source>
-        <comment>C:/wolfpack/server/release/scripts/magic/runebook.py</comment>
+        <comment>../release/scripts/magic/runebook.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The runebook has to be in your belongings to modify it.</source>
-        <comment>C:/wolfpack/server/release/scripts/magic/runebook.py</comment>
+        <comment>../release/scripts/magic/runebook.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Empty</source>
-        <comment>C:/wolfpack/server/release/scripts/magic/runebook.py</comment>
+        <comment>../release/scripts/magic/runebook.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown Map Command %u.</source>
+        <comment>../release/scripts/map.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown map preset: %s.</source>
+        <comment>../release/scripts/map.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown map type: %s.</source>
+        <comment>../release/scripts/map.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pick your destination:</source>
+        <comment>../release/scripts/moongate.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OKAY</source>
+        <comment>../release/scripts/moongate.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CANCEL</source>
+        <comment>../release/scripts/moongate.py</comment>
+        <translation>ABBRECHEN</translation>
+    </message>
+    <message>
+        <source>Canceled.</source>
+        <comment>../release/scripts/moongate.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Destination Invalid!</source>
+        <comment>../release/scripts/moongate.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>I regret nothing!</source>
-        <comment>C:/wolfpack/server/release/scripts/npc/playervendor/__init__.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/npc/playervendor/__init__.py</comment>
+        <translation>Ich bereue nichts!</translation>
     </message>
     <message>
         <source>The item you tried to buy is no longer available for sale.</source>
-        <comment>C:/wolfpack/server/release/scripts/npc/playervendor/buygump.py</comment>
+        <comment>../release/scripts/npc/playervendor/buygump.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>You cannot set the properties of items in a player vendor not owned by you.</source>
-        <comment>C:/wolfpack/server/release/scripts/npc/playervendor/item.py</comment>
+        <comment>../release/scripts/npc/playervendor/item.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>My charge per day is:</source>
-        <comment>C:/wolfpack/server/release/scripts/npc/playervendor/statusgump.py</comment>
+        <comment>../release/scripts/npc/playervendor/statusgump.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>You can not create a larger pile from a small pile of ore.</source>
+        <comment>../release/scripts/ore.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You combine the two ore piles to create a single pile of ore.</source>
+        <comment>../release/scripts/ore.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You cannot smelt that kind of ore.</source>
+        <comment>../release/scripts/ore.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You succeed in your try to pickpocket the dip.</source>
+        <comment>../release/scripts/pickpocket_dip.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must be standing in front of or behind the dummy to use it.</source>
+        <comment>../release/scripts/pickpocket_dip.py</comment>
+        <translation type="unfinished">Du musst vor oder hinter einer Trainingspuppe stehen.</translation>
+    </message>
+    <message>
         <source>Empty the bowl?</source>
-        <comment>C:/wolfpack/server/release/scripts/plants/emptybowlgump.py</comment>
+        <comment>../release/scripts/plants/emptybowlgump.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No solen lairs exist on this facet.  Try again in Trammel or Felucca.</source>
-        <comment>C:/wolfpack/server/release/scripts/plants/greenthorns.py</comment>
+        <comment>../release/scripts/plants/greenthorns.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>* The ground erupts with chaotic growth! *</source>
-        <comment>C:/wolfpack/server/release/scripts/plants/greenthorns.py</comment>
+        <comment>../release/scripts/plants/greenthorns.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>* A magical bunny leaps out of its hole, disturbed by the thorn&apos;s effect! *</source>
-        <comment>C:/wolfpack/server/release/scripts/plants/greenthorns.py</comment>
+        <comment>../release/scripts/plants/greenthorns.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>* The bunny begins to dig a tunnel back to its underground lair *</source>
-        <comment>C:/wolfpack/server/release/scripts/plants/greenthorns.py</comment>
+        <comment>../release/scripts/plants/greenthorns.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>* Strange green tendrils rise from the ground, whipping wildly! *</source>
-        <comment>C:/wolfpack/server/release/scripts/plants/greenthorns.py</comment>
+        <comment>../release/scripts/plants/greenthorns.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>* Slithering ice serpents rise to the surface to investigate the disturbance! *</source>
-        <comment>C:/wolfpack/server/release/scripts/plants/greenthorns.py</comment>
+        <comment>../release/scripts/plants/greenthorns.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>a mysterious rabbit hole</source>
-        <comment>C:/wolfpack/server/release/scripts/plants/greenthorns.py</comment>
+        <comment>../release/scripts/plants/greenthorns.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set plant</source>
-        <comment>C:/wolfpack/server/release/scripts/plants/makedecorativegump.py</comment>
+        <comment>../release/scripts/plants/makedecorativegump.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>to decorative mode</source>
-        <comment>C:/wolfpack/server/release/scripts/plants/makedecorativegump.py</comment>
+        <comment>../release/scripts/plants/makedecorativegump.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>* You feel the effects of your poison resistance wearing off *</source>
-        <comment>C:/wolfpack/server/release/scripts/plants/orangepetals.py</comment>
+        <comment>../release/scripts/plants/orangepetals.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>This bowl of dirt already has a plant in it!</source>
-        <comment>C:/wolfpack/server/release/scripts/plants/plant.py</comment>
+        <comment>../release/scripts/plants/plant.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>This bowl of dirt already has a sapling in it!</source>
-        <comment>C:/wolfpack/server/release/scripts/plants/plant.py</comment>
+        <comment>../release/scripts/plants/plant.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>This bowl of dirt already has a seed in it!</source>
-        <comment>C:/wolfpack/server/release/scripts/plants/plant.py</comment>
+        <comment>../release/scripts/plants/plant.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Reproduction</source>
-        <comment>C:/wolfpack/server/release/scripts/plants/reproductiongump.py</comment>
+        <comment>../release/scripts/plants/reproductiongump.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>This potion is out of your reach...</source>
-        <comment>C:/wolfpack/server/release/scripts/potions/__init__.py</comment>
+        <comment>../release/scripts/potions/__init__.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>You should throw this now!</source>
-        <comment>C:/wolfpack/server/release/scripts/potions/__init__.py</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You can only throw one potion at a time!</source>
-        <comment>C:/wolfpack/server/release/scripts/potions/__init__.py</comment>
+        <comment>../release/scripts/potions/__init__.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>What do you want to shrink?</source>
-        <comment>C:/wolfpack/server/release/scripts/potions/__init__.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/potions/__init__.py</comment>
+        <translation>Was möchtest du schrumpfen?</translation>
+    </message>
+    <message>
+        <source>You are already at full mana.</source>
+        <comment>../release/scripts/potions/mana.py</comment>
+        <translation>Du bist bereits bei vollem Mana.</translation>
+    </message>
+    <message>
+        <source>You must wait a few seconds before using another mana potion.</source>
+        <comment>../release/scripts/potions/mana.py</comment>
+        <translation>Du musst einige Sekunden warten, bevor du einen weiteren Manatrink zu dir nehmen kannst.</translation>
     </message>
     <message>
         <source>You don&apos;t own that creature.</source>
-        <comment>C:/wolfpack/server/release/scripts/potions/shrink.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/potions/shrink.py</comment>
+        <translation>Dieses Wesen gehört nicht dir.</translation>
     </message>
     <message>
         <source>The shrink potion has to be in your backpack to use it.</source>
-        <comment>C:/wolfpack/server/release/scripts/potions/shrink.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/potions/shrink.py</comment>
+        <translation>Der Schrumpftrank muss sich in deinem Rucksack befinden.</translation>
     </message>
     <message>
         <source>You can only shrink pets owned by you.</source>
-        <comment>C:/wolfpack/server/release/scripts/potions/shrink.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/potions/shrink.py</comment>
+        <translation>Du kannst nur Wesen schrumpfen, die dir gehören.</translation>
     </message>
     <message>
         <source>You cannot shrink other players.</source>
-        <comment>C:/wolfpack/server/release/scripts/potions/shrink.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/potions/shrink.py</comment>
+        <translation>Du kannst keine anderen Spieler schrumpfen.</translation>
     </message>
     <message>
         <source>You can only shrink animals and monsters!</source>
-        <comment>C:/wolfpack/server/release/scripts/potions/shrink.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/potions/shrink.py</comment>
+        <translation>Du kannst nur Tiere und Monster schrumpfen!</translation>
     </message>
     <message>
         <source>You cannot shrink that.</source>
-        <comment>C:/wolfpack/server/release/scripts/potions/shrink.py</comment>
+        <comment>../release/scripts/potions/shrink.py</comment>
+        <translation>Das kannst du nicht schrumpfen.</translation>
+    </message>
+    <message>
+        <source>DEFAULT</source>
+        <comment>../release/scripts/runedye.py</comment>
+        <translation>STANDARD</translation>
+    </message>
+    <message>
+        <source>Iron</source>
+        <comment>../release/scripts/skills/blacksmithing.py</comment>
+        <translation>Eisen</translation>
+    </message>
+    <message>
+        <source>Dull Copper</source>
+        <comment>../release/scripts/skills/blacksmithing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shadow Iron</source>
+        <comment>../release/scripts/skills/blacksmithing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copper</source>
+        <comment>../release/scripts/skills/blacksmithing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bronze</source>
+        <comment>../release/scripts/skills/blacksmithing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gold</source>
+        <comment>../release/scripts/skills/blacksmithing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Agapite</source>
+        <comment>../release/scripts/skills/blacksmithing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Verite</source>
+        <comment>../release/scripts/skills/blacksmithing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Valorite</source>
+        <comment>../release/scripts/skills/blacksmithing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Red Scales</source>
+        <comment>../release/scripts/skills/blacksmithing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yellow Scales</source>
+        <comment>../release/scripts/skills/blacksmithing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Black Scales</source>
+        <comment>../release/scripts/skills/blacksmithing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Green Scales</source>
+        <comment>../release/scripts/skills/blacksmithing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>White Scales</source>
+        <comment>../release/scripts/skills/blacksmithing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blue Scales</source>
+        <comment>../release/scripts/skills/blacksmithing.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Water: 1&lt;br&gt;</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/cooking.py</comment>
+        <comment>../release/scripts/skills/cooking.py</comment>
+        <translation>Wasser: 1&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>Flour: %i&lt;br&gt;</source>
+        <comment>../release/scripts/skills/cooking.py</comment>
+        <translation>Mehl: %1&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>You don&apos;t have enough material to make that.</source>
+        <comment>../release/scripts/skills/cooking.py</comment>
+        <translation>Du hast nicht genug Material um das herzustellen.</translation>
+    </message>
+    <message>
+        <source>Please report to a gamemaster that the item &apos;%s&apos; couldn&apos;t be found.</source>
+        <comment>../release/scripts/skills/fishing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>shoes</source>
+        <comment>../release/scripts/skills/fishing.py</comment>
+        <translation>Schuhe</translation>
+    </message>
+    <message>
+        <source>a fish</source>
+        <comment>../release/scripts/skills/fishing.py</comment>
+        <translation>ein Fisch</translation>
+    </message>
+    <message>
+        <source>This script has not been configured correctly.</source>
+        <comment>../release/scripts/skills/fishing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resource Item: fish</source>
+        <comment>../release/scripts/skills/fishing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sand</source>
+        <comment>../release/scripts/skills/glassblowing.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Black Pearl</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/skills/inscription.py</comment>
+        <translation>Schwarzperle</translation>
     </message>
     <message>
         <source>Blood Moss</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/skills/inscription.py</comment>
+        <translation>Blutmoos</translation>
     </message>
     <message>
         <source>Garlic</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/skills/inscription.py</comment>
+        <translation>Knoblauch</translation>
     </message>
     <message>
         <source>Ginseng</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mandrake Root</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Nightshade</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/skills/inscription.py</comment>
+        <translation>Nachtschatten</translation>
     </message>
     <message>
         <source>Sulfurous Ash</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Spider&apos;s Silk</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Batwing</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Blackmoor</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bloodspawn</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Daemon Blood</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/skills/inscription.py</comment>
+        <translation>Dämonenblut</translation>
     </message>
     <message>
         <source>Bone</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/skills/inscription.py</comment>
+        <translation>Knochen</translation>
     </message>
     <message>
         <source>Brimstone</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Daemon Bone</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Fertile Dirt</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Dragon&apos;s Blood</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Executioner&apos;s Cap</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Eye of Newt</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Obsidian</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Pigiron</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Pumice</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Nox Crystal</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Grave Dust</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Deadwood</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Wyrm&apos;s Heart</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Runebook</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/skills/inscription.py</comment>
+        <translation>Runenbuch</translation>
     </message>
     <message>
         <source>Gate Travel Scrolls</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Recall Scrolls</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unmarked Runes</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Other</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/skills/inscription.py</comment>
+        <translation>Anderes</translation>
     </message>
     <message>
         <source>Inscription</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>First Circle</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/skills/inscription.py</comment>
+        <translation>Erster Zirkel</translation>
     </message>
     <message>
         <source>Second Circle</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/skills/inscription.py</comment>
+        <translation>Zweiter Zirkel</translation>
     </message>
     <message>
         <source>Third Circle</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/skills/inscription.py</comment>
+        <translation>Dritter Zirkel</translation>
     </message>
     <message>
         <source>Fourth Circle</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/skills/inscription.py</comment>
+        <translation>Vierter Zirkel</translation>
     </message>
     <message>
         <source>Fifth Circle</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/skills/inscription.py</comment>
+        <translation>Fünfter Zirkel</translation>
     </message>
     <message>
         <source>Sixth Circle</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/skills/inscription.py</comment>
+        <translation>Sechster Zirkel</translation>
     </message>
     <message>
         <source>Seventh Circle</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/skills/inscription.py</comment>
+        <translation>Siebter Zirkel</translation>
     </message>
     <message>
         <source>Eight Circle</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/skills/inscription.py</comment>
+        <translation>Achter Zirkel</translation>
     </message>
     <message>
         <source>Blank Scrolls</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/inscription.py</comment>
+        <comment>../release/scripts/skills/inscription.py</comment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You could probably buy this for %u gold.</source>
+        <comment>../release/scripts/skills/itemid.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You don&apos;t think that anyone would sell this.</source>
+        <comment>../release/scripts/skills/itemid.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You could probably sell this for %u gold.</source>
+        <comment>../release/scripts/skills/itemid.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You don&apos;t think anyone would buy this.</source>
+        <comment>../release/scripts/skills/itemid.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are able to identify the use of this item!</source>
+        <comment>../release/scripts/skills/itemid.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have moved too far away to gather any wood.</source>
+        <comment>../release/scripts/skills/lumberjacking.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Granite</source>
+        <comment>../release/scripts/skills/masonry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dull Copper Granite</source>
+        <comment>../release/scripts/skills/masonry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shadow Granite</source>
+        <comment>../release/scripts/skills/masonry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copper Granite</source>
+        <comment>../release/scripts/skills/masonry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bronze Granite</source>
+        <comment>../release/scripts/skills/masonry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gold Granite</source>
+        <comment>../release/scripts/skills/masonry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Agapite Granite</source>
+        <comment>../release/scripts/skills/masonry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Verite Granite</source>
+        <comment>../release/scripts/skills/masonry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Valorite Granite</source>
+        <comment>../release/scripts/skills/masonry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is no ore here to mine.</source>
+        <comment>../release/scripts/skills/mining.py</comment>
+        <translation>Hier gibt es kein Erz zum Abbauen.</translation>
+    </message>
+    <message>
+        <source>You need an instrument.</source>
+        <comment>../release/scripts/skills/peacemaking.py</comment>
+        <translation>Du brauchst ein Instrument.</translation>
     </message>
     <message>
         <source>Why don&apos;t you simply take it?</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/stealing.py</comment>
-        <translation type="unfinished">Warum nimmst du es nicht einfach?</translation>
+        <comment>../release/scripts/skills/stealing.py</comment>
+        <translation>Warum nimmst du es nicht einfach?</translation>
     </message>
     <message>
         <source>You can&apos;t steal from game masters.</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/stealing.py</comment>
-        <translation type="unfinished">Du kannst von Spielleitern nichst stehlen.</translation>
+        <comment>../release/scripts/skills/stealing.py</comment>
+        <translation>Du kannst von Spielleitern nichst stehlen.</translation>
     </message>
     <message>
         <source>You are too far away to steal from that person.</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/stealing.py</comment>
-        <translation type="unfinished">Du bist zu weit weg um von dieser Person etwas zu stehlen.</translation>
+        <comment>../release/scripts/skills/stealing.py</comment>
+        <translation>Du bist zu weit weg um von dieser Person etwas zu stehlen.</translation>
     </message>
     <message>
         <source>Bad luck, your victim doesn&apos;t have a backpack.</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/stealing.py</comment>
-        <translation type="unfinished">Pech gehabt, dein Opfer hat keinen Rucksack.</translation>
+        <comment>../release/scripts/skills/stealing.py</comment>
+        <translation>Pech gehabt, dein Opfer hat keinen Rucksack.</translation>
     </message>
     <message>
         <source>You reach into %s&apos;s backpack and try to steal something...</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/stealing.py</comment>
+        <comment>../release/scripts/skills/stealing.py</comment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>That is too heavy to steal.</source>
+        <comment>../release/scripts/skills/stealing.py</comment>
+        <translation>Das ist zu schwer zum Stehlen.</translation>
     </message>
     <message>
         <source>You have been caught!</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/stealing.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/skills/stealing.py</comment>
+        <translation>Du wurdest erwischt!</translation>
     </message>
     <message>
         <source>Guards! A thief is amoung us!</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/stealing.py</comment>
-        <translation type="unfinished">Wachen! Ein Dieb ist unter uns!</translation>
+        <comment>../release/scripts/skills/stealing.py</comment>
+        <translation>Wachen! Ein Dieb ist unter uns!</translation>
+    </message>
+    <message>
+        <source>You notice %s trying to steal %s from you.</source>
+        <comment>../release/scripts/skills/stealing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Leather</source>
+        <comment>../release/scripts/skills/tailoring.py</comment>
+        <translation>Leder</translation>
+    </message>
+    <message>
+        <source>Spined Leather</source>
+        <comment>../release/scripts/skills/tailoring.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horned Leather</source>
+        <comment>../release/scripts/skills/tailoring.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barbed Leather</source>
+        <comment>../release/scripts/skills/tailoring.py</comment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cloth</source>
-        <comment>C:/wolfpack/server/release/scripts/skills/tailoring.py</comment>
+        <comment>../release/scripts/skills/tailoring.py</comment>
+        <translation>Stoff</translation>
+    </message>
+    <message>
+        <source>Star Sapphire</source>
+        <comment>../release/scripts/skills/tinkering.py</comment>
+        <translation>Sternsaphir</translation>
+    </message>
+    <message>
+        <source>Emerald</source>
+        <comment>../release/scripts/skills/tinkering.py</comment>
+        <translation>Smaragd</translation>
+    </message>
+    <message>
+        <source>Sapphire</source>
+        <comment>../release/scripts/skills/tinkering.py</comment>
+        <translation>Saphir</translation>
+    </message>
+    <message>
+        <source>Ruby</source>
+        <comment>../release/scripts/skills/tinkering.py</comment>
+        <translation>Rubin</translation>
+    </message>
+    <message>
+        <source>Citrine</source>
+        <comment>../release/scripts/skills/tinkering.py</comment>
+        <translation>Zitrin</translation>
+    </message>
+    <message>
+        <source>Amethyst</source>
+        <comment>../release/scripts/skills/tinkering.py</comment>
+        <translation>Amethyst</translation>
+    </message>
+    <message>
+        <source>Tourmaline</source>
+        <comment>../release/scripts/skills/tinkering.py</comment>
+        <translation>Turmalin</translation>
+    </message>
+    <message>
+        <source>Amber</source>
+        <comment>../release/scripts/skills/tinkering.py</comment>
+        <translation>Bernstein</translation>
+    </message>
+    <message>
+        <source>Diamond</source>
+        <comment>../release/scripts/skills/tinkering.py</comment>
+        <translation>Diamant</translation>
+    </message>
+    <message>
+        <source>is in the North</source>
+        <comment>../release/scripts/skills/tracking.py</comment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>is in the North-East</source>
+        <comment>../release/scripts/skills/tracking.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>is in the East</source>
+        <comment>../release/scripts/skills/tracking.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>is in the South-East</source>
+        <comment>../release/scripts/skills/tracking.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>is in the South</source>
+        <comment>../release/scripts/skills/tracking.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>is in the South-West</source>
+        <comment>../release/scripts/skills/tracking.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>is in the West</source>
+        <comment>../release/scripts/skills/tracking.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>is in the North-West</source>
+        <comment>../release/scripts/skills/tracking.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>is here</source>
+        <comment>../release/scripts/skills/tracking.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Single bars, you are a winner!</source>
+        <comment>../release/scripts/slotmachine.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Double bars, you are a winner!</source>
+        <comment>../release/scripts/slotmachine.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Triple bars, you are a winner!</source>
+        <comment>../release/scripts/slotmachine.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Any three 7`s, you are a winner!</source>
+        <comment>../release/scripts/slotmachine.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Three blue 7`s, you are a winner!</source>
+        <comment>../release/scripts/slotmachine.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Three white 7`s, you are a winner!</source>
+        <comment>../release/scripts/slotmachine.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Three red 7`s, you are a winner!</source>
+        <comment>../release/scripts/slotmachine.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jackpot, you are a winner!</source>
+        <comment>../release/scripts/slotmachine.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your ghostly hand passes trough this object.</source>
+        <comment>../release/scripts/slotmachine.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You don&apos;t have enough gold to play.</source>
+        <comment>../release/scripts/slotmachine.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You lost! Insert coins to try again.</source>
+        <comment>../release/scripts/slotmachine.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wolfpack Spawn System</source>
+        <comment>../release/scripts/spawngem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spawn Gem Properties</source>
+        <comment>../release/scripts/spawngem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spawn Type</source>
+        <comment>../release/scripts/spawngem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Item or NPC Definition</source>
+        <comment>../release/scripts/spawngem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Area or Wander Distance</source>
+        <comment>../release/scripts/spawngem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Min. Interval in Minutes</source>
+        <comment>../release/scripts/spawngem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max. Interval in Minutes</source>
+        <comment>../release/scripts/spawngem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius: %s
+Interval: %s to %s minutes</source>
+        <comment>../release/scripts/spawngem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have to choose a spawntype.</source>
+        <comment>../release/scripts/spawngem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You entered an invalid value.</source>
+        <comment>../release/scripts/spawngem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DEFAULT</source>
+        <comment>../release/scripts/specialdye.py</comment>
+        <translation>STANDARD</translation>
     </message>
     <message>
         <source>Alas you don&apos;t have any money in your bank.</source>
-        <comment>C:/wolfpack/server/release/scripts/speech/banker.py</comment>
-        <translation type="unfinished">Ihr habt leider kein Geld in eurem Bankfach.</translation>
+        <comment>../release/scripts/speech/banker.py</comment>
+        <translation>Ihr habt leider kein Geld in eurem Bankfach.</translation>
     </message>
     <message>
         <source>You have %i gold in your bank.</source>
-        <comment>C:/wolfpack/server/release/scripts/speech/banker.py</comment>
-        <translation type="unfinished">Ihr habt %i Goldmünzen in eurem Bankfach.</translation>
+        <comment>../release/scripts/speech/banker.py</comment>
+        <translation>Ihr habt %i Goldmünzen in eurem Bankfach.</translation>
     </message>
     <message>
         <source>Here is your bank box, %s.</source>
-        <comment>C:/wolfpack/server/release/scripts/speech/banker.py</comment>
-        <translation type="unfinished">Hier ist euer Bankfach, %s.</translation>
+        <comment>../release/scripts/speech/banker.py</comment>
+        <translation>Hier ist euer Bankfach, %s.</translation>
+    </message>
+    <message>
+        <source>You are entangled in the spiderweb. You have to break free!</source>
+        <comment>../release/scripts/spiderweb.py</comment>
+        <translation>Du bist in dem Spinnennetz gefangen. Du musst dich losreißen!</translation>
+    </message>
+    <message>
+        <source>You damage the spiderweb.</source>
+        <comment>../release/scripts/spiderweb.py</comment>
+        <translation>Du beschädigst dass Spinnennetz.</translation>
+    </message>
+    <message>
+        <source>You manage to break free of the spiderweb.</source>
+        <comment>../release/scripts/spiderweb.py</comment>
+        <translation>Es gelingt dir dich aus dem Spinnennetz zu befreien.</translation>
     </message>
     <message>
         <source>Your stomach growls...</source>
-        <comment>C:/wolfpack/server/release/scripts/system/hunger.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/hunger.py</comment>
+        <translation>Dein Magen knurrt...</translation>
     </message>
     <message>
         <source>Your stomach hurts from the lack of food...</source>
-        <comment>C:/wolfpack/server/release/scripts/system/hunger.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/hunger.py</comment>
+        <translation>Dein Magen schmerzt wegen dem fehlenden Essen...</translation>
     </message>
     <message>
         <source>Unexpected input response.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/input.py</comment>
+        <comment>../release/scripts/system/input.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>SKILLS</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>FÄHIGKEITEN</translation>
     </message>
     <message>
         <source>MATERIALS</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>MATERIALIEN</translation>
     </message>
     <message>
         <source>OTHER</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>ANDERES</translation>
     </message>
     <message>
         <source>ITEM</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>GEGENSTAND</translation>
     </message>
     <message>
         <source>Back</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>Zurück</translation>
     </message>
     <message>
         <source>Make Now</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>Jetzt herstellen</translation>
     </message>
     <message>
         <source>You don&apos;t have enough material to make that.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>Du hast nicht genug Material um das herzustellen.</translation>
     </message>
     <message>
         <source>You try to craft with an invalid material.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
+        <comment>../release/scripts/system/makemenus.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Make Last</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>Letztes herstellen</translation>
     </message>
     <message>
         <source>Repair Item</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>Reparieren</translation>
     </message>
     <message>
         <source>Enhance Item</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>Verbessern</translation>
     </message>
     <message>
         <source>Smelt Item</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>Einschmelzen</translation>
     </message>
     <message>
         <source>Exit</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>Beenden</translation>
     </message>
     <message>
         <source>Previous Menu</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>Vorheriges Menü</translation>
     </message>
     <message>
         <source>Last Ten</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>Letzte Zehn</translation>
     </message>
     <message>
         <source>Dont Mark Item</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>Nicht signieren</translation>
     </message>
     <message>
         <source>Mark Item</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>Signieren</translation>
     </message>
     <message>
         <source>You didn&apos;t make anything yet.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>Du hast bisher noch nichts hergestellt.</translation>
     </message>
     <message>
         <source>CATEGORIES</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>KATEGORIEN</translation>
     </message>
     <message>
         <source>SELECTIONS</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>AUSWAHL</translation>
     </message>
     <message>
         <source>Previous Page</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished">Vorherige Seite</translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>Vorherige Seite</translation>
     </message>
     <message>
         <source>Next Page</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished">Nächste Seite</translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>Nächste Seite</translation>
     </message>
     <message>
         <source>You put the new item into your backpack.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>Du legst den neuen Gegenstand in deinen Rucksack.</translation>
     </message>
     <message>
         <source>Chance to create an exceptional item: %0.02f%%.&lt;br&gt;</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>Chance auf einen außergewöhnlichen Gegenstand: %0.02f%%.&lt;br&gt;</translation>
     </message>
     <message>
         <source>You are not skilled enough to use this material.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation>Du bist nicht bewandert genug um dieses Material zu verwenden.</translation>
     </message>
     <message>
         <source>You selected an invalid material.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/makemenus.py</comment>
+        <comment>../release/scripts/system/makemenus.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>New %s page from &apos;%s&apos; on account &apos;%s&apos;:</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Updated %s page from &apos;%s&apos; on account &apos;%s&apos;:</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%s requeues gm page from %s (%s).
 </source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%s assigns gm page from %s (%s) to himself.
 </source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Page Menu</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/pages.py</comment>
+        <translation>Hilfemenü</translation>
     </message>
     <message>
         <source>Category: %s</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/pages.py</comment>
+        <translation>Kategorie: %s</translation>
     </message>
     <message>
         <source>Char name:</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Account name:</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Char position:</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Page sent from:</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Date/time:</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/pages.py</comment>
+        <translation>Datum/Zeit:</translation>
     </message>
     <message>
         <source>Message:</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/pages.py</comment>
+        <translation>Nachricht:</translation>
     </message>
     <message>
         <source>Go to char position</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bring char</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Go to page position</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Send message:</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;msg&gt;</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show socket info gump</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Requeue page</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete page</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Close</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
-        <translation type="unfinished">Schließen</translation>
+        <comment>../release/scripts/system/pages.py</comment>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>%s sends player %s (%s) a message: %s
 </source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%s deletes gm page from %s (%s).
 </source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%s (%s) updates his gm page [%s]:
 %s
 </source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%s (%s) makes a gm page [%s]:
 %s
 </source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%s (%s) deletes his gm page.
 </source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Help menu</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/pages.py</comment>
+        <translation>Hilfemenü</translation>
     </message>
     <message>
         <source>Category:</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/pages.py</comment>
+        <translation>Kategorie:</translation>
     </message>
     <message>
         <source>Page Queue</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Char: </source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Account: </source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Category: </source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/pages.py</comment>
+        <translation>Kategorie:</translation>
     </message>
     <message>
         <source>Time: </source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/pages.py</comment>
+        <translation>Zeit:</translation>
     </message>
     <message>
         <source>Page %u of %u</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/pages.py</comment>
+        <translation>Seite %u von %u</translation>
     </message>
     <message>
         <source>BUG</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>STUCK</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>GAMEPLAY</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>You requeue your previous page.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>You assign the gm page to yourself.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>This page is already assigned to someone else.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A message from %s: %s</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The message has been sent.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>This player is currently offline. The message has not been sent.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>This player is currently offline.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>You requeue the page.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Your gm page has been deleted.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>You remove the page.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Your page has been removed.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>You have to enter a message for your page.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
+        <comment>../release/scripts/system/pages.py</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>BUILD</source>
-        <comment>C:/wolfpack/server/release/scripts/system/pages.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/pages.py</comment>
+        <translation>BAUEN</translation>
     </message>
     <message>
         <source>Welcome to %s</source>
-        <comment>C:/wolfpack/server/release/scripts/system/players.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/players.py</comment>
+        <translation>Willkommen bei %s</translation>
     </message>
     <message>
         <source>Report Bugs: http://bugs.wpdev.org/</source>
-        <comment>C:/wolfpack/server/release/scripts/system/players.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/players.py</comment>
+        <translation>Berichte Bugs: http://bugs.wpdev.org/</translation>
     </message>
     <message>
         <source>Reconnecting.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/players.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/players.py</comment>
+        <translation>Stelle Verbindung wieder her.</translation>
     </message>
     <message>
         <source>You aren&apos;t in a guild.</source>
-        <comment>C:/wolfpack/server/release/scripts/system/players.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/players.py</comment>
+        <translation>Du bist in keiner Gilde.</translation>
     </message>
     <message>
         <source>* You feel yourself resisting the effects of the poison *</source>
-        <comment>C:/wolfpack/server/release/scripts/system/poison.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/poison.py</comment>
+        <translation>*Du fühlst wie du den Auswirkungen des Giftes widerstehst.*</translation>
     </message>
     <message>
         <source>* %s seems resistant to the poison *</source>
-        <comment>C:/wolfpack/server/release/scripts/system/poison.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/system/poison.py</comment>
+        <translation>* %s scheint dem Gift zu widerstehen *</translation>
     </message>
     <message>
         <source>Trading item 0x%x (&apos;%s&apos;, %u) to player &apos;%s&apos; (0x%x, %s)
 </source>
-        <comment>C:/wolfpack/server/release/scripts/system/trading.py</comment>
+        <comment>../release/scripts/system/trading.py</comment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your trading partner is currently busy.</source>
+        <comment>../release/scripts/system/trading.py</comment>
+        <translation>Dein Handelspartner ist gerade beschäftigt.</translation>
+    </message>
+    <message>
+        <source>You must be standing in front of or behind the dummy to use it.</source>
+        <comment>../release/scripts/training_dummy.py</comment>
+        <translation>Du musst vor oder hinter einer Trainingspuppe stehen.</translation>
+    </message>
+    <message>
+        <source>one o&apos;clock</source>
+        <comment>../release/scripts/wall_clock.py</comment>
+        <translation>ein Uhr</translation>
+    </message>
+    <message>
+        <source>two o&apos;clock</source>
+        <comment>../release/scripts/wall_clock.py</comment>
+        <translation>zwei Uhr</translation>
+    </message>
+    <message>
+        <source>three o&apos;clock</source>
+        <comment>../release/scripts/wall_clock.py</comment>
+        <translation>drei Uhr</translation>
+    </message>
+    <message>
+        <source>four o&apos;clock</source>
+        <comment>../release/scripts/wall_clock.py</comment>
+        <translation>vier Uhr</translation>
+    </message>
+    <message>
+        <source>five o&apos;clock</source>
+        <comment>../release/scripts/wall_clock.py</comment>
+        <translation>fünf Uhr</translation>
+    </message>
+    <message>
+        <source>six o&apos;clock</source>
+        <comment>../release/scripts/wall_clock.py</comment>
+        <translation>sechs Uhr</translation>
+    </message>
+    <message>
+        <source>seven o&apos;clock</source>
+        <comment>../release/scripts/wall_clock.py</comment>
+        <translation>sieben Uhr</translation>
+    </message>
+    <message>
+        <source>eight o&apos;clock</source>
+        <comment>../release/scripts/wall_clock.py</comment>
+        <translation>acht Uhr</translation>
+    </message>
+    <message>
+        <source>nine o&apos;clock</source>
+        <comment>../release/scripts/wall_clock.py</comment>
+        <translation>neun Uhr</translation>
+    </message>
+    <message>
+        <source>ten o&apos;clock</source>
+        <comment>../release/scripts/wall_clock.py</comment>
+        <translation>zehn Uhr</translation>
+    </message>
+    <message>
+        <source>eleven o&apos;clock</source>
+        <comment>../release/scripts/wall_clock.py</comment>
+        <translation>elf Uhr</translation>
+    </message>
+    <message>
+        <source>twelve o&apos;clock</source>
+        <comment>../release/scripts/wall_clock.py</comment>
+        <translation>zwölf Uhr</translation>
+    </message>
+    <message>
+        <source>It is </source>
+        <comment>../release/scripts/wall_clock.py</comment>
+        <translation>Es ist </translation>
+    </message>
+    <message>
+        <source>It is a quarter past </source>
+        <comment>../release/scripts/wall_clock.py</comment>
+        <translation>Es ist viertel nach </translation>
+    </message>
+    <message>
+        <source>It is halft past </source>
+        <comment>../release/scripts/wall_clock.py</comment>
+        <translation>Es ist halb </translation>
+    </message>
+    <message>
+        <source>It is a quarter till </source>
+        <comment>../release/scripts/wall_clock.py</comment>
+        <translation>Es ist viertel vor </translation>
+    </message>
+    <message>
+        <source> in the afternoon</source>
+        <comment>../release/scripts/wall_clock.py</comment>
+        <translation> am Nachmittag</translation>
+    </message>
+    <message>
+        <source> in the evening</source>
+        <comment>../release/scripts/wall_clock.py</comment>
+        <translation> am Abend</translation>
     </message>
     <message>
         <source>You have to install Ultima Online Third Dawn or above to use this gate.</source>
-        <comment>C:/wolfpack/server/release/scripts/wolfpack/utilities.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/wolfpack/utilities.py</comment>
+        <translation>Du musst Ultima Online: Third Dawn oder eine neuere Version installieren um dieses Tor zu nutzen.</translation>
     </message>
     <message>
         <source>You have to install Age of Shadows or above to use this gate.</source>
-        <comment>C:/wolfpack/server/release/scripts/wolfpack/utilities.py</comment>
-        <translation type="unfinished"></translation>
+        <comment>../release/scripts/wolfpack/utilities.py</comment>
+        <translation>Du musst Ultima Online: Age of Shadows oder eine neuere Version installieren um dieses Tor zu nutzen.</translation>
     </message>
     <message>
         <source>You have to install Samurai Empire or above to use this gate.</source>
-        <comment>C:/wolfpack/server/release/scripts/wolfpack/utilities.py</comment>
+        <comment>../release/scripts/wolfpack/utilities.py</comment>
+        <translation>Du musst Ultima Online: Age of Shadows oder eine neuere Version installieren um dieses Tor zu nutzen.</translation>
+    </message>
+    <message>
+        <source>Only a Grandmaster Alchemist can learn from this book.</source>
+        <comment>../release/scripts/books/glassblowing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have already learned this information.</source>
+        <comment>../release/scripts/books/glassblowing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have learned to make items from glass. You will need to find miners to mine find sand for you to make these items.</source>
+        <comment>../release/scripts/books/glassblowing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Only a Grandmaster Carpenter can learn from this book.</source>
+        <comment>../release/scripts/books/masonry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have already learned this information.</source>
+        <comment>../release/scripts/books/masonry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have learned to make items from stone. You will need miners to gather stones for you to make these items.</source>
+        <comment>../release/scripts/books/masonry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Only a Grandmaster Miner can learn from this book.</source>
+        <comment>../release/scripts/books/sandmining.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have already learned this information.</source>
+        <comment>../release/scripts/books/sandmining.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have learned how to mine fine sand. Target sand areas when mining to look for fine sand.</source>
+        <comment>../release/scripts/books/sandmining.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Only a Grandmaster Miner can learn from this book.</source>
+        <comment>../release/scripts/books/stonemining.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have already learned this knowledge.</source>
+        <comment>../release/scripts/books/stonemining.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have learned to mine for stones. Target mountains when mining to find stones.</source>
+        <comment>../release/scripts/books/stonemining.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are out of ammo.</source>
+        <comment>../release/scripts/combat/aos.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No Item definition by the name &apos;%s&apos; found.</source>
+        <comment>../release/scripts/commands/tile.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select the second corner.</source>
+        <comment>../release/scripts/commands/tile.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are not allowed to tile more than 250 items at once.</source>
+        <comment>../release/scripts/commands/tile.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select the first corner.</source>
+        <comment>../release/scripts/commands/tile.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Target the object you would like to turn.</source>
+        <comment>../release/scripts/commands/turnitem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must target an item!</source>
+        <comment>../release/scripts/commands/turnitem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This object is not movable by you!</source>
+        <comment>../release/scripts/commands/turnitem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You rotate the object.</source>
+        <comment>../release/scripts/commands/turnitem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This deed needs to be in your backpack to turn it!</source>
+        <comment>../release/scripts/commands/turnitem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You rotate the deed&apos;s placement direction.</source>
+        <comment>../release/scripts/commands/turnitem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This item is not turnable.</source>
+        <comment>../release/scripts/commands/turnitem.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For less I shall teach thee less.</source>
+        <comment>../release/scripts/contextmenus/trainmenu.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>That is not ripe yet.</source>
+        <comment>../release/scripts/crops/growing.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is someone blocking the door!</source>
+        <comment>../release/scripts/door.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You need something you can fill the milk in.</source>
+        <comment>../release/scripts/farming.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You melk the cow and fill the milk in an empty pitcher.</source>
+        <comment>../release/scripts/farming.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You get some eggs</source>
+        <comment>../release/scripts/farming.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There&apos;s nothing you can get from it.</source>
+        <comment>../release/scripts/farming.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The figurine needs to be in your posession to use it.</source>
+        <comment>../release/scripts/figurine.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You don</source>
+        <comment>../release/scripts/food.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%s&apos;s Guild</source>
+        <comment>../release/scripts/guilds/deed.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have to leave your guild before founding a new one.</source>
+        <comment>../release/scripts/guilds/deed.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You place the guildstone and your deed vanishes.</source>
+        <comment>../release/scripts/guilds/deed.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have to leave your current guild before you found a new one.</source>
+        <comment>../release/scripts/guilds/deed.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Where do you want to place the guildstone?</source>
+        <comment>../release/scripts/guilds/deed.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&apos;%s&apos; has left the game because the character was deleted.</source>
+        <comment>../release/scripts/guilds/member.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are %u other members of your guild logged on.</source>
+        <comment>../release/scripts/guilds/member.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is one other member of your guild logged on.</source>
+        <comment>../release/scripts/guilds/member.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is no other member of your guild logged on.</source>
+        <comment>../release/scripts/guilds/member.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not yet fully implemented.</source>
+        <comment>../release/scripts/magic/chivalry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The book has to be in your belongings to be used.</source>
+        <comment>../release/scripts/magic/chivalryspellbook.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This spell only works on players.</source>
+        <comment>../release/scripts/magic/circle1.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You already have nightsight.</source>
+        <comment>../release/scripts/magic/circle1.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>They already have nightsight.</source>
+        <comment>../release/scripts/magic/circle1.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Teleport is not allowed in that Region</source>
+        <comment>../release/scripts/magic/circle3.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The book has to be in your belongings to be used.</source>
+        <comment>../release/scripts/magic/necrospellbook.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your nightsight is wearing out.</source>
+        <comment>../release/scripts/magic/nightsight.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Last</source>
+        <comment>../release/scripts/magic/polymorph.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This rune is not marked.</source>
+        <comment>../release/scripts/magic/rune.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The rune needs to be in your posession to rename it.</source>
+        <comment>../release/scripts/magic/rune.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You cannot rename this rune.</source>
+        <comment>../release/scripts/magic/rune.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have to enter a name for this rune.</source>
+        <comment>../release/scripts/magic/rune.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The name has to be shorter than 30 characters.</source>
+        <comment>../release/scripts/magic/rune.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>a Blank recall rune</source>
+        <comment>../release/scripts/magic/rune.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rune to: </source>
+        <comment>../release/scripts/magic/rune.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;basefont size=&quot;7&quot; color=&quot;#336699&quot;&gt;&lt;center&gt;Rename rune&lt;/center&gt;&lt;/basefont&gt;</source>
+        <comment>../release/scripts/magic/rune.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How do you like to name the rune?</source>
+        <comment>../release/scripts/magic/rune.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Charges: %i</source>
+        <comment>../release/scripts/magic/runebook.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max Charges: %i</source>
+        <comment>../release/scripts/magic/runebook.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Usage: addspell &lt;spell&gt; or addspell all</source>
+        <comment>../release/scripts/magic/spellbook.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Values between 0 and 63 are valid.</source>
+        <comment>../release/scripts/magic/spellbook.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the spellbook you want to add the spell to.</source>
+        <comment>../release/scripts/magic/spellbook.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Usage: removespell &lt;spell&gt; or removespell all</source>
+        <comment>../release/scripts/magic/spellbook.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You need to target a spellbook.</source>
+        <comment>../release/scripts/magic/spellbook.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Added all spells to the spellbook.</source>
+        <comment>../release/scripts/magic/spellbook.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Added spell %d of circle %d (Id %d) to the spellbook.</source>
+        <comment>../release/scripts/magic/spellbook.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Removed all spells from the spellbook.</source>
+        <comment>../release/scripts/magic/spellbook.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Removed spell %d of circle %d (Id %d)from the spellbook.</source>
+        <comment>../release/scripts/magic/spellbook.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The book has to be in your belongings to be used.</source>
+        <comment>../release/scripts/magic/spellbook.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have nothing I would be interested in.</source>
+        <comment>../release/scripts/npc/vendor/__init__.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>I would not presume to charge thee anything.  Here are the goods you requested.</source>
+        <comment>../release/scripts/npc/vendor/__init__.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The total of thy purchase is %u gold, which has been withdrawn from your bank account.  My thanks for the patronage.</source>
+        <comment>../release/scripts/npc/vendor/__init__.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The total of thy purchase is %u gold.  My thanks for the patronage.</source>
+        <comment>../release/scripts/npc/vendor/__init__.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>I would not presume to charge thee anything.  Unfortunately, I could not sell you all the goods you requested.</source>
+        <comment>../release/scripts/npc/vendor/__init__.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The total of thy purchase is %u gold, which has been withdrawn from your bank account.  My thanks for the patronage.  Unfortunately, I could not sell you all the goods you requested.</source>
+        <comment>../release/scripts/npc/vendor/__init__.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The total of thy purchase is %u gold.  My thanks for the patronage.  Unfortunately, I could not sell you all the goods you requested.</source>
+        <comment>../release/scripts/npc/vendor/__init__.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>I bought %u items from you. I sent a check for %u gold to your bank account.</source>
+        <comment>../release/scripts/npc/vendor/__init__.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>I bought %u items from you. Here are your %u gold.</source>
+        <comment>../release/scripts/npc/vendor/__init__.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beech Wood</source>
+        <comment>../release/scripts/skills/bowcraft.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apple Wood</source>
+        <comment>../release/scripts/skills/bowcraft.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peach Wood</source>
+        <comment>../release/scripts/skills/bowcraft.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pear Wood</source>
+        <comment>../release/scripts/skills/bowcraft.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cedar Wood</source>
+        <comment>../release/scripts/skills/bowcraft.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Willow Wood</source>
+        <comment>../release/scripts/skills/bowcraft.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cypress Wood</source>
+        <comment>../release/scripts/skills/bowcraft.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Oak Wood</source>
+        <comment>../release/scripts/skills/bowcraft.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Walnut Wood</source>
+        <comment>../release/scripts/skills/bowcraft.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yew Wood</source>
+        <comment>../release/scripts/skills/bowcraft.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tropical Wood</source>
+        <comment>../release/scripts/skills/bowcraft.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wood</source>
+        <comment>../release/scripts/skills/bowcraft.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beech Wood</source>
+        <comment>../release/scripts/skills/carpentry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apple Wood</source>
+        <comment>../release/scripts/skills/carpentry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peach Wood</source>
+        <comment>../release/scripts/skills/carpentry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pear Wood</source>
+        <comment>../release/scripts/skills/carpentry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cedar Wood</source>
+        <comment>../release/scripts/skills/carpentry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Willow Wood</source>
+        <comment>../release/scripts/skills/carpentry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cypress Wood</source>
+        <comment>../release/scripts/skills/carpentry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Oak Wood</source>
+        <comment>../release/scripts/skills/carpentry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Walnut Wood</source>
+        <comment>../release/scripts/skills/carpentry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yew Wood</source>
+        <comment>../release/scripts/skills/carpentry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tropical Wood</source>
+        <comment>../release/scripts/skills/carpentry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wood</source>
+        <comment>../release/scripts/skills/carpentry.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are not skilled enough to gather wood from this tree.</source>
+        <comment>../release/scripts/skills/lumberjacking.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ouch!</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Autsch!</translation>
+    </message>
+    <message>
+        <source>Me not hurt bad!</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Ich nicht verwundet schlimm!</translation>
+    </message>
+    <message>
+        <source>Thou fight bad.</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Du kämpfst schlecht.</translation>
+    </message>
+    <message>
+        <source>Thy blows soft!</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Du schlägst schach!</translation>
+    </message>
+    <message>
+        <source>You bad with weapon!</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Du schlecht mit Waffe!</translation>
+    </message>
+    <message>
+        <source>Ouch! Me hurt!</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Autsch! Ich verletzt!</translation>
+    </message>
+    <message>
+        <source>No, kill me not!</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Nein, töte mich nicht!</translation>
+    </message>
+    <message>
+        <source>Me hurt!</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Ich verletzt!</translation>
+    </message>
+    <message>
+        <source>Away with thee!</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Weg mit dir!</translation>
+    </message>
+    <message>
+        <source>Oof! That hurt!</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Arg! Das weh!</translation>
+    </message>
+    <message>
+        <source>Aaah! That hurt...</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Aaah! Das tat weh...</translation>
+    </message>
+    <message>
+        <source>Good blow!</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Guter Schlag!</translation>
+    </message>
+    <message>
+        <source>Revenge!</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Rache!</translation>
+    </message>
+    <message>
+        <source>NOOooo!</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Neeiiiin!</translation>
+    </message>
+    <message>
+        <source>I... I...</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Ich.... I...</translation>
+    </message>
+    <message>
+        <source>Me no die!</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Ich nicht sterben!</translation>
+    </message>
+    <message>
+        <source>Me die!</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Ich sterbe!</translation>
+    </message>
+    <message>
+        <source>Must... not die...</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Darf... nicht sterben....</translation>
+    </message>
+    <message>
+        <source>Oooh, me hurt...</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Oooh, ich verletzt...</translation>
+    </message>
+    <message>
+        <source>Me dying?</source>
+        <comment>../release/scripts/speech/monster.py</comment>
+        <translation>Ich sterben?</translation>
+    </message>
+    <message>
+        <source>Please select a destination.</source>
+        <comment>../release/scripts/speech/pets.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your pets cannot attack that.</source>
+        <comment>../release/scripts/speech/pets.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your pet refuses to kill itself.</source>
+        <comment>../release/scripts/speech/pets.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select an attack target.</source>
+        <comment>../release/scripts/speech/pets.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can</source>
+        <comment>../release/scripts/speech/pets.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your target already controls too many pets.</source>
+        <comment>../release/scripts/speech/pets.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You transfer your pet to %s.</source>
+        <comment>../release/scripts/speech/pets.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Who do you want to transfer your pet to?</source>
+        <comment>../release/scripts/speech/pets.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your pets can only follow characters.</source>
+        <comment>../release/scripts/speech/pets.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Who do you want your pets to follow?</source>
+        <comment>../release/scripts/speech/pets.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Who do you want your pet to follow?</source>
+        <comment>../release/scripts/speech/pets.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>May I help thee?</source>
+        <comment>../release/scripts/speech/stablemaster.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>I can&apos;t sell this from over there!</source>
+        <comment>../release/scripts/speech/stablemaster.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t reach the vendor.</source>
+        <comment>../release/scripts/speech/stablemaster.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bye!</source>
+        <comment>../release/scripts/speech/stablemaster.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>That is not shrinkable...</source>
+        <comment>../release/scripts/speech/stablemaster.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>That is not tamed...</source>
+        <comment>../release/scripts/speech/stablemaster.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>That is not rideable...</source>
+        <comment>../release/scripts/speech/stablemaster.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You don&apos;t have enough gold!</source>
+        <comment>../release/scripts/speech/stablemaster.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>That is %i gold.</source>
+        <comment>../release/scripts/speech/stablemaster.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;basefont size=&quot;7&quot; color=&quot;#336699&quot;&gt;&lt;center&gt;Stablemaster shop&lt;/center&gt;&lt;/basefont&gt;</source>
+        <comment>../release/scripts/speech/stablemaster.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You see %s is breaking the item while trying to enhance it.</source>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have to target a character.</source>
+        <comment>../release/scripts/system/poison.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allowed levels: 0 to 4.</source>
+        <comment>../release/scripts/system/poison.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the character you want to poison.</source>
+        <comment>../release/scripts/system/poison.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Usage: poison &lt;level&gt;</source>
+        <comment>../release/scripts/system/poison.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have entered %s.</source>
+        <comment>../release/scripts/system/regionchange.py</comment>
+        <translation>Du betrittst %s.</translation>
+    </message>
+    <message>
+        <source>You have left %s.</source>
+        <comment>../release/scripts/system/regionchange.py</comment>
+        <translation>Du verlässt %s.</translation>
+    </message>
+    <message>
+        <source>You have left the protection of %s guards.</source>
+        <comment>../release/scripts/system/regionchange.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are now under protection by %s guards.</source>
+        <comment>../release/scripts/system/regionchange.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You use some of the wheat and make a sack of flour.</source>
+        <comment>../release/scripts/wheat.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No description available.</source>
+        <comment>../release/scripts/commands/add.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DESCRIPTION</source>
+        <comment>../release/scripts/system/makemenus.py</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>NPC</source>
+        <comment>../release/scripts/system/makemenus.py</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3271,7 +4345,7 @@ This is an unsorted and not neccesarily complete list of people who contributed 
     <name>DragAndDrop</name>
     <message>
         <source>You lost some karma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du hast etwas Karma verloren.</translation>
     </message>
     <message>
         <source>You can&apos;t equip on that layer.</source>
@@ -3279,11 +4353,11 @@ This is an unsorted and not neccesarily complete list of people who contributed 
     </message>
     <message>
         <source>You can&apos;t equip dead players.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kannst tote Spieler nicht bekleiden.</translation>
     </message>
     <message>
         <source>You can&apos;t equip other players.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kannst andere Spieler nicht bekleiden.</translation>
     </message>
     <message>
         <source>This item cannot be equipped.</source>
@@ -3318,40 +4392,12 @@ This is an unsorted and not neccesarily complete list of people who contributed 
         <translation>Du kannst das nicht in den Besitz anderer Spieler geben</translation>
     </message>
     <message>
-        <source>*cough* Thank thee!</source>
-        <translation>*hust* Danke euch!</translation>
-    </message>
-    <message>
-        <source>*You see %1 eating %2*</source>
-        <translation>*Du siehst wie %1 %2 isst*</translation>
-    </message>
-    <message>
-        <source>Sorry, but i can only use gold.</source>
-        <translation>Entschuldigt, aber ich kann nur Gold gebrauchen.</translation>
-    </message>
-    <message>
-        <source>Thank you %1 for the %2 gold!</source>
-        <translation>Danke %1 für die %2 Goldmünzen!</translation>
-    </message>
-    <message>
-        <source>You have gained some karma!</source>
-        <translation>Du hast etwas an Karma gewonnen!</translation>
-    </message>
-    <message>
-        <source>I can only accept deeds with value!</source>
-        <translation>Ich akzeptiere nur Urkunden von Wert!</translation>
-    </message>
-    <message>
-        <source>Here you have your %1 gold, %2</source>
-        <translation>Hier habt ihr eure %1 Goldmünzen, %2</translation>
-    </message>
-    <message>
         <source>You cannot grab items in locked containers.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kannst keine Gegenstände aus verschlossenen Behältern nehmen.</translation>
     </message>
     <message>
         <source>While you are jailed, you cannot pick up items.</source>
-        <translation type="unfinished"></translation>
+        <translation>Während du im Gefängnis bist, kannst du keine Gegenstände aufnehmen.</translation>
     </message>
     <message>
         <source>Picking up item &apos;%1&apos; (0x%2, %3) from player &apos;%4&apos; (&apos;%5&apos;, 0x%6)
@@ -3447,20 +4493,24 @@ This is an unsorted and not neccesarily complete list of people who contributed 
         <translation>Du versuchst einen ungültigen Gegenstand zu kaufen.</translation>
     </message>
     <message>
-        <source>The total of thy purchase is %1 gold, which has been withdrawn from your bank account.  My thanks for the patronage.</source>
-        <translation>Die Summe Eurer Einkäufe beträgt %1 Goldmünzen, die von eurem Konto abgehoben wurden.  Vielen Dank für Euren Einkauf.</translation>
-    </message>
-    <message>
-        <source>The total of thy purchase is %1 gold.  My thanks for the patronage.</source>
-        <translation>Die Summe Eurer Einkäufe beträgt %1 Goldmünzen.  Vielen Dank für Euren Einkauf.</translation>
-    </message>
-    <message>
         <source>Invalid item sold.</source>
         <translation>Ihr versucht einen ungültigen Gegenstand zu verkaufen.</translation>
     </message>
     <message>
         <source>Thank you %1, here are your %2 gold</source>
         <translation>Vielen dank %1, hier sind eure %1 Goldmünzen</translation>
+    </message>
+    <message>
+        <source>The total of thy purchase is %1 gold, which has been withdrawn from your bank account. My thanks for the patronage.</source>
+        <translation>Die Summe eures Erwerbes ist %1 Gold, welches von eurem Bankkonto abgehoben wurde. Vielen Dank für den Einkauf.</translation>
+    </message>
+    <message>
+        <source>The total of thy purchase is %1 gold. My thanks for the patronage.</source>
+        <translation>Die Summe eures Erwerbes ist %1 Gold. Vielen Dank für den Einkauf.</translation>
+    </message>
+    <message>
+        <source>The total of thy purchase is %1 gold, which has been withdrawn from your bag and from your bank account. My thanks for the patronage.</source>
+        <translation>Die Summe eures Erwerbes ist %1 Gold, welches zum Teil von eurem Bankkonto abgehoben wurde. Vielen Dank für den Einkauf.</translation>
     </message>
 </context>
 <context>
@@ -3555,7 +4605,7 @@ This is an unsorted and not neccesarily complete list of people who contributed 
     </message>
     <message>
         <source>the Mapmaker</source>
-        <translation type="unfinished"></translation>
+        <translation>die Kartographin</translation>
     </message>
 </context>
 <context>
@@ -3682,15 +4732,19 @@ This is an unsorted and not neccesarily complete list of people who contributed 
     </message>
     <message>
         <source>the Mapmaker</source>
-        <translation type="unfinished"></translation>
+        <translation>der Kartograph</translation>
     </message>
     <message>
         <source>the Hairstylist</source>
-        <translation type="unfinished">die Frieseuse</translation>
+        <translation>der Friseur</translation>
     </message>
     <message>
         <source>the Ranger</source>
-        <translation type="unfinished"></translation>
+        <translation>der Waldläufer</translation>
+    </message>
+    <message>
+        <source>the Farmer</source>
+        <translation>der Bauer</translation>
     </message>
 </context>
 <context>
@@ -3811,6 +4865,14 @@ This is an unsorted and not neccesarily complete list of people who contributed 
     <message>
         <source>%1 was killed by %2.
 </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are too far away!</source>
+        <translation>Du bist zu weit entfernt!</translation>
+    </message>
+    <message>
+        <source>Rejected putting an item (%1) into a freed character (%2)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3987,7 +5049,8 @@ This is very usefull for new shards without account policy
     <message>
         <source>Total Users Online: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Benutzer insgesamt online: %1
+</translation>
     </message>
     <message>
         <source>Done
@@ -4155,6 +5218,10 @@ This is very usefull for new shards without account policy
         <source>Content element lacking id, list, or randomlist attribute in item definition &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Rejected putting an item (%1) into a freed container (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>cItemBaseDef</name>
@@ -4208,11 +5275,11 @@ This is very usefull for new shards without account policy
     <name>cMoveTarget</name>
     <message>
         <source>You have to target a character or an item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du musst ein Wesen oder einen Gegenstand wählen.</translation>
     </message>
     <message>
         <source>Better do not try that!</source>
-        <translation type="unfinished"></translation>
+        <translation>Versuch das besser nicht!</translation>
     </message>
 </context>
 <context>
@@ -4227,28 +5294,24 @@ This is very usefull for new shards without account policy
     <name>cNPC</name>
     <message>
         <source> [frozen]</source>
-        <translation>[eingefroren]
+        <translation> [eingefroren]
 </translation>
     </message>
     <message>
         <source> [guarded]</source>
-        <translation>[bewacht]</translation>
+        <translation> [bewacht]</translation>
     </message>
     <message>
         <source> [guarding]</source>
-        <translation>[bewachend]</translation>
+        <translation> [bewachend]</translation>
     </message>
     <message>
         <source>Sorry but i have no goods to sell</source>
         <translation>Es tut mir leid, aber ich habe nichts zu verkaufen</translation>
     </message>
     <message>
-        <source>(frozen)</source>
-        <translation>(eingefroren)</translation>
-    </message>
-    <message>
         <source> (frozen)</source>
-        <translation>(eingefroren)</translation>
+        <translation> (eingefroren)</translation>
     </message>
     <message>
         <source>Unable to create unscripted npc: %1
@@ -4304,7 +5367,9 @@ LoginServer running on port %1
         <source>
 GameServer running on port %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">
+GameServer läuft auf Port %1
+</translation>
     </message>
 </context>
 <context>
@@ -4312,12 +5377,14 @@ GameServer running on port %1
     <message>
         <source>Removed &apos;%1&apos; from the party.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; aus der Party gelöscht.
+</translation>
     </message>
     <message>
         <source>Left the party.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Party verlassen.
+</translation>
     </message>
     <message>
         <source>Told &apos;%1&apos; in party &apos;%2&apos;.
@@ -4332,12 +5399,14 @@ GameServer running on port %1
     <message>
         <source>Accepted party invitation from &apos;%1&apos;.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Partyeinladung von &apos;%1&apos; akzeptiert.
+</translation>
     </message>
     <message>
         <source>Declined party invitation from &apos;%1&apos;.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Partyeinladung von &apos;%1&apos; abgelehnt.
+</translation>
     </message>
 </context>
 <context>
@@ -4417,7 +5486,7 @@ GameServer running on port %1
     </message>
     <message>
         <source>You cannot cast spells while you are in jail.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kannst nicht zaubern während du im Jail bist.</translation>
     </message>
     <message>
         <source>Started fight with character %1 (0x%2).
@@ -4432,6 +5501,10 @@ GameServer running on port %1
         <source>Lord <byte value="x9"/>%1<byte value="x9"/>%2</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source> (frozen)</source>
+        <translation> (eingefroren)</translation>
+    </message>
 </context>
 <context>
     <name>cPythonScript</name>
@@ -4445,22 +5518,22 @@ GameServer running on port %1
     <name>cRemoveTagTarget</name>
     <message>
         <source>Better do not try that!</source>
-        <translation type="unfinished"></translation>
+        <translation>Versuch das besser nicht!</translation>
     </message>
     <message>
         <source>All tags removed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Tags gelöscht.</translation>
     </message>
     <message>
         <source>Tag &quot;%1&quot; removed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tag &quot;%1&quot; gelöscht.</translation>
     </message>
 </context>
 <context>
     <name>cRemoveTarget</name>
     <message>
         <source>You need to select either an item or a character</source>
-        <translation type="unfinished"></translation>
+        <translation>Du musst ein Wesen oder einen Gegenstand wählen</translation>
     </message>
 </context>
 <context>
@@ -4602,29 +5675,29 @@ The server has been shut down. You can close this window now.
     <name>cSetTagTarget</name>
     <message>
         <source>Better do not try that!</source>
-        <translation type="unfinished"></translation>
+        <translation>Versuch das besser nicht!</translation>
     </message>
 </context>
 <context>
     <name>cSetTarget</name>
     <message>
         <source>Please select a valid character or item</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte wähle einen gültigen Char oder Gegenstand</translation>
     </message>
     <message>
         <source>Better do not try that!</source>
-        <translation type="unfinished"></translation>
+        <translation>Versuch das besser nicht!</translation>
     </message>
 </context>
 <context>
     <name>cShowTarget</name>
     <message>
         <source>You have to target a valid object.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du musst ein gültiges Objekt wählen.</translation>
     </message>
     <message>
         <source>Unknown property: &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannte Eigenschaft: &apos;%1&apos;</translation>
     </message>
     <message>
         <source>&apos;%1&apos; is &apos;%2&apos;</source>
@@ -4648,54 +5721,6 @@ The server has been shut down. You can close this window now.
     <message>
         <source>That skill has not been implemented yet.</source>
         <translation>Diese Fertigkeit wurde noch nicht implementiert.</translation>
-    </message>
-    <message>
-        <source>Why don&apos;t you simply take it?</source>
-        <translation type="obsolete">Warum nimmst du es nicht einfach?</translation>
-    </message>
-    <message>
-        <source>You can&apos;t steal from game masters.</source>
-        <translation type="obsolete">Du kannst von Spielleitern nichst stehlen.</translation>
-    </message>
-    <message>
-        <source>You are too far away to steal from that person.</source>
-        <translation type="obsolete">Du bist zu weit weg um von dieser Person etwas zu stehlen.</translation>
-    </message>
-    <message>
-        <source>Bad luck, your victim doesn&apos;t have a backpack.</source>
-        <translation type="obsolete">Pech gehabt, dein Opfer hat keinen Rucksack.</translation>
-    </message>
-    <message>
-        <source>Your victim posesses nothing you could steal.</source>
-        <translation type="obsolete">Dein Opfer hat nichts, das du stehlen könntest.</translation>
-    </message>
-    <message>
-        <source>You reach into %1&apos;s backpack and try to steal something...</source>
-        <translation type="obsolete">Du greifst in den Rucksack von %1 und versuchst etwas zu stehlen...</translation>
-    </message>
-    <message>
-        <source>You successfully steal %1.</source>
-        <translation type="obsolete">Du stielst erfolgreich %1.</translation>
-    </message>
-    <message>
-        <source>You fail to steal the item.</source>
-        <translation type="obsolete">Dein Versuch den Gegenstand zu stehlen schlägt fehl.</translation>
-    </message>
-    <message>
-        <source>You have been cought!</source>
-        <translation type="obsolete">Du wurdest entdeckt!</translation>
-    </message>
-    <message>
-        <source>Guards! A thief is amoung us!</source>
-        <translation type="obsolete">Wachen! Ein Dieb ist unter uns!</translation>
-    </message>
-    <message>
-        <source>You notice %1 trying to steal %2 from you.</source>
-        <translation type="obsolete">Du bemerkst wie %1 versucht dir %2 zu stehlen.</translation>
-    </message>
-    <message>
-        <source>You notice %1 trying to steal %2 from %3.</source>
-        <translation type="obsolete">Du bemerkst wie %1 versucht %2 von %3 zu stehlen.</translation>
     </message>
     <message>
         <source>%1 is trying to snoop in your pack</source>
@@ -4737,7 +5762,7 @@ The server has been shut down. You can close this window now.
     </message>
     <message>
         <source>You cannot use skills while you are in jail.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kannst im Gefängnis keine Fähigkeiten benutzen.</translation>
     </message>
 </context>
 <context>
@@ -4985,7 +6010,7 @@ The server has been shut down. You can close this window now.
     </message>
     <message>
         <source>You already have more than %1 characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Du hast bereits mehr als %1 Charaktere</translation>
     </message>
     <message>
         <source>Submitted invalid stats during char creation (%1,%2,%3).
@@ -5052,11 +6077,11 @@ The server has been shut down. You can close this window now.
     </message>
     <message>
         <source>You can only change your own profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kannst nur dein eigenes Profil ändern</translation>
     </message>
     <message>
         <source>You can&apos;t rename yourself</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kannst dich nicht umbenennen</translation>
     </message>
     <message>
         <source>This name was too long, i truncated it to 29 characters.</source>
@@ -5064,7 +6089,7 @@ The server has been shut down. You can close this window now.
     </message>
     <message>
         <source>You can&apos;t rename this.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kannst das nicht umbenennen.</translation>
     </message>
     <message>
         <source>You must wait to perform another action.</source>
@@ -5072,7 +6097,7 @@ The server has been shut down. You can close this window now.
     </message>
     <message>
         <source>Your ghostly hand passes trough the object.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deine Geisterhände gleiten durch das Objekt.</translation>
     </message>
     <message>
         <source>You cannot use items equipped by other players.</source>
@@ -5148,15 +6173,15 @@ The server has been shut down. You can close this window now.
     </message>
     <message>
         <source>You have to unlock the container before using it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du musst den Behälter aufschließen bevor du es benutzt.</translation>
     </message>
     <message>
         <source>You cannot fight while you are in jail.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kannst im Gefängnis nicht kämpfen.</translation>
     </message>
     <message>
         <source>You cannot use items while you are in jail.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kannst im Gefängnis keine Gegenstände benutzen.</translation>
     </message>
 </context>
 <context>

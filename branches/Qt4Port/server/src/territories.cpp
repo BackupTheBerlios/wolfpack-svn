@@ -76,8 +76,12 @@ void cTerritory::init( void )
 	cBaseRegion::init();
 	midilist_ = "";
 	resores_ = "";
+	firstcoin_ = "eed";
+	secondcoin_ = "ef0";
+	thirdcoin_ = "eea";
 	flags_ = 0;
 	guardowner_ = QString();
+	fixedlight_ = -1;
 	snowchance_ = 50;
 	rainchance_ = 50;
 	guardSections_ = QStringList();
@@ -119,6 +123,10 @@ void cTerritory::processNode( const cElement* Tag )
 		}
 	}
 
+	// <fixedlight>number</fixedlight>
+	else if ( TagName == "fixedlight" )
+		this->fixedlight_ = Value.toShort();
+
 	// <guardowner>text</guardowner>
 	else if ( TagName == "guardowner" )
 		if ( Value == "the town" )
@@ -129,6 +137,18 @@ void cTerritory::processNode( const cElement* Tag )
 	// <resores>ORES</resores>
 	else if ( TagName == "resores" )
 		this->resores_ = Value;
+
+	// <firstcoin>IDofCOIN</firstcoin>
+	else if ( TagName == "firstcoin" )
+		this->firstcoin_ = Value;
+
+	// <secondcoin>IDofCOIN</secondcoin>
+	else if ( TagName == "secondcoin" )
+		this->secondcoin_ = Value;
+
+	// <thirdcoin>IDofCOIN</thirdcoin>
+	else if ( TagName == "thirdcoin" )
+		this->thirdcoin_ = Value;
 
 	// <midilist>MIDI_COMBAT</midilist>
 	else if ( TagName == "midilist" )
@@ -171,6 +191,16 @@ void cTerritory::processNode( const cElement* Tag )
 				setNoHousing( true );
 			else if ( childNode->name() == "nodecay" )
 				setNoDecay( true );
+			else if ( childNode->name() == "instalogout" )
+				setInstaLogout( true );
+			else if ( childNode->name() == "noteleport" )
+				setNoTeleport( true );
+			else if ( childNode->name() == "safe" )
+				setSafe( true );
+			else if ( childNode->name() == "nocriminalcombat" )
+				setNoCriminalCombat( true );
+			else if ( childNode->name() == "nokillcount" )
+				setNoKillCount( true );
 		}
 	}
 
@@ -446,6 +476,11 @@ void cTerritories::check( P_CHAR pc )
 			// If the last region was a cave or if the new region is a cave,
 			// update the lightlevel.
 			if ( ( currRegion->isCave() && !lastRegion->isCave() ) || ( !currRegion->isCave() && lastRegion->isCave() ) )
+			{
+				socket->updateLightLevel();
+			}
+			// Added the Fixed Light Level for a Region
+			if ( ( ( !currRegion->fixedlight() < 0 ) && ( lastRegion->fixedlight() < 0 ) ) || ( ( currRegion->fixedlight() < 0 ) && ( !lastRegion->fixedlight() < 0 ) ) )
 			{
 				socket->updateLightLevel();
 			}

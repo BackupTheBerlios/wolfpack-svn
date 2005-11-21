@@ -13,6 +13,7 @@ import wolfpack.utilities
 import wolfpack.console
 from math import floor
 import random
+from wolfpack import tr
 
 # This is the rather complex fishing script
 
@@ -27,8 +28,8 @@ fishingItems = [
 	# You specify M and I plus a minimum skill level here
 	# At the moment only linear graphs are possible
 	# Minimum Skill (0-1000), M, I, List of IDs
-	[ 0, -1, 110, [ '170f', '1710', '1711', '1712', '170b', '170c' ], 'shoes' ], # If the value becomes negative we don't care it's omitted then
-	[ 0,  1, 0, [ '9cc', '9cd', '9ce', '9cf' ], 'a fish' ]
+	[ 0, -1, 110, [ '170f', '1710', '1711', '1712', '170b', '170c' ], tr('shoes') ], # If the value becomes negative we don't care it's omitted then
+	[ 0,  1, 0, [ '9cc', '9cd', '9ce', '9cf' ], tr('a fish') ]
 ]
 
 def checktool(char, item, wearout = False):
@@ -65,7 +66,7 @@ def onUse( char, item ):
 	socket = char.socket
 
 	# Can't fish on horses
-	if char.itemonlayer( LAYER_MOUNT ):
+	if char.ismounted():
 		socket.clilocmessage( 0x7A4EB, "", 0x3b2, 3 ) # You can't fish while riding!
 		return True
 
@@ -155,7 +156,7 @@ def response( char, args, target ):
 	if not blockedspot:
 		for item in staticitems:
 			if ( not item[ 0 ] in staticWater ) and ( item[ 3 ] >= pos.z ) and ( item[ 3 ] <= pos.z + FISHING_BLOCK_RANGE ):
-				tile = wolfpack.tiledata( item.id )
+				tile = wolfpack.tiledata( item[0] )
 
 				if tile[ "blocking" ] or tile[ "floor" ]:
 					blockedspot = 1
@@ -216,7 +217,7 @@ def getFish( fishSkill, deepwater ):
 
 		# Calculate the min+max values on our scala (out of 120)
 		# M * SKILL + I
-		value = fishItem[ 1 ] * skill + fishItem[ 2 ]
+		value = int( fishItem[ 1 ] * skill + fishItem[ 2 ] )
 
 		if value > 0:
 			# Debug
@@ -255,7 +256,7 @@ def itemtimer( char, args ):
 	socket = char.socket
 
 	if len( fishingItems ) < 1:
-		socket.sysmessage( 'This script has not been configured correctly.' )
+		socket.sysmessage( tr('This script has not been configured correctly.') )
 		return False
 
 	socket.deltag( 'is_fishing' )
@@ -290,7 +291,7 @@ def itemtimer( char, args ):
 		if not resource:
 			# Create a resource gem
 			resource = wolfpack.additem( "1ea7" )
-			resource.name = 'Resource Item: fish'
+			resource.name = tr('Resource Item: fish')
 			resource.settag( 'resourcecount', int( amount - 1 ) )
 			resource.settag( 'resource', 'fish' )
 			resource.visible = 0 # GM Visible only
@@ -310,7 +311,7 @@ def itemtimer( char, args ):
 
 		# Was there an error?
 		if not item:
-			socket.sysmessage( "Please report to a gamemaster that the item '%s' couldn't be found." % itemid )
+			socket.sysmessage( tr("Please report to a gamemaster that the item '%s' couldn't be found.") % itemid )
 
 		# Otherwise try to stack it
 		elif not wolfpack.utilities.tobackpack( item, char ):
@@ -325,9 +326,9 @@ def itemtimer( char, args ):
 
 	# Success!
 	if not spawnmonster:
-		socket.clilocmessage( 0xf61fc, "", 0x3b2, 3, None, str(itemname) ) # You pull out an item :
+		socket.clilocmessage( 0xf61fc, "", 0x3b2, 3, None, unicode(itemname) ) # You pull out an item :
 	else:
-		socket.clilocmessage( 0xf61fd, "", 0x3b2, 3, None, str(itemname) ) # You pull out an item along with a monster :
+		socket.clilocmessage( 0xf61fd, "", 0x3b2, 3, None, unicode(itemname) ) # You pull out an item along with a monster :
 
 def resourceDecayTimer( resource, args ):
 	resource.delete()

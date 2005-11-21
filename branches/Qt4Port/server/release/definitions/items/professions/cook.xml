@@ -72,8 +72,11 @@
 	<item id="97f">
 		<name>#1044567</name>
 		<id>0x97f</id>
+		<buyprice>2</buyprice>
+		<sellprice>1</sellprice>
+		<weight>1.0</weight>
 		<category>Professions\Cook\Tools\Skillet</category>
-		<basescripts>skills.cooking,equipment</basescripts>
+		<basescripts>equipment,skills.cooking</basescripts>
 		<tag name="remaining_uses" type="int" value="50" />
 	</item>
 
@@ -474,6 +477,7 @@
 		<id>0x1042</id>
 		<weight>0.1</weight>
 		<category>Professions\Cook\Supplies\Unbaked Pie</category>
+		<basescripts>cooking</basescripts>
 	</item>
 
 	<!-- Unbaked Quiche -->
@@ -537,6 +541,7 @@
 		<id>0x1083</id>
 		<weight>0.1</weight>
 		<category>Professions\Cook\Supplies\Unbaked Pizza</category>
+		<basescripts>cooking</basescripts>
 	</item>
 
 	<item id="15f8">
@@ -587,6 +592,7 @@
 		<sellprice>2</sellprice>
 		<weight>0.2</weight>
 		<category>Professions\Cook\Supplies\Raw Leg of Lamb</category>
+		<basescripts>cooking</basescripts>
 	</item>
 
 	<!-- Raw Chicken Leg -->
@@ -609,13 +615,12 @@
 	</item>
 
 	<!-- Glass Pitcher -->
-	<item id="ff6">
+	<item id="ff6" inherit="9a7">
 		<id>0xff6</id>
 		<category>Professions\Cook\Decoration\Bar\Glass Pitcher 1</category>
-		<buyprice>7</buyprice>
 	</item>
 
-	<item id="ff7" inherit="ff6">
+	<item id="ff7" inherit="9a7">
 		<id>0xff7</id>
 		<category>Professions\Cook\Decoration\Bar\Glass Pitcher 2</category>
 	</item>

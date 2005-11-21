@@ -328,7 +328,7 @@ def gouid(socket, command, arguments):
 				container = container.container
 
 			# Going to container
-			socket.sysmessage('Going to item 0x%x [Top: 0x%x].' % (uid, container.serial))
+			socket.sysmessage('Going to item 0x%x (%s) [Top: 0x%x].' % (uid, item.getname(), container.serial))
 			pos = container.pos
 			socket.player.removefromview()
 			socket.player.moveto(pos)
@@ -345,12 +345,22 @@ def gouid(socket, command, arguments):
 	elif uid > 0:
 		char = wolfpack.findchar(uid)
 		if char and char.rank <= socket.player.rank:
-			socket.sysmessage('Going to char 0x%x.' % (uid))
 			pos = char.pos
-			socket.player.removefromview()
-			socket.player.moveto(pos)
-			socket.player.update()
-			socket.resendworld()
+			if pos.map == 0xFF:
+				if char.npc:
+					stablemaster = wolfpack.findobject(char.stablemaster)
+				else:
+					stablemaster = None
+				if not stablemaster:
+					socket.sysmessage("Not going to character '%s' [Serial: 0x%x]. They are on the internal map." % (char.name, uid))
+				else:
+					socket.sysmessage("Character '%s' [Serial: 0x%x] is stabled in object 0x%x." % (char.name, uid, stablemaster.serial))
+			else:
+				socket.sysmessage('Going to char 0x%x (%s).' % (uid, char.name))
+				socket.player.removefromview()
+				socket.player.moveto(pos)
+				socket.player.update()
+				socket.resendworld()
 		else:
 			socket.sysmessage('No char with the serial 0x%x could be found.' % uid)
 		return

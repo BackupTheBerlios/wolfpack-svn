@@ -1,17 +1,18 @@
 
 import wolfpack
 from wolfpack.consts import *
-from wolfpack import properties
+from wolfpack import properties, tr
 from wolfpack.utilities import consumeresources, tobackpack, energydamage, mayAreaHarm
 import combat.utilities
 import random
 from math import floor, ceil, sqrt
 from system.debugging import DEBUG_COMBAT_INFO
-from skills import poisoning
 import system.slayer
-from combat.specialmoves import getability
+from combat.specialmoves import getability, clearability
 import combat.hiteffects
 import magic.chivalry
+import magic.necromancy
+import system.poison
 
 #
 # Check if the given weapon can slay the given
@@ -21,12 +22,12 @@ def checkSlaying(weapon, defender):
 	slayer = properties.fromitem(weapon, SLAYER)
 	if slayer == '':
 		return False
-				
+
 	slayer = system.slayer.findEntry(slayer)
-	
+
 	if not slayer:
 		return False
-		
+
 	return slayer.slays(defender)
 
 #
@@ -35,7 +36,7 @@ def checkSlaying(weapon, defender):
 def checkskill(char, skill, chance):
 	# Normalize
 	chance = min(1.0, max(0.02, chance))
-	minskill = min(char.skill[skill], (1.0 - chance) * 1200)
+	minskill = min(char.skill[skill], int((1.0 - chance) * 1200) )
 	maxskill = 1200
 	char.checkskill(skill, minskill, maxskill)
 	return chance >= random.random()
@@ -52,32 +53,13 @@ def fireweapon(attacker, defender, weapon):
 	if len(ammo) != 0:
 		if not consumeresources(attacker.getbackpack(), ammo, 1):
 			if attacker.socket:
-				attacker.socket.sysmessage('You are out of ammo.')
+				attacker.socket.sysmessage(tr('You are out of ammo.'))
 			if attacker.npc:
 				tobackpack(weapon, attacker)
 			return False
 
-		if random.random() >= 0.50:
-			if defender.player:
-				item = wolfpack.additem(ammo)
-				if not tobackpack(item, defender):
-					item.update()
-			else:
-				# Search for items at the same position
-				items = wolfpack.items(defender.pos.x, defender.pos.y, defender.pos.map)
-				handled = 0
-
-				for item in items:
-					if item.baseid == ammo:
-						item.amount += 1
-						item.update()
-						handled = 1
-						break
-
-				if not handled:
-					item = wolfpack.additem(ammo)
-					item.moveto(defender.pos)
-					item.update()
+		# The ammo is created and packed into the defenders backpack/put on the ground
+		createammo(defender, ammo)
 
 	projectile = properties.fromitem(weapon, PROJECTILE)
 
@@ -87,6 +69,29 @@ def fireweapon(attacker, defender, weapon):
 		attacker.movingeffect(projectile, defender, 0, 0, 14, hue)
 
 	return True
+
+def createammo(defender, ammo):
+	if random.random() >= 0.50:
+		if defender.player:
+			item = wolfpack.additem(ammo)
+			if not tobackpack(item, defender):
+				item.update()
+		else:
+			# Search for items at the same position
+			items = wolfpack.items(defender.pos.x, defender.pos.y, defender.pos.map)
+			handled = 0
+
+			for item in items:
+				if item.baseid == ammo:
+					item.amount += 1
+					item.update()
+					handled = 1
+					break
+
+			if not handled:
+				item = wolfpack.additem(ammo)
+				item.moveto(defender.pos)
+				item.update()
 
 #
 # Checks if the character hits his target or misses instead
@@ -104,14 +109,20 @@ def checkhit(attacker, defender, time):
 	# Retrieve the skill values
 	attackerValue = attacker.skill[attackerSkill] / 10
 	defenderValue = defender.skill[defenderSkill] / 10
-	
+
 	# Calculate the hit chance
 	bonus = 0 # Get the weapon "accuracy" status
 	bonus += properties.fromchar(attacker, HITBONUS) # Get the attackers AttackChance bonus
+	# attacker gets 10% bonus when they're under divine fury
+	if attacker.hasscript('magic.divinefury'):
+		bonus += 10
 	attackChance = (attackerValue + 20.0) * (100 + bonus)
 
 	# Calculate the defense chance
 	bonus = properties.fromchar(defender, DEFENSEBONUS) # Get the defenders defend chance
+	# defender loses 20% bonus when they're under divine fury
+	if defender.hasscript('magic.divinefury'):
+		bonus -= 20
 	defendChance = (defenderValue + 20.0) * (100 + bonus)
 
 	# Give a minimum chance of 2%
@@ -139,6 +150,12 @@ def scaledamage(char, damage, checkskills = True, checkability = False):
 	# Get the total damage bonus this character gets
 	bonus = properties.fromchar(char, DAMAGEBONUS)
 
+	if char.hasscript('magic.horrificbeast'):
+		bonus += 25
+
+	if char.hasscript('magic.divinefury'):
+		bonus += 10
+
 	# For axes a lumberjacking skill check is made to gain
 	# in that skill
 	if weapon and weapon.type == 1002:
@@ -154,27 +171,27 @@ def scaledamage(char, damage, checkskills = True, checkability = False):
 	if not char.npc or weapon:
 		# Strength bonus
 		bonus += char.strength * 0.3
-	
+
 		# If strength is above 100, grant an extra 5 percent bonus
 		if char.strength >= 100:
 			bonus += 5
 
 		# Anatomy bonus
 		bonus += char.skill[ANATOMY] * 0.05
-	
+
 		# Grant another 5 percent for anatomy grandmasters
 		if char.skill[ANATOMY] >= 1000:
 			bonus += 5
 
 		# Tactics bonus
 		bonus += char.skill[TACTICS] * 0.0625
-	
+
 		# Add another 6.25 percent for grandmasters
 		if char.skill[TACTICS] >= 1000:
 			bonus += 6.25
 
-	damage = damage + damage * bonus / 100.0
-	
+	damage = damage + damage * (bonus / 100.0)
+
 	return max(1, floor(damage))
 
 def consecratedweapon( defender ):
@@ -325,8 +342,8 @@ def absorbdamage(defender, damage):
 	# it should be damaged. This implementation is so crappy because
 	# we lack the required properties for armors yet.
 	if armor and armor.health > 0:
-		# 4% chance for losing one hitpoint
-		if 0.04 >= random.random():
+		# 25% chance for losing one hitpoint
+		if 0.25 >= random.random():
 			# If it's a self repairing item, grant health instead of reducing it
 			selfrepair = properties.fromitem(armor, SELFREPAIR)
 			if selfrepair > 0 and armor.health < armor.maxhealth - 1:
@@ -347,65 +364,90 @@ def absorbdamage(defender, damage):
 
 	# Only players can parry using a shield or a weapon
 	if defender.player or defender.skill[PARRYING] > 0:
-		shield = defender.itemonlayer(LAYER_LEFTHAND)
-		weapon = defender.getweapon()
-		blocked = 0
-
-		if not properties.itemcheck(shield, ITEM_SHIELD):
-			shield = None
-
-		if not properties.itemcheck(weapon, ITEM_MELEE):
-			weapon = None
-
-		# If we have a shield determine if we blocked the blow by
-		# really checking the parry skill
-		if shield:
-			# There is a 0.3% chance to block for each skill point
-			chance = defender.skill[PARRYING] * 0.0003
-			defender.checkskill(PARRYING, 0, 1200)
-			blocked = chance >= random.random()
-
-		# Otherwise just use the parry skill as a chance value
-		# we can't gain it using a weapon as a shield.
-		# Note: no ranged weapons
-		elif weapon and weapon.twohanded:
-			# There is a 0.15% chance to block for each skill point
-			chance = defender.skill[PARRYING] * 0.00015
-			blocked = chance >= random.random()
-
-		# If we blocked the blow. Show it, absorb the damage
-		# and damage the shield if there is any
-		if blocked:
-			defender.effect(0x37B9, 10, 16)
-			damage = 0
-
-			# This is as lame as above
-			if shield and shield.health > 0:
-				# 4% chance for losing one hitpoint				
-				if 0.04 >= random.random():
-					selfrepair = properties.fromitem(shield, SELFREPAIR)
-					if selfrepair > 0 and shield.health < shield.maxhealth - 1:
-						if selfrepair > random.randint(0, 9):
-							shield.health += 2
-							shield.resendtooltip()
-					else:							
-						shield.health -= 1
-						shield.resendtooltip()
-
-			if shield and shield.health <= 0:
-				tobackpack(shield, defender)
-				shield.update()
-				if defender.socket:
-					defender.socket.clilocmessage(500645)
+		damage = blockdamage(defender, damage)
 
 	return damage
 
+#
+# Checks if the damage can be blocked using a shield.
+# Called by absorbdamage
+# This returns the new damage value.
+#
+def blockdamage(defender, damage):
+	shield = defender.itemonlayer(LAYER_LEFTHAND)
+	weapon = defender.getweapon()
+	blocked = 0
+
+	if not properties.itemcheck(shield, ITEM_SHIELD):
+		shield = None
+
+	if not properties.itemcheck(weapon, ITEM_MELEE):
+		weapon = None
+
+	if shield:
+		# There is a 0.3% chance to block for each skill point
+		chance = defender.skill[PARRYING] * 0.0003
+		defender.checkskill(PARRYING, 0, 1200)
+		blocked = chance >= random.random()
+
+	# we can't gain parrying using a weapon as a shield.
+	# Note: no ranged weapons
+	elif weapon and weapon.twohanded:
+		# There is a 0.15% chance to block for each skill point
+		chance = defender.skill[PARRYING] * 0.00015
+		blocked = chance >= random.random()
+
+	# If we blocked the blow. Show it, absorb the damage
+	# and damage the shield if there is any
+	if blocked:
+		defender.effect(0x37B9, 10, 16)
+		damage = 0
+
+		# This is as lame as above
+		if shield and shield.health > 0:
+			if random.randint(0, 2) == 0:
+				wear = random.randint(0, 1)
+				if wear > 0 and shield.maxhealth > 0:
+					if shield.health >= wear:
+						shield.health -= wear
+						wear = 0
+					else:
+						wear -= shield.hitpoints
+						shield.hitpoints = 0
+
+					if wear > 0:
+						if shield.maxhitpoints > wear:
+							shield.maxhitpoints -= wear
+							defender.message(1061121, '') # Your equipment is severely damaged.
+						else:
+							shield.delete()
+					if shield:
+						shield.resendtooltip()
+
+			# 4% chance for losing one hitpoint
+			#if 0.04 >= random.random():
+			#	selfrepair = properties.fromitem(shield, SELFREPAIR)
+			#	if selfrepair > 0 and shield.health < shield.maxhealth - 1:
+			#		if selfrepair > random.randint(0, 9):
+			#			shield.health += 2
+			#			shield.resendtooltip()
+			#	else:							
+			#		shield.health -= 1
+			#		shield.resendtooltip()
+
+		#if shield and shield.health <= 0:
+		#	tobackpack(shield, defender)
+		#	shield.update()
+		#	if defender.socket:
+		#		defender.socket.clilocmessage(500645)
+
+	return damage
 #
 # Deal a splashdamage attack
 #
 def splashdamage(attacker, effect, excludechar = None):
 	(physical, cold, fire, poison, energy) = (0, 0, 0, 0, 0)
-	
+
 	if effect == SPLASHPHYSICAL:
 		sound = 0x10e
 		hue = 50
@@ -428,12 +470,12 @@ def splashdamage(attacker, effect, excludechar = None):
 		energy = 100
 	else:
 		raise RuntimeError, "Invalid effect passed to splashdamage: %s" % effect
-		
+
 	guild = attacker.guild # Cache the guild
 	party = attacker.guild # Cache the party
 	didsound = False # Did we play a soundeffect yet?
 	(mindamage, maxdamage) = properties.getdamage(attacker) # Cache the min+maxdamage
-	
+
 	pos = attacker.pos
 	chariterator = wolfpack.charregion(pos.x - 3, pos.y - 3, pos.x + 3, pos.y + 3, pos.map)
 	target = chariterator.first
@@ -446,7 +488,7 @@ def splashdamage(attacker, effect, excludechar = None):
 			factor = min(1.0, (4 - distance) / 3)
 			if factor > 0.0:
 				damage = int(random.randint(mindamage, maxdamage) * factor)
-				
+
 				if damage > 0:
 					if not didsound:
 						attacker.soundeffect(sound)
@@ -480,10 +522,6 @@ def hit(attacker, defender, weapon, time):
 	if ability:
 		damage = ability.scaledamage(attacker, defender, damage)
 
-	# Give the defender a chance to absorb damage
-	damage = absorbdamage(defender, damage)
-	blocked = damage <= 0
-
 	# Enemy of One (chivalry)
 	if attacker.npc:
 		if defender.player:
@@ -498,12 +536,19 @@ def hit(attacker, defender, weapon, time):
 				defender.effect( 0x37B9, 10, 5 )
 				damage += scaledamage(attacker, 50 )
 
+	slayer = properties.fromitem(weapon, SLAYER)
+	if slayer and slayer == "silver" and magic.necromancy.transformed(defender) and not defender.hasscript("magic.horrificbeast"):
+		damage += scaledamage(attacker, 25 ) # Every necromancer transformation other than horrific beast takes an additional 25% damage
+
+	# Give the defender a chance to absorb damage
+	damage = absorbdamage(defender, damage)
+	blocked = damage <= 0
+
 	# If the attack was parried, the ability was wasted
-	#if damage == 0 and ability:
-	#	#ability.use(attacker)
-	#	if attacker.socket:
-	#		attacker.socket.clilocmessage(1061140) # Your attack was parried
-	#	ability = None # Reset ability
+	if AGEOFSHADOWS and blocked:
+		if attacker.socket:
+			attacker.socket.clilocmessage(1061140) # Your attack was parried
+		clearability(attacker)
 
 	ignorephysical = False
 	if ability:
@@ -517,56 +562,103 @@ def hit(attacker, defender, weapon, time):
 	if weapon:
 		# Leeching
 		if not blocked:
+			# Making default Leechs to prevent errors
+
+			lifeleech = 0
+			staminaleech = 0
+			manaleech = 0
+
 			leech = properties.fromitem(weapon, LIFELEECH)
 			if leech and leech > random.randint(0, 99) and attacker.maxhitpoints > attacker.hitpoints:
-				amount = (damagedone * 30) / 100 # Leech 30% Health
-				if amount > 0:
-					attacker.hitpoints = min(attacker.maxhitpoints, attacker.hitpoints + amount)
-					attacker.updatehealth()
-				
+				lifeleech = (damagedone * 30) / 100 # Leech 30% Health
+
 			leech = properties.fromitem(weapon, STAMINALEECH)
 			if leech and leech > random.randint(0, 99) and attacker.maxhitpoints > attacker.stamina:
-				amount = (damagedone * 100) / 100 # Leech 100% Stamina
-				if amount > 0:
-					attacker.stamina = min(attacker.maxstamina, attacker.stamina + amount)
-					attacker.updatehealth()
-	
+				staminaleech = (damagedone * 100) / 100 # Leech 100% Stamina
+
 			leech = properties.fromitem(weapon, MANALEECH)
 			if leech and leech > random.randint(0, 99) and attacker.maxmana > attacker.mana:
-				amount = (damagedone * 40) / 100 # Leech 40% Mana
-				if amount > 0:
-					attacker.mana = min(attacker.maxmana, attacker.mana + amount)
-					attacker.updatemana()
-	
+				manaleech = (damagedone * 40) / 100 # Leech 40% Mana
+
+			# Now leech life, stamina and mana
+			if lifeleech > 0:
+				attacker.hitpoints = min(attacker.maxhitpoints, attacker.hitpoints + lifeleech)
+				attacker.updatehealth()
+
+			if staminaleech > 0:
+				attacker.stamina = min(attacker.maxstamina, attacker.stamina + staminaleech)
+				attacker.updatehealth()
+
+			if manaleech > 0:
+				attacker.mana = min(attacker.maxmana, attacker.mana + manaleech)
+				attacker.updatemana()
+
+			# Poisoning (50% chance)
+			if weapon.hastag('poisoning_uses'):
+				poisoning_uses = int(weapon.gettag('poisoning_uses'))
+				if poisoning_uses <= 0:
+					weapon.deltag('poisoning_uses')
+					weapon.resendtooltip()
+				else:
+					poisoning_uses -= 1
+					if poisoning_uses <= 0:
+						weapon.deltag('poisoning_uses')
+						weapon.resendtooltip()
+					else:
+						weapon.settag('poisoning_uses', poisoning_uses)
+
+					poisoning_strength = 0 # Assume lesser unless the tag tells so otherwise
+					if weapon.hastag('poisoning_strength'):
+						poisoning_strength = int(weapon.gettag('poisoning_strength'))
+					if defender.hasscript("magic.evilomen") and poisoning_strength < 4:
+						poisoning_strength += 1
+					if random.random() >= 0.50:
+						if system.poison.poison(defender, poisoning_strength):
+							if attacker.socket:
+								attacker.socket.clilocmessage(1008096, "", 0x3b2, 3, None, defender.name, False, False)
+							if defender.socket:
+								attacker.socket.clilocmessage(1008097, "", 0x3b2, 3, None, attacker.name, False, True)
+
 			# Splash Damage
 			for effectid in [SPLASHPHYSICAL, SPLASHFIRE, SPLASHCOLD, SPLASHPOISON, SPLASHENERGY]:
 				effect = properties.fromitem(weapon, effectid)
 				if effect and effect > random.randint(0, 99):
 					splashdamage(attacker, effectid, excludechar = defender)
-					
+
 			# Hit Spell effects
 			for (effectid, callback) in combat.hiteffects.EFFECTS.items():
 				effect = properties.fromitem(weapon, effectid)
 				if effect and effect > random.randint(0, 99):
 					callback(attacker, defender)
 
-		# 4% chance for losing one hitpoint
-		if 0.04 >= random.random():
+		# Slime or Toxic Elemental, 4% chance for losing one hitpoint
+		if weapon.maxhealth > 0 and ( (weapon.getintproperty( 'range', 1 ) <= 1 and (defender.id == 51 or defender.id == 158)) or 0.04 >= random.random() ):
+			if (weapon.getintproperty( 'range', 1 ) <= 1 and (defender.id == 51 or defender.id == 158)):
+				attacker.message( 500263, '' ) # *Acid blood scars your weapon!*
+
 			# If it's a self repairing item, grant health instead of reducing it
 			selfrepair = properties.fromitem(weapon, SELFREPAIR)
-			if selfrepair > 0 and weapon.health < weapon.maxhealth - 1:
+			if AGEOFSHADOWS and selfrepair > 0:
 				if selfrepair > random.randint(0, 9):
 					weapon.health += 2
 					weapon.resendtooltip()
-			elif weapon.health > 0:
-				weapon.health -= 1
-				weapon.resendtooltip()
-		if weapon.health <= 0:
-			tobackpack(weapon, attacker)
-			weapon.update()
-			if attacker.socket:
-				attacker.socket.clilocmessage(500645)
-	
+			else:
+				if weapon.health > 0:
+					weapon.health -= 1
+				elif weapon.maxhealth > 1:
+					weapon.maxhealth -= 1
+					attacker.message( 1061121, '' ) # Your equipment is severely damaged.
+				else:
+					weapon.delete()
+				if weapon:
+					weapon.resendtooltip()
+
+		#if weapon.health <= 0:
+		#	tobackpack(weapon, attacker)
+		#	weapon.update()
+		#	if attacker.socket:
+		#		attacker.socket.clilocmessage(500645)
+
 	# Notify the weapon ability
 	if not blocked and ability:
 		ability.hit(attacker, defender, damage)

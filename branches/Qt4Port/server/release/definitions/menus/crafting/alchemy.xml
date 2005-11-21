@@ -8,7 +8,7 @@
 -->
 <definitions>
 
-	<menu id="ALCHEMY" name="Alchemy">
+	<menu id="ALCHEMY" name="1044001"> <!-- <CENTER>ALCHEMY MENU</CENTER> -->
 		<menu id="ALCHEMY_REFRESH" />
 		<menu id="ALCHEMY_AGILITY" />
 		<menu id="ALCHEMY_NIGHTSIGHT" />
@@ -17,6 +17,10 @@
 		<menu id="ALCHEMY_POISON" />
 		<menu id="ALCHEMY_CURE" />
 		<menu id="ALCHEMY_EXPLOSION" />
+		<!--
+		<menu id="ALCHEMY_CONFUSION" />
+		<menu id="ALCHEMY_CONFLAGRATION" />
+		-->
 		<!--Shrink Potion-->
 		<craft definition="potion_shrink">
 			<alchemy min="800" max="1300" />
@@ -24,9 +28,17 @@
 			<material id="f86" amount="8" name="Mandrake Root" />
 			<material id="f0e" amount="1" name="Empty Bottle" />
 		</craft>
+<!--
+		<craft definition="potion_invisibility">
+			<alchemy min="650" max="1150" />
+			<material id="f7b" amount="4" name="Bloodmoss" />
+			<material id="f88" amount="3" name="Nightshade" />
+		</craft>
+-->
 	</menu>
 
-	<menu id="ALCHEMY_REFRESH" name="Refresh">
+	<!--Refresh Potion-->
+	<menu id="ALCHEMY_REFRESH" name="1044530">
 		<!--Refresh Potion-->
 		<craft definition="potion_refresh">
 			<alchemy min="-250" max="250" />
@@ -42,7 +54,8 @@
 		</craft>
 	</menu>
 
-	<menu id="ALCHEMY_AGILITY" name="Agility">
+	<!--Agility Potion-->
+	<menu id="ALCHEMY_AGILITY" name="1044531">
 		<!--Agility Potion-->
 		<craft definition="potion_agility">
 			<alchemy min="150" max="650" />
@@ -58,7 +71,8 @@
 		</craft>
 	</menu>
 
-	<menu id="ALCHEMY_NIGHTSIGHT" name="Nightsight">
+	<!--Nightsight Potion-->
+	<menu id="ALCHEMY_NIGHTSIGHT" name="1044532">
 		<!--Nightsight Potion-->
 		<craft definition="potion_nightsight">
 			<alchemy min="-250" max="250" />
@@ -67,7 +81,8 @@
 		</craft>
 	</menu>
 
-	<menu id="ALCHEMY_HEAL" name="Heal">
+	<!--Heal Potion-->
+	<menu id="ALCHEMY_HEAL" name="1044533">
 		<!--Lesser Heal Potion-->
 		<craft definition="potion_lesserheal">
 			<alchemy min="-250" max="250" />
@@ -90,7 +105,8 @@
 		</craft>
 	</menu>
 
-	<menu id="ALCHEMY_STRENGTH" name="Strength">
+	<!--Strength Potion-->
+	<menu id="ALCHEMY_STRENGTH" name="1044534">
 		<!--Strength Potion-->
 		<craft definition="potion_strength">
 			<alchemy min="250" max="750" />
@@ -106,7 +122,7 @@
 		</craft>
 	</menu>
 
-	<menu id="ALCHEMY_POISON" name="Poison">
+	<menu id="ALCHEMY_POISON" name="1044535">
 		<!--Lesser Poison Potion-->
 		<craft definition="potion_lesserpoison">
 			<alchemy min="-50" max="450" />
@@ -134,9 +150,27 @@
 			<material id="f88" amount="8" name="Nightshade" />
 			<material id="f0e" amount="1" name="Empty Bottle" />
 		</craft>
+
+		<!--Darkglow Poison Potion-->
+<!--
+		<craft definition="potion_darkglowpoison">
+			<alchemy min="650" max="1150" />
+			<material id="3191" amount="5" name="Luminescent Fungi" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+
+		Parasitic Poison Potion
+		<craft definition="potion_parasiticpoison">
+			<alchemy min="650" max="1150" />
+			<material id="3190" amount="5" name="Parasitic Plant" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+
+-->
 	</menu>
 
-	<menu id="ALCHEMY_CURE" name="Cure">
+	<!--Cure Potion-->
+	<menu id="ALCHEMY_CURE" name="1044536">
 		<!--Lesser Cure Potion-->
 		<craft definition="potion_lessercure">
 			<alchemy min="-100" max="400" />
@@ -159,7 +193,8 @@
 		</craft>
 	</menu>
 
-	<menu id="ALCHEMY_EXPLOSION" name="Explosion">
+	<!--Explosion Potion-->
+	<menu id="ALCHEMY_EXPLOSION" name="1044537">
 		<!--Lesser Explosion Potion-->
 		<craft definition="potion_lesserexplosion">
 			<alchemy min="50" max="550" />
@@ -181,5 +216,43 @@
 			<material id="f0e" amount="1" name="Empty Bottle" />
 		</craft>
 	</menu>
+
+<!--
+	Confusion Blast
+	<menu id="ALCHEMY_CONFUSION" name="1072107">
+		Confusion Blast Potion
+		<craft definition="potion_confusionblast">
+			<alchemy min="500" max="1000" />
+			<material id="f8a" amount="5" name="Pig Iron" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+
+		Greater Confusion Blast
+		<craft definition="potion_greaterconfusionblast">
+			<alchemy min="650" max="1150" />
+			<material id="f8a" amount="10" name="Pig Iron" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+	</menu>
+
+	Conflagration
+	<menu id="ALCHEMY_CONFLAGRATION" name="1072097">
+		Conflagration Potion
+		<craft definition="potion_conflagration">
+			<alchemy min="550" max="1050" />
+			<material id="f8f" amount="5" name="Grave Dunst" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+
+		Greater Conflagration Potion
+		<craft definition="potion_greaterconflagration">
+			<alchemy min="700" max="1200" />
+			<material id="f8f" amount="10" name="Grave Dunst" />
+			<material id="f0e" amount="1" name="Empty Bottle" />
+		</craft>
+	</menu>
+
+-->
+
 
 </definitions>

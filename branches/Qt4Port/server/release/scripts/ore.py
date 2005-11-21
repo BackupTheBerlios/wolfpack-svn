@@ -10,13 +10,8 @@ from wolfpack.consts import GRAY, MINING, SOUND_HAMMER_1
 from skills import mining
 from random import randrange, randint
 from system.lootlists import DEF_ORES # Gets BaseIDs
-
-FORGEIDS = [ 'fb1', '197a', '197b', '197c', '197d', '197e', '197f', '1980', \
-	'1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989', \
-	'198a', '198b', '198c', '198d', '198e', '198f', '1990', '1991', '1992', \
-	'1993', '1994', '1995', '1996', '1997', '1998', '1999', '199a', '199b', \
-	'199c', '199d', '199e', '199f', '19a0', '19a1', '19a2', '19a3', '19a4', \
-	'19a5', '19a6', '19a7', '19a8', '19a9' ]
+from wolfpack import tr
+from skills.blacksmithing import FORGES
 
 def onShowTooltip(player, object, tooltip):
 	name = 'Unknown Ore'
@@ -72,7 +67,7 @@ def response( char, args, target ):
 		resname = item.gettag( 'resname' )
 
 	if target.item:
-		targetitem = wolfpack.finditem( target.item.serial )
+		targetitem = target.item
 
 	elif target.char:
 		char.socket.clilocmessage(501973)
@@ -80,21 +75,23 @@ def response( char, args, target ):
 
 	# Static Forges can be used, too
 	else:
-		statics = wolfpack.statics(target.pos.x, target.pos.y, target.pos.map, True)
 		if char.pos.distance( target.pos ) > 3:
 			char.socket.clilocmessage( 0x7A258 ) # You can't reach...
 			return True
+
+		statics = wolfpack.statics(target.pos.x, target.pos.y, target.pos.map, True)
 		for tile in statics:
 			dispid = tile[0]
-			if dispid == 0xFB1 or (dispid >= 0x197A and dispid <= 0x19A9):
+			if dispid in FORGES:
 				dosmelt( char, [ item, resname ] )
 				return True
-			else:
-				char.socket.clilocmessage(501973)
-				return
+
+		# We found no static forge
+		char.socket.clilocmessage(501973)
+		return
 
 	# We go onto creating ingots here.
-	if target.item and target.item.baseid in FORGEIDS:
+	if target.item and target.item.id in FORGES:
 		if item.baseid in DEF_ORES:
 			if char.pos.distance( target.pos ) > 3:
 				char.socket.clilocmessage( 0x7A258 ) # You can't reach...
@@ -244,22 +241,22 @@ def response( char, args, target ):
 				else:
 					# Merge the ore piles
 					if targetitem.baseid == DEF_ORES[1] or targetitem.baseid == DEF_ORES[2] or targetitem.baseid == DEF_ORES[3]:
-						char.socket.sysmessage( "You can not create a larger pile from a small pile of ore.", GRAY )
+						char.socket.sysmessage( tr("You can not create a larger pile from a small pile of ore."), GRAY )
 					elif targetitem.baseid == DEF_ORES[0]:
 						targetitem.amount += item.amount
 						targetitem.update()
 						item.delete()
-						char.socket.sysmessage( "You combine the two ore piles to create a single pile of ore.", GRAY )
+						char.socket.sysmessage( tr("You combine the two ore piles to create a single pile of ore."), GRAY )
 					return True
 			else:
 				# Merge the ore piles
 				if targetitem.baseid == DEF_ORES[1] or targetitem.baseid == DEF_ORES[2] or targetitem.baseid == DEF_ORES[3]:
-					char.socket.sysmessage( "You can not create a larger pile from a small pile of ore.", GRAY )
+					char.socket.sysmessage( tr("You can not create a larger pile from a small pile of ore."), GRAY )
 				elif targetitem.baseid == DEF_ORES[0]:
 					targetitem.amount += item.amount
 					targetitem.update()
 					item.delete()
-					char.socket.sysmessage( "You combine the two ore piles to create a single pile of ore.", GRAY )
+					char.socket.sysmessage( tr("You combine the two ore piles to create a single pile of ore."), GRAY )
 				return True
 
 def dosmelt(char, args):
@@ -267,7 +264,7 @@ def dosmelt(char, args):
 	resname = args[1]
 
 	if not mining.ORES.has_key(resname):
-		char.socket.sysmessage('You cannot smelt that kind of ore.')
+		char.socket.sysmessage( tr('You cannot smelt that kind of ore.') )
 		return 0
 
 	success = 0
@@ -324,6 +321,9 @@ def dosmelt(char, args):
 			# You burn away the impurities but are left with no useable metal.
 			char.socket.clilocmessage( 501989, '', GRAY )
 			ore.delete()
+
+	# Resend weight
+	char.socket.resendstatus()
 
 	return True
 

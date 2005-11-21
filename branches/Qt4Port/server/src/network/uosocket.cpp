@@ -291,6 +291,13 @@ void cUOSocket::send( cGump* gump )
 		gumpsize += ( *it ).length() * 2 + 2;
 		++it;
 	}
+	
+	if (gumpsize >= 0x8000) {
+		sysMessage("Gump exceeds maximum packet size.");
+		return;
+	}
+	
+	
 	cUOTxGumpDialog uoPacket( gumpsize );
 
 	uoPacket.setSerial( gump->serial() );
@@ -757,15 +764,32 @@ void cUOSocket::disconnect()
 	{
 		_player->removeFromView( true );
 
-		// is the player allowed to logoff instantly?
-		if ( _player->isGMorCounselor() || ( _player->region() && _player->region()->isGuarded() ) )
-		{
-			_player->onLogout();
+		// Insta Logout from Guarded Regions activated?
+		if (Config::instance()->instalogoutfromguarded()) {
+
+			// is the player allowed to logoff instantly?
+			if ( _player->isGMorCounselor() || ( _player->region() && _player->region()->isGuarded() ) || ( _player->region() && _player->region()->isInstaLogout() ) || _player->multi() )
+			{
+				_player->onLogout();
+			}
+			else
+			{
+				// let the player linger...
+				_player->setLogoutTime( Server::instance()->time() + Config::instance()->quittime() * 1000 );
+			}
 		}
 		else
 		{
-			// let the player linger...
-			_player->setLogoutTime( Server::instance()->time() + Config::instance()->quittime() * 1000 );
+			// is the player allowed to logoff instantly?
+			if ( _player->isGMorCounselor() || ( _player->region() && _player->region()->isInstaLogout() ) || _player->multi() )
+			{
+				_player->onLogout();
+			}
+			else
+			{
+				// let the player linger...
+				_player->setLogoutTime( Server::instance()->time() + Config::instance()->quittime() * 1000 );
+			}
 		}
 
 		_player->resend( false );
@@ -824,7 +848,7 @@ void cUOSocket::sendCharList()
 	// AoS needs it most likely for account creation
 	const uint maxChars = wpMin<uint>( 6, Config::instance()->maxCharsPerAccount() );
 	cUOTxClientFeatures clientFeatures;
-	unsigned short flags = 0x3 | 0x40 | 0x801c;
+	unsigned short flags = 0x3 | 0x40 | 0x801c | 0x80;	// Added 0x80 to Enable the ML Features
 	if (maxChars == 6) {
 		flags |= 0x8020;
 		flags &= ~ 0x4;
@@ -1199,6 +1223,22 @@ void cUOSocket::handleCreateChar( cUORxCreateChar* packet )
 		}
 	}
 
+	// Temporary Gender and Race (Just for initial Checks... but if Race is allowed in char class, it can be a lot more usefull)
+	bool tGender = true;		// Woman by default
+	bool tRace = false;		// Human by Default
+	
+	// The Gender (True to Woman, False to man)
+	if (packet->gender()%2 == 0)
+	{
+		tGender = false;			// Its a Man!
+	}
+
+	// Pickin the Race (True to human, False to Elf)
+	if (packet->gender() > 1)
+	{
+		tRace = true;			// Its an Elf!
+	}
+
 	// Check the stats
 	Q_UINT16 statSum = ( packet->strength() + packet->dexterity() + packet->intelligence() );
 
@@ -1217,14 +1257,14 @@ void cUOSocket::handleCreateChar( cUORxCreateChar* packet )
 	}
 
 	// Check Hair
-	if ( packet->hairStyle() && ( !isHair( packet->hairStyle() ) || !isHairColor( packet->hairColor() ) ) )
+	if ( packet->hairStyle() && ( !isHairsByRace( packet->hairStyle(), tRace ) || !isHairsByRaceColor( packet->hairColor(), tRace ) ) )
 	{
 		log( tr( "Submitted wrong hair style (%1) or wrong hair color (%2) during char creation.\n" ).arg( packet->hairStyle() ).arg( packet->hairColor() ) );
 		cancelCreate( tr( "Invalid hair" ) )
 	}
 
 	// Check Beard
-	if ( packet->beardStyle() && ( !isBeard( packet->beardStyle() ) || !isHairColor( packet->beardColor() ) ) )
+	if ( packet->beardStyle() && ( !isBeard( packet->beardStyle() ) || !isHairsByRaceColor( packet->beardColor(), tRace ) ) )
 	{
 		log( tr( "Submitted wrong beard style (%1) or wrong beard color (%2) during char creation.\n" ).arg( packet->beardStyle() ).arg( packet->beardColor() ) );
 		cancelCreate( tr( "Invalid beard" ) )
@@ -1247,7 +1287,7 @@ void cUOSocket::handleCreateChar( cUORxCreateChar* packet )
 	}
 
 	// Finally check the skin
-	if ( !isSkinColor( packet->skinColor() ) )
+	if ( !isSkinColor( packet->skinColor(), tRace ) )
 	{
 		log( tr( "Submitted a wrong skin color (%1) during char creation.\n" ).arg( packet->skinColor() ) );
 		cancelCreate( tr( "Invalid skin color" ) )
@@ -1256,10 +1296,16 @@ void cUOSocket::handleCreateChar( cUORxCreateChar* packet )
 	// FINALLY create the char
 	P_PLAYER pChar = new cPlayer;
 	pChar->Init();
-	pChar->setGender( packet->gender() );
 
+	pChar->setGender( packet->gender()%2 );	// It will retrieve just the Gender
+
+	// It will set the Race for Elves if its an Elf
+	if (packet->gender() > 1)
+		pChar->setElf ( 1 );
+
+	// Gender (Instead of be a Human or an Elf)
 	const cElement* playerDefinition = 0;
-	if ( packet->gender() == 1 )
+	if ( tGender )
 	{
 		pChar->setBaseid( "player_female" );
 		playerDefinition = Definitions::instance()->getDefinition( WPDT_NPC, "player_female" );
@@ -1279,7 +1325,15 @@ void cUOSocket::handleCreateChar( cUORxCreateChar* packet )
 	pChar->setSkin( packet->skinColor() );
 	pChar->setOrgSkin( packet->skinColor() );
 
-	pChar->setBody( ( packet->gender() == 1 ) ? 0x191 : 0x190 );
+	// Now... lets check the bodies for Humans and Elves
+	if ( !tRace )	// Its a Human
+	{
+		pChar->setBody( ( tGender ) ? 0x191 : 0x190 );
+	}
+	else
+	{
+		pChar->setBody( ( tGender ) ? 0x25e : 0x25d );
+	}
 
 	pChar->setOrgBody( pChar->body() );
 
@@ -1312,7 +1366,7 @@ void cUOSocket::handleCreateChar( cUORxCreateChar* packet )
 	pChar->addItem( cBaseChar::Shirt, pItem );
 
 	// Skirt or Pants
-	pItem = cItem::createFromScript( ( packet->gender() != 0 ) ? "1516" : "152e" );
+	pItem = cItem::createFromScript( ( tGender ) ? "1516" : "152e" );
 	pItem->setColor( packet->pantsColor() );
 	pItem->setNewbie( true );
 	pChar->addItem( cBaseChar::Pants, pItem );
@@ -1388,6 +1442,9 @@ void cUOSocket::handleCreateChar( cUORxCreateChar* packet )
 	pChar->giveNewbieItems( skillid2 );
 
 	log( LOG_MESSAGE, tr( "Created character '%1' (0x%2).\n" ).arg( pChar->name() ).arg( pChar->serial(), 0, 16 ) );
+
+	// Save the flags
+	flags_ = packet->flags();
 
 	// Start the game with the newly created char -- OR RELAY HIM !!
 	playChar( pChar );
@@ -1631,6 +1688,13 @@ void cUOSocket::handleAosMultiPurpose( cUORxAosMultiPurpose* packet )
 			{
 				PyObject *args = Py_BuildValue( "(N)", _player->getPyObject() );
 				_player->callEventHandler( EVENT_GUILDBUTTON, args );
+				Py_DECREF( args );
+			}
+			break;
+		case cUORxAosMultiPurpose::QuestButton:
+			{
+				PyObject *args = Py_BuildValue( "(N)", _player->getPyObject() );
+				_player->callEventHandler( EVENT_QUESTBUTTON, args );
 				Py_DECREF( args );
 			}
 			break;
@@ -2226,6 +2290,8 @@ void cUOSocket::sendContainer( P_ITEM pCont )
 			break;
 
 		case 0x0E7A: // Picknick Basket
+		case 0x24d5: // Basket
+		case 0x24d6: // Basket
 			gump = 0x3F;
 			break;
 
@@ -2262,6 +2328,9 @@ void cUOSocket::sendContainer( P_ITEM pCont )
 		case 0x0990: // Round Basket
 		case 0x9AC:
 		case 0x9B1:
+		case 0x24d7: // Basket (SE)
+		case 0x24d8: // Basket (SE)
+		case 0x24dd: // Basket (SE)
 			gump = 0x41;
 			break;
 
@@ -2295,6 +2364,7 @@ void cUOSocket::sendContainer( P_ITEM pCont )
 		case 0xed1: // Bones
 		case 0xed2: // Bones
 		case 0x2006: // Coffin
+		case 0x318c: // Grizzled Bones
 			gump = 0x09;
 			break;
 
@@ -2335,6 +2405,67 @@ void cUOSocket::sendContainer( P_ITEM pCont )
 		case 0x0A44: // Dresser
 		case 0x0A35: // Dresser
 			gump = 0x51;
+			break;
+
+		case 0x232a: // Gift Box
+		case 0x232b: // Gift Box
+			gump = 0x102;
+			break;
+
+		case 0x24d9: // Basket
+		case 0x24da: // Basket
+		case 0x24db: // Basket
+		case 0x24dc: // Basket
+			gump = 0x108;
+			break;
+
+		case 0x280b: // Plain Wooden Chest
+		case 0x280c: // Plain Wooden Chest
+			gump = 0x109;
+			break;
+
+		case 0x280d: // Ornate Wooden Chest
+		case 0x280e: // Ornate Wooden Chest
+		case 0x2811: // Wooden Footlocker
+		case 0x2812: // Wooden Footlocker
+			gump = 0x10b;
+			break;
+
+		case 0x280f: // Gilded Wooden Chest
+		case 0x2810: // Gilded Wooden Chest
+			gump = 0x10a;
+			break;
+
+		case 0x2815: // Tall Cabinet
+		case 0x2816: // Tall Cabinet
+		case 0x2817: // Short Cabinet
+		case 0x2818: // Short Cabinet
+			gump = 0x10c;
+			break;
+
+		case 0x2813: // Finished Wooden Chest
+		case 0x2814: // Finished Wooden Chest
+			gump = 0x10d;
+			break;
+
+		case 0x2857: // Red Armoire
+		case 0x2858: // Red Armoire
+			gump = 0x105;
+			break;
+
+		case 0x2859: // Elegant Armoire
+		case 0x285a: // Elegant Armoire
+			gump = 0x107;
+			break;
+
+		case 0x285b: // Maple Armoire
+		case 0x285c: // Maple Armoire
+			gump = 0x106;
+			break;
+
+		case 0x285d: // Cherry Armoire
+		case 0x285e: // Cherry Armoire
+			gump = 0x10e;
 			break;
 
 		default:
@@ -3391,6 +3522,19 @@ void cUOSocket::updateLightLevel()
 		{
 			level = wpMin<int>( 0x1f, wpMax<int>( 0, Config::instance()->worldCurrentLevel() - static_cast<int>( _player->fixedLightLevel() ) ) );
 		}
+
+		// If Region have a Default Light Level, then let's Override
+		if (region->fixedlight() > -1)
+			level = wpMin<int>( 0x1f, wpMax<int>( 0, region->fixedlight() - static_cast<int>( _player->fixedLightLevel() ) ) );
+
+		// Elves are always with Full NightSight. True?
+		if (Config::instance()->elffullnightsight())
+		{
+			if ( _player->isElf() )
+				level = 0;
+		}
+
+		// Sending LightLevel
 		pLight.setLevel( level );
 		send( &pLight );
 	}
@@ -3697,7 +3841,8 @@ bool cUOSocket::useItem( P_ITEM item )
 
 				if ( !allowed )
 				{
-					_player->makeCriminal();
+					if (_player->onBecomeCriminal(3, NULL, item ))
+						_player->makeCriminal();
 				}
 			}
 		}

@@ -256,8 +256,8 @@ void cTiming::poll()
 		positions.append( socket->player()->pos() );
 	}
 
-	// Check all other characters
-	if ( nextNpcCheck <= time )
+	// Check all other characters (Implementation of OnTimeChange Event too for NPCs)
+	if ( ( nextNpcCheck <= time ) || ( events & cBaseChar::EventTime ) )
 	{
 		cCharIterator chariter;
 		for ( P_CHAR character = chariter.first(); character; character = chariter.next() )
@@ -296,11 +296,14 @@ void cTiming::poll()
 			}
 		}
 
-		if ( nextTamedCheck <= time )
-			nextTamedCheck = ( uint ) ( time + Config::instance()->checkTamedTime() * MY_CLOCKS_PER_SEC );
-
 		if ( nextNpcCheck <= time )
-			nextNpcCheck = ( uint ) ( time + Config::instance()->checkNPCTime() * MY_CLOCKS_PER_SEC );
+		{
+			if ( nextTamedCheck <= time )
+				nextTamedCheck = ( uint ) ( time + Config::instance()->checkTamedTime() * MY_CLOCKS_PER_SEC );
+
+			if ( nextNpcCheck <= time )
+				nextNpcCheck = ( uint ) ( time + Config::instance()->checkNPCTime() * MY_CLOCKS_PER_SEC );
+		}
 	}
 
 	// Check the Timers
@@ -327,11 +330,18 @@ void cTiming::checkRegeneration( P_CHAR character, unsigned int time )
 		// If it's not disabled hunger affects our health regeneration
 		if ( character->hitpoints() < character->maxHitpoints() )
 		{
-			if ( !Config::instance()->hungerRate() || character->hunger() > 3 )
+			if ( !Config::instance()->hungerRate() || character->hunger() > 10 )
 			{
-				character->setHitpoints( character->hitpoints() + 1 );
-				character->updateHealth();
-				character->setRegenHitpointsTime( ( uint ) ( Server::instance()->time() + floor( character->getHitpointRate() * 1000 ) ) );
+				// get next health regeneration time
+				//unsigned int hitsRegenTime = character->onRegenHitpoints(( uint ) ( floor( character->getHitpointRate() * 1000 ) ));
+				unsigned int hitsRegenTime = character->getHitpointRate() * 1000;
+
+				if ( hitsRegenTime )
+				{
+					character->setHitpoints( character->hitpoints() + 1 );
+					character->updateHealth();
+					character->setRegenHitpointsTime( Server::instance()->time() + hitsRegenTime );
+				}
 			}
 		}
 	}
@@ -340,13 +350,21 @@ void cTiming::checkRegeneration( P_CHAR character, unsigned int time )
 	{
 		if ( character->stamina() < character->maxStamina() )
 		{
-			character->setStamina( character->stamina() + 1 );
-			character->setRegenStaminaTime( ( uint ) ( Server::instance()->time() + floor( character->getStaminaRate() * 1000 ) ) );
+			// get next stamina regeneration time
+			//unsigned int stamRegenTime = character->onRegenStamina(( uint ) ( floor( character->getStaminaRate() * 1000 ) ));
+			unsigned int stamRegenTime = character->getStaminaRate() * 1000;
 
-			P_PLAYER player = dynamic_cast<P_PLAYER>( character );
-			if ( player && player->socket() )
+			if ( stamRegenTime )
 			{
-				player->socket()->updateStamina();
+
+				character->setStamina( character->stamina() + 1 );
+				character->setRegenStaminaTime( Server::instance()->time() + stamRegenTime );
+
+				P_PLAYER player = dynamic_cast<P_PLAYER>( character );
+				if ( player && player->socket() )
+				{
+					player->socket()->updateStamina();
+				}
 			}
 		}
 	}
@@ -355,21 +373,28 @@ void cTiming::checkRegeneration( P_CHAR character, unsigned int time )
 	{
 		if ( character->mana() < character->maxMana() )
 		{
-			character->setMana( character->mana() + 1 );
-			character->setRegenManaTime( ( uint ) ( Server::instance()->time() + floor( character->getManaRate() * 1000 ) ) );
+			// get next mana regeneration time
+			//unsigned int manaRegenTime = character->onRegenMana(( uint ) ( floor( character->getManaRate() * 1000 ) ));
+			unsigned int manaRegenTime = character->getManaRate() * 1000;
 
-			P_PLAYER player = dynamic_cast<P_PLAYER>( character );
-			if ( player )
+			if ( manaRegenTime )
 			{
-				if ( player->socket() )
-				{
-					player->socket()->updateMana();
-				}
+				character->setMana( character->mana() + 1 );
+				character->setRegenManaTime( Server::instance()->time() + manaRegenTime );
 
-				if ( player->isMeditating() && character->mana() >= character->maxMana() )
+				P_PLAYER player = dynamic_cast<P_PLAYER>( character );
+				if ( player )
 				{
-					player->setMeditating( false );
-					player->sysmessage( 501846 );
+					if ( player->socket() )
+					{
+						player->socket()->updateMana();
+					}
+
+					if ( player->isMeditating() && character->mana() >= character->maxMana() )
+					{
+						player->setMeditating( false );
+						player->sysmessage( 501846 );
+					}
 				}
 			}
 		}
@@ -414,7 +439,7 @@ void cTiming::checkPlayer( P_PLAYER player, unsigned int time )
 void cTiming::checkNpc( P_NPC npc, unsigned int time )
 {
 	// Remove summoned npcs
-	if ( npc->summoned() && npc->summonTime() <= time )
+	if ( npc->summoned() && npc->summonTime() <= time && npc->summonTime() )
 	{
 		// Make pooofff and sheeesh
 		npc->soundEffect( 0x1fe );
@@ -447,16 +472,16 @@ void cTiming::checkNpc( P_NPC npc, unsigned int time )
 
 			switch ( npc->hunger() )
 			{
-			case 4:
+			case 12:
 				npc->emote( tr( "*%1 looks a little hungry*" ).arg( npc->name() ), 0x26 );
 				break;
-			case 3:
+			case 9:
 				npc->emote( tr( "*%1 looks fairly hungry*" ).arg( npc->name() ), 0x26 );
 				break;
-			case 2:
+			case 6:
 				npc->emote( tr( "*%1 looks extremely hungry*" ).arg( npc->name() ), 0x26 );
 				break;
-			case 1:
+			case 3:
 				npc->emote( tr( "*%1 looks weak from starvation*" ).arg( npc->name() ), 0x26 );
 				break;
 			case 0:

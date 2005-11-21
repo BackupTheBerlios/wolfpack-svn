@@ -48,6 +48,27 @@ Wolfpack 12.9.14 Beta (SVN)
   - Fixed items decaying in multis, if they lay on tables.
   - Added support for regional mining in regions with <RESORES></RESORES>. (thx to MagnusBr)
   - Added "pay from pack only" option. (thx to MagnusBr)
+  - Fixed uo version not detected on character creation.
+  - OnWearItem is called for the character the item is equiped on too.
+  - Added some new flags for regions:
+    <instalogout />, <noteleport />, <safe />, <nocriminalcombat /> and <nokillcount />
+  - Added "Insta Logout from Guarded Regions" option, to enable or disable the InstaLogout from Guarded Areas
+  - Added "Percent Hits after Ress", "Percent Mana after Ress" and "Percent Stamina after Ress"
+  - Added Support to Elves as a Playable Race (From UO:Mondain's Legacy)
+  - Added support for Mondain's Legacy Map. (Map 0 and Map 1 are larger)
+    If your server doesn't have the new map disable this in wolfpack.xml.
+  - Removed unused server options in wolfpack.xml.
+  - Added "advance" parameter to char.skillcheck, that allows skillchecks without the possibility of skillgains.
+  - Fixed summontime property. If it's 0, the NPC will never disappear.
+  - Fixed having no LoS on floor tiles (that do not block sight) build on black map (dirt e.g.)
+  - Implemented onRegenHitpoints, onRegenMana, onRegenStamina events.
+  - Added "Factor for MaxHitPoints Calculation", "Factor for MaxMana Calculation", "Factor for MaxStamina Calculation".
+  - Implemented onBecomeCriminal event.
+  - Implemented some Racial Features for Elves from Mondain's Legacy
+  - Implemented some Racial Features for Humans from Mondain's Legacy
+  - Added "name.prefix" and "name.suffix" tags to prefix and suffix for names, like in Sphere revisions.
+  - Added "Simple MaxHitPoints Calculation", to enable the MaxHits Calculation = Str * Factor and not Str/2 * Factor + 50
+  - Added tags "modmaxhitsfactor", "modmaxstamfactor" and "modmaxmanafactor" as a modification for these Factors
  * Definition Changes:
   - Tinker buy some items now
   - Bench (0x1049) which was crafted was "unusable"
@@ -66,10 +87,14 @@ Wolfpack 12.9.14 Beta (SVN)
   - Added books to learn special abilities (mining sand/stone; glassblowing; masonry)
   - Added granite and sand definitions
   - Added craftmenu for glassblowing
-  - Support up to client 4.0.11.
+  - Support up to client 5.0.0.
   - Added Multis and Multi deeds.
   - Implemented some new npcs (thx to idget).
   - Implemented SE items for crafting.
+  - Growable and harvestable hay, wheat, cotton, flax, hops.
+  - Grapevines got the farming script.
+  - Misc. id typos fixed.
+  - Added Mondain's Legacy Weapons
  * Python Script Changes:
   - Improved/fixed goitem and gouid command in relation to containers (sending content).
   - Added an follow button to who menu.
@@ -156,6 +181,19 @@ Wolfpack 12.9.14 Beta (SVN)
   - Added support for regional mining in mining.py (thx to MagnusBr)
   - Remaining tool uses for different skills were not handled
   - Added a findlock command.
+  - Added cliloc support for crafting menues.
+  - Fixed metals in carpentry menu and tinkering menu requiring blacksmithing skill.
+  - Adapted scripts to new elven bodies.
+  - Animals can eat hay sheafs now.
+  - Implemented growable and harvestable hay, hops, wheat, cotton and flax.
+  - Grapevines and fruit trees can be harvested if they have resources.
+  - If enhancing an item fails and the item breaks, chars in range of 5 tiles and if in LoS will notice that.
+  - Cows will give milk, chicken eggs (on double click).
+  - If you use wheat sheafs near a flour mill, you will get a sack of flour.
+  - Added an optional extended carpentry system that uses different wood types. This has to be enabled in wolfpack.xml
+  - Disabled animal taming gain for creatures a character had already tamed.
+  - Fixed gates with invalid positions crashing the server when used.
+  - Implemented some Racial Features for Elves from Mondain's Legacy
  * Misc. Changes:
  * Known Issues, Bugs, and Missing Features:
   - Some skills are still incomplete.
@@ -165,6 +203,8 @@ Wolfpack 12.9.14 Beta (SVN)
     We welcome donated OSI-like region scripts!
   - Possible that a few monsters are missing and/or incomplete.
   - Multis (Houses/Boats) are not completly supported.
+  - "Infused with Magic" and "Perception" (Elves Features from Mondain's Legacy) are not implemented yet
+  - "Workhorse" and "Jack of all trades" (Human Features from Mondain's Legacy) are not implemented yet
   - For latest information check out: http://bugs.wpdev.org
 
 Wolfpack 12.9.13 Beta (25. December 2004)

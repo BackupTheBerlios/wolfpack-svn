@@ -88,7 +88,7 @@ cBaseChar::cBaseChar()
 	fame_ = 0;
 	kills_ = 0;
 	deaths_ = 0;
-	hunger_ = 6;
+	hunger_ = 20;
 	hungerTime_ = 0;
 	flag_ = 0x02;
 	emoteColor_ = 0x23;
@@ -223,6 +223,11 @@ void cBaseChar::load( cBufferedReader& reader, unsigned int version )
 	if ( version < 9 )
 	{
 		count = CHIVALRY + 1; // Before version 9 the highest skill was chivalry
+	}
+
+	if ( version < 11 )
+	{
+		count = BUSHIDO + 2;
 	}
 
 	for ( unsigned int s = 0; s < count; ++s )
@@ -801,9 +806,9 @@ bool cBaseChar::resurrect( cUObject* source )
 	setBody( orgBody_ );
 	setSkin( orgSkin_ );
 	setDead( false );
-	hitpoints_ = wpMax<short>( 1, static_cast<short>( 0.1 * maxHitpoints_ ) );
-	stamina_ = static_cast<short>( 0.5 * maxStamina_ );
-	mana_ = static_cast<short>( 0.5 * maxMana_ );
+	hitpoints_ = wpMax<short>( 1, static_cast<short>( ((Config::instance()->percentHitsAfterRess()) * maxHitpoints_)/100 ) );
+	stamina_ = wpMax<short>( 1, static_cast<short>( ((Config::instance()->percentStaminaAfterRess()) * maxStamina_)/100 ) );
+	mana_ = wpMax<short>( 1, static_cast<short>( ((Config::instance()->percentManaAfterRess()) * maxMana_)/100 ) );
 	fight( 0 );
 	P_ITEM backpack = getBackpack(); // Make sure he has a backpack
 
@@ -1083,6 +1088,33 @@ bool cBaseChar::inGuardedArea()
 	cTerritory* Region = Territories::instance()->region( this->pos().x, this->pos().y, this->pos().map );
 	if ( Region )
 		return Region->isGuarded();
+	else
+		return false;
+}
+
+bool cBaseChar::inSafeArea()
+{
+	cTerritory* Region = Territories::instance()->region( this->pos().x, this->pos().y, this->pos().map );
+	if ( Region )
+		return Region->isSafe();
+	else
+		return false;
+}
+
+bool cBaseChar::inNoCriminalCombatArea()
+{
+	cTerritory* Region = Territories::instance()->region( this->pos().x, this->pos().y, this->pos().map );
+	if ( Region )
+		return Region->isNoCriminalCombat();
+	else
+		return false;
+}
+
+bool cBaseChar::inNoKillCountArea()
+{
+	cTerritory* Region = Territories::instance()->region( this->pos().x, this->pos().y, this->pos().map );
+	if ( Region )
+		return Region->isNoKillCount();
 	else
 		return false;
 }
@@ -1451,6 +1483,12 @@ void cBaseChar::processNode( const cElement* Tag )
 
 void cBaseChar::addItem( cBaseChar::enLayer layer, cItem* pi, bool handleWeight, bool noRemove )
 {
+	if ( free )
+	{
+		Console::instance()->log( LOG_WARNING, tr( "Rejected putting an item (%1) into a freed character (%2)" ).arg( pi->serial(), 0, 16 ).arg( serial_, 0, 16 ) );
+		return;
+	}
+
 	if ( pi->multi() )
 	{
 		// Ignore the pseudo-pointer if uninitialized
@@ -1709,7 +1747,7 @@ stError* cBaseChar::setProperty( const QString& name, const cVariant& value )
 	}
 
 	/*
-		\property char.hunger This integer property indicates the food level of the character. 0 is the lowest food level, 6 the highest.
+		\property char.hunger This integer property indicates the food level of the character. 0 is the lowest food level, 20 the highest.
 	*/
 	else
 		SET_INT_PROPERTY( "hunger", hunger_ )
@@ -1734,7 +1772,7 @@ stError* cBaseChar::setProperty( const QString& name, const cVariant& value )
 		SET_INT_PROPERTY( "flag", flag_ )
 
 		/*
-		\property propertyflags The bitfield (32 bit) with basechar properties. You can use the
+		\property char.propertyflags The bitfield (32 bit) with basechar properties. You can use the
 		upper 8 bits for custom properties.
 		*/
 	else
@@ -1952,6 +1990,14 @@ stError* cBaseChar::setProperty( const QString& name, const cVariant& value )
 		return 0;
 	}
 	/*
+		\property char.elf Indicates if the Character is a Elf or Not.
+	*/
+	else if ( name == "elf" )
+	{
+		setElf( value.toInt() );
+		return 0;
+	}
+	/*
 		\property char.invisible Indicates whether the character is invisible or not.
 	*/
 	else if ( name == "invisible" )
@@ -2099,6 +2145,7 @@ PyObject* cBaseChar::getProperty( const QString& name )
 	PY_PROPERTY( "gender", gender_ )
 	PY_PROPERTY( "id", body_ )
 	PY_PROPERTY( "invulnerable", isInvulnerable() )
+	PY_PROPERTY( "elf", isElf() )
 	PY_PROPERTY( "invisible", isInvisible() )
 	PY_PROPERTY( "frozen", isFrozen() )
 	PY_PROPERTY( "hitpointsbonus", hitpointsBonus_ )
@@ -2297,6 +2344,12 @@ void cBaseChar::callGuards()
 unsigned int cBaseChar::damage( eDamageType type, unsigned int amount, cUObject* source )
 {
 	if ( isInvulnerable() )
+	{
+		return 0;
+	}
+
+	// Safe Area
+	if ( inSafeArea() )
 	{
 		return 0;
 	}
@@ -2645,6 +2698,18 @@ bool cBaseChar::onDropOnChar( P_ITEM pItem )
 	return result;
 }
 
+bool cBaseChar::onWearItem( P_PLAYER pPlayer, P_ITEM pItem, unsigned char layer )
+{
+	bool result = false;
+	if ( canHandleEvent( EVENT_WEARITEM ) )
+	{
+		PyObject* args = Py_BuildValue( "O&O&O&b", PyGetCharObject, pPlayer, PyGetCharObject, this, PyGetItemObject, pItem, layer );
+		result = callEventHandler( EVENT_WEARITEM, args );
+		Py_DECREF( args );
+	}
+	return result;
+}
+
 QString cBaseChar::onShowPaperdollName( P_CHAR pOrigin )
 {
 	// I hate this event by the way (DarkStorm)
@@ -2714,6 +2779,83 @@ bool cBaseChar::onSkillGain( unsigned char skill, unsigned short min, unsigned s
 		Py_DECREF( args );
 	}
 	return result;
+}
+
+// Regen Things (OnRegenStamina, OnRegenHitpoints, OnRegenMana)
+
+unsigned int cBaseChar::onRegenHitpoints( unsigned int points )
+{
+	if ( canHandleEvent( EVENT_REGENHITS ) )
+	{
+		PyObject* args = Py_BuildValue( "O&i", PyGetCharObject, this, points );
+		PyObject* result = callEvent( EVENT_REGENHITS, args );
+
+		if ( result )
+		{
+			if ( PyInt_Check( result ) )
+				points = PyInt_AsLong( result );
+
+			Py_DECREF( result );
+		}
+		else
+			points = 0;
+
+		Py_DECREF( args );
+	}
+	else
+		points = 0;
+
+	return points;
+}
+
+unsigned int cBaseChar::onRegenMana( unsigned int points )
+{
+	if ( canHandleEvent( EVENT_REGENMANA ) )
+	{
+		PyObject* args = Py_BuildValue( "O&i", PyGetCharObject, this, points );
+		PyObject* result = callEvent( EVENT_REGENMANA, args );
+
+		if ( result )
+		{
+			if ( PyInt_Check( result ) )
+				points = PyInt_AsLong( result );
+
+			Py_DECREF( result );
+		}
+		else
+			points = 0;
+
+		Py_DECREF( args );
+	}
+	else
+		points = 0;
+
+	return points;
+}
+
+unsigned int cBaseChar::onRegenStamina( unsigned int points )
+{
+	if ( canHandleEvent( EVENT_REGENSTAMINA ) )
+	{
+		PyObject* args = Py_BuildValue( "O&i", PyGetCharObject, this, points );
+		PyObject* result = callEvent( EVENT_REGENSTAMINA, args );
+
+		if ( result )
+		{
+			if ( PyInt_Check( result ) )
+				points = PyInt_AsLong( result );
+
+			Py_DECREF( result );
+		}
+		else
+			points = 0;
+
+		Py_DECREF( args );
+	}
+	else
+		points = 0;
+
+	return points;
 }
 
 bool cBaseChar::kill( cUObject* source )
@@ -2791,10 +2933,17 @@ bool cBaseChar::kill( cUObject* source )
 				}
 			}
 
-			if ( isInnocent() && ( this->body_ == 0x190 || this->body_ == 0x191 ) )
+			if ( isInnocent() && ( this->body_ == 0x190 || this->body_ == 0x191 || this->body_ == 0x25d  || this->body_ == 0x25e  ) )
 			{
-				pPlayer->makeCriminal();
-				pPlayer->setKills( pPlayer->kills() + 1 );
+				if (!pPlayer->inNoCriminalCombatArea())
+				{
+					if (pPlayer->onBecomeCriminal(1, this, NULL ))
+						pPlayer->makeCriminal();
+				}
+
+				if (!inNoKillCountArea())
+					pPlayer->setKills( pPlayer->kills() + 1 );
+
 				if (pPlayer->kills() == Config::instance()->maxkills() + 1) {
 					pPlayer->resend(); // Just became a murderer
 				}
@@ -2803,7 +2952,10 @@ bool cBaseChar::kill( cUObject* source )
 
 				// Report the number of slain people to the player
 				if ( pPlayer->socket() )
-					pPlayer->socket()->sysMessage( tr( "You have killed %1 innocent people." ).arg( pPlayer->kills() ) );
+				{
+					if (!inNoKillCountArea())
+						pPlayer->socket()->sysMessage( tr( "You have killed %1 innocent people." ).arg( pPlayer->kills() ) );
+				}
 
 				// The player became a murderer
 				if ( pPlayer->kills() >= Config::instance()->maxkills() )
@@ -2924,7 +3076,7 @@ bool cBaseChar::kill( cUObject* source )
 					P_ITEM pNewItem = item->dupe();
 					corpse->addItem( pNewItem );
 					corpse->addEquipment( layer, pNewItem->serial() );
-				} else if (layer != Backpack) {
+				} else if ( (layer != Backpack) && !(item->hasTag("dontremoveondeath")) ) {
 					// Put into the backpack
 					if (item->newbie() || item->movable() > 1) {
 						backpack->addItem( item );
@@ -3187,6 +3339,11 @@ cBaseChar::FightStatus cBaseChar::fight( P_CHAR enemy )
 			sysmessage( 1061621 );
 			enemy = 0;
 		}
+		else if ( enemy->inSafeArea() )
+		{
+			sysmessage( "You cannot fight with creatures in Safe Areas.");
+			enemy = 0;
+		}
 		else if (enemy == this)
 		{
 			enemy = 0;
@@ -3298,7 +3455,7 @@ void cBaseChar::poll( unsigned int time, unsigned int events )
 			P_CHAR target = attackTarget_;
 
 			// Invulnerable or Dead target. Stop fighting.
-			if ( target == this || isDead() || target->isInvulnerable() || target->isDead() )
+			if ( target == this || isDead() || target->isInvulnerable() || target->isDead() || target->inSafeArea() )
 			{
 				fight( 0 );
 				return;
@@ -3355,13 +3512,37 @@ bool cBaseChar::isInnocent()
 
 void cBaseChar::refreshMaximumValues()
 {
+	// Lets try the Factors
+	float maxHitsFactor = Config::instance()->factorMaxHits();
+	float maxStaminaFactor = Config::instance()->factorMaxStam();
+	float maxManaFactor = Config::instance()->factorMaxMana();
+
+	// And now, lets see for modifications
+	if ( hasTag( "modmaxhitsfactor" ) )
+		maxHitsFactor += ( getTag( "modmaxhitsfactor" ).toDouble() );
+
+	if ( hasTag( "modmaxstamfactor" ) )
+		maxStaminaFactor += ( getTag( "modmaxstamfactor" ).toDouble() );
+
+	if ( hasTag( "modmaxmanafactor" ) )
+		maxManaFactor += ( getTag( "modmaxmanafactor" ).toDouble() );
+
+	// Finally, lets start to refresh values
 	if ( Config::instance()->refreshMaxValues() )
 	{
 		if ( objectType() == enPlayer )
-			maxHitpoints_ = wpMax<ushort>( 1, ( ( strength_ ) / 2 ) + hitpointsBonus_ + 50 );
+		{
+			if ( Config::instance()->simpleMaxHitsCalculation() )
+				maxHitpoints_ = wpMax<ushort>( 1, (strength_ * maxHitsFactor) + hitpointsBonus_ );
+			else
+				maxHitpoints_ = wpMax<ushort>( 1, ( ( strength_ * maxHitsFactor ) / 2 ) + hitpointsBonus_ + 50 );
+		}
 
-		maxStamina_ = wpMax<ushort>( 1, dexterity_ + staminaBonus_ );
-		maxMana_ = wpMax<ushort>( 1, intelligence_ + manaBonus_ );
+		maxStamina_ = wpMax<ushort>( 1, dexterity_ * maxStaminaFactor + staminaBonus_ );
+		if ( isElf() )
+			maxMana_ = wpMax<ushort>( 1, (intelligence_ * maxManaFactor * Config::instance()->elfwisdombonus()) + manaBonus_ );
+		else
+			maxMana_ = wpMax<ushort>( 1, (intelligence_ * maxManaFactor) + manaBonus_ );
 	}
 }
 
@@ -3413,14 +3594,28 @@ double cBaseChar::getHitpointRate()
 		points = wpMax<int>( 0, getTag( "regenhitpoints" ).toInt() );
 	}
 
-	return 1.0 / ( 0.1 * ( 1 + points ) );
+	P_PLAYER pPlayer = dynamic_cast<P_PLAYER>( this );
+
+	// See if its a NPC
+	if ( !pPlayer )
+		return 1.0 / ( 0.1 * ( 1 + points ) );
+
+	// Bonus from Regen Events
+	points += ( onRegenHitpoints(( uint ) ( float( points ) )) );
+
+	// Tough for Humans
+
+	if ( isElf() )
+		return 1.0 / ( 0.1 * ( 1 + points ) );
+	else
+		return ( 1.0 / ( 0.1 * ( 1 + points ) ) ) * Config::instance()->humantough();
 }
 
 double cBaseChar::getStaminaRate()
 {
 	if ( !isDead() )
 	{
-		double chance = ( double ) stamina() / ( double ) maxStamina();
+		double chance = ( double ) ( stamina() + 1 ) / ( double ) maxStamina();
 		double value = sqrt( skillValue( FOCUS ) * 0.0005 );
 		chance *= ( 1.0 - value );
 		chance += value;
@@ -3437,6 +3632,9 @@ double cBaseChar::getStaminaRate()
 	points += static_cast<int>( skillValue( FOCUS ) * 0.01 );
 	points = wpMax<int>( -1, points );
 
+	// Bonus from Regen Events
+	points += ( onRegenStamina(( uint ) ( float( points ) )) );
+
 	return 1.0 / ( 0.1 * ( 2 + points ) );
 }
 
@@ -3444,7 +3642,7 @@ double cBaseChar::getManaRate()
 {
 	if ( !isDead() )
 	{
-		double chance = ( double ) mana() / maxMana();
+		double chance = ( double ) ( mana() + 1 ) / maxMana();
 		double value = sqrt( skillValue( FOCUS ) * 0.0005 );
 		chance *= ( 1.0 - value );
 		chance += value;
@@ -3453,7 +3651,7 @@ double cBaseChar::getManaRate()
 
 	if ( !isMeditating() )
 	{
-		double chance = ( double ) mana() / maxMana();
+		double chance = ( double ) ( mana() + 1 ) / maxMana();
 		double value = sqrt( skillValue( MEDITATION ) * 0.0005 );
 		chance *= ( 1.0 - value );
 		chance += value;
@@ -3485,6 +3683,9 @@ double cBaseChar::getManaRate()
 	{
 		points += getTag( "regenmana" ).toInt();
 	}
+
+	// Bonus from Regen Events
+	points += ( onRegenMana(( uint ) ( float( points ) )) );
 
 	return 1.0 / ( 0.1 * points );
 }

@@ -8,6 +8,7 @@
 import wolfpack.settings
 import skills
 from wolfpack.consts import *
+from wolfpack.utilities import tr
 
 MAX_TEACHING = 300
 MIN_TEACHING = 20
@@ -28,6 +29,8 @@ def onContextCheckEnabled( char, target, tag ):
 		return False # disabled
 	if ( char.skill[ skill ] >= char.skillcap[ skill ] ):
 		return False # disabled
+	if ( char.skill[ skill ] >= int( target.skill[ skill ] / ( 1000.0 / MAX_TEACHING ) ) ):
+		return False # disabled
 	else:
 		return True #enabled
 
@@ -36,7 +39,7 @@ def onContextEntry( char, target, tag  ):
 	if ( char.dead or skill < 0 ):
 		return True
 
-	baseToSet = target.skill[ skill ] / ( 1000 / MAX_TEACHING )
+	baseToSet = int( target.skill[ skill ] / ( 1000.0 / MAX_TEACHING ) )
 	if ( baseToSet > MAX_TEACHING ):
 		baseToSet = MAX_TEACHING
 	elif ( baseToSet < MIN_TEACHING ):
@@ -48,8 +51,12 @@ def onContextEntry( char, target, tag  ):
 	if ( pointsToLearn <= 0 ): # Player knows more than me
 		return True
 
-	target.say( 1019077, args = "", affix = " " + str( pointsToLearn*10 ), prepend = 0, socket = char.socket ) # I will teach thee all I know, if paid the amount in full.  The price is:
-	target.say( 1043108, socket = char.socket ) #For less I shall teach thee less.
+	target.say( 1019077, affix = " " + str( pointsToLearn*10 ), prepend = False, socket = char.socket ) # I will teach thee all I know, if paid the amount in full.  The price is:
+
+	# using text instead of cliloc, because cliloc will hide the last message
+	target.say( tr("For less I shall teach thee less.") ) #For less I shall teach thee less.
+	#target.say( 1043108, socket = char.socket ) #For less I shall teach thee less.
+
 	char.settag("npctrainer", str( target.serial ) )
 	char.settag("trainningskill", str( skill ) )
 	return True
@@ -83,7 +90,7 @@ def onDropOnChar( char, item ):
 		if ( sum >= cap ):
 			return False
 
-		baseToSet = char.skill[ skill ] / ( 1000 / MAX_TEACHING )
+		baseToSet = int( char.skill[ skill ] / ( 1000.0 / MAX_TEACHING ) )
 		if ( baseToSet > MAX_TEACHING ):
 			baseToSet = MAX_TEACHING
 		elif ( baseToSet < MIN_TEACHING ):

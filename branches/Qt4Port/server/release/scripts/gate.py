@@ -1,7 +1,6 @@
-
 import wolfpack
 from wolfpack.consts import LOG_ERROR
-from wolfpack import console, utilities
+from wolfpack import console, utilities, tr
 from wolfpack.gumps import cGump
 
 #
@@ -13,9 +12,9 @@ def onCollide(player, item):
 
 	if not item.hastag('target'):
 		if player.socket:
-			player.socket.sysmessage('This gate leads nowhere...')
+			player.socket.sysmessage( tr('This gate leads nowhere...') )
 		else:
-			console.log(LOG_ERROR, "NPC [%x] using gate [%x] without target.\n" % (player.serial, item.serial))
+			console.log(LOG_ERROR, tr("NPC [%x] using gate [%x] without target.\n") % (player.serial, item.serial))
 		return False
 
 	target = item.gettag('target').split(',')
@@ -24,18 +23,21 @@ def onCollide(player, item):
 	try:
 		target = map(int, target)
 	except:
-		player.socket.sysmessage('This gate leads nowhere...')
+		player.socket.sysmessage( tr('This gate leads nowhere...') )
 		return False
 
-	# Move the player
-	pos = player.pos
-	pos.x = target[0]
-	pos.y = target[1]
-	pos.z = target[2]
-	if len(target) > 3:
-		pos.map = target[3]
+	# Validate the coord
+	try:
+		m = target[3]
+	except:
+		m = player.pos.map
+	pos = wolfpack.coord( target[0], target[1], target[2], m )
 
-	if not utilities.isMapAvailableTo(player, pos.map):
+	if not utilities.isValidPosition( pos ):
+		player.socket.sysmessage( tr('This gate leads nowhere...') )
+		return False
+
+	if not utilities.isMapAvailableTo( player, pos.map ):
 		return False
 
 	# Move his pets if he has any
@@ -44,11 +46,11 @@ def onCollide(player, item):
 			if follower.wandertype == 4 and follower.distanceto(player) < 5:
 				follower.removefromview()
 				follower.moveto(pos)
-				follower.update(0)
+				follower.update()
 
 	player.removefromview()
 	player.moveto(pos)
-	player.update(0)
+	player.update()
 	if player.socket:
 		player.socket.resendworld()
 
@@ -82,7 +84,7 @@ def onUse(player, item):
 		gump = cGump( 0, 0, 0, 50, 50 )
 		# Header
 		gump.addBackground( 0x24a4, 300, 200 )
-		gump.addHtmlGump( 10, 30, 300, 20, '<basefont size="7" color="#336699"><center>Set target for teleportaion</center></basefont>' )
+		gump.addHtmlGump( 10, 30, 300, 20, tr('<basefont size="7" color="#336699"><center>Set target for teleportaion</center></basefont>') )
 		# Input Fields
 		gump.addHtmlGump( 40, 60, 300, 20, 'x-Pos:' )
 		gump.addResizeGump( 90, 60, 0x2486, 156, 26 )

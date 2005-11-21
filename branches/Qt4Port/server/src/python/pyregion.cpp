@@ -139,6 +139,21 @@ static PyObject* wpRegion_getAttr( wpRegion* self, char* name )
 	else if ( !strcmp( name, "resores" ) )
 		return QString2Python( self->pRegion->resores() );
 	/*
+		\rproperty region.firstcoin The Definition of the First Coin for this Region (From New Monetary).
+	*/
+	else if ( !strcmp( name, "firstcoin" ) )
+		return QString2Python( self->pRegion->firstcoin() );
+	/*
+		\rproperty region.secondcoin The Definition of the Second Coin for this Region (From New Monetary).
+	*/
+	else if ( !strcmp( name, "secondcoin" ) )
+		return QString2Python( self->pRegion->secondcoin() );
+	/*
+		\rproperty region.thirdcoin The Definition of the Third Coin for this Region (From New Monetary).
+	*/
+	else if ( !strcmp( name, "thirdcoin" ) )
+		return QString2Python( self->pRegion->thirdcoin() );
+	/*
 		\rproperty region.midilist A list of midi sounds to be played for this region.
 	*/
 	else if ( !strcmp( name, "midilist" ) )
@@ -148,6 +163,11 @@ static PyObject* wpRegion_getAttr( wpRegion* self, char* name )
 	*/
 	else if ( !strcmp( name, "guardowner" ) )
 		return QString2Python( self->pRegion->guardOwner() );
+	/*
+		\rproperty region.fixedlight The Fixed LightLevel for this Region (Will return -1 to no fixed light level)
+	*/
+	else if ( !strcmp( name, "fixedlight" ) )
+		return PyInt_FromLong( self->pRegion->fixedlight() );
 
 	// Flags
 	/*
@@ -181,7 +201,7 @@ static PyObject* wpRegion_getAttr( wpRegion* self, char* name )
 	else if ( !strcmp( name, "noagressivemagic" ) )
 		return PyInt_FromLong( self->pRegion->isNoAgressiveMagic() ? 1 : 0 );
 	/*
-		\rproperty region.noagressivemagic This boolean flag indicates whether magic is forbidden in this region or not.
+		\rproperty region.antimagic This boolean flag indicates whether magic is forbidden in this region or not.
 	*/
 	else if ( !strcmp( name, "antimagic" ) )
 		return PyInt_FromLong( self->pRegion->isAntiMagic() ? 1 : 0 );
@@ -210,6 +230,31 @@ static PyObject* wpRegion_getAttr( wpRegion* self, char* name )
 	*/
 	else if ( !strcmp( name, "noentermessage" ) )
 		return PyInt_FromLong( self->pRegion->isNoEnterMessage() ? 1 : 0 );
+	/*
+		\rproperty region.instalogout This boolean flag indicates if Region is a InstaLogout Region or not.
+	*/
+	else if ( !strcmp( name, "instalogout" ) )
+		return PyInt_FromLong( self->pRegion->isInstaLogout() ? 1 : 0 );
+	/*
+		\rproperty region.noteleport This boolean flag indicates that no Teleport Magic is allowed in this place.
+	*/
+	else if ( !strcmp( name, "noteleport" ) )
+		return PyInt_FromLong( self->pRegion->isNoTeleport() ? 1 : 0 );
+	/*
+		\rproperty region.safe This boolean flag indicates the Region is a Safe Region (no one can be harmed here).
+	*/
+	else if ( !strcmp( name, "safe" ) )
+		return PyInt_FromLong( self->pRegion->isSafe() ? 1 : 0 );
+	/*
+		\rproperty region.nocriminalcombat This boolean flag indicates that attacks here against innocent targets, cant make attacker criminal.
+	*/
+	else if ( !strcmp( name, "nocriminalcombat" ) )
+		return PyInt_FromLong( self->pRegion->isNoCriminalCombat() ? 1 : 0 );
+	/*
+		\rproperty region.nokillcount This boolean flag indicates that Kills are not counted on this area.
+	*/
+	else if ( !strcmp( name, "nokillcount" ) )
+		return PyInt_FromLong( self->pRegion->isNoKillCount() ? 1 : 0 );
 
 	return Py_FindMethod( wpRegionMethods, ( PyObject * ) self, name );
 }

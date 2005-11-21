@@ -362,25 +362,32 @@ int cItem::deleteAmount( int amount, unsigned short _id, unsigned short _color )
 
 void cItem::save( cBufferedWriter& writer, unsigned int version )
 {
-	if ( free || ( container_ && container_->free ) )
+	if ( free )
 	{
-		Console::instance()->log( LOG_ERROR, tr( "Saving item 0x%1 although it's already freed.\n" ).arg( serial_, 0, 16 ) );
+		Console::instance()->log( LOG_WARNING, tr( "Skipping item 0x%1 during save process because it's already freed.\n" ).arg( serial_, 0, 16 ) );
 	}
+	else if ( container_ && container_->free )
+	{
+		Console::instance()->log( LOG_WARNING, tr( "Skipping item 0x%1 during save process because it's in a freed container.\n" ).arg( serial_, 0, 16 ) );
+	}
+	else
+	{
 
-	cUObject::save( writer, version );
+		cUObject::save( writer, version );
 
-	writer.writeShort( id_ );
-	writer.writeShort( color_ );
-	writer.writeInt( container_ ? container_->serial() : INVALID_SERIAL );
-	writer.writeByte( layer_ );
-	writer.writeShort( amount_ );
-	writer.writeShort( hp_ );
-	writer.writeShort( maxhp_ );
-	writer.writeByte( movable_ );
-	writer.writeInt( ownserial_ );
-	writer.writeByte( visible_ );
-	writer.writeByte( priv_ );
-	writer.writeAscii( baseid() );
+		writer.writeShort( id_ );
+		writer.writeShort( color_ );
+		writer.writeInt( container_ ? container_->serial() : INVALID_SERIAL );
+		writer.writeByte( layer_ );
+		writer.writeShort( amount_ );
+		writer.writeShort( hp_ );
+		writer.writeShort( maxhp_ );
+		writer.writeByte( movable_ );
+		writer.writeInt( ownserial_ );
+		writer.writeByte( visible_ );
+		writer.writeByte( priv_ );
+		writer.writeAscii( baseid() );
+	}
 }
 
 void cItem::postload( unsigned int /*version*/ )
@@ -556,7 +563,7 @@ void cItem::Init( bool createSerial )
 	this->amount_ = 1; // Amount of items in pile
 	this->hp_ = 0; //Number of hit points an item has.
 	this->maxhp_ = 0; // Max number of hit points an item can have.
-	this->movable_ = 0; // 0=Default as stored in client, 1=Always movable, 2=Never movable, 3=Owner movable.
+	this->movable_ = 0; // 0=Default as stored in client, 1=Always movable, 2=Owner movable, 3=Never movable.
 	this->setOwnSerialOnly( -1 );
 	this->visible_ = 0; // 0=Normally Visible, 1=Owner & GM Visible, 2=GM Visible
 	this->priv_ = 0; // Bit 0, nodecay off/on.  Bit 1, newbie item off/on.  Bit 2 Dispellable
@@ -764,9 +771,9 @@ void cItem::processNode( const cElement* Tag )
 	// <immovable />
 	else if ( TagName == "movable" )
 		this->movable_ = 1;
-	else if ( TagName == "immovable" )
-		this->movable_ = 2;
 	else if ( TagName == "ownermovable" )
+		this->movable_ = 2;
+	else if ( TagName == "immovable" )
 		this->movable_ = 3;
 
 	// <decay />
@@ -1094,6 +1101,9 @@ void cItem::update( cUOSocket* singlesocket )
 
 		if ( singlesocket )
 		{
+			// don't remove backpack, because this would close all bags
+			if ( this->layer() != cBaseChar::Backpack )
+				singlesocket->removeObject( this );
 			singlesocket->send( &equipItem );
 			sendTooltip( singlesocket );
 		}
@@ -1103,6 +1113,8 @@ void cItem::update( cUOSocket* singlesocket )
 			{
 				if ( socket->canSee( this ) )
 				{
+					if ( this->layer() != cBaseChar::Backpack )
+						socket->removeObject( this );
 					socket->send( &equipItem );
 					sendTooltip( socket );
 				}
@@ -1436,6 +1448,12 @@ void cItem::addItem( cItem* pItem, bool randomPos, bool handleWeight, bool noRem
 	if ( !pItem )
 		return;
 
+	if ( free )
+	{
+		Console::instance()->log( LOG_WARNING, tr( "Rejected putting an item (%1) into a freed container (%2)" ).arg( pItem->serial(), 0, 16 ).arg( serial_, 0, 16 ) );
+		return;
+	}
+
 	if ( pItem == this )
 	{
 		Console::instance()->log( LOG_WARNING, tr( "Rejected putting an item into itself (%1)" ).arg( serial_, 0, 16 ) );
@@ -1695,8 +1713,14 @@ stError* cItem::setProperty( const QString& name, const cVariant& value )
 	/*
 		\property item.layer The layer of the object, used with equipable objects.
 	*/
-	else
-		SET_INT_PROPERTY( "layer", layer_ )
+	else if (name == "layer") {
+		if (container_ && container_->isChar()) {
+			PROPERTY_ERROR(-3, "You may not change the layer of items that are currently equipped.");
+		} else {
+			SET_INT_PROPERTY("layer", layer_);
+		}
+	}
+		
 		/*
 		\property item.health The current health or durability of the object.
 		*/
@@ -2131,9 +2155,16 @@ void cItem::createTooltip( cUOTxTooltipList& tooltip, cPlayer* player )
 		tooltip.addLine( 1050044, QString( "%1\t%2" ).arg( count ).arg( weight ) );
 	}
 
-	// Newbie Items
+	// Newbie/Blessed Items
 	if ( newbie() )
+	{
 		tooltip.addLine( 1038021, "" );
+	}
+	// Cursed Items
+	else if ( hasTag( "cursed" ) )
+	{
+		tooltip.addLine( 1049643, "" );
+	}
 
 	// Invisible to others
 	if ( player->isGM() && visible() > 0 )
@@ -2240,6 +2271,40 @@ unsigned int cItem::removeItems( const QStringList& baseids, unsigned int amount
 	for ( ContainerCopyIterator it( this ); !it.atEnd(); ++it )
 	{
 		amount = ( *it )->removeItems( baseids, amount );
+	}
+
+	return amount;
+}
+
+/*!
+\brief Removes a certain amount of items from this container
+recursively.
+\param baseids The list of baseids that a item can have.
+\param amount The amount of items to remove.
+\returns The remaining amount of items to be removed.
+*/
+unsigned int cItem::removeItem( const QString& id, unsigned int amount )
+{
+	// We can statisfy the need by removing from ourself
+	if ( id == QString(this->baseid()) )
+	{
+		if ( this->amount() > amount )
+		{
+			setAmount( this->amount() - amount );
+			update();
+			return 0;
+		}
+		else
+		{
+			amount -= this->amount();
+			remove();
+			return amount;
+		}
+	}
+
+	for ( ContainerCopyIterator it( this ); !it.atEnd(); ++it )
+	{
+		amount = ( *it )->removeItem( id, amount );
 	}
 
 	return amount;

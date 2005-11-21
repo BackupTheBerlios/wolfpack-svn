@@ -1,4 +1,3 @@
-
 #===============================================================#
 #   )      (\_     | WOLFPACK 13.0.0 Scripts                    #
 #  ((    _/{  "-;  | Created by: DarkStorm                      #
@@ -15,25 +14,26 @@ from wolfpack.utilities import hex2dec, tobackpack
 from wolfpack.properties import itemcheck, fromitem
 import random
 from skills import blacksmithing
+from wolfpack import tr
+from copy import deepcopy
 
 # last list: [ring, necklace, earrings, bracelet]
 GEMS = [
-		['Star Sapphire', 0, 0, ['f0f', 'f1b', 'f21'], 0x0, 'starsapphire', ["#1044176","#1044194","#1044203","#1044221"]],
-		['Emerald', 0, 0, ['f10', 'f2f'], 0x0, 'emerald', ["#1044177","#1044195","#1044204","#1044222"]],
-		['Sapphire', 0, 0, ['f11', 'f12', 'f19', 'f1f'], 0x0, 'sapphire', ["#1044178","#1044196","#1044205","#1044223"]],
-		['Ruby', 0, 0, ['f13', 'f14', 'f1a', 'f1c', 'f1d', 'f2a', 'f2b'], 0x0, 'ruby', ["#1044179","#1044197","#1044206","#1044224"]],
-		['Citrine', 0, 0, ['f15', 'f23', 'f24', 'f2c'], 0x0, 'citrine', ["#1044180","#1044198","#1044207","#1044225"]],
-		['Amethyst', 0, 0, ['f16', 'f17', 'f22', 'f2e'], 0x0, 'amethyst', ["#1044181","#1044199","#1044208","#1044226"]],
-		['Tourmaline', 0, 0, ['f18', 'f1e', 'f20', 'f2d'], 0x0, 'tourmaline', ["#1044182","#1044200","#1044209","#1044227"]],
-		['Amber', 0, 0, ['f25'], 0x0, 'amber', ["#1044183","#1044201","#1044210","#1044228"]],
-		['Diamond', 0, 0, ['f26','f27','f28','f29','f30'], 0x0, 'diamond', ["#1044184","#1044202","#1044211","#1044229"]]
-
-		#['Bronze',			0, 0, ['bronze_ingot'], 0x972, 'bronze'],
-		#['Gold',				0, 0, ['gold_ingot'], 0x8a5, 'gold'],
-		#['Agapite',		 	0, 0, ['agapite_ingot'], 0x979, 'agapite'],
-		#['Verite',			0, 0, ['verite_ingot'], 0x89f, 'verite'],
-		#['Valorite',		0, 0, ['valorite_ingot'], 0x8ab, 'valorite'],
+		[tr('Star Sapphire'), 0, 0, ['f0f', 'f1b', 'f21'], 0x4f2, 'starsapphire', ["#1044176","#1044194","#1044203","#1044221"]],
+		[tr('Emerald'), 0, 0, ['f10', 'f2f'], 0xa3, 'emerald', ["#1044177","#1044195","#1044204","#1044222"]],
+		[tr('Sapphire'), 0, 0, ['f11', 'f12', 'f19', 'f1f'], 0xc2, 'sapphire', ["#1044178","#1044196","#1044205","#1044223"]],
+		[tr('Ruby'), 0, 0, ['f13', 'f14', 'f1a', 'f1c', 'f1d', 'f2a', 'f2b'], 0x21, 'ruby', ["#1044179","#1044197","#1044206","#1044224"]],
+		[tr('Citrine'), 0, 0, ['f15', 'f23', 'f24', 'f2c'], 0x30, 'citrine', ["#1044180","#1044198","#1044207","#1044225"]],
+		[tr('Amethyst'), 0, 0, ['f16', 'f17', 'f22', 'f2e'], 0x13, 'amethyst', ["#1044181","#1044199","#1044208","#1044226"]],
+		[tr('Tourmaline'), 0, 0, ['f18', 'f1e', 'f20', 'f2d'], 0x9a, 'tourmaline', ["#1044182","#1044200","#1044209","#1044227"]],
+		[tr('Amber'), 0, 0, ['f25'], 0x7da, 'amber', ["#1044183","#1044201","#1044210","#1044228"]],
+		[tr('Diamond'), 0, 0, ['f26','f27','f28','f29','f30'], 0x47e, 'diamond', ["#1044184","#1044202","#1044211","#1044229"]]
 ]
+
+# Use metals list from Blacksmithing, but test for tinkering skill
+TINKERINGMETALS = deepcopy(blacksmithing.METALS)
+for metal in TINKERINGMETALS:
+	metal[1] = TINKERING
 
 def name_item( item, material ):
 	# ring
@@ -63,6 +63,7 @@ class TinkerItemAction(CraftItemAction):
 		CraftItemAction.__init__(self, parent, title, itemid, definition)
 		self.markable = 1
 		self.retaincolor = 0
+		self.stackable = 0
 
 	#
 	# Check if we did an exceptional job.
@@ -101,6 +102,25 @@ class TinkerItemAction(CraftItemAction):
 	#
 	def applyproperties(self, player, arguments, item, exceptional):
 		item.decay = 1
+
+		# Use all available resources if the item we make is
+		# flagged as "stackable".
+		if self.stackable:
+			backpack = player.getbackpack()
+			count = -1
+			for (materials, amount, name) in self.materials:
+				items = backpack.countitems(materials)
+				if count == -1:
+					count = items / amount
+				else:
+					count = min(count, items / amount)
+			for (materials, amount, name) in self.materials:
+				backpack.removeitems( materials, count )
+			if count != -1:
+				item.amount += count
+			else:
+				item.amount = 1 + count
+			item.update()
 
 		# See if this item
 		if self.retaincolor and self.submaterial1 > 0:
@@ -142,7 +162,7 @@ class SeTinkerItemAction(TinkerItemAction):
 			return False
 		else:
 			return TinkerItemAction.visible(self, char, arguments)
-			
+
 	def checkmaterial(self, player, arguments, silent = 0):
 		if player.socket and player.socket.flags & 0x10 == 0:
 			return False
@@ -154,7 +174,7 @@ class TinkeringMenu(MakeMenu):
 		MakeMenu.__init__(self, id, parent, title)
 		self.allowmark = True
 		self.allowrepair = True
-		self.submaterials1 = blacksmithing.METALS
+		self.submaterials1 = TINKERINGMETALS
 		self.submaterials2 = GEMS
 		self.submaterial1missing = 1044037
 		self.submaterial1noskill = 1044268
@@ -166,10 +186,10 @@ class TinkeringMenu(MakeMenu):
 	# Get the material used by the character from the tags
 	#
 	def getsubmaterial1used(self, player, arguments):
-		if not player.hastag('blacksmithing_ore'):
+		if not player.hastag('tinkering_ore'):
 			return False
 		else:
-			material = int(player.gettag('blacksmithing_ore'))
+			material = int(player.gettag('tinkering_ore'))
 			if material < len(self.submaterials1):
 				return material
 			else:
@@ -192,7 +212,7 @@ class TinkeringMenu(MakeMenu):
 	# Save the material preferred by the user in a tag
 	#
 	def setsubmaterial1used(self, player, arguments, material):
-		player.settag('blacksmithing_ore', material)
+		player.settag('tinkering_ore', material)
 
 	#
 	# Save the material preferred by the user in a tag
@@ -250,7 +270,7 @@ def loadMenu(id, parent = None):
 					if child.name == 'setinker':
 						action = SeTinkerItemAction(menu, name, int(itemid), itemdef)
 					else:
-						action = TinkerItemAction(menu, name, int(itemid), itemdef)		
+						action = TinkerItemAction(menu, name, int(itemid), itemdef)
 				except:
 					console.log(LOG_ERROR, "Tinker action with invalid item id in menu %s.\n" % menu.id)
 
@@ -270,6 +290,11 @@ def loadMenu(id, parent = None):
 						amount = hex2dec(subchild.getattribute('amount', '0'))
 						materialname = subchild.getattribute('name', 'Unknown')
 						action.materials.append([['1bdd','1bde','1bdf','1be0','1be1','1be2','1bd7','1bd8','1bd9','1bda','1bdb','1bdc'], amount, 'Boards, Logs'])
+
+					# Consume all available materials scaled by the
+					# amount of each submaterial
+					elif subchild.name == 'stackable':
+						action.stackable = 1
 
 					elif subchild.name == 'nomark':
 						action.markable = 0

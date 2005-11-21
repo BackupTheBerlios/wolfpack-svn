@@ -337,7 +337,7 @@
 		<id>0xf9d</id>
 		<category>Professions\Tailorer\Sewing Kit</category>
 		<tag name="remaining_uses" type="int" value="35" />
-		<basescripts>skills.tailoring,equipment</basescripts>
+		<basescripts>equipment,skills.tailoring</basescripts>
 		<buyprice>3</buyprice>
 		<sellprice>1</sellprice>
 		<weight>2.0</weight>
@@ -508,7 +508,7 @@
 
 	<item id="1066">
 		<id>0x1066</id>
-		<category>Professions\Tailorer\Upright Loom 2 (N/S) (2/2)</category>
+		<category>Professions\Tailorer\Decoration\Upright Loom 2 (N/S) (2/2)</category>
 	</item>
 
 	<item id="1067">

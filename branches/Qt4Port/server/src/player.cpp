@@ -499,6 +499,7 @@ bool cPlayer::mount( P_NPC pMount )
 		if ( isGM() )
 		{
 			pMount->setOwner( this );
+			pMount->setTamed( true );
 		}
 
 		// remove it from screen!
@@ -537,11 +538,34 @@ void cPlayer::showName( cUOSocket* socket )
 
 	QString charName = name();
 
-	// Lord & Lady Title
-	if ( !isIncognito() && fame_ >= 10000 && !isReputationHidden() )
-		charName.prepend( gender_ ? tr( "Lady " ) : tr( "Lord " ) );
+	// Prefix
+	QString prefix( " " );
 
-	QString affix( "" );
+	// Tag for Prefix
+	if ( !isIncognito() && !isPolymorphed() )
+	{
+		if ( hasTag( "name.prefix" ) )
+		{
+			prefix.append( getTag( "name.prefix" ).toString() );
+		}
+		else if ( fame_ >= 10000 && !isReputationHidden() )
+		{
+			prefix.append( gender_ ? tr( "Lady" ) : tr( "Lord" ) );
+		}
+	}
+
+	// Suffix
+	QString affix( " " );
+
+	// Tag for Suffix
+	if ( !isIncognito() && !isPolymorphed() )
+	{
+		if ( hasTag( "name.suffix" ) )
+		{
+			affix.append( getTag( "name.suffix" ).toString() );
+			affix.append( " " );
+		}
+	}
 
 	if ( !isIncognito() && guild_ && !guild_->abbreviation().isEmpty() )
 	{
@@ -598,7 +622,7 @@ void cPlayer::showName( cUOSocket* socket )
 		cUOTxAsciiSpeech speech;
 		speech.setId(body_);
 		speech.setSerial(serial_);
-		speech.setMessage(charName + " " + affix);
+		speech.setMessage(prefix + " " + charName + " " + affix);
 		speech.setColor(speechColor);
 		speech.setFont(3);
 		speech.setType(6); // Object Speech
@@ -633,7 +657,7 @@ void cPlayer::showName( cUOSocket* socket )
 		// Show it to the socket
 		// socket->showSpeech( this, charName, speechColor, 3, cUOTxUnicodeSpeech::System );
 		// Names are presented in ASCII speech, Guild titles are not
-		socket->clilocMessage( 1050045, " \t" + charName + "\t " + affix, speechColor, 3, this, true );
+		socket->clilocMessage( 1050045, prefix + " \t" + charName + "\t " + affix, speechColor, 3, this, true );
 	}
 }
 
@@ -1124,6 +1148,20 @@ bool cPlayer::onCastSpell( unsigned int spell )
 	return result;
 }
 
+bool cPlayer::onBecomeCriminal( unsigned int reason, P_CHAR sourcechar, P_ITEM sourceitem )
+{
+	bool result = true;
+
+	if ( canHandleEvent( EVENT_BECOMECRIMINAL ) )
+	{
+		PyObject* args = Py_BuildValue( "(O&iO&O&)", PyGetCharObject, this, reason, PyGetCharObject, sourcechar, PyGetItemObject, sourceitem );
+		result = callEventHandler( EVENT_BECOMECRIMINAL, args );
+		Py_DECREF( args );
+	}
+
+	return result;
+}
+
 void cPlayer::setStamina( Q_INT16 data, bool notify /* = true */ )
 {
 	bool update = false;
@@ -1330,6 +1368,9 @@ PyObject* cPlayer::getProperty( const QString& name )
 
 void cPlayer::awardFame( short amount, bool showmessage )
 {
+	if ( Config::instance()->disableFame() )
+		return;
+
 	int nCurFame, nChange = 0;
 	bool gain = false;
 
@@ -1397,6 +1438,9 @@ void cPlayer::awardFame( short amount, bool showmessage )
 
 void cPlayer::awardKarma( P_CHAR pKilled, short amount, bool showmessage )
 {
+	if ( Config::instance()->disableKarma() )
+		return;
+
 	if (amount > 0 && karmaLock()) {
 		return; // Don't award karma if the karma is locked
 	}
@@ -1592,6 +1636,13 @@ bool cPlayer::canSeeItem( P_ITEM item )
 		else
 		{
 			P_CHAR character = dynamic_cast<P_CHAR>( item->container() );
+			
+			// We're equipped by a character. If we're on the mount layer
+			// only the equipping character can see us
+			if (item->layer() == 0x19 && character != this && !character->isHuman()) {
+				return false;
+			}
+			
 			return canSeeChar( character );
 		}
 	}
@@ -1677,7 +1728,7 @@ bool cPlayer::sysmessage( unsigned int message, const QString& params, unsigned 
 cBaseChar::FightStatus cPlayer::fight( P_CHAR enemy )
 {
 	// Jailed players cannot fight.
-	if (isJailed()) {
+	if ( isJailed() ) {
 		return FightDenied;
 	}
 
@@ -1693,7 +1744,11 @@ cBaseChar::FightStatus cPlayer::fight( P_CHAR enemy )
 
 			if ( fight && fight->attacker() == this && !fight->legitimate() )
 			{
-				makeCriminal();
+				if (!inNoCriminalCombatArea())
+				{
+					if (onBecomeCriminal(2, enemy, NULL ))
+						makeCriminal();
+				}
 				log(LOG_TRACE, tr("Started fight with character %1 (0x%2).\n").arg(enemy->orgName()).arg(enemy->serial(), 0, 16));
 			}
 		}
@@ -1709,12 +1764,23 @@ void cPlayer::createTooltip( cUOTxTooltipList& tooltip, cPlayer* player )
 {
 	cUObject::createTooltip( tooltip, player );
 
+	// Suffix
 	QString affix( " " );
+
+	// Tag for Suffix
+	if ( !isIncognito() && !isPolymorphed() )
+	{
+		if ( hasTag( "name.suffix" ) )
+		{
+			affix.append( getTag( "name.suffix" ).toString() );
+			affix.append( " " );
+		}
+	}
 
 	// Append the (frozen) tag
 	if ( isFrozen() )
 	{
-		affix = " (frozen)";
+		affix.append( tr( " (frozen)" ) );
 	}
 
 	if ( player->account()->isShowSerials() )
@@ -1739,22 +1805,25 @@ void cPlayer::createTooltip( cUOTxTooltipList& tooltip, cPlayer* player )
 		}
 	}
 
+	// Prefix
+	QString prefix( " " );
+
+	// Tag for Prefix
+	if ( !isIncognito() && !isPolymorphed() )
+	{
+		if ( hasTag( "name.prefix" ) )
+		{
+			prefix.append( getTag( "name.prefix" ).toString() );
+			prefix.append( " " );
+		}
+		else if ( fame_ >= 10000 && !isReputationHidden() )
+		{
+			prefix.append( gender_ ? tr( "Lady " ) : tr( "Lord " ) );
+		}
+	}
+
 	// Don't miss lord and lady titles
-	if ( !isIncognito() && !isPolymorphed() && fame_ >= 10000 && !isReputationHidden() )
-	{
-		if ( gender() )
-		{
-			tooltip.addLine( 1050045, tr( "Lady \t%1\t%2" ).arg( name_ ).arg( affix ) );
-		}
-		else
-		{
-			tooltip.addLine( 1050045, tr( "Lord \t%1\t%2" ).arg( name_ ).arg( affix ) );
-		}
-	}
-	else
-	{
-		tooltip.addLine( 1050045, QString( " \t%1\t%2" ).arg( name_ ).arg( affix ) );
-	}
+	tooltip.addLine( 1050045, tr( "%3\t%1\t%2" ).arg( name_ ).arg( affix ).arg( prefix ) );
 
 	// Append guild title and name
 	if ( !isIncognito() && !isPolymorphed() && guild_ )
@@ -1918,5 +1987,9 @@ bool cPlayer::isOverloaded()
 
 unsigned int cPlayer::maxWeight()
 {
-	return ( unsigned int ) ( 40 + strength_ * 3.5 );
+	// Racial "Strong Back" for Humans
+	if ( isElf() )
+		return ( unsigned int ) ( 40 + strength_ * 3.5 );
+	else
+		return ( unsigned int ) ( ( 40 + strength_ * 3.5 ) * Config::instance()->humanstrongback() );
 }
