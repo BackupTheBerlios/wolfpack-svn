@@ -105,8 +105,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\"
-			IntermediateDirectory="Release"
+			OutputDirectory="$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			CharacterSet="2"
@@ -131,8 +131,10 @@
 				AdditionalOptions="/GR"
 				Optimization="3"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories=".;..\src\sqlite;qt;C:\MySQL\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;QT_THREAD_SUPPORT;QT_LITE_COMPONENT;QT_DLL;QT_NO_STL;QT_NO_COMPRESS;MYSQL_DRIVER"
+				FavorSizeOrSpeed="2"
+				WholeProgramOptimization="false"
+				AdditionalIncludeDirectories="..\src\sqlite;.;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\Qt3Support&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\mkspecs\win32-msvc.net&quot;;C:\Python24\include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;QT_LARGEFILE_SUPPORT;QT_CLEAN_NAMESPACE;QT_COMPAT_WARNINGS;QT_NO_TRANSLATION;QT_THREAD_SUPPORT;QT_DLL;QT_NO_DEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT"
 				StringPooling="true"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="0"
@@ -160,13 +162,13 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="qt-mt333.lib ws2_32.lib comctl32.lib python23.lib wininet.lib imagehlp.lib libmysql.lib"
+				AdditionalDependencies="c:\python24\libs\python24.lib $(QTDIR)\lib\QtCore4.lib $(QTDIR)\lib\QtGui4.lib $(QTDIR)\lib\QtNetwork4.lib $(QTDIR)\lib\QtXml4.lib $(QTDIR)\lib\Qt3Support4.lib ws2_32.lib comctl32.lib wininet.lib"
 				OutputFile="../release/wolfpack.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
 				AdditionalLibraryDirectories="C:\MySQL\lib\opt"
 				IgnoreAllDefaultLibraries="false"
-				GenerateDebugInformation="true"
+				GenerateDebugInformation="false"
 				GenerateMapFile="true"
 				MapFileName="$(OUTDIR)\wolfpack.map"
 				MapExports="true"
@@ -174,11 +176,12 @@
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				OptimizeForWindows98="1"
+				LinkTimeCodeGeneration="1"
 				SetChecksum="true"
-				SupportUnloadOfDelayLoadedDLL="false"
+				SupportUnloadOfDelayLoadedDLL="true"
 				MergeSections=""
 				TargetMachine="1"
-				FixedBaseAddress="2"
+				FixedBaseAddress="0"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -236,8 +239,8 @@
 				InlineFunctionExpansion="1"
 				EnableIntrinsicFunctions="false"
 				FavorSizeOrSpeed="2"
-				AdditionalIncludeDirectories=".;..\src\sqlite;..\STLPort\stlport;..\msvcrt\include;qt;C:\MySQL\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;QT_THREAD_SUPPORT;QT_LITE_COMPONENT;QT_DLL;QT_NO_STL;QT_NO_COMPRESS;CRASHHANDLER;MYSQL_DRIVER"
+				AdditionalIncludeDirectories="..\src\sqlite;.;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\Qt3Support&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\mkspecs\win32-msvc.net&quot;;C:\Python24\include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;QT_LARGEFILE_SUPPORT;QT_CLEAN_NAMESPACE;QT_COMPAT_WARNINGS;QT_NO_TRANSLATION;QT_THREAD_SUPPORT;QT_DLL;QT_NO_DEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;CRASHHANDLER;MYSQL_DRIVER"
 				StringPooling="true"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="0"
@@ -265,7 +268,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="qt-mt333.lib ws2_32.lib comctl32.lib msvcrt.lib python23.lib wininet.lib imagehlp.lib libmysql.lib"
+				AdditionalDependencies="c:\python24\libs\python24.lib $(QTDIR)\lib\QtCore4.lib $(QTDIR)\lib\QtGui4.lib $(QTDIR)\lib\QtNetwork4.lib $(QTDIR)\lib\QtXml4.lib $(QTDIR)\lib\Qt3Support4.lib ws2_32.lib comctl32.lib msvcrt.lib wininet.lib imagehlp.lib libmysql.lib"
 				OutputFile="../release/wolfpack.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
@@ -767,14 +770,6 @@
 			</File>
 			<File
 				RelativePath="..\src\Timing.h"
-				>
-			</File>
-			<File
-				RelativePath="..\src\tracking.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\src\tracking.h"
 				>
 			</File>
 			<File
@@ -1635,6 +1630,14 @@
 					Name="VCCustomBuildTool"
 				/>
 			</FileConfiguration>
+		</File>
+		<File
+			RelativePath="..\src\quests.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\src\quests.h"
+			>
 		</File>
 		<File
 			RelativePath=".\sehprolg.obj"
