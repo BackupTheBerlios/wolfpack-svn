@@ -132,7 +132,7 @@ protected:
 
 						if ( c > 0 && Server::instance()->getState() == RUNNING )
 						{
-							Console::instance()->queueCommand( QChar( c ) );
+							Console::instance()->queueCommand( QString( c ) );
 						}
 					}
 					else
