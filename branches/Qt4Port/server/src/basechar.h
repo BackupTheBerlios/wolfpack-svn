@@ -371,7 +371,7 @@ public:
 
 	inline Q3CString baseid() const
 	{
-		return basedef_ ? basedef_->id() : 0;
+		return basedef_ ? basedef_->id() : Q3CString();
 	}
 
 	inline cCharBaseDef* basedef() const
@@ -594,7 +594,7 @@ public:
 
 	virtual Q3CString bindmenu()
 	{
-		return basedef_ ? basedef_->bindmenu() : 0;
+		return basedef_ ? basedef_->bindmenu() : Q3CString();
 	}
 
 	inline unsigned char bodytype()
@@ -639,12 +639,12 @@ public:
 
 	inline Q3CString carve()
 	{
-		return basedef_ ? basedef_->carve() : 0;
+		return basedef_ ? basedef_->carve() : Q3CString();
 	}
 
 	inline Q3CString lootPacks()
 	{
-		return basedef_ ? basedef_->lootPacks() : 0;
+		return basedef_ ? basedef_->lootPacks() : Q3CString();
 	}
 
 	inline unsigned char controlSlots()

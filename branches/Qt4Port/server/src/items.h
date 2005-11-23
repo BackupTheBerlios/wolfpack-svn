@@ -200,11 +200,11 @@ public:
 	}
 	Q3CString baseid() const
 	{
-		return basedef_ ? basedef_->id() : 0;
+		return basedef_ ? basedef_->id() : Q3CString();
 	}
 	inline unsigned int clilocName() const
 	{
-		return basedef_ ? basedef_->clilocName() : 0;
+		return basedef_ ? basedef_->clilocName() : Q3CString();
 	}
 	inline cItemBaseDef* basedef() const
 	{
@@ -260,7 +260,7 @@ public:
 
 	virtual Q3CString bindmenu()
 	{
-		return basedef_ ? basedef_->bindmenu() : 0;
+		return basedef_ ? basedef_->bindmenu() : Q3CString();
 	}
 
 	// Setters
