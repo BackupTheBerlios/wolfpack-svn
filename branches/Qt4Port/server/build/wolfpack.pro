@@ -27,7 +27,7 @@ OBJECTS_DIR = obj
 MOC_DIR = obj
 
 win32:DEFINES -= UNICODE
-win32:LIBS += -lws2_32.lib
+win32:LIBS += -lws2_32 -lcomctl32 -lwininet -lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 -lole32 -loleaut32 -luuid -lodbc32 -lodbccp32
 
 # make confclean
 unix {

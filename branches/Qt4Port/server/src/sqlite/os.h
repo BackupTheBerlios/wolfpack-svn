@@ -122,6 +122,7 @@
 #if OS_WIN
 #include <windows.h>
 #include <winbase.h>
+# include <sys/types.h>
   typedef struct OsFile OsFile;
   struct OsFile {
     HANDLE h;               /* Handle for accessing the file */
@@ -130,7 +131,7 @@
 # if defined(_MSC_VER) || defined(__BORLANDC__)
     typedef __int64 off_t;
 # else
-#  if !defined(_CYGWIN_TYPES_H)
+#  if !defined(_CYGWIN_TYPES_H) && !defined( __MINGW32__ )
      typedef long long off_t;
 #    if defined(__MINGW32__)
 #      define	_OFF_T_

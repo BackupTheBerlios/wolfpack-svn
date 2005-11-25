@@ -3,6 +3,9 @@
 ; Script "Modes"
 !define PYTHONLESSMODE   ; Packs required python files along with installer,
                           ; so user don't need to download pyhton
+!define MINGWBUILD       ; Include Mingw dependency dlls
+;!define MSVC8BUILD      ; Include Microsoft VC++ 8.0 ( 2005 ) dependency dlls
+
 ; HM NIS Edit Wizard helper defines
 !define VERSION "12.9.14"
 !define PRODUCT_NAME "Wolfpack"
@@ -67,11 +70,13 @@ VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "${PRODUCT_NAME} Ultima 
 VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "${VERSION}.0"
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "setup-wolfpack.exe"
+OutFile "setup-wolfpack-${VERSION}.exe"
 InstallDir "c:\wolfpack"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
 ShowUnInstDetails show
+
+!execute "$%QTDIR%\bin\lrelease ..\wolfpack.pro"
 
 Section "Core" SEC01
   SetOutPath "$INSTDIR"
@@ -98,9 +103,13 @@ Section "Core" SEC01
   File "$%QTDIR%\lib\QtXml4.dll"
   File "$%QTDIR%\lib\Qt3Support4.dll"
   File "$%QTDIR%\lib\QtSql4.dll"
+!ifdef MSVC8BUILD
   File "$%SystemRoot%\System32\msvcp80.dll"
   File "$%SystemRoot%\System32\msvcr80.dll"
-
+!endif
+!ifdef MINGWBUILD
+  File "$%QTDIR%\bin\mingwm10.dll"
+!endif
 !ifndef PYTHONLESSMODE
   File "$%SystemRoot%\System32\Python24.dll"
   SetOutPath "$INSTDIR\python-dll\"
