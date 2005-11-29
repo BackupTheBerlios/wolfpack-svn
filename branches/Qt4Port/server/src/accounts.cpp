@@ -437,7 +437,6 @@ void cAccounts::load()
 			Console::instance()->send( tr( "Accounts database didn't exist! Creating one\n" ) );
 			PersistentBroker::instance()->executeQuery( createSql );
 			cAccount* account = createAccount( "admin", "admin" );
-			account->setAcl( "admin" );
 			Console::instance()->send( tr( "Created default admin account: Login = admin, Password = admin\n" ) );
 		}
 

@@ -68,7 +68,7 @@
 
 #include <stdlib.h>
 #include <qhostaddress.h>
-//Added by qt3to4:
+#include <QTimer>
 #include <Q3PtrList>
 
 #include <vector>
@@ -510,14 +510,15 @@ void cUOSocket::receive()
 				unsigned int time = Server::instance()->time();
 				if ( _player->lastMovement() + delay > time )
 				{
-					//sysMessage(QString("Delayed Walk Request, Last WalkRequest was %1 ms ago.").arg(time - _player->lastMovement()));
+					//log( tr("Delayed Walk Request, Last WalkRequest was %1 ms ago, max delay: %2").arg(time - _player->lastMovement()).arg(delay) );
 					incomingQueue.prepend( packet );
+					QTimer::singleShot( _player->lastMovement() + delay - time, this, SLOT( receive() ) );
 					return;
 				}
 			}
 		}
 
-		if ( false && handlers[packetId] )
+		if ( handlers[packetId] )
 		{
 			PyObject* args = Py_BuildValue( "(NN)", PyGetSocketObject( this ), CreatePyPacket( packet ) );
 			PyObject* result = PyObject_CallObject( handlers[packetId], args );
