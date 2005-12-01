@@ -34,6 +34,7 @@
 #include "basics.h"
 #include "timers.h"
 #include "combat.h"
+#include "console.h"
 #include "mapobjects.h"
 #include "serverconfig.h"
 #include "network/network.h"
@@ -142,6 +143,8 @@ void cTiming::poll()
 	}
 
 	unsigned int events = 0;
+	bool loopitems = false;
+	bool loopregions = false;
 
 	// Check lightlevel and time
 	if ( nextUOTimeTick <= time )
@@ -163,6 +166,14 @@ void cTiming::poll()
 		if ( hour != oldhour )
 		{
 			events |= cBaseChar::EventTime;
+
+			// OnTimeChange for Items
+			if ( Config::instance()->enableTimeChangeForItems() )
+				loopitems = true;
+
+			// Wheater System
+			if ( Config::instance()->enableWheater() )
+				loopregions = true;		
 		}
 
 		// 11 to 18 = Day
@@ -306,6 +317,51 @@ void cTiming::poll()
 		}
 	}
 
+	// Check items with onTimeChange event if a hour passed
+	if ( loopitems )
+	{
+		cItemIterator itemIterator;
+		P_ITEM item;
+		for ( item = itemIterator.first(); item; item = itemIterator.next() )
+		{
+			if ( item->canHandleEvent( EVENT_TIMECHANGE ) )
+			{
+				PyObject* args = Py_BuildValue( "(N)", item->getPyObject() );
+				item->callEventHandler( EVENT_TIMECHANGE, args );
+				Py_DECREF( args );
+			}
+		}
+	}
+
+	// Loop Regions to try to change Wheater
+	if ( loopregions )
+	{
+		const Q3ValueVector<cElement*>& elements = Definitions::instance()->getDefinitions( WPDT_REGION );
+
+		Q3ValueVector<cElement*>::const_iterator it( elements.begin() );
+		while ( it != elements.end() )
+		{
+			cTerritory* territory = new cTerritory( *it, 0 );
+
+			// Assign Rain Chance
+			int rainChance = territory->rainChance();
+
+			// Random Chance
+			int randomChance = RandomNum( 1, 100 );
+
+			// Checking if we have to change something
+			if ( randomChance <= rainChance )
+			{
+				territory->setIsRaining( true );
+				Console::instance()->log( LOG_NOTICE, "Start Raining on " + territory->name() );
+			}
+			else
+				territory->setIsRaining( false );
+
+			++it;
+		}
+	}
+
 	// Check the Timers
 	startProfiling( PF_TIMERSCHECK );
 	Timers::instance()->check();
@@ -417,19 +473,22 @@ void cTiming::checkPlayer( P_PLAYER player, unsigned int time )
 	}
 
 	// Murder Decay
-	if ( player->murdererTime() > 0 && player->murdererTime() < time )
+	if ( Config::instance()->murderdecay() > 0 )
 	{
-		if ( player->kills() > 0 )
-			player->setKills( player->kills() - 1 );
-
-		if ( player->kills() == Config::instance()->maxkills() && Config::instance()->maxkills() > 0 )
+		if ( player->murdererTime() > 0 && player->murdererTime() < time )
 		{
-			socket->sysMessage( tr( "You are no longer a murderer." ) );
-			player->setMurdererTime( time + Config::instance()->murderdecay() * MY_CLOCKS_PER_SEC );
-		} else if ( player->kills() == 0 ) {
-			player->setMurdererTime( 0 );
-		} else {
-			player->setMurdererTime( time + Config::instance()->murderdecay() * MY_CLOCKS_PER_SEC );
+			if ( player->kills() > 0 )
+				player->setKills( player->kills() - 1 );
+
+			if ( player->kills() == Config::instance()->maxkills() && Config::instance()->maxkills() > 0 )
+			{
+				socket->sysMessage( tr( "You are no longer a murderer." ) );
+				player->setMurdererTime( time + Config::instance()->murderdecay() * MY_CLOCKS_PER_SEC );
+			} else if ( player->kills() == 0 ) {
+				player->setMurdererTime( 0 );
+			} else {
+				player->setMurdererTime( time + Config::instance()->murderdecay() * MY_CLOCKS_PER_SEC );
+			}
 		}
 	}
 

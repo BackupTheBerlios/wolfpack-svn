@@ -120,6 +120,7 @@ struct stBlockingItem
 	bool noblock; // floor that does not block
 };
 
+// Get blocking tiles at the given x,y,map coordinate
 // Get floor tiles, that are not blocking, too
 // we need these floor tiles to know, if the 'black map' tile is the only floor here
 void getBlockingTiles( const Coord& pos, Q3ValueList<stBlockingItem>& items )

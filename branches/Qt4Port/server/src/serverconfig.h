@@ -40,6 +40,7 @@
 // Library Headers
 #include <qstring.h>
 #include <QStringList>
+#include <QList>
 #include <qhostaddress.h>
 
 // Structs
@@ -70,7 +71,7 @@ protected:
 	QString getGroupDoc( const QString& group );
 	QString getEntryDoc( const QString& group, const QString& entry );
 
-	Q3ValueVector<ServerList_st> serverList_;
+	QList<ServerList_st> serverList_;
 	std::vector<StartLocation_st> startLocation_;
 
 	// loaded data
@@ -147,6 +148,7 @@ protected:
 	float factorMaxMana_;
 	float factorMaxStam_;
 	bool simpleMaxHitsCalculation_;
+	bool enableTimeChangeForItems_;
 	bool elffullnightsight_;
 	float elfwisdombonus_;
 	float humanstrongback_;
@@ -187,6 +189,9 @@ protected:
 	bool usenewmonetary_;
 	bool usereversedvaluable_;
 
+	// Wheater System
+	bool enableWheater_;
+
 public:
 	cConfig();
 
@@ -194,7 +199,7 @@ public:
 	void unload();
 	void reload();
 
-	Q3ValueVector<ServerList_st> serverList(); // read-only
+	QList<ServerList_st> serverList(); // read-only
 	std::vector<StartLocation_st>& startLocation();
 
 	// gets
@@ -223,6 +228,7 @@ public:
 	float factorMaxMana() const;
 	float factorMaxStam() const;
 	bool simpleMaxHitsCalculation() const;
+	bool enableTimeChangeForItems() const;
 
 	bool refreshMaxValues() const
 	{
@@ -371,6 +377,9 @@ public:
 	// New Monetary system
 	bool usenewmonetary() const;
 	bool usereversedvaluable() const;
+
+	// Wheater System
+	bool enableWheater() const;
 
 private:
 	void setDefaultStartLocation();
@@ -760,6 +769,10 @@ inline bool cConfig::simpleMaxHitsCalculation() const
 {
 	return simpleMaxHitsCalculation_;
 }
+inline bool cConfig::enableTimeChangeForItems() const
+{
+	return enableTimeChangeForItems_;
+}
 // Racial features
 inline bool cConfig::elffullnightsight() const
 {
@@ -785,6 +798,11 @@ inline bool cConfig::usenewmonetary() const
 inline bool cConfig::usereversedvaluable() const
 {
 	return usereversedvaluable_;
+}
+// Wheater System
+inline bool cConfig::enableWheater() const
+{
+	return enableWheater_;
 }
 
 typedef Singleton<cConfig> Config;

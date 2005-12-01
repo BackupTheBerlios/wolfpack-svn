@@ -701,7 +701,7 @@ void cUOSocket::handleLoginRequest( cUORxLoginRequest* packet )
 	// Otherwise build the shard-list
 	cUOTxShardList shardList;
 
-	Q3ValueVector<ServerList_st> shards = Config::instance()->serverList();
+	QList<ServerList_st> shards = Config::instance()->serverList();
 
 	for ( Q_UINT8 i = 0; i < shards.size(); ++i )
 	{
@@ -758,7 +758,6 @@ void cUOSocket::disconnect()
 		}
 	}
 
-//	Network::instance()->netIo()->flush( _socket );
 	_socket->close();
 
 	if ( _player )
@@ -804,7 +803,7 @@ void cUOSocket::disconnect()
 void cUOSocket::handleSelectShard( cUORxSelectShard* packet )
 {
 	// Relay him - save an auth-id so we recog. him when he relays locally
-	Q3ValueVector<ServerList_st> shards = Config::instance()->serverList();
+	QList<ServerList_st> shards = Config::instance()->serverList();
 
 	if ( packet->shardId() >= shards.size() )
 	{
@@ -1973,6 +1972,7 @@ void cUOSocket::resendPlayer( bool quick )
 	changeMap.setMap( pChar->pos().map );
 	send( &changeMap );
 
+	// Send Season
 	cUOTxChangeSeason season;
 	if ( Config::instance()->enableFeluccaSeason() && _player->pos().map == 0 )
 	{
@@ -2545,6 +2545,54 @@ void cUOSocket::updatePlayer()
 		send( &playerupdate );
 
 		updateLightLevel();
+
+		updateWeather( _player );
+	}
+}
+
+void cUOSocket::updateWeather( P_PLAYER pChar )
+{
+	if ( pChar )
+	{
+		cTerritory* subregion = Territories::instance()->region( pChar->pos() );
+		cTerritory* region = dynamic_cast<cTerritory*>( subregion->parent() );
+
+		// If its a Region and not a Cave...
+		if ( ( region ) && !( region->isCave() ) )
+		{
+			// Assign weather
+			if ( region->isRaining() ) 
+			{
+				cUOTxWeather weather;
+				weather.setType( WT_RAINING );
+				weather.setAmount( RandomNum( 0x10, 0x70 ) );
+				weather.setTemperature( 0x10 );
+
+				send( &weather );
+			}
+			else
+			{
+				cUOTxWeather weather;
+
+				weather.setType( WT_NONE );
+				weather.setAmount( 0x00 );
+				weather.setTemperature( 0x10 );
+
+				send( &weather );
+			}
+		}
+		// Its not a Region or its a cave... so no weather
+		else
+		{
+			cUOTxWeather weather;
+
+			weather.setType( WT_NONE );
+			weather.setAmount( 0x00 );
+			weather.setTemperature( 0x10 );
+
+			send( &weather );
+		}
+
 	}
 }
 

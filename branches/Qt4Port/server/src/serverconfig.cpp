@@ -214,6 +214,7 @@ void cConfig::readData()
 	factorMaxMana_ = getDouble( "General", "Factor for MaxMana Calculation", 1.0, true );
 	factorMaxStam_ = getDouble( "General", "Factor for MaxStamina Calculation", 1.0, true );
 	simpleMaxHitsCalculation_ = getBool( "General", "Simple MaxHitPoints Calculation", false, true );
+	enableTimeChangeForItems_ = getBool( "General", "Enable onTimeChange for Items", false, true );
 
 	// Network
 	loginPort_ = getNumber( "Network", "Loginserver Port", 2593, true );
@@ -252,6 +253,9 @@ void cConfig::readData()
 	// Monetary System
 	usenewmonetary_ = getBool( "Monetary", "Use New Monetary", false, true );
 	usereversedvaluable_ = getBool( "Monetary", "Use Reversed Valuable Base", false, true );
+
+	// Weather System
+	enableWheater_ = getBool( "Wheater", "Enable Wheater System", false, true );
 
 }
 
@@ -468,7 +472,7 @@ QString cConfig::getEntryDoc( const QString& group, const QString& entry )
 	return Preferences::getEntryDoc( group, entry );
 }
 
-Q3ValueVector<ServerList_st> cConfig::serverList()
+QList<ServerList_st> cConfig::serverList()
 {
 	static unsigned int lastIpCheck = 0;
 	static bool dynamicIP = false;

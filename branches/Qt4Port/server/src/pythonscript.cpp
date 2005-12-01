@@ -268,14 +268,15 @@ floor level while modifying his custom house.
 
 /*
 \event onSpeech
-\param npc The npc who heard the text.
+\param object The npc or item who heard the text.
 \param player The player the text is coming from.
 \param text The text.
 \param keywords A list of numeric keywords. This is passed from the
 client. See speech.mul for the meaning of keywords.
-\condition Triggered when a npc hears text said by a player.
-\return Return 1 if your npc understood what the player said,
+\condition Triggered when a npc or item hears text said by a player.
+\return Return 1 if your npc or item understood what the player said,
 no other npc scripts will be called then.
+\notes If you Return 1 for your item, so no process for speech for npcs. So, be carefull.
 */
 "onSpeech",
 
@@ -454,8 +455,9 @@ for scripts in the objects basescripts list.
 
 /*
 \event onTimeChange
-\param char The char.
+\param object The object.
 \condition This event is called for every connected client (or npcs) once an ingame hour has elapsed.
+\notes If enabled by wolfpack.xml, it can be called for items too
 */
 "onTimeChange",
 

@@ -43,13 +43,13 @@ void cQuests::load()
 	// Try to get all Quests (Max 10.000 quests)
 	Q_UINT32 i;
 
-	for ( i = 0; i < 10000; ++i )
+	for ( i = 1; i < 10000; ++i )
 	{
 		const cElement* quest = Definitions::instance()->getDefinition( WPDT_QUEST, QString::number( i ) );
 
 		if ( !quest )
 		{
-			Console::instance()->log( LOG_NOTICE, tr( "QUESTS: %1 Quests Found.\n" ).arg( i ) );
+			Console::instance()->send( tr( "QUESTS: %1 Quests Found.\n" ).arg( i - 1 ) );
 			break;
 		}
 
@@ -68,6 +68,10 @@ void cQuests::load()
 				nQuest.npctargets = node->text();
 			else if ( node->name() == "npctargetsamounts" )
 				nQuest.npcamounts = node->text();
+			else if ( node->name() == "itemtargets" )
+				nQuest.itemtargets = node->text();
+			else if ( node->name() == "itemtargetsamounts" )
+				nQuest.itemamounts = node->text();
 			else if ( node->name() == "rewarditems" )
 				nQuest.rewards = node->text();
 			else if ( node->name() == "rewardsamount" )

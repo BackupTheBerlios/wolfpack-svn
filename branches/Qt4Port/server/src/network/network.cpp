@@ -41,7 +41,6 @@
 
 // Library Includes
 #include <QStringList>
-#include <qmutex.h>
 #include <Q3PtrList>
 #include <QTcpServer>
 
@@ -57,8 +56,8 @@ public:
 
 	cNetworkPrivate()
 	{
-		/*loginSockets.setAutoDelete( true );
-		uoSockets.setAutoDelete( true );*/
+		loginSockets.setAutoDelete( false );
+		uoSockets.setAutoDelete( false );
 		loginServer_ = 0;
 		gameServer_ = 0;
 	}
@@ -128,23 +127,23 @@ void cNetwork::load()
 {
 	if ( Config::instance()->enableLogin() )
 	{
-		d->loginServer_ = new QTcpServer( 0 );
+		d->loginServer_ = new QTcpServer( this );
 		d->loginServer_->listen( QHostAddress::Any, Config::instance()->loginPort() );
 		connect( d->loginServer_, SIGNAL(newConnection()), this, SLOT(incomingLoginServerConnection()));
 		Console::instance()->send( tr( "\nLoginServer running on port %1\n" ).arg( Config::instance()->loginPort() ) );
-		Q3ValueVector<ServerList_st> serverList = Config::instance()->serverList();
+		QList<ServerList_st> serverList = Config::instance()->serverList();
 		if ( serverList.size() < 1 )
 			Console::instance()->log( LOG_WARNING, tr( "LoginServer enabled but there no Game server entries found\n Check your wolfpack.xml settings\n" ) );
 		else
 		{
-			for ( Q3ValueVector<ServerList_st>::iterator it = serverList.begin(); it != serverList.end(); ++it )
+			for ( QList<ServerList_st>::iterator it = serverList.begin(); it != serverList.end(); ++it )
 				Console::instance()->send( tr("\t%1 using address %2\n").arg( (*it).sServer, (*it).address.toString() ) );
 		}
 	}
 
 	if ( Config::instance()->enableGame() )
 	{
-		d->gameServer_ = new QTcpServer( 0 );
+		d->gameServer_ = new QTcpServer( this );
 		d->gameServer_->listen( QHostAddress::Any, Config::instance()->gamePort() );
 		connect( d->gameServer_, SIGNAL(newConnection()), this, SLOT(incomingGameServerConnection()));
 		Console::instance()->send( tr( "\nGameServer running on port %1\n" ).arg( Config::instance()->gamePort() ) );

@@ -183,9 +183,9 @@ void buyAction( cUOSocket* socket, cUORxBuy* packet )
 				}				
 
 				// Get our total gold at once
-				Q_UINT32 packFirst = backpack->countItems( idfirst.toInt(0, 16) );
-				Q_UINT32 packSecond = backpack->countItems( idsecond.toInt(0, 16) );
-				Q_UINT32 packThird = backpack->countItems( idthird.toInt(0, 16) );
+				Q_UINT32 packFirst = backpack->countItems( idfirst.toUShort(0, 16) );
+				Q_UINT32 packSecond = backpack->countItems( idsecond.toUShort(0, 16) );
+				Q_UINT32 packThird = backpack->countItems( idthird.toUShort(0, 16) );
 
 				// Use Reversed Monetary?
 				if (Config::instance()->usereversedvaluable()) {
@@ -356,13 +356,13 @@ void buyAction( cUOSocket* socket, cUORxBuy* packet )
 				P_ITEM backpack = pChar->getBackpack(); //My BackPack
 
 				// Get our total gold at once
-				Q_UINT32 bankFirst = bank->countItems( idfirst.toInt(0, 16) );
-				Q_UINT32 bankSecond = bank->countItems( idsecond.toInt(0, 16) );
-				Q_UINT32 bankThird = bank->countItems( idthird.toInt(0, 16) );
+				Q_UINT32 bankFirst = bank->countItems( idfirst.toUShort(0, 16) );
+				Q_UINT32 bankSecond = bank->countItems( idsecond.toUShort(0, 16) );
+				Q_UINT32 bankThird = bank->countItems( idthird.toUShort(0, 16) );
 
-				Q_UINT32 packFirst = backpack->countItems( idfirst.toInt(0, 16) );
-				Q_UINT32 packSecond = backpack->countItems( idsecond.toInt(0, 16) );
-				Q_UINT32 packThird = backpack->countItems( idthird.toInt(0, 16) );
+				Q_UINT32 packFirst = backpack->countItems( idfirst.toUShort(0, 16) );
+				Q_UINT32 packSecond = backpack->countItems( idsecond.toUShort(0, 16) );
+				Q_UINT32 packThird = backpack->countItems( idthird.toUShort(0, 16) );
 
 				// Lets go... First Money Section
 				if ( packFirst >= totalValue )
