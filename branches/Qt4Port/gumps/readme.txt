@@ -1,1 +1,0 @@
-To edit these gump files, please use Gump Studio by Bradley.
