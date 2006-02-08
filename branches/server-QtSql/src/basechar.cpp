@@ -54,7 +54,10 @@
 #include "skills.h"
 #include "definitions.h"
 #include "serverconfig.h"
+
 #include <QByteArray>
+#include <QSqlQuery>
+#include <QVariant>
 
 cBaseChar::cBaseChar()
 {
@@ -415,72 +418,89 @@ void cBaseChar::save( cBufferedWriter& writer )
 
 void cBaseChar::save()
 {
+	static bool init = false;
+	static QSqlQuery preparedUpdate;
+	static QSqlQuery preparedInsert;
+	if ( !init )
+	{
+		preparedUpdate.prepare("update characters values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) where serial = ?");
+		preparedInsert.prepare("insert into characters values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )");
+		init = true;
+	}
+
 	if ( changed_ )
 	{
-		initSave;
-		setTable( "characters" );
+		QSqlQuery q;
+		if ( isPersistent )
+			q = preparedUpdate;
+		else
+			q = preparedInsert;
 
-		addField( "serial", serial() );
-		addStrField( "name", orgName_ );
-		addStrField( "title", title_ );
-		addStrField( "creationdate", creationDate_.toString( Qt::ISODate ) );
-		addField( "body", body_ );
-		addField( "orgbody", orgBody_ );
-		addField( "skin", skin_ );
-		addField( "orgskin", orgSkin_ );
-		addField( "saycolor", saycolor_ );
-		addField( "emotecolor", emoteColor_ );
-		addField( "strength", strength_ );
-		addField( "strengthmod", strengthMod_ );
-		addField( "dexterity", dexterity_ );
-		addField( "dexteritymod", dexterityMod_ );
-		addField( "intelligence", intelligence_ );
-		addField( "intelligencemod", intelligenceMod_ );
-		addField( "maxhitpoints", maxHitpoints_ );
-		addField( "hitpoints", hitpoints_ );
-		addField( "maxstamina", maxStamina_ );
-		addField( "stamina", stamina_ );
-		addField( "maxmana", maxMana_ );
-		addField( "mana", mana_ );
-		addField( "karma", karma_ );
-		addField( "fame", fame_ );
-		addField( "kills", kills_ );
-		addField( "deaths", deaths_ );
-		addField( "hunger", hunger_ );
-		addField( "poison", poison_ );
-		addField( "murderertime", murdererTime_ ? murdererTime_ - Server::instance()->time() : 0 );
-		addField( "criminaltime", criminalTime_ ? criminalTime_ - Server::instance()->time() : 0 );
-		addField( "gender", gender_ );
-		addField( "propertyflags", propertyFlags_ );
-		addField( "murderer", murdererSerial_ );
-		addField( "guarding", guarding_ ? guarding_->serial() : INVALID_SERIAL );
-		addField( "hitpointsbonus", hitpointsBonus_ );
-		addField( "staminabonus", staminaBonus_ );
-		addField( "manabonus", manaBonus_ );
-		addField( "strcap", strengthCap_ );
-		addField( "dexcap", dexterityCap_ );
-		addField( "intcap", intelligenceCap_ );
-		addField( "statcap", statCap_ );
-		addStrField( "baseid", baseid() );
-		addField( "direction", direction_ );
-		addCondition( "serial", serial() );
-		saveFields;
+		q.addBindValue( serial() );
+		q.addBindValue( orgName_ );
+		q.addBindValue( title_ );
+		q.addBindValue( creationDate_.toString( Qt::ISODate ) );
+		q.addBindValue( body_ );
+		q.addBindValue( orgBody_ );
+		q.addBindValue( skin_ );
+		q.addBindValue( orgSkin_ );
+		q.addBindValue( saycolor_ );
+		q.addBindValue( emoteColor_ );
+		q.addBindValue( strength_ );
+		q.addBindValue( strengthMod_ );
+		q.addBindValue( dexterity_ );
+		q.addBindValue( dexterityMod_ );
+		q.addBindValue( intelligence_ );
+		q.addBindValue( intelligenceMod_ );
+		q.addBindValue( maxHitpoints_ );
+		q.addBindValue( hitpoints_ );
+		q.addBindValue( maxStamina_ );
+		q.addBindValue( stamina_ );
+		q.addBindValue( maxMana_ );
+		q.addBindValue( mana_ );
+		q.addBindValue( karma_ );
+		q.addBindValue( fame_ );
+		q.addBindValue( kills_ );
+		q.addBindValue( deaths_ );
+		q.addBindValue( hunger_ );
+		q.addBindValue( poison_ );
+		q.addBindValue( murdererTime_ ? murdererTime_ - Server::instance()->time() : 0 );
+		q.addBindValue( criminalTime_ ? criminalTime_ - Server::instance()->time() : 0 );
+		q.addBindValue( gender_ );
+		q.addBindValue( propertyFlags_ );
+		q.addBindValue( murdererSerial_ );
+		q.addBindValue( guarding_ ? guarding_->serial() : INVALID_SERIAL );
+		q.addBindValue( hitpointsBonus_ );
+		q.addBindValue( staminaBonus_ );
+		q.addBindValue( manaBonus_ );
+		q.addBindValue( strengthCap_ );
+		q.addBindValue( dexterityCap_ );
+		q.addBindValue( intelligenceCap_ );
+		q.addBindValue( statCap_ );
+		q.addBindValue( baseid() );
+		q.addBindValue( direction_ );
+		q.addBindValue( serial() );
+		q.exec();
 	}
 
 	QVector<stSkillValue>::iterator it;
-	PersistentBroker::instance()->lockTable( "skills" );
 	int i = 0;
 	QString query( 256 ); // 256 byte should be enough
 	for ( it = skills_.begin(); it != skills_.end(); ++it, ++i )
 	{
+		QSqlQuery skillsPreparedQuery;
+		skillsPreparedQuery.prepare( "REPLACE INTO skills VALUES( ?, ?, ?, ?, ?)" );
 		if ( ( *it ).changed )
 		{
-			query.sprintf( "REPLACE INTO skills VALUES(%u,%u,%u,%u,%u);", serial_, i, ( *it ).value, ( *it ).lock, ( *it ).cap );
-			PersistentBroker::instance()->executeQuery( query );
+			skillsPreparedQuery.addBindValue( serial_ );
+			skillsPreparedQuery.addBindValue( i );
+			skillsPreparedQuery.addBindValue( (*it).value );
+			skillsPreparedQuery.addBindValue( (*it).lock );
+			skillsPreparedQuery.addBindValue( (*it).cap );
+			skillsPreparedQuery.exec();
 			( *it ).changed = false;
 		}
 	}
-	PersistentBroker::instance()->unlockTable( "skills" );
 	cUObject::save();
 }
 

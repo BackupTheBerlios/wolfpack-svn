@@ -60,6 +60,8 @@
 #include <algorithm>
 #include <QByteArray>
 #include <QList>
+#include <QSqlQuery>
+#include <QVariant>
 
 using namespace std;
 
@@ -451,30 +453,43 @@ void cItem::load( cBufferedReader& reader, unsigned int version )
 
 void cItem::save()
 {
+	static bool init = false;
+	static QSqlQuery preparedUpdate;
+	static QSqlQuery preparedInsert;
+	if ( !init )
+	{
+		preparedUpdate.prepare("update items values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) where serial = ?");
+		preparedInsert.prepare("insert into items values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )");
+		init = true;
+	}
+
 	if ( changed_ )
 	{
-		initSave;
-		setTable( "items" );
+		QSqlQuery q;
+		if ( isPersistent )
+			q = preparedUpdate;
+		else
+			q = preparedInsert;
 
-		addField( "serial", serial() );
-		addField( "id", id() );
-		addField( "color", color() );
+		q.addBindValue( serial() );
+		q.addBindValue( id() );
+		q.addBindValue( color() );
 		SERIAL contserial = INVALID_SERIAL;
 		if ( container_ )
 			contserial = container_->serial();
-		addField( "cont", contserial );
-		addField( "layer", layer_ );
-		addField( "amount", amount_ );
-		addField( "hp", hp_ );
-		addField( "maxhp", maxhp_ );
-		addField( "movable", movable_ );
-		addField( "owner", ownserial_ );
-		addField( "visible", visible_ );
-		addField( "priv", priv_ );
-		addStrField( "baseid", baseid() );
+		q.addBindValue( contserial );
+		q.addBindValue( layer_ );
+		q.addBindValue( amount_ );
+		q.addBindValue( hp_ );
+		q.addBindValue( maxhp_ );
+		q.addBindValue( movable_ );
+		q.addBindValue( ownserial_ );
+		q.addBindValue( visible_ );
+		q.addBindValue( priv_ );
+		q.addBindValue( baseid() );
 
-		addCondition( "serial", serial() );
-		saveFields;
+		q.addBindValue( serial() );
+		q.exec();
 	}
 	cUObject::save();
 }

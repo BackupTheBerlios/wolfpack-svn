@@ -34,12 +34,14 @@
 #include "network/uosocket.h"
 #include "persistentbroker.h"
 #include "console.h"
-
 #include "world.h"
 #include "player.h"
 
 #include <functional>
 #include <algorithm>
+
+#include <QSqlQuery>
+#include <QVariant>
 
 using namespace std;
 
@@ -150,22 +152,37 @@ void cCorpse::load( char** result, quint16& offset )
 
 void cCorpse::save()
 {
-	initSave;
-	setTable( "corpses" );
+	static bool init = false;
+	static QSqlQuery preparedUpdate;
+	static QSqlQuery preparedInsert;
+	if ( !init )
+	{
+		preparedUpdate.prepare("update corpses values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) where serial = ?");
+		preparedInsert.prepare("insert into corpses values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )");
+		init = true;
+	}
 
-	addField( "serial", serial() );
-	addField( "bodyid", bodyId_ );
-	addField( "hairstyle", 0 /*hairStyle_*/ );
-	addField( "haircolor", 0 /*hairColor_*/ );
-	addField( "beardstyle", 0 /*beardStyle_*/ );
-	addField( "beardcolor", 0 /*beardColor_*/ );
-	addField( "direction", direction_ );
-	addStrField( "charbaseid", charbaseid_ );
-	addField( "murderer", murderer_ );
-	addField( "murdertime", murdertime_ );
+	if ( changed_ )
+	{
+		QSqlQuery q;
+		if ( isPersistent )
+			q = preparedUpdate;
+		else
+			q = preparedInsert;
 
-	addCondition( "serial", serial() );
-	saveFields;
+		q.addBindValue( serial() );
+		q.addBindValue( bodyId_ );
+		q.addBindValue( 0 /*hairStyle_*/ );
+		q.addBindValue( 0 /*hairColor_*/ );
+		q.addBindValue( 0 /*beardStyle_*/ );
+		q.addBindValue( 0 /*beardColor_*/ );
+		q.addBindValue( direction_ );
+		q.addBindValue( charbaseid_ );
+		q.addBindValue( murderer_ );
+		q.addBindValue( murdertime_ );
+		q.addBindValue( serial() );
+		q.exec();
+	}
 
 	// Equipment can change as well
 	if ( isPersistent )
@@ -173,8 +190,15 @@ void cCorpse::save()
 		PersistentBroker::instance()->executeQuery( QString( "DELETE FROM corpses_equipment WHERE serial = '%1'" ).arg( serial() ) );
 	}
 
+	QSqlQuery equipmentQuery;
+	equipmentQuery.prepare( "INSERT INTO corpses_equipment VALUES(?,?,?)" );
 	for ( QMap<quint8, SERIAL>::iterator it = equipment_.begin(); it != equipment_.end(); ++it )
-		PersistentBroker::instance()->executeQuery( QString( "REPLACE INTO corpses_equipment VALUES(%1,%2,%3)" ).arg( serial() ).arg( it.key() ).arg( it.value() ) );
+	{
+		equipmentQuery.addBindValue( serial() );
+		equipmentQuery.addBindValue( it.key() ); 
+		equipmentQuery.addBindValue( it.value() );
+		equipmentQuery.exec();
+	}
 
 	cItem::save();
 }

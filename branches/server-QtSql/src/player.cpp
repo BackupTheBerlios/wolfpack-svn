@@ -53,6 +53,9 @@
 #include "scriptmanager.h"
 #include "inlines.h"
 
+#include <QSqlQuery>
+#include <QVariant>
+
 cPlayer::cPlayer()
 {
 	account_ = NULL;
@@ -189,33 +192,46 @@ void cPlayer::load( char** result, quint16& offset )
 
 void cPlayer::save()
 {
+	static bool init = false;
+	static QSqlQuery preparedUpdate;
+	static QSqlQuery preparedInsert;
+	if ( !init )
+	{
+		preparedUpdate.prepare("update players values ( ?, ?, ?, ?, ?, ?, ?, ? ) where serial = ?");
+		preparedInsert.prepare("insert into players values ( ?, ?, ?, ?, ?, ?, ?, ? )");
+		init = true;
+	}
+
 	if ( changed_ )
 	{
-		initSave;
-		setTable( "players" );
+		QSqlQuery q;
+		if ( isPersistent )
+			q = preparedUpdate;
+		else
+			q = preparedInsert;
 
-		addField( "serial", serial() );
+		q.addBindValue( serial() );
 
 		if ( account_ )
 		{
-			addStrField( "account", account_->login() );
+			q.addBindValue( account_->login() );
 		}
 		else
 		{
-			addStrField( "account", QString::null );
+			q.addBindValue( QString() );
 		}
 
-		addField( "additionalflags", additionalFlags_ );
-		addField( "visualrange", visualRange_ );
-		addStrField( "profile", profile_ );
-		addField( "fixedlight", fixedLightLevel_ );
-		addField( "strlock", strengthLock_ );
-		addField( "dexlock", dexterityLock_ );
-		addField( "intlock", intelligenceLock_ );
-		addField( "maxcontrolslots", maxControlSlots_ );
+		q.addBindValue( additionalFlags_ );
+		q.addBindValue( visualRange_ );
+		q.addBindValue( profile_ );
+		q.addBindValue( fixedLightLevel_ );
+		q.addBindValue( strengthLock_ );
+		q.addBindValue( dexterityLock_ );
+		q.addBindValue( intelligenceLock_ );
+		q.addBindValue( maxControlSlots_ );
 
-		addCondition( "serial", serial() );
-		saveFields;
+		q.addBindValue( serial() );
+		q.exec();
 	}
 	cBaseChar::save();
 }
