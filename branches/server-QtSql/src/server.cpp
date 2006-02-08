@@ -268,6 +268,7 @@ void myMessageOutput( QtMsgType type, const char *msg )
 }
 
 #include "python/pyprofiler.h"
+#include <QSqlDatabase>
 
 void cServer::run()
 {
@@ -281,6 +282,9 @@ void cServer::run()
 
 	bool error = false;
 	QEventLoop eventLoop;
+
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+	db.setDatabaseName( "world.db" );
 
 	// Register Components
 	registerComponent( Config::instance(), tr( "configuration" ), true, false );
