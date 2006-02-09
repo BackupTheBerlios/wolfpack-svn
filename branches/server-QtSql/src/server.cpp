@@ -285,6 +285,7 @@ void cServer::run()
 
 	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
 	db.setDatabaseName( "world.db" );
+	db.open();
 
 	// Register Components
 	registerComponent( Config::instance(), tr( "configuration" ), true, false );
