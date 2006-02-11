@@ -50,8 +50,8 @@ login varchar(16) NOT NULL default '',\
 password varchar(32) NOT NULL default '',\
 flags int NOT NULL default '0',\
 acl varchar(255) NOT NULL default 'player',\
-lastlogin int NOT NULL default '',\
-blockuntil int NOT NULL default '',\
+lastlogin int NOT NULL default '0',\
+blockuntil int NOT NULL default '0',\
 email varchar(255) NOT NULL default '',\
 PRIMARY KEY (login)\
 );";
@@ -360,8 +360,8 @@ cAccount* cAccounts::authenticate( const QString& login, const QString& password
 void cAccounts::save()
 {
 	// Open the Account Driver
-	QSqlDatabase db;
-	if ( !QSqlDatabase::contains("accounts") )
+	QSqlDatabase db = QSqlDatabase::database("accounts");
+	if ( !db.isValid() )
 	{
 		db = QSqlDatabase::addDatabase( QString("q" + Config::instance()->accountsDriver()).toUpper(), "accounts" );
 		if ( !db.isValid() )
@@ -369,8 +369,6 @@ void cAccounts::save()
 			throw wpException( tr( "Unknown Account Database Driver '%1', check your wolfpack.xml" ).arg( Config::instance()->accountsDriver() ) );
 		}
 	}
-	else
-		db = QSqlDatabase::database("accounts");
 
 	try
 	{
@@ -393,10 +391,9 @@ void cAccounts::save()
 		}
 
 		// Lock the table
-		db.transaction();
 		db.exec( "DELETE FROM accounts" );
 		QSqlQuery query( db );
-		query.prepare( "INSERT INTO accounts VALUES( ?, ?, ?, ?, ?, ?, ? )" );
+		query.prepare( "insert into accounts values( ?, ?, ?, ?, ?, ?, ? )" );
 		iterator it = accounts.begin();
 		for ( ; it != accounts.end(); ++it )
 		{
@@ -405,15 +402,15 @@ void cAccounts::save()
 
 			query.addBindValue( account->login_ );
 			query.addBindValue( account->password_ );
-			query.addBindValue( account->flags_ );
+			query.addBindValue( QVariant::fromValue<uint>( account->flags_ ) );
 			query.addBindValue( account->aclName_ );
-			query.addBindValue( !account->lastLogin_.isNull() ? account->lastLogin_.toTime_t() : 0 );
-			query.addBindValue( !account->blockUntil.isNull() ? account->blockUntil.toTime_t() : 0 );
-			query.addBindValue( account->email_ );
+			query.addBindValue( QVariant::fromValue<uint>( !account->lastLogin_.isNull() ? account->lastLogin_.toTime_t() : 0 ) );
+			query.addBindValue( QVariant::fromValue<uint>( !account->blockUntil.isNull() ? account->blockUntil.toTime_t() : 0 ) );
+			query.addBindValue( QString(account->email_) );
 
 			query.exec();
+			Console::instance()->send( query.executedQuery() );
 		}
-		db.commit();
 	}
 	catch ( QString& error )
 	{
@@ -428,8 +425,8 @@ void cAccounts::save()
 void cAccounts::load()
 {
 	// Open the Account Driver
-	QSqlDatabase db;
-	if ( !QSqlDatabase::contains("accounts") )
+	QSqlDatabase db = QSqlDatabase::database("accounts");
+	if ( !db.isValid() )
 	{
 		db = QSqlDatabase::addDatabase( QString("q" + Config::instance()->accountsDriver()).toUpper(), "accounts" );
 		if ( !db.isValid() )
@@ -437,8 +434,6 @@ void cAccounts::load()
 			throw wpException( tr( "Unknown Account Database Driver '%1', check your wolfpack.xml" ).arg( Config::instance()->accountsDriver() ) );
 		}
 	}
-	else
-		db = QSqlDatabase::database("accounts");
 
 	// Load all Accounts
 	try
@@ -580,7 +575,7 @@ cAccount* cAccounts::createAccount( const QString& login, const QString& passwor
 		d->setAcl( "admin" );
 		d->refreshAcl();
 		save(); // Make sure to save it.
-		reload(); // Reloads
+		//reload(); // Reloads
 		return d;
 	}
 	else

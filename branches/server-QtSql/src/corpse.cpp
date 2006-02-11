@@ -174,7 +174,7 @@ void cCorpse::save()
 		q.addBindValue( 0 /*beardStyle_*/ );
 		q.addBindValue( 0 /*beardColor_*/ );
 		q.addBindValue( direction_ );
-		q.addBindValue( charbaseid_ );
+		q.addBindValue( QString( charbaseid_ ) );
 		q.addBindValue( murderer_ );
 		q.addBindValue( murdertime_ );
 		q.addBindValue( serial() );

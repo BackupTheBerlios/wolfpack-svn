@@ -475,7 +475,7 @@ void cBaseChar::save()
 		q.addBindValue( dexterityCap_ );
 		q.addBindValue( intelligenceCap_ );
 		q.addBindValue( statCap_ );
-		q.addBindValue( baseid() );
+		q.addBindValue( QString( baseid() ) );
 		q.addBindValue( direction_ );
 		if ( isPersistent )
 			q.addBindValue( serial() );
