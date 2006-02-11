@@ -488,7 +488,9 @@ void cItem::save()
 		q.addBindValue( priv_ );
 		q.addBindValue( baseid() );
 
-		q.addBindValue( serial() );
+		if ( isPersistent )
+			q.addBindValue( serial() );
+
 		q.exec();
 	}
 	cUObject::save();
@@ -1469,7 +1471,7 @@ unsigned char cItem::classid;
 
 static FactoryRegistration<cItem> registration( "cItem" );
 
-void cItem::load( char** result, quint16& offset )
+void cItem::load( QSqlQuery& result, ushort& offset )
 {
 	cUObject::load( result, offset ); // Load the items we inherit from first
 
@@ -1477,20 +1479,20 @@ void cItem::load( char** result, quint16& offset )
 	if ( !isItemSerial( serial() ) )
 		throw QString( "Item has invalid character serial: 0x%1" ).arg( serial(), 0, 16 );
 
-	id_ = atoi( result[offset++] );
-	color_ = atoi( result[offset++] );
+	id_ = result.value( offset++ ).toInt();
+	color_ = result.value( offset++ ).toInt();
 
-	SERIAL containerSerial = atoi( result[offset++] );
+	SERIAL containerSerial = result.value( offset++ ).toInt();
 
-	layer_ = atoi( result[offset++] );
-	amount_ = atoi( result[offset++] );
-	hp_ = atoi( result[offset++] );
-	maxhp_ = atoi( result[offset++] );
-	movable_ = atoi( result[offset++] );
-	ownserial_ = atoi( result[offset++] );
-	visible_ = atoi( result[offset++] );
-	priv_ = atoi( result[offset++] );
-	basedef_ = ItemBaseDefs::instance()->get( result[offset++] );
+	layer_ = result.value( offset++ ).toInt();
+	amount_ = result.value( offset++ ).toInt();
+	hp_ = result.value( offset++ ).toInt();
+	maxhp_ = result.value( offset++ ).toInt();
+	movable_ = result.value( offset++ ).toInt();
+	ownserial_ = result.value( offset++ ).toInt();
+	visible_ = result.value( offset++ ).toInt();
+	priv_ = result.value( offset++ ).toInt();
+	basedef_ = ItemBaseDefs::instance()->get( result.value( offset++ ).toByteArray() );
 
 	// Their own weight should already be set.
 	totalweight_ = amount_ * weight();

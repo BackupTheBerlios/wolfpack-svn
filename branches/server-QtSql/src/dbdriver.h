@@ -39,6 +39,7 @@ struct sqlite3_stmt;
 #include <map>
 #include "defines.h"
 #include "pythonscript.h"
+#include <QSqlDatabase>
 
 class cDBResult;
 class cSQLiteResult;
@@ -123,6 +124,7 @@ protected:
 
 class cSQLiteDriver : public cDBDriver
 {
+	QSqlDatabase db;
 public:
 	const char* name() const
 	{

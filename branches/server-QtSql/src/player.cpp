@@ -173,19 +173,19 @@ void cPlayer::save( cBufferedWriter& writer, unsigned int version )
 	}
 }
 
-void cPlayer::load( char** result, quint16& offset )
+void cPlayer::load( QSqlQuery& result, ushort& offset )
 {
 	cBaseChar::load( result, offset );
 
-	setAccount( Accounts::instance()->getRecord( result[offset++] ) );
-	additionalFlags_ = atoi( result[offset++] );
-	visualRange_ = atoi( result[offset++] );
-	profile_ = result[offset++];
-	fixedLightLevel_ = atoi( result[offset++] );
-	strengthLock_ = atoi( result[offset++] );
-	dexterityLock_ = atoi( result[offset++] );
-	intelligenceLock_ = atoi( result[offset++] );
-	maxControlSlots_ = atoi( result[offset++] );
+	setAccount( Accounts::instance()->getRecord( result.value( offset++ ).toString() ) );
+	additionalFlags_ = result.value( offset++ ).toInt();
+	visualRange_ = result.value( offset++ ).toInt();
+	profile_ = result.value( offset++ ).toString();
+	fixedLightLevel_ = result.value( offset++ ).toInt();
+	strengthLock_ = result.value( offset++ ).toInt();
+	dexterityLock_ = result.value( offset++ ).toInt();
+	intelligenceLock_ = result.value( offset++ ).toInt();
+	maxControlSlots_ = result.value( offset++ ).toInt();
 
 	changed_ = false;
 }

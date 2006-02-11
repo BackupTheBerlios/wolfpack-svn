@@ -40,6 +40,9 @@
 #include <sqlite.h>
 #include "../sqlite3/sqlite3.h"
 
+#include <QSqlDatabase>
+#include <QSqlQuery>
+
 #ifdef MYSQL_DRIVER
 # ifdef _MSC_VER
 #  pragma comment(lib,"libmysql.lib")
@@ -97,10 +100,7 @@ char** cDBResult::data() const
 // Get an integer with a specific offset
 qint32 cDBResult::getInt( quint32 offset ) const
 {
-	if ( !_row )
-		throw QString( "Trying to access a non valid result!" );
-
-	return atoi( _row[offset] );
+	return 0;
 }
 
 // Get a string with a specific offset
@@ -256,99 +256,37 @@ const char* cDBResult::className() const
 // Fetchs a new row, returns false if there is no new row
 bool cSQLiteDriver::fetchrow ( cDBResult& result ) const
 {
-	if ( !result._result )
-		return false;
-
-	int count;
-	const char** columns;
-
-	return ( sqlite_step( ( sqlite_vm * ) result._result, &count, ( const char * ** ) &result._row, &columns ) == SQLITE_ROW );
+	return false;
 }
 
 void cSQLiteDriver::freeDBResult ( cDBResult& result ) const
 {
-	char* error;
-	if ( sqlite_finalize( ( sqlite_vm * ) result._result, &error ) != SQLITE_OK )
-	{
-		if ( error )
-		{
-			QString err( error );
-			sqlite_freemem( error );
-			throw err;
-		}
-		else
-		{
-			throw QString( "Unknown SQLite error while finalizing query." );
-		}
-	}
-
-	result._result = 0;
-	result._row = 0;
-	result._connection = 0;
 }
 
 int cSQLiteDriver::lastInsertId()
 {
-	return sqlite_last_insert_rowid( ( sqlite * ) connection );
+	return 0;
 }
 
 bool cSQLiteDriver::open( int )
 {
-	char* error = NULL;
-
-	close();
-
-	connection = sqlite_open( _dbname.toLatin1(), 0, &error );
-
-	if ( !connection )
-	{
-		if ( error )
-		{
-			QString err( error );
-			sqlite_freemem( error );
-			throw err;
-		}
-		else
-		{
-			throw QString( "Unknown SQLite error while opening database." );
-		}
-	}
-
-	exec( "PRAGMA synchronous = OFF;" );
-	exec( "PRAGMA default_synchronous = OFF;" );
-	exec( "PRAGMA full_column_names = OFF;" );
-	exec( "PRAGMA show_datatypes = OFF;" );
-	exec( "PRAGMA parser_trace = OFF;" );
+	if ( _dbname != "world.db" )
+		db = QSqlDatabase::addDatabase("QSQLITE", _dbname );
+	else
+		db = QSqlDatabase::addDatabase( "QSQLITE" );
+	db.setDatabaseName( _dbname );
+	db.open();
 
 	return true;
 }
 
 void cSQLiteDriver::close()
 {
-	if ( connection != 0 )
-	{
-		sqlite_close( ( sqlite * ) connection );
-		connection = 0;
-	}
 }
 
 bool cSQLiteDriver::exec( const QString& query )
 {
-	char* error;
-
-	if ( sqlite_exec( ( sqlite * ) connection, query.toLocal8Bit(), NULL, NULL, &error ) != SQLITE_OK )
-	{
-		if ( error )
-		{
-			QString err( QString( error ) + " (" + query + ")" );
-			sqlite_freemem( error );
-			throw err;
-		}
-		else
-		{
-			throw QString( "Unknown SQLite error while executing: %1" ).arg( query );
-		}
-	}
+	QSqlQuery q( query, db );
 
 	return true;
 }
@@ -358,33 +296,12 @@ cDBResult cSQLiteDriver::query( const QString& query )
 	char* error = NULL;
 	sqlite_vm* result;
 
-	// Compile a VM and pass it to cSQLiteResult
-	if ( sqlite_compile( ( sqlite * ) connection, query.toLocal8Bit(), NULL, &result, &error ) != SQLITE_OK )
-	{
-		if ( error )
-		{
-			QString err( QString( error ) + " (" + query + ")" );
-			sqlite_freemem( error );
-			throw err;
-		}
-		else
-		{
-			throw QString( "Unknown SQLite error while querying: %1" ).arg( query );
-		}
-	}
-
 	return cDBResult( result, connection, *this );
 }
 
 bool cSQLiteDriver::tableExists( const QString& table )
 {
-	cDBResult result = query( QString( "PRAGMA table_info('%1');" ).arg( table ) );
-
-	bool res = result.fetchrow(); // Every table has at least one field
-
-	result.free();
-
-	return res;
+	return db.tables().contains( table );
 }
 
 /*****************************************************************************

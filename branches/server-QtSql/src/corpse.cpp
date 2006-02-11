@@ -41,6 +41,7 @@
 #include <algorithm>
 
 #include <QSqlQuery>
+#include <QSqlError>
 #include <QVariant>
 
 using namespace std;
@@ -122,32 +123,28 @@ void cCorpse::save( cBufferedWriter& writer, unsigned int version )
 	}
 }
 
-void cCorpse::load( char** result, quint16& offset )
+void cCorpse::load( QSqlQuery& result, ushort& offset )
 {
 	cItem::load( result, offset );
-	bodyId_ = atoi( result[offset++] );
-	/*hairStyle_ =*/ atoi( result[offset++] );
-	/*hairColor_ =*/ atoi( result[offset++] );
-	/*beardStyle_ =*/ atoi( result[offset++] );
-	/*beardColor_ =*/ atoi( result[offset++] );
-	direction_ = atoi( result[offset++] );
-	charbaseid_ = result[offset++];
-	murderer_ = atoi( result[offset++] );
-	murdertime_ = atoi( result[offset++] );
+	bodyId_ = result.value( offset++ ).toInt();
+	/*hairStyle_ =*/ result.value( offset++ ).toInt();
+	/*hairColor_ =*/ result.value( offset++ ).toInt();
+	/*beardStyle_ =*/ result.value( offset++ ).toInt();
+	/*beardColor_ =*/ result.value( offset++ ).toInt();
+	direction_ = result.value( offset++ ).toInt();
+	charbaseid_ = result.value( offset++ ).toByteArray();
+	murderer_ = result.value( offset++ ).toInt();
+	murdertime_ = result.value( offset++ ).toInt();
 
 	// Get the corpse equipment
-	QString sql = "SELECT serial,layer,item FROM corpses_equipment WHERE serial = '" + QString::number( serial() ) + "'";
+	QSqlQuery query( "SELECT serial,layer,item FROM corpses_equipment WHERE serial = '" + QString::number( serial() ) + "'" );
 
-	cDBResult res = PersistentBroker::instance()->query( sql );
-
-	if ( !res.isValid() )
-		throw PersistentBroker::instance()->lastError();
+	if ( !query.isActive() )
+		throw query.lastError().databaseText();
 
 	// Fetch row-by-row
-	while ( res.fetchrow() )
-		equipment_.insert( res.getInt( 0 ), res.getInt( 1 ) );
-
-	res.free();
+	while ( query.next() )
+		equipment_.insert( query.value( 0 ).toInt(), query.value( 1 ).toInt() );
 }
 
 void cCorpse::save()

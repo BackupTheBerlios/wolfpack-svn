@@ -204,23 +204,23 @@ void cNPC::save( cBufferedWriter& writer, unsigned int version )
 	}
 }
 
-void cNPC::load( char** result, quint16& offset )
+void cNPC::load( QSqlQuery& result, quint16& offset )
 {
 	cBaseChar::load( result, offset );
 
-	summonTime_ = atoi( result[offset++] ) + Server::instance()->time();
+	summonTime_ = result.value( offset++ ).toInt() + Server::instance()->time();
 	if ( summonTime_ )
 		summonTime_ += Server::instance()->time();
-	additionalFlags_ = atoi( result[offset++] );
-	owner_ = reinterpret_cast<P_PLAYER>( atoi( result[offset++] ) );
-	stablemasterSerial_ = atoi( result[offset++] );
-	setAI( result[offset++] );
-	setWanderType( ( enWanderTypes ) atoi( result[offset++] ) );
-	setWanderX1( atoi( result[offset++] ) );
-	setWanderX2( atoi( result[offset++] ) );
-	setWanderY1( atoi( result[offset++] ) );
-	setWanderY2( atoi( result[offset++] ) );
-	setWanderRadius( atoi( result[offset++] ) );
+	additionalFlags_ = result.value( offset++ ).toInt();
+	owner_ = reinterpret_cast<P_PLAYER>( result.value( offset++ ).toInt() );
+	stablemasterSerial_ = result.value( offset++ ).toInt();
+	setAI( result.value( offset++ ).toString() );
+	setWanderType( ( enWanderTypes ) result.value( offset++ ).toInt() );
+	setWanderX1( result.value( offset++ ).toInt() );
+	setWanderX2( result.value( offset++ ).toInt() );
+	setWanderY1( result.value( offset++ ).toInt() );
+	setWanderY2( result.value( offset++ ).toInt() );
+	setWanderRadius( result.value( offset++ ).toInt() );
 
 	changed_ = false;
 }

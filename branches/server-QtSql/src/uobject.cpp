@@ -181,19 +181,18 @@ unsigned int cUObject::dist( cUObject* d ) const
 /*!
 	Performs persistency layer loads.
 */
-void cUObject::load( char** result, quint16& offset )
+void cUObject::load( QSqlQuery& result, ushort& offset )
 {
-	name_ = ( result[offset] == 0 ) ? QString::null : QString::fromUtf8( result[offset] );
+	name_ = ( result.value(offset).toByteArray().isEmpty() ) ? QString::null : QString::fromUtf8( result.value(offset).toByteArray() );
 	offset++;
-	serial_ = atoi( result[offset++] );
-	multi_ = reinterpret_cast<cMulti*>( static_cast<size_t>( atoi( result[offset++] ) ) );
-	pos_.x = atoi( result[offset++] );
-	pos_.y = atoi( result[offset++] );
-	pos_.z = atoi( result[offset++] );
-	pos_.map = atoi( result[offset++] );
-	QByteArray scriptList = result[offset];
-	offset++;
-	bool havetags_ = atoi( result[offset++] );
+	serial_ = result.value( offset++ ).toInt();
+	multi_ = reinterpret_cast<cMulti*>( static_cast<size_t>( result.value(offset++).toInt() ) );
+	pos_.x = result.value( offset++ ).toInt();
+	pos_.y = result.value( offset++ ).toInt();
+	pos_.z = result.value( offset++ ).toInt();
+	pos_.map = result.value( offset++ ).toInt();
+	QByteArray scriptList = result.value( offset++ ).toByteArray();
+	bool havetags_ = result.value( offset++ ).toInt();
 
 	setScriptList( scriptList );
 
