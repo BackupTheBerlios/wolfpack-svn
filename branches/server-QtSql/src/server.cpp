@@ -284,7 +284,7 @@ void cServer::run()
 	QEventLoop eventLoop;
 
 	// Register Components
-	registerComponent( Config::instance(), tr( "configuration" ), true, false );
+	registerComponent( Config::instance(), QT_TR_NOOP( "configuration" ), true, false );
 
 	// We want to start this independently
 	//registerComponent(PythonEngine::instance(), "python", false, true, "configuration");
