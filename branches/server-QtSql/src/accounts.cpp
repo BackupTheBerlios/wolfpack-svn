@@ -391,8 +391,8 @@ void cAccounts::save()
 		}
 
 		// Lock the table
-		db.exec( "DELETE FROM accounts" );
 		QSqlQuery query( db );
+		query.exec( "DELETE FROM accounts" );
 		query.prepare( "insert into accounts values( ?, ?, ?, ?, ?, ?, ? )" );
 		iterator it = accounts.begin();
 		for ( ; it != accounts.end(); ++it )
@@ -409,7 +409,6 @@ void cAccounts::save()
 			query.addBindValue( QString(account->email_) );
 
 			query.exec();
-			Console::instance()->send( query.executedQuery() );
 		}
 	}
 	catch ( QString& error )

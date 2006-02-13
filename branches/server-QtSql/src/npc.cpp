@@ -257,8 +257,8 @@ void cNPC::save()
 		q.addBindValue( wanderY1() );
 		q.addBindValue( wanderY2() );
 		q.addBindValue( wanderRadius() );
-
-		q.addBindValue( serial() );
+		if ( isPersistent )
+			q.addBindValue( serial() );
 		q.exec();
 	}
 

@@ -160,17 +160,14 @@ bool cTimer::loadItem( unsigned int id, const QString& key, P_ITEM& item )
  */
 bool cTimer::loadFloat( unsigned int id, const QString& key, double& value )
 {
-	cDBResult result = PersistentBroker::instance()->query( QString( "SELECT value FROM effects_properties WHERE id = '%1' AND keyname = '%2' AND type = 'float'" ).arg( id ).arg( PersistentBroker::instance()->quoteString( key ) ) );
+	QSqlQuery result = PersistentBroker::instance()->query( QString( "SELECT value FROM effects_properties WHERE id = '%1' AND keyname = '%2' AND type = 'float'" ).arg( id ).arg( PersistentBroker::instance()->quoteString( key ) ) );
 
-	if ( !result.fetchrow() )
+	if ( !result.next() )
 	{
-		result.free();
 		return false;
 	}
 
-	value = result.getString( 0 ).toFloat();
-
-	result.free();
+	value = result.value( 0 ).toDouble();
 
 	return true;
 }

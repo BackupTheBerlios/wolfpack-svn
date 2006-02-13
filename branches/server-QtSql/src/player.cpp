@@ -197,8 +197,8 @@ void cPlayer::save()
 	static QSqlQuery preparedInsert;
 	if ( !init )
 	{
-		preparedUpdate.prepare("update players values ( ?, ?, ?, ?, ?, ?, ?, ? ) where serial = ?");
-		preparedInsert.prepare("insert into players values ( ?, ?, ?, ?, ?, ?, ?, ? )");
+		preparedUpdate.prepare("update players values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) where serial = ?");
+		preparedInsert.prepare("insert into players values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )");
 		init = true;
 	}
 
@@ -229,8 +229,8 @@ void cPlayer::save()
 		q.addBindValue( dexterityLock_ );
 		q.addBindValue( intelligenceLock_ );
 		q.addBindValue( maxControlSlots_ );
-
-		q.addBindValue( serial() );
+		if ( isPersistent )
+			q.addBindValue( serial() );
 		q.exec();
 	}
 	cBaseChar::save();

@@ -871,12 +871,12 @@ void cWorld::loadSQL( QList<PersistentObject*>& objects )
 	}
 
 	// Load SpawnRegion information
-	cDBResult result = PersistentBroker::instance()->query( "SELECT spawnregion,serial FROM spawnregions;" );
+	QSqlQuery result = PersistentBroker::instance()->query( "SELECT spawnregion,serial FROM spawnregions;" );
 
-	while ( result.fetchrow() )
+	while ( result.next() )
 	{
-		QString spawnregion = result.getString( 0 );
-		SERIAL serial = result.getInt( 1 );
+		QString spawnregion = result.value( 0 ).toString();
+		SERIAL serial = result.value( 1 ).toInt();
 
 		cSpawnRegion *region = SpawnRegions::instance()->region( spawnregion );
 		cUObject *object = findObject( serial );
@@ -889,8 +889,6 @@ void cWorld::loadSQL( QList<PersistentObject*>& objects )
 			object->remove();
 		}
 	}
-
-	result.free();
 
 	Guilds::instance()->load();
 

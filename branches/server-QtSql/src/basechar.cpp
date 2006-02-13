@@ -475,20 +475,23 @@ void cBaseChar::save()
 		q.addBindValue( dexterityCap_ );
 		q.addBindValue( intelligenceCap_ );
 		q.addBindValue( statCap_ );
-		q.addBindValue( QString( baseid() ) );
+		q.addBindValue( QVariant::fromValue<QString>( baseid() ) );
 		q.addBindValue( direction_ );
 		if ( isPersistent )
 			q.addBindValue( serial() );
 		q.exec();
 	}
 
+	QSqlQuery skillsPreparedQuery;
+	if ( isPersistent )
+		skillsPreparedQuery.prepare( "REPLACE INTO skills VALUES( ?, ?, ?, ?, ?)" );
+	else
+		skillsPreparedQuery.prepare( "INSERT INTO skills VALUES( ?, ?, ?, ?, ?)" );
+
 	QVector<stSkillValue>::iterator it;
 	int i = 0;
-	QString query( 256 ); // 256 byte should be enough
 	for ( it = skills_.begin(); it != skills_.end(); ++it, ++i )
 	{
-		QSqlQuery skillsPreparedQuery;
-		skillsPreparedQuery.prepare( "REPLACE INTO skills VALUES( ?, ?, ?, ?, ?)" );
 		if ( ( *it ).changed )
 		{
 			skillsPreparedQuery.addBindValue( serial_ );
