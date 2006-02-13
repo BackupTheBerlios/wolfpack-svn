@@ -251,7 +251,8 @@ void cUObject::save()
 		QString scriptList = this->scriptList();
 		q.addBindValue( scriptList == QString::null ? QString( "" ) : scriptList );
 		q.addBindValue( havetags_ );
-		q.addBindValue( serial_ );
+		if ( isPersistent )
+			q.addBindValue( serial_ );
 		q.exec();
 	}
 

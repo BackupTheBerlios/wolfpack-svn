@@ -474,10 +474,10 @@ void cItem::save()
 		q.addBindValue( serial() );
 		q.addBindValue( id() );
 		q.addBindValue( color() );
-		SERIAL contserial = INVALID_SERIAL;
 		if ( container_ )
-			contserial = container_->serial();
-		q.addBindValue( contserial );
+			q.addBindValue( container_->serial() );
+		else
+			q.addBindValue( INVALID_SERIAL );
 		q.addBindValue( layer_ );
 		q.addBindValue( amount_ );
 		q.addBindValue( hp_ );
