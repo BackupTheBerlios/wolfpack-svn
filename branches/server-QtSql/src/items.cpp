@@ -486,7 +486,7 @@ void cItem::save()
 		q.addBindValue( ownserial_ );
 		q.addBindValue( visible_ );
 		q.addBindValue( priv_ );
-		q.addBindValue( QString( baseid() ) );
+		q.addBindValue( baseid() );
 
 		if ( isPersistent )
 			q.addBindValue( serial() );

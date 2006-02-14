@@ -912,7 +912,7 @@ void cWorld::load()
 	}
 	else
 	{
-//		loadSQL( objects );
+		loadSQL( objects );
 	}
 
 	unsigned int duration = getNormalizedTime() - loadStart;

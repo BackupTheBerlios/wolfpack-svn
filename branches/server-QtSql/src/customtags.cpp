@@ -366,7 +366,7 @@ const QString cVariant::toString() const
 	}
 
 	if ( typ != StringType )
-		return QString::null;
+		return QString();
 
 	return *( ( QString * ) value.ptr );
 }

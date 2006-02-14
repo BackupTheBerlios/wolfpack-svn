@@ -150,12 +150,13 @@ bool cPersistentBroker::executeQuery( const QString& query )
 	if ( !d->connection.isValid() )
 		throw tr( "PersistentBroker not connected to database." );
 
-	bool result = d->connection.exec( query ).isValid();
-	if ( !result )
+	QSqlQuery q;
+	if ( !q.exec( query ) )
 	{
 		Console::instance()->log( LOG_ERROR, d->connection.lastError().text() );
+		return false;
 	}
-	return result;
+	return true;
 }
 
 QSqlQuery cPersistentBroker::query( const QString& query )
