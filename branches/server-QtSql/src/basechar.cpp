@@ -306,7 +306,7 @@ void cBaseChar::save( cBufferedWriter& writer, unsigned int version )
 	}
 }
 
-void cBaseChar::load( QSqlQuery& result, quint16& offset )
+void cBaseChar::load( QSqlQuery& result, ushort& offset )
 {
 	cUObject::load( result, offset );
 

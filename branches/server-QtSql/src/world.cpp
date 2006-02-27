@@ -89,7 +89,7 @@ typedef std::map<SERIAL, P_CHAR> CharMap;
 //
 // ONCE AGAIN, DON'T FORGET TO INCREASE THIS VALUE
 #define DATABASE_VERSION 11
-#define WP_DATABASE_VERSION "11"
+#define WP_DATABASE_VERSION "12"
 
 unsigned int cWorld::getDatabaseVersion() const {
 	return DATABASE_VERSION;
@@ -639,7 +639,16 @@ void cWorld::loadSQL( QList<PersistentObject*>& objects )
 	{
 		if ( !PersistentBroker::instance()->tableExists( tableInfo[i].name ) )
 		{
-			query.exec( tableInfo[i].create );
+			if ( !query.exec( tableInfo[i].create ) )
+			{
+				// Create Database failed, let's figure why
+				QSqlError e = query.lastError();
+				if ( Config::instance()->databaseDriver() == "sqlite" && e.number() == 26 )
+				{
+					Console::instance()->log( LOG_ERROR, tr("Invalid World database file. The file is either corrupted or in sqlite2 format, which require a conversion step. If this is an sqlite2 database please check this wiki entry: http://www.wpdev.org/wiki/index.php/Convert_sqlite2_to_sqlite3_format") );
+				}
+				throw tr( "Unable to load world database" );
+			}
 
 			// create default settings
 			if ( !strcmp( tableInfo[i].name, "settings" ) )
