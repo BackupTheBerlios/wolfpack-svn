@@ -1,7 +1,0 @@
-
-<definitions>
-
-	<!-- Sea -->
-	<include file="definitions/npcs/animals/sea/dolphin.xml" />
-
-</definitions>
