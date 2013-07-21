@@ -65,7 +65,6 @@ private slots:
 
 private:
 	void createListBox();
-	void adjustListBoxSize( int maxHeight = 32767, int maxWidth = 32767 );
 	QPoint textCursorPoint() const;
 
 	QString wordPrefix;

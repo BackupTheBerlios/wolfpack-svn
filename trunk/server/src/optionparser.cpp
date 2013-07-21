@@ -2,7 +2,7 @@
 *     Wolfpack Emu (WP)
 * UO Server Emulation Program
 *
-* Copyright 2001-2007 by holders identified in AUTHORS.txt
+* Copyright 2001-2013 by holders identified in AUTHORS.txt
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
 * the Free Software Foundation; either version 2 of the License, or
@@ -55,8 +55,8 @@ void OptionParser::parse()
 {
 #if QT_VERSION < 0x0401000
 	QStringList args;
-	for( int j = 0; j < QCoreApplication::argc(); ++j )
-		args.append( QCoreApplication::argv()[ j ] );
+    for( int j = 0; j < QCoreApplication::arguments().size(); ++j )
+        args.append( QCoreApplication::arguments().at(j) );
 #else
 	QStringList args = QCoreApplication::arguments();
 #endif

@@ -2,7 +2,7 @@
  *     Wolfpack Emu (WP)
  * UO Server Emulation Program
  *
- * Copyright 2001-2007 by holders identified in AUTHORS.txt
+ * Copyright 2001-2013 by holders identified in AUTHORS.txt
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -596,11 +596,13 @@ public:
 		partySystem										= 0x06,
 		closeQuestArrow									= 0x07,
 		changeMap										= 0x08,
+        // TODO
+        disarmRequest                                   = 0x09,
 		wrestlingStun									= 0x0a,
 		setLanguage										= 0x0b,
 		closedStatusGump								= 0x0c,
 				// Unknown: 0x0d
-		// Unknown: 0x0e
+        animate                                         = 0x0e,
 		unknownLoginInfo								= 0x0f,
 		toolTip											= 0x10,
 				// Unknown: 0x11
@@ -1290,11 +1292,11 @@ public:
 	cUORxRequestTooltips( const QByteArray& data ) : cUOPacket( data ) {
 	}
 
-	const unsigned short getCount() {
+    unsigned short getCount() {
 		return (getShort(1) - 3) / 4;
 	}
 
-	const unsigned int getSerial(unsigned short index) {
+    unsigned int getSerial(unsigned short index) {
 		return getInt(3 + index * 4);
 	}
 };

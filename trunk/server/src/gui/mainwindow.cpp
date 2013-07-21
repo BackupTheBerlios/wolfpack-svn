@@ -24,7 +24,7 @@
 *
 * Wolfpack Homepage: http://developer.berlios.de/projects/wolfpack/
 */
-#include <QtGui>
+#include <QtWidgets>
 #include <QUrl>
 #include <QDesktopServices>
 
@@ -44,7 +44,7 @@
 
 MainWindow::MainWindow()
 {
-	ui.setupUi( this );
+    ui.setupUi( this );
 
 	setWindowIcon( QIcon(":/gui/images/icon_red.png") );
 	// Start Menus
@@ -56,7 +56,7 @@ MainWindow::MainWindow()
 	trayicon->show();
 	// Fire up the server thread
 	Server::instance()->start();
-	connect( Server::instance(), SIGNAL(finished()), this, SLOT(onServerStoped()) );
+    connect( Server::instance(), SIGNAL(finished()), this, SLOT(onServerStopped()) );
 
 	// Push Python Profiler to Wolfpack's thread
 	PyProfiler::instance()->moveToThread( Server::instance() );
@@ -71,11 +71,11 @@ MainWindow::~MainWindow()
 bool MainWindow::event( QEvent* e )
 {
 	if ( e->type() >= QEvent::User )
-	{
-		QWolfpackConsoleEvent* event = static_cast<QWolfpackConsoleEvent*>( e );
-		switch ( e->type() )
+    {
+        QWolfpackConsoleEvent* event = static_cast<QWolfpackConsoleEvent*>( e );
+        switch ( e->type() )
 		{
-		case QWolfpackConsoleEvent::SendEvent:
+        case QWolfpackConsoleEvent::SendEvent:
 			handleConsoleMessage( event->data().toString() );
 			break;
 		case QWolfpackConsoleEvent::SetTitleEvent:
@@ -156,7 +156,7 @@ void MainWindow::handleConsoleNotifyState( enServerState s )
 	}
 }
 
-void MainWindow::onServerStoped()
+void MainWindow::onServerStopped()
 {
 	handleConsoleMessage( tr( "\nThe server has been shut down. You can close this window now.\n" ) );
 }

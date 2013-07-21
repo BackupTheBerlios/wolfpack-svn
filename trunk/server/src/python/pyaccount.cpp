@@ -2,7 +2,7 @@
  *     Wolfpack Emu (WP)
  * UO Server Emulation Program
  *
- * Copyright 2001-2007 by holders identified in AUTHORS.txt
+ * Copyright 2001-2013 by holders identified in AUTHORS.txt
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -30,14 +30,14 @@
 #include <QCryptographicHash>
 #include <limits.h>
 
-#include "engine.h"
+
 #include "utilities.h"
 #include "../accounts.h"
 #include "../basechar.h"
 #include "../serverconfig.h"
 
 #include "../player.h"
-
+#include "engine.h"
 /*
 	\object account
 	\description This object type represents a user account.

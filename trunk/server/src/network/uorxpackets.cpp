@@ -2,7 +2,7 @@
  *     Wolfpack Emu (WP)
  * UO Server Emulation Program
  *
- * Copyright 2001-2007 by holders identified in AUTHORS.txt
+ * Copyright 2001-2013 by holders identified in AUTHORS.txt
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -131,6 +131,9 @@ cUOPacket* cUORxMultiPurpose::packet( const QByteArray& data )
 	// Switch the Subcommand
 	switch ( temp.getShort( 3 ) )
 	{
+    // TODO
+//    case disarmRequest:
+//        return new cUORxDisarmRequest(data);
 	case setLanguage:
 		return new cUORxSetLanguage( data );
 	case contextMenuRequest:

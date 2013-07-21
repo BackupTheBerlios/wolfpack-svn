@@ -2,7 +2,7 @@
 *     Wolfpack Emu (WP)
 * UO Server Emulation Program
 *
-* Copyright 2001-2007 by holders identified in AUTHORS.txt
+* Copyright 2001-2013 by holders identified in AUTHORS.txt
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
 * the Free Software Foundation; either version 2 of the License, or
@@ -38,7 +38,7 @@ class ProfilerWindow : public QMainWindow
 	Q_OBJECT
 	Ui::ProfilerWindow ui;
 public:
-	explicit ProfilerWindow(QWidget *parent = 0, Qt::WFlags flags = 0);
+    explicit ProfilerWindow(QWidget *parent = 0, Qt::WindowFlags flags = 0);
 	void setProfileSession( const ProfileSession& d );
 };
 

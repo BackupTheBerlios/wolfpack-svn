@@ -2,7 +2,7 @@
  *     Wolfpack Emu (WP)
  * UO Server Emulation Program
  *
- * Copyright 2001-2007 by holders identified in AUTHORS.txt
+ * Copyright 2001-2013 by holders identified in AUTHORS.txt
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -546,7 +546,7 @@ void cUOTxOpenPaperdoll::fromChar( P_CHAR pChar, P_CHAR pOrigin )
 	if ( !nameByScript.isNull() )
 	{
 		// Replace non displayable characters
-		setName( makeAscii( nameByScript ) );
+        setName( nameByScript );
 	}
 	else
 	{
@@ -633,11 +633,11 @@ void cUOTxOpenPaperdoll::fromChar( P_CHAR pChar, P_CHAR pOrigin )
 				}
 			}
 
-			setName( makeAscii( prefix + pChar->name() + ( title.isEmpty() ? QString( "" ) : ", " + title ) ) );
+            setName( prefix + pChar->name() + ( title.isEmpty() ? QString( "" ) : ", " + title ) );
 		}
 		else
 		{
-			setName( makeAscii( pChar->name() + ( title.isEmpty() ? QString( "" ) : ", " + title ) ) );
+            setName( pChar->name() + ( title.isEmpty() ? QString( "" ) : ", " + title ) );
 		}
 	}
 

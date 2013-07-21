@@ -77,8 +77,6 @@ int LineEditHistory::beginOfWord( bool mark )
 
 QPoint LineEditHistory::textCursorPoint() const
 {
-	int cursorPara;
-	int cursorPos;
 	//getCursorPosition(&cursorPara, &cursorPos);
 	QRect rect = QWidget::rect();
 	QPoint point(rect.left(), rect.bottom());
@@ -115,7 +113,6 @@ void LineEditHistory::complete()
 		listBox->addItems( map.values() );
 
 		QPoint point = textCursorPoint();
-		adjustListBoxSize(QApplication::desktop()->height() - point.y(), width() / 2);
 		listBox->move(point);
 		listBox->show();
 		listBox->raise();
@@ -137,21 +134,6 @@ void LineEditHistory::itemChosen(QListWidgetItem *item)
 	if (item)
 		insert(item->text().mid( wordPrefix.length() ) );
 	listBox->close();
-}
-
-void LineEditHistory::adjustListBoxSize( int maxHeight /* = 32767 */, int maxWidth /* = 32767  */)
-{
-/*	if (!listBox->count())
-		return;
-	int totalHeight = listBox->item(0)->size().height() * listBox->count();
-	if ( listBox->variableHeight() ) {
-		totalHeight = 0;
-		for (int i = 0; i < (int)listBox->count(); ++i)
-			totalHeight += listBox->itemHeight(i);
-	}
-	listBox->setFixedHeight(qMin(totalHeight, maxHeight));
-	listBox->setFixedWidth(qMin(listBox->maxItemWidth(), maxWidth));
-*/
 }
 
 void LineEditHistory::keyPressEvent( QKeyEvent *e )

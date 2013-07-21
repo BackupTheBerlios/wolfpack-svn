@@ -2,7 +2,7 @@
  *     Wolfpack Emu (WP)
  * UO Server Emulation Program
  *
- * Copyright 2001-2007 by holders identified in AUTHORS.txt
+ * Copyright 2001-2013 by holders identified in AUTHORS.txt
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -28,14 +28,15 @@
 #if !defined( __UTILITIES_H__ )
 #define __UTILITIES_H__
 
-#include <boost/python.hpp>
-
-#include "engine.h"
-#include "pyerrors.h"
 #include <QString>
 #include <QList>
 #include <QByteArray>
 
+#include "engine.h"
+
+#include <boost/python.hpp>
+
+#include "pyerrors.h"
 #include "../typedefs.h"
 
 class cUOSocket;

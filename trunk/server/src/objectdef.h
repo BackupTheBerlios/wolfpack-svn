@@ -46,15 +46,16 @@ inline QString tr( const QString& text, const char* comment = 0, const char* con
 
 # ifndef QT_NO_TEXTCODEC
 // full set of tr functions
+// TODO refactor: UTF-8 is now ALWAYS used by translate!
 #  define WP_TR_FUNCTIONS(classname) \
 	static QString tr( const char* s, const char* c = 0 ) \
 	{ \
-		return QCoreApplication::translate( #classname, s, c, QCoreApplication::DefaultCodec ); \
+        return QCoreApplication::translate( #classname, s, c ); \
 	} \
-	\
+    \
 	static QString trUtf8( const char* s, const char* c = 0 ) \
 	{ \
-		return QCoreApplication::translate( #classname, s, c, QCoreApplication::UnicodeUTF8 ); \
+        return QCoreApplication::translate( #classname, s, c ); \
 	}
 
 # else
@@ -62,7 +63,7 @@ inline QString tr( const QString& text, const char* comment = 0, const char* con
 #  define WP_TR_FUNCTIONS \
 	static QString tr( const char* s, const char* c = 0 ) \
 	{ \
-		return QCoreApplication::translate( #classname, s, c, QCoreApplication::DefaultCodec ); \
+        return QCoreApplication::translate( #classname, s, c ); \
 	}
 
 # endif
@@ -77,12 +78,12 @@ inline QString tr( const QString& text, const char* comment = 0, const char* con
 #  define WP_TR_FUNCTIONS(classname) \
 	static QString tr( const char* s, const char* c = 0 ) \
 	{ \
-		return QString::fromAscii( s ); \
+        return QString::fromLatin1(s); \
 	} \
 	\
 	static QString trUtf8( const char* s, const char* c = 0 ) \
 	{ \
-		return QString::fromAscii(s); \
+        return QString::fromLatin1(s); \
 	}
 #endif
 

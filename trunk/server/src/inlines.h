@@ -2,7 +2,7 @@
  *     Wolfpack Emu (WP)
  * UO Server Emulation Program
  *
- * Copyright 2001-2007 by holders identified in AUTHORS.txt
+ * Copyright 2001-2013 by holders identified in AUTHORS.txt
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -165,56 +165,56 @@ inline bool isBetween( double n, int lower, int higher, double tolerance = 0.5 )
 	return ( n > lower - tolerance ) && ( n < higher + tolerance );
 }
 
-inline QString makeAscii( const QString& input )
-{
-	QString result;
+//inline QString makeAscii( const QString& input )
+//{
+//	QString result;
 
-	for ( int i = 0; i < input.length(); ++i )
-	{
-		QChar c = input.at( i );
+//	for ( int i = 0; i < input.length(); ++i )
+//	{
+//		QChar c = input.at( i );
 
-		// German umlauts can be represented differently
-		switch ( c.unicode() )
-		{
-		case -4:
-			// ü
-			result.append( "ue" );
-			continue;
-		case -28:
-			// ä
-			result.append( "ae" );
-			continue;
-		case -10:
-			// ö
-			result.append( "oe" );
-			continue;
-		case -33:
-			// ß
-			result.append( "ss" );
-			continue;
-		case -36:
-			// Ü
-			result.append( "Ue" );
-			continue;
-		case -60:
-			// Ä
-			result.append( "Ae" );
-			continue;
-		case -42:
-			// Ö
-			result.append( "Oe" );
-			continue;
-		}
+//		// German umlauts can be represented differently
+//		switch ( c.unicode() )
+//		{
+//		case -4:
+//			// ü
+//			result.append( "ue" );
+//			continue;
+//		case -28:
+//			// ä
+//			result.append( "ae" );
+//			continue;
+//		case -10:
+//			// ö
+//			result.append( "oe" );
+//			continue;
+//		case -33:
+//			// ß
+//			result.append( "ss" );
+//			continue;
+//		case -36:
+//			// Ü
+//			result.append( "Ue" );
+//			continue;
+//		case -60:
+//			// Ä
+//			result.append( "Ae" );
+//			continue;
+//		case -42:
+//			// Ö
+//			result.append( "Oe" );
+//			continue;
+//		}
 
-		// Other non representable char
-		if ( c.toLatin1() < 1 || ( c.toLatin1() > 122 && c.toLatin1() != 127 ) )
-		{
-			continue;
-		}
-		result.append( c );
-	}
+//		// Other non representable char
+//		if ( c.toLatin1() < 1 || ( c.toLatin1() > 122 && c.toLatin1() != 127 ) )
+//		{
+//			continue;
+//		}
+//		result.append( c );
+//	}
 
-	return result;
-}
+//	return result;
+//}
 
 #endif

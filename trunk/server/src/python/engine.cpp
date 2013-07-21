@@ -2,7 +2,7 @@
  *     Wolfpack Emu (WP)
  * UO Server Emulation Program
  *
- * Copyright 2001-2007 by holders identified in AUTHORS.txt
+ * Copyright 2001-2013 by holders identified in AUTHORS.txt
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -109,10 +109,10 @@ static void stopPython()
 	Starts the python interpreter
 */
 extern "C"  void init_wolfpack();
-static void startPython( int argc, char* argv[] )
+static void startPython( int argc, QStringList argv )
 {
 	using namespace boost::python;
-	Py_SetProgramName( argv[0] );
+    Py_SetProgramName( argv.at(0).toLatin1().data() );
 
 	Py_NoSiteFlag = 1; // No import because we need to set the search path first
 
@@ -123,7 +123,17 @@ static void startPython( int argc, char* argv[] )
 #endif
 		PyEval_InitThreads();
 
-	PySys_SetArgv( argc, argv );
+    char **output;
+
+    // Copy input to output
+    output = new char*[argv.size() + 1];
+    for (int i = 0; i < argv.size(); i++) {
+        output[i] = new char[strlen(argv.at(i).toStdString().c_str())+1];
+        memcpy(output[i], argv.at(i).toStdString().c_str(), strlen(argv.at(i).toStdString().c_str())+1);
+    }
+    output[argv.size()] = ((char)NULL);
+
+    PySys_SetArgv( argc, output );
 
 	// Modify our search-path
 	list searchPath = extract<list>( object( handle<>( borrowed( PySys_GetObject( "path" ) ) ) ) );
@@ -293,7 +303,7 @@ cPythonEngine::~cPythonEngine()
 
 void cPythonEngine::load()
 {
-	startPython( QCoreApplication::argc(), QCoreApplication::argv() );
+    startPython( QCoreApplication::arguments().size(), QCoreApplication::arguments() );
 	cComponent::load();
 }
 

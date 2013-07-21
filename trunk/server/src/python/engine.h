@@ -2,7 +2,7 @@
  *     Wolfpack Emu (WP)
  * UO Server Emulation Program
  *
- * Copyright 2001-2007 by holders identified in AUTHORS.txt
+ * Copyright 2001-2013 by holders identified in AUTHORS.txt
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -32,6 +32,8 @@
 
 #if !defined(__PYTHON_ENGINE_H__)
 #define __PYTHON_ENGINE_H__
+
+#include "../server.h"
 
 #include <QtGlobal>
 #include <QString>
@@ -76,7 +78,6 @@ inline PyObject* doPy_RETURN_FALSE()
 #define Py_RETURN_FALSE return doPy_RETURN_FALSE()
 #endif
 
-#include "../server.h"
 typedef void ( *fnCleanupHandler )();
 
 class CleanupAutoRegister

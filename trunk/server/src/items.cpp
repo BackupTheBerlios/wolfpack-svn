@@ -2,7 +2,7 @@
  *     Wolfpack Emu (WP)
  * UO Server Emulation Program
  *
- * Copyright 2001-2007 by holders identified in AUTHORS.txt
+ * Copyright 2001-2013 by holders identified in AUTHORS.txt
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -523,7 +523,7 @@ QString cItem::getName( bool shortName )
 	{
 		// Test if we have a %.../...% form or a simple %
 		QRegExp simple( "%([^/]+)%" );
-		simple.setMinimal( TRUE );
+        simple.setMinimal( true );
 
 		if ( itemname.contains( simple ) )
 			itemname.replace( simple, simple.cap( 1 ) );
@@ -1349,16 +1349,26 @@ void cItem::talk( const QString& message, UI16 color, quint8 type, bool autospam
 	{
 	case 0x01:
 		speechType = cUOTxUnicodeSpeech::Broadcast; break;
+    case 0x02:
+        speechType = cUOTxUnicodeSpeech::Emote; break;
 	case 0x06:
 		speechType = cUOTxUnicodeSpeech::System; break;
-	case 0x09:
-		speechType = cUOTxUnicodeSpeech::Yell; break;
-	case 0x02:
-		speechType = cUOTxUnicodeSpeech::Emote; break;
+    case 0x07:
+        speechType = cUOTxUnicodeSpeech::Emphasis; break;
 	case 0x08:
 		speechType = cUOTxUnicodeSpeech::Whisper; break;
+    case 0x09:
+        speechType = cUOTxUnicodeSpeech::Yell; break;
 	case 0x0A:
 		speechType = cUOTxUnicodeSpeech::Spell; break;
+    case 0x0D:
+        speechType = cUOTxUnicodeSpeech::Guild; break;
+    case 0x0E:
+        speechType = cUOTxUnicodeSpeech::Alliance; break;
+    case 0x0F:
+        speechType = cUOTxUnicodeSpeech::Command; break;
+    case 0xC0:
+        speechType = cUOTxUnicodeSpeech::Encoded; break;
 	default:
 		speechType = cUOTxUnicodeSpeech::Regular; break;
 	};

@@ -2,7 +2,7 @@
  *     Wolfpack Emu (WP)
  * UO Server Emulation Program
  *
- * Copyright 2001-2007 by holders identified in AUTHORS.txt
+ * Copyright 2001-2013 by holders identified in AUTHORS.txt
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -556,6 +556,10 @@ void cUOSocket::receive()
 				// just want to walk a little.
 				handleWalkRequest( static_cast<cUORxWalkRequest*>( packet ) );
 				break;
+//            case 0x04:
+//                // God mode.
+//                handleGodModeRequest( static_cast<cUORxGodModeRequest*>( packet ) );
+//                break;
 			case 0x05:
 				handleRequestAttack( static_cast<cUORxRequestAttack*>( packet ) );
 				break;
@@ -571,12 +575,14 @@ void cUOSocket::receive()
 			case 0x09:
 				handleRequestLook( static_cast<cUORxRequestLook*>( packet ) );
 				break;
+//            case 0x09: Edit
 			case 0x12:
 				handleAction( static_cast<cUORxAction*>( packet ) );
 				break;
 			case 0x13:
 				DragAndDrop::equipItem( this, static_cast<cUORxWearItem*>( packet ) );
 				break;
+//            case 0x14: ChangeZ
 			case 0x22:
 				resync();
 				break;
@@ -591,9 +597,13 @@ void cUOSocket::receive()
 			case 0x3B:
 				handleBuy( static_cast<cUORxBuy*>( packet ) );
 				break;
+//            case 0x47: NewTerrain
+//            case 0x48: NewAnimData
+//            case 0x58: NewRegion
 			case 0x5D:
 				handlePlayCharacter( static_cast<cUORxPlayCharacter*>( packet ) );
 				break;
+//             case 0x61: DeleteStatic
 			case 0x6c:
 				handleTarget( static_cast<cUORxTarget*>( packet ) );
 				break;
@@ -608,6 +618,9 @@ void cUOSocket::receive()
 			case 0x75:
 				handleRename( static_cast<cUORxRename*>( packet ) );
 				break;
+//            case 0x79: ResourceQuery
+//        case 0x7E: GodviewQuery
+//            case 0x7D: MenuResponse
 			case 0x80:
 				handleLoginRequest( static_cast<cUORxLoginRequest*>( packet ) );
 				break;
@@ -617,12 +630,16 @@ void cUOSocket::receive()
 			case 0x91:
 				handleServerAttach( static_cast<cUORxServerAttach*>( packet ) );
 				break;
+//            case 0x95: HuePickerResponse
+//            case 0x96: GameCentralMoniter
 			case 0x98:
 				handleAllNames( static_cast<cUORxAllNames*>( packet ) );
 				break;
+//            case 0x9A: AciiPromptResponse
 			case 0x9B:
 				handleHelpRequest( static_cast<cUORxHelpRequest*>( packet ) );
 				break;
+//             case 0x9D: GMSingle
 			case 0x9F:
 				handleSell( static_cast<cUORxSell*>( packet ) ); break;
 			case 0xA0:
@@ -647,25 +664,41 @@ void cUOSocket::receive()
 			case 0xB8:
 				handleProfile( static_cast<cUORxProfile*>( packet ) );
 				break;
+//            case 0xBB: AccountID
 			case 0xBD:
 				_version = static_cast<cUORxSetVersion*>( packet )->version();
 				break;
+//            case 0xBE: AssistVersion
 			case 0xBF:
 				handleMultiPurpose( static_cast<cUORxMultiPurpose*>( packet ) );
 				break;
+//            case 0xC2: UnicodePromptResponse
 			case 0xC8:
 				handleUpdateRange( static_cast<cUORxUpdateRange*>( packet ) );
 				break;
-			case 0xD6:
+//            case 0xC9: TripTime
+//            case 0xCA: UTripTime
+//            case 0xCF: AccountLogin
+//            case 0xD0: ConfigurationFile
+//            case 0xD1: LogoutReq
+            case 0xD6:
 				handleRequestTooltips( static_cast<cUORxRequestTooltips*>( packet ) );
 				break;
 			case 0xD7:
 				handleAosMultiPurpose( static_cast<cUORxAosMultiPurpose*>( packet ) );
 				break;
-			case 0xB6:
+            // TODO
+//            case 0xE1: // ClientType
+//                handleClientType(static_cast<cUORxClientType*>( packet ))
+//                break;
+//            case 0xEF: // LoginServerSeed
+//            case 0xF8: // CreateCharacter70160
+
+            case 0xB6: // ObjectHelpRequest
 				break; // Completely ignore the packet.
-			case 0xBB:
+            case 0xBB: // AccountID
 				break; // Completely ignore the packet.
+
 			default:
 				Console::instance()->send( packet->dump( packet->uncompressed() ) );
 				delete packet;
@@ -1721,8 +1754,15 @@ void cUOSocket::handleMultiPurpose( cUORxMultiPurpose* packet )
 			}
 			return;
 
-		case 0x0e:
-			return;
+        // TODO
+        case cUORxMultiPurpose::animate:
+            return;
+            // TODO
+        case cUORxMultiPurpose::disarmRequest:
+            return;
+            // TODO
+        case cUORxMultiPurpose::wrestlingStun:
+            return;
 
 			// Ignore this packet (Unknown Login Info)
 		case cUORxMultiPurpose::unknownLoginInfo:
@@ -3182,7 +3222,7 @@ void cUOSocket::sendStatWindow( P_CHAR pChar )
 	// Dont allow rename-self
 	sendStats.setAllowRename( ( ( pChar->objectType() == enNPC && dynamic_cast<P_NPC>( pChar )->owner() == _player && !pChar->isHuman() ) || _player->isGM() ) && ( _player != pChar ) );
 
-	sendStats.setName( makeAscii( pChar->name() ) );
+    sendStats.setName( pChar->name() );
 	sendStats.setSerial( pChar->serial() );
 
 	if ( pChar != _player )

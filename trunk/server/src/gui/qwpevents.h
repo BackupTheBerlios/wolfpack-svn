@@ -46,11 +46,11 @@ public:
 		NotifyState
 	};
 
-	QWolfpackConsoleEvent( Type t, const QVariant& data ) : QEvent( (QEvent::Type) t ), data_(data)
+    QWolfpackConsoleEvent( Type t, const QVariant& data ) : QEvent( (QEvent::Type) t ), data_(data)
 	{
 	}
 
-	explicit QWolfpackConsoleEvent( const QFont& font ) : QEvent( (QEvent::Type) ChangeFontEvent ), font_(font)
+    explicit QWolfpackConsoleEvent( const QFont& font ) : QEvent( (QEvent::Type) ChangeFontEvent ), font_(font)
 	{
 	}
 

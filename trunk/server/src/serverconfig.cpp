@@ -2,7 +2,7 @@
  *     Wolfpack Emu (WP)
  * UO Server Emulation Program
  *
- * Copyright 2001-2007 by holders identified in AUTHORS.txt
+ * Copyright 2001-2013 by holders identified in AUTHORS.txt
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -191,8 +191,8 @@ void cConfig::readData()
 	disableKarma_ = getBool( "General", "Disable Karma", false, true );
 	disableFame_ = getBool( "General", "Disable Fame", false, true );
 	saveInterval_ = getNumber( "General", "Save Interval", 900, true );
-	mulPath_ = QDir::convertSeparators( getString( "General", "MulPath", "./muls/", true ) );
-	logPath_ = QDir::convertSeparators( getString( "General", "LogPath", "./logs/", true ) );
+    mulPath_ = QDir::toNativeSeparators( getString( "General", "MulPath", "./muls/", true ) );
+    logPath_ = QDir::toNativeSeparators( getString( "General", "LogPath", "./logs/", true ) );
 	logRotate_ = getBool( "General", "LogRotate", true, true );
 	mountRange_ = getNumber( "General", "Mount Range", 2, true );
 	newTooltipPackets_ = getBool( "General", "New Tooltip Packets", true, true );

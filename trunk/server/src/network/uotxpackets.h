@@ -2,7 +2,7 @@
  *     Wolfpack Emu (WP)
  * UO Server Emulation Program
  *
- * Copyright 2001-2007 by holders identified in AUTHORS.txt
+ * Copyright 2001-2013 by holders identified in AUTHORS.txt
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -924,13 +924,19 @@ public:
 	enum eSpeechType
 	{
 		Regular			= 0x00,
-		Broadcast,
-		Emote,
+        Broadcast       = 0x01,
+        Emote           = 0x02,
 		System			= 0x06,
 		Emphasis		= 0x07,
 		Whisper			= 0x08,
 		Yell			= 0x09,
-		Spell			= 0x0a
+        Spell			= 0x0a,
+
+        Guild           = 0x0d,
+        Alliance        = 0x0e,
+        Command         = 0x0f,
+
+        Encoded         = 0xc0
 	};
 
 	void setSource( SERIAL data )

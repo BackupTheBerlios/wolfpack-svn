@@ -2,7 +2,7 @@
  *     Wolfpack Emu (WP)
  * UO Server Emulation Program
  *
- * Copyright 2001-2007 by holders identified in AUTHORS.txt
+ * Copyright 2001-2013 by holders identified in AUTHORS.txt
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -25,7 +25,6 @@
  * Wolfpack Homepage: http://developer.berlios.de/projects/wolfpack/
  */
 
-#include "engine.h"
 
 #include "target.h"
 #include "../territories.h"
@@ -47,6 +46,9 @@
 #include "tempeffect.h"
 #include "objectcache.h"
 #include "skills.h"
+
+#include "engine.h"
+
 
 /*
 	\object char
@@ -878,7 +880,7 @@ static PyObject* wpChar_say( wpChar* self, PyObject* args, PyObject* keywds )
 		uint color = self->pChar->saycolor();
 		cUOSocket* socket = 0;
 
-		static char* kwlist[] =
+        static char* kwlist[] =
 		{
 		"clilocid",
 		"args",

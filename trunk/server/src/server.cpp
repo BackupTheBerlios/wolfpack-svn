@@ -2,7 +2,7 @@
  *     Wolfpack Emu (WP)
  * UO Server Emulation Program
  *
- * Copyright 2001-2007 by holders identified in AUTHORS.txt
+ * Copyright 2001-2013 by holders identified in AUTHORS.txt
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -248,7 +248,7 @@ bool cServer::getSecure()
 	return d->secure;
 }
 
-void myMessageOutput( QtMsgType /*type*/, const char */*msg*/ )
+void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
  /*   switch ( type ) {
         case QtDebugMsg:
@@ -273,7 +273,7 @@ void myMessageOutput( QtMsgType /*type*/, const char */*msg*/ )
 void cServer::run()
 {
 #if !defined( DEBUG )
-	qInstallMsgHandler(myMessageOutput);
+    qInstallMessageHandler(myMessageOutput);
 #endif
 	// If have no idea where i should put this otherwise
 #if defined(Q_OS_UNIX)
@@ -321,7 +321,6 @@ void cServer::run()
 	// ISO-8859-15 (MIB: 111)
 #if defined(Q_OS_UNIX)
 	QTextCodec::setCodecForLocale( QTextCodec::codecForMib(111) );
-	QTextCodec::setCodecForCStrings( QTextCodec::codecForMib(111) );
 #endif
 
 	// Load wolfpack.xml
@@ -492,7 +491,7 @@ void cServer::setupConsole()
 	Console::instance()->send( QString( "\n%1 %2 %3\n\n" ).arg( productString(), productBeta(), productVersion() ) );
 	Console::instance()->setAttributes( false, false, false, 0xAF, 0xAF, 0xAF, 0, FONT_FIXEDWIDTH );
 
-	Console::instance()->send( "Copyright (C) 2000-2010 Wolfpack Development Team\n" );
+    Console::instance()->send( "Copyright (C) 2000-2013 Wolfpack Development Team\n" );
 	Console::instance()->send( QString( "Wolfpack Homepage: %1 \n" ).arg( DEFAULTWEBPAGE ));
 	Console::instance()->send( tr( "By using this software you agree to the license accompanying this release.\n" ) );
 	Console::instance()->send( tr( "Compiled on %1 %2\n" ).arg( __DATE__, __TIME__ ) );
@@ -625,7 +624,7 @@ void cServer::load( const QString& name )
 
 	if ( !component->isSilent() )
 	{
-		Console::instance()->sendProgress( tr( "Loading %1" ).arg( component->getName() ) );
+        Console::instance()->sendProgress( "\n" +  tr( "Loading %1" ).arg( component->getName() ) );
 	}
 
 	component->load();

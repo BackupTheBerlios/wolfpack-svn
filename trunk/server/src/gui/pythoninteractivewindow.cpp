@@ -189,9 +189,9 @@ void PythonInteractiveWindow::startPythonInterpreter()
 	d->main_module = boost::python::object( (boost::python::handle<>( boost::python::borrowed( PyImport_AddModule( "__main__" ) ) )) );
 	d->main_namespace = boost::python::dict( (boost::python::handle<>( boost::python::borrowed( PyModule_GetDict( d->main_module.ptr() ) ) )) );
 
-	// Modify our search-path
-	list searchPath = extract<list>( boost::python::object( boost::python::handle<>( boost::python::borrowed( PySys_GetObject( "path" ) ) ) ) );
-	QStringList elements = Config::instance()->getString( "General", "Python Searchpath", "./scripts;.", true ).split( ";" );
+    // Modify our search-path
+    list searchPath = extract<list>( boost::python::object( boost::python::handle<>( boost::python::borrowed( PySys_GetObject( "path" ) ) ) ) );
+    QStringList elements = Config::instance()->getString( QString("General"), QString("Python Searchpath"), QString("./scripts;."), true ).split( ";" );
 
 	// Prepend our items to the searchpath
 	for ( int i = elements.count() - 1; i >= 0; --i )

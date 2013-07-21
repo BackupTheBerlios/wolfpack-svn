@@ -10,12 +10,12 @@ TARGET = wolfpack
 TEMPLATE = app
 
 CONFIG *= qt thread exceptions rtti 
-QT += network xml sql
+QT += network xml sql widgets
 
 CONFIG -= flat
 DESTDIR = ../release
 
-VERSION = 12.9.17
+VERSION = 13.0.0
 
 RC_FILE = res.rc
 OBJECTS_DIR = obj
@@ -228,4 +228,4 @@ WPSCRIPTS = ../release/scripts
 QMAKE_TARGET_COMPANY = Wolfpack Development Team
 QMAKE_TARGET_PRODUCT = Wolfpack
 QMAKE_TARGET_DESCRIPTION = Ultima Online(tm) Server Software
-QMAKE_TARGET_COPYRIGHT = Copyright (c) 2000-2009 Wolfpack Development Team
+QMAKE_TARGET_COPYRIGHT = Copyright (c) 2000-2013 Wolfpack Development Team

@@ -2,7 +2,7 @@
  *     Wolfpack Emu (WP)
  * UO Server Emulation Program
  *
- * Copyright 2001-2007 by holders identified in AUTHORS.txt
+ * Copyright 2001-2013 by holders identified in AUTHORS.txt
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -25,8 +25,6 @@
  * Wolfpack Homepage: http://developer.berlios.de/projects/wolfpack/
  */
 
-#include "engine.h"
-
 #include "../items.h"
 #include "../muls/tilecache.h"
 #include "../scriptmanager.h"
@@ -38,6 +36,8 @@
 #include "pycontent.h"
 #include "tempeffect.h"
 #include "objectcache.h"
+
+#include "engine.h"
 
 /*
 	\object item
