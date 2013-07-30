@@ -4,7 +4,7 @@ TARGET = boost_python
 DESTDIR = lib
 
 # Include configure settings
-!include(../build/config.pri) {
+!include(../../build/config.pri) {
 	message("HINT: use ./configure.py script!")
 }
 

@@ -69,6 +69,7 @@
 
 // Library Includes
 #include <list>
+#include "zlib.h"
 
 // UNCOMMENT THIS IF YOU WANT TO USE A HASHMAP
 //#define WP_USE_HASH_MAP
@@ -1775,13 +1776,6 @@ void cWorld::backupWorld( const QString& filename, int count, bool compress )
 		backupThread->start( QThread::LowPriority );
 	}
 }
-
-extern "C"
-{
-	extern void* gzopen( const char* path, const char* mode );
-	extern int gzwrite( void* file, void* buf, unsigned len );
-	extern int gzclose( void* file );
-};
 
 /*
 	Pipe a backup trough
