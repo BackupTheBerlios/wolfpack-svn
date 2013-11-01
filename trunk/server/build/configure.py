@@ -170,6 +170,20 @@ def checkPython( options, lookForHeaders, lookForLib ):
 	# Linux and BSD Search Paths
 	elif sys.platform in ("linux2", "freebsd4", "freebsd5"):
 		PYTHONLIBSEARCHPATH += [ \
+			# Python 2.7 - Look for this first
+			"/usr/local/lib/libpython2.7*.so", \
+			"/usr/local/lib/[Pp]ython*/libpython2.7*.so", \
+			"/usr/local/lib/[Pp]ython*/config/libpython2.7*.so", \
+			"/usr/lib/libpython2.7*.so", \
+			"/usr/lib/[Pp]ython*/libpython2.7*.so", \
+			"/usr/lib/[Pp]ython*/config/libpython2.7*.so", \
+			# Python 2.6 - Look for this first
+			"/usr/local/lib/libpython2.6*.so", \
+			"/usr/local/lib/[Pp]ython*/libpython2.6*.so", \
+			"/usr/local/lib/[Pp]ython*/config/libpython2.6*.so", \
+			"/usr/lib/libpython2.6*.so", \
+			"/usr/lib/[Pp]ython*/libpython2.6*.so", \
+			"/usr/lib/[Pp]ython*/config/libpython2.6*.so", \
 			# Python 2.4 - Look for this first
 			"/usr/local/lib/libpython2.4*.so", \
 			"/usr/local/lib/[Pp]ython*/libpython2.4*.so", \
@@ -192,6 +206,20 @@ def checkPython( options, lookForHeaders, lookForLib ):
 			"/usr/lib/[Pp]ython*/libpython2.3*.so", \
 			"/usr/lib/[Pp]ython*/config/libpython2.3*.so" ]
 		PYTHONLIBSTATICSEARCHPATH += [ \
+			# Python 2.7
+			"/usr/local/lib/libpython2.7*.a", \
+			"/usr/local/lib/[Pp]ython2.7*/libpython2.7*.a", \
+			"/usr/local/lib/[Pp]ython2.7*/config/libpython2.7*.a", \
+			"/usr/lib/libpython2.7*.a", \
+			"/usr/lib/[Pp]ython2.7*/libpython2.7*.a", \
+			"/usr/lib/[Pp]ython2.7*/config/libpython2.7*.a", \
+			# Python 2.6
+			"/usr/local/lib/libpython2.6*.a", \
+			"/usr/local/lib/[Pp]ython2.6*/libpython2.6*.a", \
+			"/usr/local/lib/[Pp]ython2.6*/config/libpython2.6*.a", \
+			"/usr/lib/libpython2.6*.a", \
+			"/usr/lib/[Pp]ython2.6*/libpython2.6*.a", \
+			"/usr/lib/[Pp]ython2.6*/config/libpython2.6*.a", \
 			# Python 2.4
 			"/usr/local/lib/libpython2.4*.a", \
 			"/usr/local/lib/[Pp]ython2.4*/libpython2.4*.a", \
@@ -216,6 +244,12 @@ def checkPython( options, lookForHeaders, lookForLib ):
 		PYTHONINCSEARCHPATH += [ \
 			"/usr/local/include/Python.h", \
 			"/usr/include/Python.h", \
+			# Python 2.7
+			"/usr/local/include/[Pp]ython2.7*/Python.h", \
+			"/usr/include/[Pp]ython2.7*/Python.h" \
+			# Python 2.6
+			"/usr/local/include/[Pp]ython2.6*/Python.h", \
+			"/usr/include/[Pp]ython2.6*/Python.h" \
 			# Python 2.4
 			"/usr/local/include/[Pp]ython2.4*/Python.h", \
 			"/usr/include/[Pp]ython2.4*/Python.h" \
